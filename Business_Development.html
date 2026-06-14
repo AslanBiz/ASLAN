@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SP BD Control Center — Önizleme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1877F2; --blue-deep:#1564DB; --blue-soft:#EAF2FE;
+    --navy:#0B1E39; --navy-2:#0F2647; --ink:#1E2A3D; --slate:#5A6B82;
+    --line:#E3EAF4; --surface:#F4F7FC; --white:#fff;
+    --green:#1A9E5F; --amber:#D89A1E; --red:#D64545;
+    --display:"Plus Jakarta Sans",system-ui,-apple-system,Segoe UI,sans-serif;
+    --body:"Inter",system-ui,-apple-system,Segoe UI,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--surface);line-height:1.55;-webkit-font-smoothing:antialiased}
+  button{font-family:inherit}
+
+  /* ---- shell ---- */
+  .app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+  .sidebar{background:linear-gradient(180deg,#0B1E39,#091A33);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+  .side-brand{display:flex;align-items:center;gap:11px;padding:19px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .mark{width:32px;height:32px;border-radius:9px;flex:none;background:linear-gradient(135deg,var(--blue),#3F92FF);display:grid;place-items:center;box-shadow:0 5px 14px rgba(24,119,242,.4)}
+  .mark svg{width:18px;height:18px}
+  .side-brand b{font-family:var(--display);font-size:14px;color:#fff;font-weight:700;line-height:1.2;display:block}
+  .side-brand small{font-family:var(--mono);font-size:9.5px;color:#7FB2FF;letter-spacing:.08em}
+  .nav{flex:1;padding:12px 12px;overflow-y:auto}
+  .nav-group{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#51699B;padding:14px 12px 7px}
+  .nav-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;color:#A9BBD6;font-size:13.5px;font-weight:500;cursor:pointer;width:100%;background:none;border:none;text-align:left;transition:background .15s,color .15s;margin-bottom:2px}
+  .nav-item svg{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .nav-item:hover{background:rgba(255,255,255,.06);color:#fff}
+  .nav-item.active{background:var(--blue);color:#fff;box-shadow:0 6px 16px rgba(24,119,242,.38)}
+  .side-user{display:flex;align-items:center;gap:11px;padding:15px 18px;border-top:1px solid rgba(255,255,255,.08)}
+  .side-user .nm{font-size:13px;font-weight:600;color:#fff}
+  .side-user .rl{font-size:11px;color:#7E94B5}
+
+  .main{display:flex;flex-direction:column;min-width:0}
+  .topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 30px;height:64px}
+  .topbar h1{font-family:var(--display);font-size:19px;color:var(--navy);font-weight:700}
+  .spacer{flex:1}
+  .hamburger{display:none;width:38px;height:38px;border:1px solid var(--line);background:#fff;border-radius:9px;place-items:center;cursor:pointer}
+  .hamburger svg{width:18px;height:18px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round}
+  .search{position:relative}
+  .search input{font-family:var(--body);font-size:13.5px;border:1px solid var(--line);border-radius:9px;padding:9px 13px 9px 34px;background:#fff;width:220px;color:var(--ink)}
+  .search input:focus{outline:none;border-color:var(--blue)}
+  .search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--slate);fill:none;stroke-width:2}
+  .lang-btn{font-family:var(--mono);font-weight:600;font-size:12.5px;color:var(--blue);background:var(--blue-soft);border:1px solid #CFE0FB;border-radius:9px;padding:8px 12px;cursor:pointer}
+  .lang-btn:hover{background:#DEEBFE}
+
+  .content{padding:26px 30px;flex:1}
+  .demo-bar{display:flex;align-items:center;gap:9px;background:#FFF8E8;border:1px solid #F3E2B6;border-radius:10px;padding:9px 14px;margin-bottom:22px;font-size:12.5px;color:#946A12}
+  .demo-bar b{font-family:var(--mono);font-weight:600;letter-spacing:.03em}
+
+  /* ---- buttons / badges ---- */
+  .btn{font-size:13.5px;font-weight:600;border-radius:9px;padding:9px 15px;border:1px solid var(--line);background:#fff;color:var(--navy);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+  .btn:hover{background:var(--surface)}
+  .btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+  .btn-primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .btn-primary:hover{background:var(--blue-deep)}
+  .badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.02em;padding:3px 9px;border-radius:7px;border:1px solid transparent;white-space:nowrap}
+  .b-blue{background:var(--blue-soft);color:var(--blue-deep);border-color:#CFE0FB}
+  .b-green{background:#E4F6EC;color:#137A48;border-color:#BCE7CD}
+  .b-amber{background:#FBF1DB;color:#946A12;border-color:#F0DCAE}
+  .b-red{background:#FBE9E9;color:#B5302F;border-color:#F2C9C9}
+  .b-grey{background:#EEF2F8;color:#5A6B82;border-color:#DDE5F0}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none}
+  .d-red{background:var(--red)}.d-amber{background:var(--amber)}.d-green{background:var(--green)}.d-blue{background:var(--blue)}.d-grey{background:#9FB0C7}
+  .av{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#E3EEFE,#CFE0FB);display:grid;place-items:center;font-family:var(--display);font-weight:700;color:var(--blue-deep);font-size:12.5px;flex:none}
+
+  /* ---- views ---- */
+  .view{display:none}
+  .view.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px}
+  .filter{font-size:13px;color:var(--slate);background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 12px}
+  .block{margin-bottom:24px}
+  .block-h{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin-bottom:12px}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .stat .num{font-family:var(--display);font-weight:800;font-size:30px;color:var(--navy);line-height:1}
+  .stat.alert .num{color:var(--red)}
+  .stat .lbl{font-size:12.5px;color:var(--slate);margin-top:8px;display:flex;align-items:center;gap:7px}
+
+  /* widgets */
+  .board{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+  .widget{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .widget-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line)}
+  .widget-head h3{font-size:14px;font-weight:700;color:var(--navy)}
+  .widget-head .cnt{font-family:var(--mono);font-size:11.5px;color:var(--slate)}
+  .li{display:flex;align-items:center;gap:12px;padding:11px 18px}
+  .li + .li{border-top:1px solid #F0F4FA}
+  .li .main{flex:1;min-width:0}
+  .li .ttl{font-size:13.5px;font-weight:600;color:var(--navy);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .li .sub{font-size:12px;color:var(--slate)}
+  .li .right{font-family:var(--mono);font-size:11px;color:var(--slate);white-space:nowrap}
+
+  /* table */
+  .panel{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .table{width:100%;border-collapse:collapse;font-size:13.5px}
+  .table th{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate);font-weight:600;padding:13px 16px;border-bottom:1px solid var(--line);background:#FBFCFE}
+  .table td{padding:13px 16px;border-bottom:1px solid #F0F4FA;color:var(--ink);vertical-align:middle}
+  .table tbody tr:last-child td{border-bottom:none}
+  .table.click tbody tr{cursor:pointer;transition:background .15s}
+  .table.click tbody tr:hover{background:var(--blue-soft)}
+  .t-name{display:flex;align-items:center;gap:11px;font-weight:600;color:var(--navy)}
+  .t-name .av{width:32px;height:32px;font-size:12px}
+
+  /* kanban */
+  .kanban{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px}
+  .col{flex:0 0 252px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px}
+  .col-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--slate)}
+  .col-head .n{background:var(--surface);border-radius:6px;padding:1px 7px}
+  .opp{background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px;margin-bottom:10px;transition:box-shadow .15s,transform .15s;cursor:default}
+  .opp:hover{box-shadow:0 10px 22px -12px rgba(9,26,51,.2);transform:translateY(-2px)}
+  .opp:last-child{margin-bottom:0}
+  .opp .name{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:9px;line-height:1.35}
+  .opp .row{display:flex;align-items:center;justify-content:space-between;margin-top:9px}
+  .opp .val{font-family:var(--mono);font-size:11.5px;color:var(--slate)}
+
+  /* country desk */
+  .cc-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+  .cc{font-size:13px;font-weight:600;border-radius:8px;padding:7px 14px;background:#fff;border:1px solid var(--line);color:var(--slate);cursor:pointer;transition:all .15s}
+  .cc:hover{border-color:#CFE0FB;color:var(--navy)}
+  .cc.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .desk-head{display:flex;flex-wrap:wrap;align-items:center;gap:13px;margin-bottom:20px}
+  .desk-head h2{font-family:var(--display);font-size:24px;color:var(--navy)}
+  .desk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:16px}
+  .field{display:flex;justify-content:space-between;gap:14px;padding:9px 0;font-size:13px}
+  .field + .field{border-top:1px solid #F0F4FA}
+  .field .k{color:var(--slate)}
+  .field .v{font-weight:600;color:var(--navy);text-align:right}
+  .mini{display:flex;align-items:center;gap:10px;padding:9px 0;font-size:13px}
+  .mini + .mini{border-top:1px solid #F0F4FA}
+  .mini .mn{font-weight:600;color:var(--navy)}
+  .mini .ms{font-size:11.5px;color:var(--slate)}
+  .empty{font-size:12.5px;color:var(--slate);font-style:italic;padding:9px 0}
+
+  /* contact detail */
+  .back{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--slate);background:none;border:none;cursor:pointer;margin-bottom:16px}
+  .back:hover{color:var(--navy)}
+  .back svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+  .detail{display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start}
+  .photo{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;text-align:center}
+  .photo .big{width:92px;height:92px;border-radius:22px;margin:0 auto 14px;background:linear-gradient(135deg,#E3EEFE,#CFE0FB);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:30px;color:var(--blue-deep)}
+  .photo .nm{font-family:var(--display);font-size:18px;font-weight:700;color:var(--navy)}
+  .photo .ti{font-size:13px;color:var(--slate);margin-bottom:14px}
+  .photo .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:18px}
+  .ai-label{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin:4px 0 10px}
+  .ai-row{display:flex;flex-wrap:wrap;gap:7px}
+  .ai-btn{font-size:12px;font-weight:600;color:var(--blue-deep);background:var(--blue-soft);border:1px solid #CFE0FB;border-radius:8px;padding:7px 11px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+  .ai-btn:hover{background:#DEEBFE}
+  .ai-btn::before{content:"✦";font-size:10px}
+  .card-pad{padding:20px}
+  .req{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px}
+  .req-c{background:var(--blue-soft);border:1px solid #CFE0FB;border-radius:11px;padding:14px}
+  .req-c .k{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
+  .req-c .v{font-weight:700;color:var(--blue-deep);margin-top:5px;font-size:14px}
+  .note-box{font-size:13.5px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:15px;line-height:1.6}
+
+  @keyframes fade2{from{opacity:0}to{opacity:1}}
+
+  /* responsive */
+  @media (max-width:900px){
+    .app{grid-template-columns:1fr}
+    .sidebar{position:fixed;left:0;top:0;width:248px;transform:translateX(-100%);transition:transform .25s;z-index:60}
+    .app.nav-open .sidebar{transform:none}
+    .app.nav-open::after{content:"";position:fixed;inset:0;background:rgba(9,26,51,.45);z-index:55}
+    .hamburger{display:grid}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .detail{grid-template-columns:1fr}
+    .content{padding:20px}
+    .topbar{padding:0 18px}
+    .search input{width:140px}
+  }
+  @media (max-width:560px){
+    .stats{grid-template-columns:1fr}
+    .req{grid-template-columns:1fr}
+    .search{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="side-brand">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.4"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3"/></svg></span>
+      <span><b>SP BD Control Center</b><small data-tr="İÇ ÖNİZLEME" data-en="INTERNAL PREVIEW">İÇ ÖNİZLEME</small></span>
+    </div>
+    <nav class="nav">
+      <div class="nav-group" data-tr="Genel" data-en="Overview">Genel</div>
+      <button class="nav-item active" data-view="dashboard"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="11" width="7" height="10" rx="1.5"/><rect x="3" y="15" width="7" height="6" rx="1.5"/></svg><span data-tr="Panel" data-en="Dashboard">Panel</span></button>
+
+      <div class="nav-group" data-tr="İlişkiler" data-en="Relationships">İlişkiler</div>
+      <button class="nav-item" data-view="contacts"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg><span data-tr="Kişiler" data-en="Contacts">Kişiler</span></button>
+      <button class="nav-item" data-view="companies"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="11" height="18" rx="1.4"/><path d="M15 8h4.4a.6.6 0 0 1 .6.6V21"/><path d="M7.5 7h2.5M7.5 11h2.5M7.5 15h2.5"/></svg><span data-tr="Firmalar" data-en="Companies">Firmalar</span></button>
+      <button class="nav-item" data-view="countries"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.8 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.8-3.8-9S9.5 5.6 12 3Z"/></svg><span data-tr="Ülke Masası" data-en="Country Desk">Ülke Masası</span></button>
+
+      <div class="nav-group" data-tr="İş Akışı" data-en="Workflow">İş Akışı</div>
+      <button class="nav-item" data-view="opportunities"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1"/></svg><span data-tr="Fırsatlar" data-en="Opportunities">Fırsatlar</span></button>
+      <button class="nav-item" data-view="events"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17"/><path d="M8 3v4M16 3v4"/><path d="M9.3 14.6l1.7 1.7 3.4-3.4"/></svg><span data-tr="Etkinlikler" data-en="Events">Etkinlikler</span></button>
+      <button class="nav-item" data-view="tenders"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.2h6V7H9z"/><path d="M8.5 13.5l2 2 4-4"/></svg><span data-tr="İhaleler" data-en="Tenders">İhaleler</span></button>
+      <button class="nav-item" data-view="tasks"><svg viewBox="0 0 24 24"><path d="M4 7h2.4l1.3 1.5L10.3 5"/><path d="M4 17h2.4l1.3 1.5L10.3 15"/><path d="M13 7.5H20M13 16.5H20"/></svg><span data-tr="Görevler" data-en="Tasks">Görevler</span></button>
+
+      <div class="nav-group" data-tr="Hafıza" data-en="Memory">Hafıza</div>
+      <button class="nav-item" data-view="links"><svg viewBox="0 0 24 24"><path d="M9.5 14.5l5-5"/><path d="M8.3 12.4l-1.8 1.8a3.2 3.2 0 1 0 4.5 4.5l1.8-1.8"/><path d="M15.7 11.6l1.8-1.8a3.2 3.2 0 1 0-4.5-4.5L11.2 6.1"/></svg><span data-tr="Bağlantılar" data-en="Links">Bağlantılar</span></button>
+      <button class="nav-item" data-view="templates"><svg viewBox="0 0 24 24"><path d="M5 5h14a1.5 1.5 0 0 1 1.5 1.5V15A1.5 1.5 0 0 1 19 16.5h-9l-4 3.5V16.5H5A1.5 1.5 0 0 1 3.5 15V6.5A1.5 1.5 0 0 1 5 5Z"/><path d="M7.5 9.5h9M7.5 12.5h6"/></svg><span data-tr="Şablonlar" data-en="Templates">Şablonlar</span></button>
+    </nav>
+    <div class="side-user">
+      <span class="av" style="background:linear-gradient(135deg,#1877F2,#3F92FF);color:#fff">AK</span>
+      <div><div class="nm">Ayten</div><div class="rl" data-tr="Yönetici Ortak" data-en="Managing Partner">Yönetici Ortak</div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <button class="hamburger" id="ham" aria-label="Menü"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <h1 id="pageTitle">Panel</h1>
+      <div class="spacer"></div>
+      <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg><input type="text" data-tr-ph="Ara…" data-en-ph="Search…" placeholder="Ara…"></div>
+      <button class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span data-tr="Yeni" data-en="New">Yeni</span></button>
+      <button class="lang-btn" id="langToggle" aria-label="Switch to English">EN</button>
+    </header>
+
+    <div class="content">
+      <div class="demo-bar"><span class="dot d-amber"></span><span><b data-tr="ÖNİZLEME" data-en="PREVIEW">ÖNİZLEME</b> — <span data-tr="Statik tanıtım sürümü. Örnek verilerle programın nasıl çalışacağını gösterir; gerçek kayıt tutmaz." data-en="Static demo build. Shows how the program will work with sample data; it does not store real records.">Statik tanıtım sürümü. Örnek verilerle programın nasıl çalışacağını gösterir; gerçek kayıt tutmaz.</span></span></div>
+
+      <!-- ===== DASHBOARD ===== -->
+      <section class="view active" id="view-dashboard">
+        <div class="stats">
+          <div class="stat alert"><div class="num">7</div><div class="lbl"><span class="dot d-red"></span><span data-tr="Geciken işlem" data-en="Overdue actions">Geciken işlem</span></div></div>
+          <div class="stat"><div class="num">4</div><div class="lbl"><span class="dot d-blue"></span><span data-tr="Bugünkü görev" data-en="Tasks today">Bugünkü görev</span></div></div>
+          <div class="stat"><div class="num">12</div><div class="lbl"><span class="dot d-amber"></span><span data-tr="Bu hafta" data-en="This week">Bu hafta</span></div></div>
+          <div class="stat"><div class="num">5</div><div class="lbl"><span class="dot d-green"></span><span data-tr="Sıcak fırsat" data-en="Hot opportunities">Sıcak fırsat</span></div></div>
+        </div>
+
+        <div class="board">
+          <div class="widget">
+            <div class="widget-head"><h3 data-tr="Bugün" data-en="Today">Bugün</h3><span class="cnt">14 Haz</span></div>
+            <div class="widget-body">
+              <div class="li"><span class="dot d-blue"></span><div class="main"><div class="ttl" data-tr="Teklif gönder — Gulf Estates" data-en="Send proposal — Gulf Estates">Teklif gönder — Gulf Estates</div><div class="sub">Ayten · Oman</div></div><span class="right">11:00</span></div>
+              <div class="li"><span class="dot d-blue"></span><div class="main"><div class="ttl" data-tr="Vize evrakı kontrolü — Cityscape" data-en="Visa documents check — Cityscape">Vize evrakı kontrolü — Cityscape</div><div class="sub">BD Asistanı</div></div><span class="right">14:30</span></div>
+              <div class="li"><span class="dot d-blue"></span><div class="main"><div class="ttl" data-tr="LinkedIn yanıtı — Caspian Dev." data-en="LinkedIn reply — Caspian Dev.">LinkedIn yanıtı — Caspian Dev.</div><div class="sub">BD Yöneticisi · Azerbaijan</div></div><span class="right">16:00</span></div>
+            </div>
+          </div>
+
+          <div class="widget">
+            <div class="widget-head"><h3 data-tr="Geciken" data-en="Overdue">Geciken</h3><span class="cnt b-red badge">7</span></div>
+            <div class="widget-body">
+              <div class="li"><span class="dot d-red"></span><div class="main"><div class="ttl" data-tr="Takip e-postası — Riyadh Urban" data-en="Follow-up email — Riyadh Urban">Takip e-postası — Riyadh Urban</div><div class="sub">Ayten · Saudi Arabia</div></div><span class="right" data-tr="3 gün" data-en="3 days">3 gün</span></div>
+              <div class="li"><span class="dot d-red"></span><div class="main"><div class="ttl" data-tr="Ülke notu güncelle — Iraq" data-en="Update country note — Iraq">Ülke notu güncelle — Iraq</div><div class="sub">BD Yöneticisi</div></div><span class="right" data-tr="5 gün" data-en="5 days">5 gün</span></div>
+              <div class="li"><span class="dot d-red"></span><div class="main"><div class="ttl" data-tr="UNGM kontrolü" data-en="UNGM check">UNGM kontrolü</div><div class="sub">BD Asistanı · Global</div></div><span class="right" data-tr="8 gün" data-en="8 days">8 gün</span></div>
+            </div>
+          </div>
+
+          <div class="widget">
+            <div class="widget-head"><h3 data-tr="Bu Hafta" data-en="This Week">Bu Hafta</h3><span class="cnt">12</span></div>
+            <div class="widget-body">
+              <div class="li"><span class="dot d-amber"></span><div class="main"><div class="ttl" data-tr="Etkinlik hazırlığı — Cityscape" data-en="Event prep — Cityscape">Etkinlik hazırlığı — Cityscape</div><div class="sub" data-tr="4 eksik madde" data-en="4 missing items">4 eksik madde</div></div><span class="right">17 Haz</span></div>
+              <div class="li"><span class="dot d-amber"></span><div class="main"><div class="ttl" data-tr="Takip — Nino G. (Tiflis)" data-en="Follow-up — Nino G. (Tbilisi)">Takip — Nino G. (Tiflis)</div><div class="sub">Georgia</div></div><span class="right">18 Haz</span></div>
+              <div class="li"><span class="dot d-amber"></span><div class="main"><div class="ttl" data-tr="TOKİ ihale kontrolü" data-en="TOKI tender check">TOKİ ihale kontrolü</div><div class="sub">Türkiye</div></div><span class="right">19 Haz</span></div>
+            </div>
+          </div>
+
+          <div class="widget">
+            <div class="widget-head"><h3 data-tr="Odak Ülkeler" data-en="Focus Countries">Odak Ülkeler</h3><span class="cnt">7</span></div>
+            <div class="widget-body">
+              <div class="li"><span class="dot d-green"></span><div class="main"><div class="ttl">Oman</div><div class="sub" data-tr="6 açık aksiyon · 2 gün önce" data-en="6 open actions · 2 days ago">6 açık aksiyon · 2 gün önce</div></div><span class="badge b-blue">Focus</span></div>
+              <div class="li"><span class="dot d-amber"></span><div class="main"><div class="ttl">Saudi Arabia</div><div class="sub" data-tr="9 açık aksiyon · risk notu" data-en="9 open actions · risk note">9 açık aksiyon · risk notu</div></div><span class="badge b-blue">Focus</span></div>
+              <div class="li"><span class="dot d-green"></span><div class="main"><div class="ttl">Azerbaijan</div><div class="sub" data-tr="4 açık aksiyon · ofis" data-en="4 open actions · office">4 açık aksiyon · ofis</div></div><span class="badge b-grey">Active</span></div>
+            </div>
+          </div>
+
+          <div class="widget">
+            <div class="widget-head"><h3 data-tr="Sıcak Fırsatlar" data-en="Hot Opportunities">Sıcak Fırsatlar</h3><span class="cnt">5</span></div>
+            <div class="widget-body">
+              <div class="li"><span class="av">GE</span><div class="main"><div class="ttl" data-tr="Muscat Karma Proje" data-en="Muscat Mixed-use">Muscat Karma Proje</div><div class="sub">Oman · Proposal Sent</div></div><span class="badge b-blue">A</span></div>
+              <div class="li"><span class="av">RU</span><div class="main"><div class="ttl" data-tr="Riyadh Konut Master Plan" data-en="Riyadh Housing Masterplan">Riyadh Konut Master Plan</div><div class="sub">Saudi Arabia · Negotiation</div></div><span class="badge b-blue">A</span></div>
+              <div class="li"><span class="av">CD</span><div class="main"><div class="ttl" data-tr="Bakü Kentsel Dönüşüm" data-en="Baku Urban Regeneration">Bakü Kentsel Dönüşüm</div><div class="sub">Azerbaijan · Meeting Planned</div></div><span class="badge b-grey">B</span></div>
+            </div>
+          </div>
+
+          <div class="widget">
+            <div class="widget-head"><h3 data-tr="Etkinlik Sayacı" data-en="Events Countdown">Etkinlik Sayacı</h3></div>
+            <div class="widget-body">
+              <div class="li"><span class="dot d-amber"></span><div class="main"><div class="ttl">Cityscape Global · Riyadh</div><div class="sub" data-tr="Vize, sunum ve 2 kontrol bekliyor" data-en="Visa, deck and 2 checks pending">Vize, sunum ve 2 kontrol bekliyor</div></div><span class="right" data-tr="12 gün" data-en="12 days">12 gün</span></div>
+              <div class="li"><span class="dot d-green"></span><div class="main"><div class="ttl">ODBW · Muscat</div><div class="sub" data-tr="Hazırlık tamam" data-en="Prep complete">Hazırlık tamam</div></div><span class="right" data-tr="34 gün" data-en="34 days">34 gün</span></div>
+            </div>
+          </div>
+
+          <div class="widget">
+            <div class="widget-head"><h3 data-tr="İhale Kontrolleri" data-en="Tender Checks">İhale Kontrolleri</h3><span class="cnt" data-tr="3 bekliyor" data-en="3 due">3 bekliyor</span></div>
+            <div class="widget-body">
+              <div class="li"><span class="dot d-red"></span><div class="main"><div class="ttl">IPKB · Azerbaijan</div><div class="sub" data-tr="Haftalık · 9 gün geçti" data-en="Weekly · 9 days late">Haftalık · 9 gün geçti</div></div><span class="badge b-red" data-tr="Gecikti" data-en="Overdue">Gecikti</span></div>
+              <div class="li"><span class="dot d-amber"></span><div class="main"><div class="ttl">EBRD · Global</div><div class="sub" data-tr="15 günlük · bugün" data-en="15-day · today">15 günlük · bugün</div></div><span class="badge b-amber" data-tr="Bugün" data-en="Today">Bugün</span></div>
+              <div class="li"><span class="dot d-grey"></span><div class="main"><div class="ttl">UNGM · Global</div><div class="sub" data-tr="Aylık · 3 gün kaldı" data-en="Monthly · in 3 days">Aylık · 3 gün kaldı</div></div><span class="badge b-grey" data-tr="Yaklaşıyor" data-en="Upcoming">Yaklaşıyor</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CONTACTS ===== -->
+      <section class="view" id="view-contacts">
+        <div class="toolbar">
+          <span class="filter" data-tr="Ülke: Tümü" data-en="Country: All">Ülke: Tümü</span>
+          <span class="filter" data-tr="Kategori: Tümü" data-en="Category: All">Kategori: Tümü</span>
+          <span class="filter" data-tr="Warmth: Tümü" data-en="Warmth: All">Warmth: Tümü</span>
+          <span class="filter" data-tr="Sahip: Tümü" data-en="Owner: All">Sahip: Tümü</span>
+          <span class="filter" data-tr="Sadece geciken" data-en="Overdue only">Sadece geciken</span>
+          <div class="spacer"></div>
+          <button class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span data-tr="Yeni Kişi" data-en="New Contact">Yeni Kişi</span></button>
+        </div>
+        <div class="panel">
+          <table class="table click">
+            <thead><tr><th data-tr="Kişi" data-en="Contact">Kişi</th><th data-tr="Firma" data-en="Company">Firma</th><th data-tr="Ülke" data-en="Country">Ülke</th><th data-tr="Kategori" data-en="Category">Kategori</th><th>Warmth</th><th data-tr="Sahip" data-en="Owner">Sahip</th><th data-tr="Sıradaki adım" data-en="Next action">Sıradaki adım</th><th data-tr="Takip" data-en="Follow-up">Takip</th></tr></thead>
+            <tbody id="contactRows">
+              <tr><td><div class="t-name"><span class="av">MA</span>Maryam A.</div></td><td>Gulf Estates</td><td>Oman</td><td>Developer</td><td><span class="badge b-red">Hot</span></td><td>Ayten</td><td data-tr="Teklif gönder" data-en="Send proposal">Teklif gönder</td><td>22 Haz</td></tr>
+              <tr><td><div class="t-name"><span class="av">KR</span>Khalid R.</div></td><td>Riyadh Urban Holding</td><td>Saudi Arabia</td><td>Investor</td><td><span class="badge b-red">Hot</span></td><td>Ayten</td><td data-tr="Görüşme planla" data-en="Plan meeting">Görüşme planla</td><td>19 Haz</td></tr>
+              <tr><td><div class="t-name"><span class="av">TM</span>Tural M.</div></td><td>Caspian Development</td><td>Azerbaijan</td><td>Developer</td><td><span class="badge b-amber">Warm</span></td><td>BD Yöneticisi</td><td data-tr="LinkedIn yanıtı" data-en="LinkedIn reply">LinkedIn yanıtı</td><td>16 Haz</td></tr>
+              <tr><td><div class="t-name"><span class="av">NG</span>Nino G.</div></td><td>Tbilisi Public Works</td><td>Georgia</td><td>Government</td><td><span class="badge b-amber">Warm</span></td><td>BD Yöneticisi</td><td data-tr="Takip e-postası" data-en="Follow-up email">Takip e-postası</td><td>18 Haz</td></tr>
+              <tr><td><div class="t-name"><span class="av">OS</span>Omar S.</div></td><td>Mosul Reconstruction Co.</td><td>Iraq</td><td>Contractor</td><td><span class="badge b-grey">Cold</span></td><td>BD Asistanı</td><td data-tr="Tanışma notu ekle" data-en="Add intro note">Tanışma notu ekle</td><td>—</td></tr>
+              <tr><td><div class="t-name"><span class="av">LH</span>Leyla H.</div></td><td>Emirates Family Office</td><td>UAE</td><td>Family Office</td><td><span class="badge b-amber">Warm</span></td><td>Ayten</td><td data-tr="Tanıtım dosyası gönder" data-en="Send intro deck">Tanıtım dosyası gönder</td><td>25 Haz</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== CONTACT DETAIL ===== -->
+      <section class="view" id="view-contact-detail">
+        <button class="back" id="backToContacts"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg><span data-tr="Kişilere dön" data-en="Back to contacts">Kişilere dön</span></button>
+        <div class="detail">
+          <div>
+            <div class="photo">
+              <div class="big">MA</div>
+              <div class="nm">Maryam A.</div>
+              <div class="ti">Development Director · Gulf Estates</div>
+              <div class="chips">
+                <span class="badge b-blue">Oman</span>
+                <span class="badge b-red">Hot</span>
+                <span class="badge b-grey">Priority A</span>
+              </div>
+              <div class="ai-label" data-tr="AI YARDIMCI" data-en="AI ASSISTANT">AI YARDIMCI</div>
+              <div class="ai-row">
+                <button class="ai-btn" data-tr="Bu kişiyi özetle" data-en="Summarize contact">Bu kişiyi özetle</button>
+                <button class="ai-btn" data-tr="Takip mesajı oluştur" data-en="Draft follow-up">Takip mesajı oluştur</button>
+                <button class="ai-btn" data-tr="Eksik olan ne?" data-en="What's missing?">Eksik olan ne?</button>
+                <button class="ai-btn" data-tr="Gerçek fırsat mı?" data-en="Real opportunity?">Gerçek fırsat mı?</button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="block">
+              <div class="block-h" data-tr="Sıradaki adım · Sahip · Takip" data-en="Next action · Owner · Follow-up">Sıradaki adım · Sahip · Takip</div>
+              <div class="req">
+                <div class="req-c"><div class="k" data-tr="Sıradaki adım" data-en="Next action">Sıradaki adım</div><div class="v" data-tr="Teklif gönder" data-en="Send proposal">Teklif gönder</div></div>
+                <div class="req-c"><div class="k" data-tr="Sahip" data-en="Owner">Sahip</div><div class="v">Ayten</div></div>
+                <div class="req-c"><div class="k" data-tr="Takip tarihi" data-en="Follow-up date">Takip tarihi</div><div class="v">22 Haz 2026</div></div>
+              </div>
+            </div>
+            <div class="block">
+              <div class="block-h" data-tr="İlişki bilgisi" data-en="Relationship">İlişki bilgisi</div>
+              <div class="panel"><div class="card-pad" style="display:grid;gap:0">
+                <div class="field"><span class="k" data-tr="Nerede tanışıldı" data-en="Where met">Nerede tanışıldı</span><span class="v">Cityscape · 2026</span></div>
+                <div class="field"><span class="k" data-tr="Kim tanıştı" data-en="Who met">Kim tanıştı</span><span class="v">Ayten</span></div>
+                <div class="field"><span class="k" data-tr="Bağlı firma" data-en="Linked company">Bağlı firma</span><span class="v">Gulf Estates</span></div>
+                <div class="field"><span class="k" data-tr="Bağlı fırsat" data-en="Linked opportunity">Bağlı fırsat</span><span class="v" style="color:var(--blue-deep)" data-tr="Muscat Karma Proje" data-en="Muscat Mixed-use">Muscat Karma Proje</span></div>
+                <div class="field"><span class="k">LinkedIn · E-posta · Telefon</span><span class="v" style="color:var(--green)">✓ ✓ ✓</span></div>
+              </div></div>
+            </div>
+            <div class="block">
+              <div class="block-h" data-tr="Notlar" data-en="Notes">Notlar</div>
+              <div class="note-box" data-tr="Muscat'taki karma kullanım projesi için master plan arıyor. Karar verici; bütçe net. Geçen yılki ODBW'de tanışıldı, ilişki güçlü. Bir sonraki adım hızlı teklif." data-en="Looking for a masterplan for a mixed-use project in Muscat. Decision-maker; budget is clear. Met at last year's ODBW, relationship is strong. Next step is a fast proposal.">Muscat'taki karma kullanım projesi için master plan arıyor. Karar verici; bütçe net. Geçen yılki ODBW'de tanışıldı, ilişki güçlü. Bir sonraki adım hızlı teklif.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== COMPANIES ===== -->
+      <section class="view" id="view-companies">
+        <div class="toolbar">
+          <span class="filter" data-tr="Tür: Tümü" data-en="Type: All">Tür: Tümü</span>
+          <span class="filter" data-tr="Ülke: Tümü" data-en="Country: All">Ülke: Tümü</span>
+          <span class="filter" data-tr="İlişki: Tümü" data-en="Relationship: All">İlişki: Tümü</span>
+          <div class="spacer"></div>
+          <button class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span data-tr="Yeni Firma" data-en="New Company">Yeni Firma</span></button>
+        </div>
+        <div class="panel">
+          <table class="table">
+            <thead><tr><th data-tr="Firma" data-en="Company">Firma</th><th data-tr="Tür" data-en="Type">Tür</th><th data-tr="Ülke" data-en="Country">Ülke</th><th data-tr="SP İlişkisi" data-en="SP Relationship">SP İlişkisi</th><th data-tr="Öncelik" data-en="Priority">Öncelik</th><th data-tr="Aktif kişi" data-en="Contacts">Aktif kişi</th><th data-tr="Aktif fırsat" data-en="Opportunities">Aktif fırsat</th></tr></thead>
+            <tbody>
+              <tr><td class="t-name">Gulf Estates</td><td>Developer</td><td>Oman</td><td><span class="badge b-blue">Potential Client</span></td><td><span class="badge b-grey">A</span></td><td>3</td><td>1</td></tr>
+              <tr><td class="t-name">Riyadh Urban Holding</td><td>Investor</td><td>Saudi Arabia</td><td><span class="badge b-blue">Potential Client</span></td><td><span class="badge b-grey">A</span></td><td>2</td><td>1</td></tr>
+              <tr><td class="t-name">Caspian Development</td><td>Developer</td><td>Azerbaijan</td><td><span class="badge b-green">Client</span></td><td><span class="badge b-grey">B</span></td><td>4</td><td>2</td></tr>
+              <tr><td class="t-name">Tbilisi Public Works</td><td>Government</td><td>Georgia</td><td><span class="badge b-blue">Potential Partner</span></td><td><span class="badge b-grey">B</span></td><td>1</td><td>0</td></tr>
+              <tr><td class="t-name">Emirates Family Office</td><td>Family Office</td><td>UAE</td><td><span class="badge b-blue">Potential Client</span></td><td><span class="badge b-grey">B</span></td><td>1</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== COUNTRY DESK ===== -->
+      <section class="view" id="view-countries">
+        <div class="cc-chips" id="ccChips">
+          <button class="cc active" data-country="oman">Oman</button>
+          <button class="cc" data-country="saudi">Saudi Arabia</button>
+          <button class="cc" data-country="azerbaijan">Azerbaijan</button>
+          <button class="cc" data-country="iraq">Iraq</button>
+          <button class="cc" data-country="uae">UAE</button>
+          <button class="cc" data-country="georgia">Georgia</button>
+          <button class="cc" data-country="syria">Syria</button>
+        </div>
+        <div class="desk-head">
+          <h2 id="dkName">Oman</h2>
+          <span class="badge b-blue" id="dkRegion">MENA</span>
+          <span class="badge b-grey" id="dkPriority">Focus</span>
+        </div>
+        <div class="desk-grid">
+          <div class="panel"><div class="card-pad">
+            <div class="block-h" data-tr="Pazara giriş" data-en="Market entry">Pazara giriş</div>
+            <div class="field"><span class="k" data-tr="SP durumu" data-en="SP status">SP durumu</span><span class="v" id="dkStatus">—</span></div>
+            <div class="field"><span class="k" data-tr="Mimari lisans" data-en="Architectural license">Mimari lisans</span><span class="v" id="dkLicense">—</span></div>
+            <div class="field"><span class="k" data-tr="Şirket kurulumu" data-en="Company setup">Şirket kurulumu</span><span class="v" id="dkSetup">—</span></div>
+            <div class="field"><span class="k" data-tr="Vize notu" data-en="Visa note">Vize notu</span><span class="v" id="dkVisa">—</span></div>
+          </div></div>
+
+          <div class="panel"><div class="card-pad">
+            <div class="block-h" data-tr="Kamu temasları" data-en="Government contacts">Kamu temasları</div>
+            <div id="dkGov"></div>
+          </div></div>
+
+          <div class="panel"><div class="card-pad">
+            <div class="block-h" data-tr="Geliştiriciler" data-en="Developers">Geliştiriciler</div>
+            <div id="dkDev"></div>
+          </div></div>
+
+          <div class="panel"><div class="card-pad">
+            <div class="block-h" data-tr="Aktif fırsatlar" data-en="Active opportunities">Aktif fırsatlar</div>
+            <div id="dkOpp"></div>
+          </div></div>
+
+          <div class="panel"><div class="card-pad">
+            <div class="block-h" data-tr="İhale platformları" data-en="Tender platforms">İhale platformları</div>
+            <div id="dkTender"></div>
+          </div></div>
+
+          <div class="panel"><div class="card-pad">
+            <div class="block-h" data-tr="Haftalık aksiyon" data-en="Weekly action">Haftalık aksiyon</div>
+            <div class="note-box" id="dkWeekly">—</div>
+            <div class="field" style="margin-top:8px"><span class="k" data-tr="Son güncelleme" data-en="Last updated">Son güncelleme</span><span class="v" id="dkUpdated">—</span></div>
+          </div></div>
+        </div>
+      </section>
+
+      <!-- ===== OPPORTUNITIES ===== -->
+      <section class="view" id="view-opportunities">
+        <div class="toolbar">
+          <span class="filter" data-tr="Ülke: Tümü" data-en="Country: All">Ülke: Tümü</span>
+          <span class="filter" data-tr="Sahip: Tümü" data-en="Owner: All">Sahip: Tümü</span>
+          <span class="filter" data-tr="Öncelik: A" data-en="Priority: A">Öncelik: A</span>
+          <div class="spacer"></div>
+          <button class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span data-tr="Yeni Fırsat" data-en="New Opportunity">Yeni Fırsat</span></button>
+        </div>
+        <div class="kanban">
+          <div class="col">
+            <div class="col-head"><span data-tr="İncelenecek" data-en="To Review">İncelenecek</span><span class="n">2</span></div>
+            <div class="opp"><div class="name" data-tr="Dubai Sağlık Kampüsü" data-en="Dubai Healthcare Campus">Dubai Sağlık Kampüsü</div><div class="row"><span class="badge b-grey">UAE</span><span class="badge b-amber">Unclear</span></div><div class="row"><span class="val">~ €4M</span><span class="av">LH</span></div></div>
+            <div class="opp"><div class="name" data-tr="Tiflis Kamu Binası" data-en="Tbilisi Public Building">Tiflis Kamu Binası</div><div class="row"><span class="badge b-grey">Georgia</span></div><div class="row"><span class="val">—</span><span class="av">NG</span></div></div>
+          </div>
+          <div class="col">
+            <div class="col-head"><span data-tr="Tanıtım Yapıldı" data-en="Intro Sent">Tanıtım Yapıldı</span><span class="n">1</span></div>
+            <div class="opp"><div class="name" data-tr="Bakü Kentsel Dönüşüm" data-en="Baku Urban Regeneration">Bakü Kentsel Dönüşüm</div><div class="row"><span class="badge b-blue">Azerbaijan</span><span class="badge b-grey">B</span></div><div class="row"><span class="val">~ €6M</span><span class="av">TM</span></div></div>
+          </div>
+          <div class="col">
+            <div class="col-head"><span data-tr="Görüşme Planlı" data-en="Meeting Planned">Görüşme Planlı</span><span class="n">1</span></div>
+            <div class="opp"><div class="name" data-tr="Mosul Yeniden İmar" data-en="Mosul Reconstruction">Mosul Yeniden İmar</div><div class="row"><span class="badge b-grey">Iraq</span><span class="badge b-amber">Government Risk</span></div><div class="row"><span class="val">~ €9M</span><span class="av">OS</span></div></div>
+          </div>
+          <div class="col">
+            <div class="col-head"><span data-tr="Teklif Gönderildi" data-en="Proposal Sent">Teklif Gönderildi</span><span class="n">1</span></div>
+            <div class="opp"><div class="name" data-tr="Muscat Karma Proje" data-en="Muscat Mixed-use">Muscat Karma Proje</div><div class="row"><span class="badge b-blue">Oman</span><span class="badge b-blue">A</span></div><div class="row"><span class="val">~ €8M</span><span class="av">MA</span></div></div>
+          </div>
+          <div class="col">
+            <div class="col-head"><span data-tr="Müzakere" data-en="Negotiation">Müzakere</span><span class="n">1</span></div>
+            <div class="opp"><div class="name" data-tr="Riyadh Konut Master Plan" data-en="Riyadh Housing Masterplan">Riyadh Konut Master Plan</div><div class="row"><span class="badge b-blue">Saudi Arabia</span><span class="badge b-green">Strategic</span></div><div class="row"><span class="val">~ €15M</span><span class="av">KR</span></div></div>
+          </div>
+          <div class="col">
+            <div class="col-head"><span data-tr="Kazanıldı" data-en="Won">Kazanıldı</span><span class="n">1</span></div>
+            <div class="opp"><div class="name" data-tr="Bakü Konut Etabı" data-en="Baku Housing Phase">Bakü Konut Etabı</div><div class="row"><span class="badge b-green">Azerbaijan</span><span class="badge b-green">Won</span></div><div class="row"><span class="val">€5M</span><span class="av">TM</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== EVENTS ===== -->
+      <section class="view" id="view-events">
+        <div class="desk-head">
+          <h2>Cityscape Global · Riyadh</h2>
+          <span class="badge b-blue">Saudi Arabia</span>
+          <span class="badge b-amber" data-tr="12 gün kaldı" data-en="12 days left">12 gün kaldı</span>
+        </div>
+        <div class="block">
+          <div class="panel"><div class="card-pad" style="display:grid;gap:0">
+            <div class="field"><span class="k" data-tr="Tarih" data-en="Dates">Tarih</span><span class="v">26–28 Haz 2026</span></div>
+            <div class="field"><span class="k" data-tr="Amaç" data-en="Purpose">Amaç</span><span class="v" data-tr="Stand · görüşmeler · pazara giriş" data-en="Stand · meetings · market entry">Stand · görüşmeler · pazara giriş</span></div>
+            <div class="field"><span class="k" data-tr="Katılan ekip" data-en="Team attending">Katılan ekip</span><span class="v">Ayten · BD Yöneticisi</span></div>
+            <div class="field"><span class="k" data-tr="Sunum durumu" data-en="Presentation">Sunum durumu</span><span class="v" style="color:var(--amber)" data-tr="Hazırlanıyor" data-en="In progress">Hazırlanıyor</span></div>
+          </div></div>
+        </div>
+        <div class="desk-grid">
+          <div class="panel"><div class="card-pad">
+            <div class="block-h" data-tr="Etkinlik öncesi" data-en="Pre-event">Etkinlik öncesi</div>
+            <div class="check done"><span class="box on"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></span><span class="lab" data-tr="Pasaport & davet" data-en="Passport & invitation">Pasaport & davet</span></div>
+            <div class="check done"><span class="box on"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></span><span class="lab" data-tr="Uçuş & otel" data-en="Flight & hotel">Uçuş & otel</span></div>
+            <div class="check"><span class="box"></span><span class="lab" data-tr="Vize başvurusu" data-en="Visa application">Vize başvurusu</span></div>
+            <div class="check"><span class="box"></span><span class="lab" data-tr="SP sunum dosyası" data-en="SP deck">SP sunum dosyası</span></div>
+            <div class="check"><span class="box"></span><span class="lab" data-tr="Görüşme listesi & QR / kartlar" data-en="Meeting list & QR / cards">Görüşme listesi & QR / kartlar</span></div>
+          </div></div>
+
+          <div class="panel"><div class="card-pad">
+            <div class="block-h" data-tr="Etkinlik sonrası" data-en="Post-event">Etkinlik sonrası</div>
+            <div class="check"><span class="box"></span><span class="lab" data-tr="Kartlar girildi" data-en="Cards entered">Kartlar girildi</span></div>
+            <div class="check"><span class="box"></span><span class="lab" data-tr="Fotoğraflar eklendi" data-en="Photos added">Fotoğraflar eklendi</span></div>
+            <div class="check"><span class="box"></span><span class="lab" data-tr="Teşekkür e-postaları" data-en="Thank-you emails">Teşekkür e-postaları</span></div>
+            <div class="check"><span class="box"></span><span class="lab" data-tr="Takip tarihleri" data-en="Follow-up dates">Takip tarihleri</span></div>
+            <div class="check"><span class="box"></span><span class="lab" data-tr="Fırsatlar oluşturuldu" data-en="Opportunities created">Fırsatlar oluşturuldu</span></div>
+          </div></div>
+
+          <div class="panel"><div class="card-pad">
+            <div class="block-h" data-tr="Hedef görüşmeler" data-en="Target meetings">Hedef görüşmeler</div>
+            <div class="mini"><span class="av">KR</span><div><div class="mn">Khalid R.</div><div class="ms">Riyadh Urban Holding</div></div></div>
+            <div class="mini"><span class="av">LH</span><div><div class="mn">Leyla H.</div><div class="ms">Emirates Family Office</div></div></div>
+            <div class="mini"><span class="av">MA</span><div><div class="mn">Maryam A.</div><div class="ms">Gulf Estates</div></div></div>
+          </div></div>
+        </div>
+      </section>
+
+      <!-- ===== TENDERS ===== -->
+      <section class="view" id="view-tenders">
+        <div class="toolbar">
+          <span class="filter" data-tr="Bölge: Tümü" data-en="Region: All">Bölge: Tümü</span>
+          <span class="filter" data-tr="Sıklık: Tümü" data-en="Frequency: All">Sıklık: Tümü</span>
+          <span class="filter" data-tr="Kontrol bekleyen" data-en="Due for check">Kontrol bekleyen</span>
+          <div class="spacer"></div>
+          <button class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span data-tr="Yeni Platform" data-en="New Platform">Yeni Platform</span></button>
+        </div>
+        <div class="panel">
+          <table class="table">
+            <thead><tr><th data-tr="Platform" data-en="Platform">Platform</th><th data-tr="Bölge" data-en="Region">Bölge</th><th data-tr="Sıklık" data-en="Frequency">Sıklık</th><th data-tr="Sahip" data-en="Owner">Sahip</th><th data-tr="Son kontrol" data-en="Last check">Son kontrol</th><th data-tr="Sonuç" data-en="Outcome">Sonuç</th><th data-tr="Durum" data-en="Status">Durum</th></tr></thead>
+            <tbody>
+              <tr><td class="t-name">IPKB</td><td>Azerbaijan</td><td>Weekly</td><td>BD Asistanı</td><td>05 Haz</td><td data-tr="Tender to review" data-en="Tender to review">Tender to review</td><td><span class="badge b-red" data-tr="Gecikti" data-en="Overdue">Gecikti</span></td></tr>
+              <tr><td class="t-name">EBRD</td><td>Global</td><td>15 gün</td><td>BD Yöneticisi</td><td>30 May</td><td data-tr="EOI needed" data-en="EOI needed">EOI needed</td><td><span class="badge b-amber" data-tr="Bugün" data-en="Today">Bugün</span></td></tr>
+              <tr><td class="t-name">UNGM</td><td>Global</td><td>Monthly</td><td>BD Asistanı</td><td>20 May</td><td data-tr="No relevant tender" data-en="No relevant tender">No relevant tender</td><td><span class="badge b-grey" data-tr="Yaklaşıyor" data-en="Upcoming">Yaklaşıyor</span></td></tr>
+              <tr><td class="t-name">TOKİ</td><td>Türkiye</td><td>Weekly</td><td>BD Yöneticisi</td><td>11 Haz</td><td data-tr="Review tender" data-en="Review tender">Review tender</td><td><span class="badge b-green" data-tr="Güncel" data-en="Up to date">Güncel</span></td></tr>
+              <tr><td class="t-name">TED</td><td>Europe</td><td>Monthly</td><td>BD Yöneticisi</td><td>02 Haz</td><td data-tr="Partner required" data-en="Partner required">Partner required</td><td><span class="badge b-grey" data-tr="Yaklaşıyor" data-en="Upcoming">Yaklaşıyor</span></td></tr>
+              <tr><td class="t-name">ADB</td><td>Global</td><td>Monthly</td><td>BD Asistanı</td><td>08 Haz</td><td data-tr="Documents requested" data-en="Documents requested">Documents requested</td><td><span class="badge b-green" data-tr="Güncel" data-en="Up to date">Güncel</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== TASKS ===== -->
+      <section class="view" id="view-tasks">
+        <div class="toolbar">
+          <span class="filter" data-tr="Sahip: Tümü" data-en="Owner: All">Sahip: Tümü</span>
+          <span class="filter" data-tr="Durum: Açık" data-en="Status: Open">Durum: Açık</span>
+          <span class="filter" data-tr="Öncelik: Tümü" data-en="Priority: All">Öncelik: Tümü</span>
+          <div class="spacer"></div>
+          <button class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span data-tr="Yeni Görev" data-en="New Task">Yeni Görev</span></button>
+        </div>
+        <div class="panel">
+          <table class="table">
+            <thead><tr><th data-tr="Görev" data-en="Task">Görev</th><th data-tr="Bağlı kayıt" data-en="Linked record">Bağlı kayıt</th><th data-tr="Sahip" data-en="Owner">Sahip</th><th data-tr="Son tarih" data-en="Due date">Son tarih</th><th data-tr="Öncelik" data-en="Priority">Öncelik</th><th data-tr="Durum" data-en="Status">Durum</th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:600;color:var(--navy)" data-tr="Takip e-postası gönder" data-en="Send follow-up email">Takip e-postası gönder</td><td>Riyadh Urban Holding</td><td>Ayten</td><td style="color:var(--red)">11 Haz</td><td><span class="badge b-red">High</span></td><td><span class="badge b-red" data-tr="Gecikti" data-en="Overdue">Gecikti</span></td></tr>
+              <tr><td style="font-weight:600;color:var(--navy)" data-tr="Teklif hazırla" data-en="Prepare proposal">Teklif hazırla</td><td>Gulf Estates</td><td>Ayten</td><td>14 Haz</td><td><span class="badge b-red">High</span></td><td><span class="badge b-blue" data-tr="Devam ediyor" data-en="In progress">Devam ediyor</span></td></tr>
+              <tr><td style="font-weight:600;color:var(--navy)" data-tr="Vize evrakı topla" data-en="Collect visa documents">Vize evrakı topla</td><td>Cityscape Global</td><td>BD Asistanı</td><td>16 Haz</td><td><span class="badge b-amber">Medium</span></td><td><span class="badge b-grey" data-tr="Başlamadı" data-en="Not started">Başlamadı</span></td></tr>
+              <tr><td style="font-weight:600;color:var(--navy)" data-tr="IPKB platformunu kontrol et" data-en="Check IPKB platform">IPKB platformunu kontrol et</td><td>IPKB · Azerbaijan</td><td>BD Asistanı</td><td style="color:var(--red)">05 Haz</td><td><span class="badge b-amber">Medium</span></td><td><span class="badge b-red" data-tr="Gecikti" data-en="Overdue">Gecikti</span></td></tr>
+              <tr><td style="font-weight:600;color:var(--navy)" data-tr="Ülke notunu güncelle" data-en="Update country note">Ülke notunu güncelle</td><td>Iraq</td><td>BD Yöneticisi</td><td>20 Haz</td><td><span class="badge b-grey">Low</span></td><td><span class="badge b-grey" data-tr="Bekliyor" data-en="Waiting">Bekliyor</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== LINKS ===== -->
+      <section class="view" id="view-links">
+        <div class="toolbar">
+          <span class="filter" data-tr="Ülke: Tümü" data-en="Country: All">Ülke: Tümü</span>
+          <span class="filter" data-tr="Tür: Tümü" data-en="Type: All">Tür: Tümü</span>
+          <div class="spacer"></div>
+          <button class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span data-tr="Yeni Bağlantı" data-en="New Link">Yeni Bağlantı</span></button>
+        </div>
+        <div class="panel">
+          <table class="table">
+            <thead><tr><th data-tr="Başlık" data-en="Title">Başlık</th><th data-tr="İlişki" data-en="Relation">İlişki</th><th data-tr="Tür" data-en="Type">Tür</th><th data-tr="Özet" data-en="Summary">Özet</th><th data-tr="Aksiyon" data-en="Action">Aksiyon</th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:600;color:var(--navy)" data-tr="Riyadh kentsel gelişim planı" data-en="Riyadh urban development plan">Riyadh kentsel gelişim planı</td><td>Saudi Arabia</td><td data-tr="Pazar" data-en="Market">Pazar</td><td data-tr="Yeni konut bölgeleri açıklandı" data-en="New housing zones announced">Yeni konut bölgeleri açıklandı</td><td><span class="badge b-blue" data-tr="İncele" data-en="Review">İncele</span></td></tr>
+              <tr><td style="font-weight:600;color:var(--navy)" data-tr="Oman PPP mevzuatı" data-en="Oman PPP regulation">Oman PPP mevzuatı</td><td>Oman</td><td data-tr="Mevzuat" data-en="Regulation">Mevzuat</td><td data-tr="Yabancı firma katılım koşulları" data-en="Foreign firm participation rules">Yabancı firma katılım koşulları</td><td><span class="badge b-grey" data-tr="Arşiv" data-en="Archive">Arşiv</span></td></tr>
+              <tr><td style="font-weight:600;color:var(--navy)" data-tr="Caspian Development profili" data-en="Caspian Development profile">Caspian Development profili</td><td>Azerbaijan</td><td data-tr="Firma" data-en="Company">Firma</td><td data-tr="Geçmiş projeler ve ortaklar" data-en="Past projects and partners">Geçmiş projeler ve ortaklar</td><td><span class="badge b-blue" data-tr="Takip" data-en="Follow-up">Takip</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== TEMPLATES ===== -->
+      <section class="view" id="view-templates">
+        <div class="toolbar">
+          <span class="filter" data-tr="Kanal: Tümü" data-en="Channel: All">Kanal: Tümü</span>
+          <div class="spacer"></div>
+          <button class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span data-tr="Yeni Şablon" data-en="New Template">Yeni Şablon</span></button>
+        </div>
+        <div class="board">
+          <div class="widget"><div class="widget-head"><h3 data-tr="Fuar sonrası takip" data-en="Post-fair follow-up">Fuar sonrası takip</h3><span class="badge b-grey">E-posta</span></div><div class="card-pad"><div class="note-box" data-tr="Merhaba [İsim], [Etkinlik]'te tanıştığımıza memnun oldum. SP olarak [konu] için… Bir sonraki adım: kısa bir görüşme." data-en="Hello [Name], it was good to meet at [Event]. At SP we'd be glad to… Next step: a short call.">Merhaba [İsim], [Etkinlik]'te tanıştığımıza memnun oldum. SP olarak [konu] için… Bir sonraki adım: kısa bir görüşme.</div></div></div>
+          <div class="widget"><div class="widget-head"><h3 data-tr="LinkedIn tanışma" data-en="LinkedIn intro">LinkedIn tanışma</h3><span class="badge b-grey">LinkedIn</span></div><div class="card-pad"><div class="note-box" data-tr="Merhaba [İsim], [ülke/sektör] çalışmalarınızı takip ediyorum. SP Architects olarak… Bağlantı kurmaktan memnuniyet duyarım." data-en="Hello [Name], I follow your work in [country/sector]. At SP Architects we… I'd be glad to connect.">Merhaba [İsim], [ülke/sektör] çalışmalarınızı takip ediyorum. SP Architects olarak… Bağlantı kurmaktan memnuniyet duyarım.</div></div></div>
+          <div class="widget"><div class="widget-head"><h3 data-tr="Nazik ret" data-en="Polite refusal">Nazik ret</h3><span class="badge b-grey">E-posta</span></div><div class="card-pad"><div class="note-box" data-tr="Teşekkür ederiz. Bu aşamada [neden] kapsam dışında kalıyor; ileride uygun bir fırsatta tekrar görüşmek isteriz." data-en="Thank you. At this stage [reason] is out of scope; we'd be glad to revisit at the right opportunity.">Teşekkür ederiz. Bu aşamada [neden] kapsam dışında kalıyor; ileride uygun bir fırsatta tekrar görüşmek isteriz.</div></div></div>
+          <div class="widget"><div class="widget-head"><h3 data-tr="Görüşme planlama" data-en="Meeting scheduling">Görüşme planlama</h3><span class="badge b-grey">WhatsApp</span></div><div class="card-pad"><div class="note-box" data-tr="Merhaba [İsim], [tarih] haftasında 20 dakikalık bir görüşme sizin için uygun mu? Size uygun saati paylaşırsanız ayarlayalım." data-en="Hi [Name], would a 20-minute call work the week of [date]? Share a time that suits you and we'll set it up.">Merhaba [İsim], [tarih] haftasında 20 dakikalık bir görüşme sizin için uygun mu? Size uygun saati paylaşırsanız ayarlayalım.</div></div></div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var app = document.getElementById('app');
+  var ham = document.getElementById('ham');
+  var langBtn = document.getElementById('langToggle');
+  var titleEl = document.getElementById('pageTitle');
+  var lang = 'tr', current = 'dashboard';
+
+  var titles = {
+    dashboard:{tr:'Panel',en:'Dashboard'},
+    contacts:{tr:'Kişiler',en:'Contacts'},
+    'contact-detail':{tr:'Kişi Kartı',en:'Contact'},
+    companies:{tr:'Firmalar',en:'Companies'},
+    countries:{tr:'Ülke Masası',en:'Country Desk'},
+    opportunities:{tr:'Fırsatlar',en:'Opportunities'},
+    events:{tr:'Etkinlikler',en:'Events & Fairs'},
+    tenders:{tr:'İhale Platformları',en:'Tender Platforms'},
+    tasks:{tr:'Görevler',en:'Tasks'},
+    links:{tr:'Bağlantı & Not',en:'Links & Notes'},
+    templates:{tr:'Şablonlar',en:'Templates'}
+  };
+
+  function setTitle(){ titleEl.textContent = (titles[current]||{})[lang] || ''; }
+  function applyLang(){
+    document.documentElement.lang = lang;
+    var n = document.querySelectorAll('[data-tr]');
+    for(var i=0;i<n.length;i++){ var v=n[i].getAttribute('data-'+lang); if(v!==null) n[i].textContent=v; }
+    var ph = document.querySelectorAll('[data-tr-ph]');
+    for(var j=0;j<ph.length;j++){ var pv=ph[j].getAttribute('data-'+lang+'-ph'); if(pv!==null) ph[j].setAttribute('placeholder',pv); }
+    langBtn.textContent = lang==='tr' ? 'EN' : 'TR';
+    setTitle(); renderCountry();
+  }
+  langBtn.addEventListener('click', function(){ lang = lang==='tr'?'en':'tr'; applyLang(); });
+
+  function showView(v, navKey){
+    current = v;
+    var views = document.querySelectorAll('.view');
+    for(var i=0;i<views.length;i++){ views[i].classList.toggle('active', views[i].id==='view-'+v); }
+    var items = document.querySelectorAll('.nav-item');
+    for(var j=0;j<items.length;j++){ items[j].classList.toggle('active', items[j].getAttribute('data-view')===(navKey||v)); }
+    setTitle();
+    app.classList.remove('nav-open');
+    window.scrollTo(0,0);
+  }
+
+  var navItems = document.querySelectorAll('.nav-item');
+  for(var i=0;i<navItems.length;i++){
+    navItems[i].addEventListener('click', function(){ showView(this.getAttribute('data-view')); });
+  }
+  ham.addEventListener('click', function(){ app.classList.toggle('nav-open'); });
+  app.addEventListener('click', function(e){ if(app.classList.contains('nav-open') && e.target===app) app.classList.remove('nav-open'); });
+
+  // contact rows -> detail
+  var rows = document.querySelectorAll('#contactRows tr');
+  for(var r=0;r<rows.length;r++){ rows[r].addEventListener('click', function(){ showView('contact-detail','contacts'); }); }
+  document.getElementById('backToContacts').addEventListener('click', function(){ showView('contacts'); });
+
+  // ---- country desk data ----
+  var C = {
+    oman:{region:'MENA',priority:'Focus',status:'Project-Based Only',license:{tr:'Gerekli',en:'Needed'},setup:{tr:'Değerlendiriliyor',en:'In progress'},visa:{tr:'e-Vize, hızlı',en:'e-Visa, fast'},
+      gov:[['Ministry of Housing','Govt · Muscat'],['Diwan Royal Court','Govt · Muscat']],
+      dev:[['Gulf Estates','Developer · A'],['Oman Tourism Dev.','Developer · B']],
+      opp:[['Muscat Karma Proje','Proposal Sent · €8M']],
+      tender:[['Tejari','Weekly'],['Isnad','Monthly']],
+      weekly:{tr:'Gulf Estates teklifini kapat; ODBW görüşmelerini onayla.',en:'Close the Gulf Estates proposal; confirm ODBW meetings.'},updated:'2 gün önce'},
+    saudi:{region:'MENA',priority:'Focus',status:'Partner Needed',license:{tr:'Süreçte',en:'In progress'},setup:{tr:'Gerekli',en:'Needed'},visa:{tr:'İş vizesi, davet gerekli',en:'Business visa, invitation needed'},
+      gov:[['Royal Commission','Govt · Riyadh'],['MoMRA','Govt · Riyadh']],
+      dev:[['Riyadh Urban Holding','Investor · A'],['NHC','Developer · A']],
+      opp:[['Riyadh Konut Master Plan','Negotiation · €15M']],
+      tender:[['Etimad','Weekly'],['Monsha\u2019at','Monthly']],
+      weekly:{tr:'Cityscape görüşmelerini kesinleştir; yerel ortak ödülünü değerlendir.',en:'Lock Cityscape meetings; assess local partner shortlist.'},updated:'1 gün önce'},
+    azerbaijan:{region:'CIS',priority:'Active',status:'Office',license:{tr:'Tamamlandı',en:'Completed'},setup:{tr:'Tamamlandı',en:'Completed'},visa:{tr:'Vize muafiyeti',en:'Visa-free'},
+      gov:[['State Urban Planning','Govt · Baku']],
+      dev:[['Caspian Development','Developer · B'],['Baku City Circuit','Developer · B']],
+      opp:[['Bakü Kentsel Dönüşüm','Intro Sent · €6M'],['Bakü Konut Etabı','Won · €5M']],
+      tender:[['IPKB','Weekly']],
+      weekly:{tr:'IPKB kontrolünü güncelle; kentsel dönüşüm tanıtımını ilerlet.',en:'Update IPKB check; advance the regeneration intro.'},updated:'4 gün önce'},
+    iraq:{region:'MENA',priority:'Watch',status:'Not Active',license:{tr:'Değerlendirilmedi',en:'Not assessed'},setup:{tr:'Gerekli değil',en:'Not needed'},visa:{tr:'Davet ile',en:'On invitation'},
+      gov:[],dev:[['Mosul Reconstruction Co.','Contractor · B']],
+      opp:[['Mosul Yeniden İmar','Meeting Planned · €9M']],
+      tender:[],
+      weekly:{tr:'Görüşme öncesi devlet erişimi ve ödeme netliğini doğrula.',en:'Verify government access and payment clarity before the meeting.'},updated:'5 gün önce'},
+    uae:{region:'MENA',priority:'Active',status:'Project-Based Only',license:{tr:'Serbest bölge ile',en:'Via free zone'},setup:{tr:'Değerlendiriliyor',en:'In progress'},visa:{tr:'Vize muafiyeti',en:'Visa-free'},
+      gov:[],dev:[['Emirates Family Office','Family Office · B']],
+      opp:[['Dubai Sağlık Kampüsü','To Review · €4M']],
+      tender:[],
+      weekly:{tr:'Family Office tanıtım dosyasını gönder; fırsatı netleştir.',en:'Send the Family Office intro deck; clarify the lead.'},updated:'6 gün önce'},
+    georgia:{region:'CIS',priority:'Watch',status:'Representative',license:{tr:'Gerekli değil',en:'Not needed'},setup:{tr:'Gerekli değil',en:'Not needed'},visa:{tr:'Vize muafiyeti',en:'Visa-free'},
+      gov:[['Tbilisi Public Works','Govt · Tbilisi']],dev:[],
+      opp:[['Tiflis Kamu Binası','To Review']],
+      tender:[],
+      weekly:{tr:'Nino G. takibini tamamla; kamu binası fırsatını incele.',en:'Complete Nino G. follow-up; review the public-building lead.'},updated:'3 gün önce'},
+    syria:{region:'MENA',priority:'Watch',status:'Not Active',license:{tr:'Değerlendirilmedi',en:'Not assessed'},setup:{tr:'Gerekli değil',en:'Not needed'},visa:{tr:'Belirsiz',en:'Unclear'},
+      gov:[],dev:[],opp:[],tender:[],
+      weekly:{tr:'Damascus master plan görüşmesi sonrası fırsatları kaydet.',en:'Log opportunities after the Damascus masterplan meeting.'},updated:'—'}
+  };
+
+  function fillList(id, arr){
+    var el = document.getElementById(id);
+    if(!arr || !arr.length){ el.innerHTML = '<div class="empty">'+(lang==='tr'?'Kayıt yok — eklemek için tıklayın':'No records — click to add')+'</div>'; return; }
+    var h='';
+    for(var i=0;i<arr.length;i++){ h += '<div class="mini"><div><div class="mn">'+arr[i][0]+'</div><div class="ms">'+arr[i][1]+'</div></div></div>'; }
+    el.innerHTML = h;
+  }
+  function txt(o){ return (o && typeof o==='object') ? (o[lang]||o.tr) : o; }
+  var activeCountry = 'oman';
+  function renderCountry(){
+    var d = C[activeCountry]; if(!d) return;
+    document.getElementById('dkName').textContent = document.querySelector('.cc[data-country="'+activeCountry+'"]').textContent;
+    document.getElementById('dkRegion').textContent = d.region;
+    document.getElementById('dkPriority').textContent = d.priority;
+    document.getElementById('dkStatus').textContent = d.status;
+    document.getElementById('dkLicense').textContent = txt(d.license);
+    document.getElementById('dkSetup').textContent = txt(d.setup);
+    document.getElementById('dkVisa').textContent = txt(d.visa);
+    document.getElementById('dkWeekly').textContent = txt(d.weekly);
+    document.getElementById('dkUpdated').textContent = d.updated;
+    fillList('dkGov', d.gov); fillList('dkDev', d.dev); fillList('dkOpp', d.opp); fillList('dkTender', d.tender);
+  }
+  var chips = document.querySelectorAll('#ccChips .cc');
+  for(var c=0;c<chips.length;c++){
+    chips[c].addEventListener('click', function(){
+      for(var k=0;k<chips.length;k++) chips[k].classList.remove('active');
+      this.classList.add('active');
+      activeCountry = this.getAttribute('data-country');
+      renderCountry();
+    });
+  }
+  renderCountry();
+})();
+</script>
+</body>
+</html>
