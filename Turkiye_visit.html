@@ -5,19 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Türkiye Visit Programme · MoHUP · July 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#0D1B2A;--navy2:#162436;--gold:#C4973A;--gold-l:#FBF3DC;
-  --ink:#1C1C1C;--ink2:#4A4540;--ink3:#8A8278;
-  --bg:#F9F7F3;--white:#FFFEFB;--border:#E4DDD4;
-  --ank:#7A3800;--ank-l:#FEF3E6;--bod:#0A5E4E;--bod-l:#E0F5EF;
-  --ist:#163D6A;--ist-l:#E6EEF8;--green:#2A5A14;--green-l:#EBF5E2;
-  --amber:#7A3C0A;--amber-l:#FEF0E0;--r:8px;--shadow:0 2px 12px rgba(0,0,0,.07);
+  --navy:#1A1A2E;
+  --navy2:#1E1E38;
+  --gold:#D4AF37;
+  --gold-l:#F5EFC8;
+  --ink:#1A1A2E;
+  --ink2:#4A4540;
+  --ink3:#8A8278;
+  --bg:#FAFAFA;
+  --white:#FAFAFA;
+  --surface:#FFFFFF;
+  --border:#E0D8CC;
+  --sand:#E4D9C3;
+  --ank:#8A3A00;
+  --ank-l:#FEF0E4;
+  --bod:#0A5A4A;
+  --bod-l:#DEF2EC;
+  --ist:#1A1A2E;
+  --ist-l:#EEEEF6;
+  --green:#2A5A14;
+  --green-l:#E8F4E0;
+  --amber:#7A3C0A;
+  --amber-l:#FEF0E0;
+  --r:8px;
+  --shadow:0 2px 14px rgba(0,0,0,.08);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;font-size:14px}
+body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;font-size:14px}
 .layout{display:flex;min-height:100vh}
 .sidebar{width:210px;background:var(--navy);position:fixed;top:0;left:0;height:100vh;display:flex;flex-direction:column;z-index:200;overflow-y:auto}
 .sidebar-logo{display:flex;align-items:center;gap:10px;padding:18px 16px 14px;border-bottom:0.5px solid rgba(255,255,255,.08)}
@@ -33,13 +51,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
 .panel{display:none;padding:28px 32px;max-width:1080px;margin:0 auto}
 .panel.active{display:block}
 .top-bar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
-.page-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--navy)}
+.page-title{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;font-weight:400;color:var(--navy)}
 .page-title em{font-style:italic;color:var(--gold)}
 .page-sub{font-size:12px;color:var(--ink3);margin-top:2px}
-.export-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:6px 13px;border:0.5px solid var(--border);border-radius:var(--r);cursor:pointer;background:var(--white);color:var(--ink2);font-family:'Inter',sans-serif;transition:background .15s;text-decoration:none}
+.export-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:6px 13px;border:0.5px solid var(--border);border-radius:var(--r);cursor:pointer;background:var(--white);color:var(--ink2);font-family:'Lato',sans-serif;transition:background .15s;text-decoration:none}
 .export-btn:hover{background:var(--gold-l)}
 .tag{display:inline-block;font-size:10px;font-weight:600;border-radius:4px;padding:2px 7px;white-space:nowrap}
-.tag-key{background:var(--navy);color:var(--gold)}
+.tag-key{background:var(--navy);color:#D4AF37}
 .tag-visit{background:var(--bod-l);color:var(--bod)}
 .tag-dinner{background:var(--amber-l);color:var(--amber)}
 .tag-transfer{background:#EEEEEE;color:#555}
@@ -89,7 +107,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
 .search-box{display:flex;align-items:center;gap:8px;background:var(--white);border:0.5px solid var(--border);border-radius:var(--r);padding:7px 12px;margin-bottom:14px;max-width:340px}
 .search-box input{border:none;outline:none;font-family:'Inter',sans-serif;font-size:13px;color:var(--ink);background:transparent;flex:1}
 .filter-bar{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
-.filter-btn{font-size:11px;font-weight:600;padding:4px 11px;border:0.5px solid var(--border);border-radius:20px;cursor:pointer;background:var(--white);color:var(--ink2);font-family:'Inter',sans-serif;transition:all .18s}
+.filter-btn{font-size:11px;font-weight:600;padding:4px 11px;border:0.5px solid var(--border);border-radius:20px;cursor:pointer;background:var(--white);color:var(--ink2);font-family:'Lato',sans-serif;transition:all .18s}
 .filter-btn:hover{border-color:var(--navy);color:var(--navy)}
 .filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 .people-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
@@ -143,7 +161,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
 <div class="layout">
 <nav class="sidebar">
   <div class="sidebar-logo">
-    <img src="aslan-logo.png" alt="Aslan Business">
+    <img src="data:image/png;base64,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" alt="Aslan Business" style="width:36px;height:36px;object-fit:contain;flex-shrink:0">
     <div class="sidebar-brand">Aslan<br>Business</div>
   </div>
   <div class="sidebar-title">Visit Programme</div>
@@ -241,11 +259,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
       </div>
       <div class="slot slot-transfer">
         <div class="slot-time"><div class="slot-hour">14:30</div><div class="slot-to">→ 15:00</div><div class="slot-dur">30 min</div></div>
-        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>→ Business Lunch venue</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>→ Luigi's Restaurant</div></div>
       </div>
       <div class="slot">
         <div class="slot-time"><div class="slot-hour">15:00</div><div class="slot-to">→ 16:00</div><div class="slot-dur">1 hr</div></div>
-        <div class="slot-content"><div class="slot-title">Business Lunch</div><div class="slot-desc">Venue TBC.</div></div>
+        <div class="slot-content"><div class="slot-title">🍽 Lunch — Luigi's Restaurant · Ankara</div><div class="slot-desc">All delegation lunch at Luigi's, Ankara.</div><div class="slot-links"><a href="https://luigis.com.tr/tr/galeri/" class="ext" target="_blank">🔗 Luigi's Restaurant</a></div></div>
       </div>
       <div class="slot slot-transfer">
         <div class="slot-time"><div class="slot-hour">16:00</div><div class="slot-to">→ 16:30</div><div class="slot-dur">30 min</div></div>
@@ -606,7 +624,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
     </div>
     <div class="person-card" data-city="Bodrum">
       <div class="person-top">
-        <div class="avatar" style="width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#1A5A4A">EC</div>
+        <img src="Emre-Camlibel.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.style.display='none';this.nextSibling.style.display='flex'" alt="Emre Camlibel"><div class="avatar" style="width:52px;height:52px;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#1A5A4A">EC</div>
         <div>
           <div class="person-name">Dr. M. Emre Çamlıbel</div>
           <div class="person-role">Chairman</div>
@@ -702,7 +720,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
     </div>
     <div class="person-card" data-city="Istanbul">
       <div class="person-top">
-        <div class="avatar" style="width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#3A1A5A">SC</div>
+        <img src="Suleyman-Cetinsaya.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.style.display='none';this.nextSibling.style.display='flex'" alt="Suleyman Cetinsaya"><div class="avatar" style="width:52px;height:52px;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#3A1A5A">SC</div>
         <div>
           <div class="person-name">Süleyman / Serhan Çetinsaya</div>
           <div class="person-role">Owner</div>
@@ -1424,140 +1442,42 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
     <button class="filter-btn" onclick="switchMap('istanbul',this)">📍 Istanbul</button>
   </div>
 
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-
-  <div style="background:var(--white);border:0.5px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:16px">
-    <div id="map-container" style="height:480px;width:100%"></div>
+  <div style="margin-bottom:12px;display:flex;gap:6px">
+    <button class="filter-btn active" onclick="swMap('ankara',this)">Ankara</button>
+    <button class="filter-btn" onclick="swMap('bodrum',this)">Bodrum</button>
+    <button class="filter-btn" onclick="swMap('istanbul',this)">Istanbul</button>
   </div>
-
-  <!-- Location cards grid -->
-  <div id="loc-grid-all" class="location-list">
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Sheraton Hotel</div><div class="loc-addr">Ankara · Accommodation Day 0–2</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Sinpaş Altınoran</div><div class="loc-addr">Ankara · <a href="https://maps.app.goo.gl/FQRSZQsXxcAuugFv8" target="_blank" style="color:var(--bod)">📍 Map</a></div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Pasifik Holding — Next Level</div><div class="loc-addr">Ankara · <a href="http://pasifik.com" target="_blank" style="color:var(--ist)">🔗</a></div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Ministry of Environment</div><div class="loc-addr">Ankara · <a href="https://maps.app.goo.gl/kLn757fysf6NYdnM9" target="_blank" style="color:var(--bod)">📍 Map</a></div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Ankara Airport (ESB)</div><div class="loc-addr">Ankara · <a href="https://maps.app.goo.gl/rcvKdi67XentezTe6" target="_blank" style="color:var(--bod)">📍 Map</a></div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">METT Hotel · Yalıkavak Marina</div><div class="loc-addr">Bodrum · <a href="https://maps.app.goo.gl/6WqQ5qdhXCN1Q1EB9" target="_blank" style="color:var(--bod)">📍 Map</a></div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">Six Senses Kaplankaya</div><div class="loc-addr">Bodrum · <a href="https://www.sixsenses.com/en/resorts/kaplankaya" target="_blank" style="color:var(--ist)">🔗</a></div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">The Bodrum Edition · Rönesans</div><div class="loc-addr">Bodrum</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">Mesa Demirbükü · MESA</div><div class="loc-addr">Bodrum</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">Aman Ruya Resort · Re Pie</div><div class="loc-addr">Bodrum · <a href="https://www.aman.com/resorts/amanruya" target="_blank" style="color:var(--ist)">🔗</a></div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">Mandarin Oriental Bodrum</div><div class="loc-addr">Bodrum · ASTAŞ Holding</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">Radisson Blu Vadistanbul</div><div class="loc-addr">Istanbul · Accommodation Day 4–7</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">IstMarina · DAP Yapı</div><div class="loc-addr">Istanbul · <a href="https://maps.app.goo.gl/rm33RpSUuWGxZCU58" target="_blank" style="color:var(--bod)">📍 Map</a></div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">SeaPearl Ataköy · Kuzu Group</div><div class="loc-addr">Istanbul</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">Istanbul Financial Center</div><div class="loc-addr">Istanbul · Ataşehir</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">Istanbul Finance City · Sinpaş</div><div class="loc-addr">Istanbul</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">Metropol Istanbul · Emlak Konut</div><div class="loc-addr">Istanbul</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">Hilltown Küçükyalı · Rönesans</div><div class="loc-addr">Istanbul</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">Galataport Istanbul</div><div class="loc-addr">Karaköy · <a href="https://galataport.com.tr/en" target="_blank" style="color:var(--ist)">🔗</a></div></div></div>
+  <div id="mc-ankara">
+    <iframe src="https://maps.app.goo.gl/6X6DtH5774qUira66" width="100%" height="460" style="border:0;border-radius:var(--r);filter:grayscale(30%)" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+      <a href="https://maps.app.goo.gl/FQRSZQsXxcAuugFv8" class="ext ext-map" target="_blank">Sinpas Altinoran</a>
+      <a href="https://maps.app.goo.gl/kLn757fysf6NYdnM9" class="ext ext-map" target="_blank">Ministry</a>
+      <a href="https://maps.app.goo.gl/rcvKdi67XentezTe6" class="ext ext-map" target="_blank">Airport ESB</a>
+    </div>
   </div>
-
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-  // ── LOCATION DATA ──────────────────────────────────────
-  const LOCS = {
-    ankara: [
-      { name:"Sheraton Hotel", lat:39.9255, lng:32.8601, day:"30 Jun · Hotel", color:"#7A3800", icon:"🏨" },
-      { name:"Sinpaş Altınoran", lat:39.8769, lng:32.7862, day:"1 Jul · 11:00–12:30", color:"#7A3800", icon:"🏘", url:"https://sinpasaltinoran.com.tr" },
-      { name:"Pasifik Holding — Next Level", lat:39.9210, lng:32.8740, day:"1 Jul · 13:00–14:30", color:"#7A3800", icon:"🏬", url:"http://pasifik.com" },
-      { name:"Ministry of Environment", lat:39.9016, lng:32.7665, day:"2 Jul · 11:00–13:00 · KEY MEETING", color:"#7A3800", icon:"🏛", url:"https://www.csb.gov.tr/en" },
-      { name:"Ankara Airport (ESB)", lat:39.9596, lng:32.6880, day:"2 Jul · 17:00 departure", color:"#7A3800", icon:"✈" },
-    ],
-    bodrum: [
-      { name:"METT Hotel · Yalıkavak Marina", lat:37.1449, lng:27.3135, day:"2 Jul · Hotel", color:"#0A5E4E", icon:"🏨", url:"https://www.metthotels.com" },
-      { name:"Six Senses Kaplankaya", lat:37.3167, lng:27.5833, day:"3 Jul · Boat Tour Stop", color:"#0A5E4E", icon:"🌿", url:"https://www.sixsenses.com/en/resorts/kaplankaya" },
-      { name:"Bodrum Edition Hotel · Rönesans", lat:37.0586, lng:27.2850, day:"4 Jul · 09:30", color:"#0A5E4E", icon:"🏨", url:"https://www.marriott.com/en-us/hotels/bjwbr-the-bodrum-edition" },
-      { name:"Mesa Demirbükü · MESA", lat:37.0420, lng:27.3290, day:"4 Jul · 11:00", color:"#0A5E4E", icon:"🏡" },
-      { name:"Aman Ruya Resort · Re Pie Holding", lat:37.0510, lng:27.3680, day:"4 Jul · 12:15", color:"#0A5E4E", icon:"🌊", url:"https://www.aman.com/resorts/amanruya" },
-      { name:"Mandarin Oriental Bodrum · ASTAŞ", lat:37.0630, lng:27.1790, day:"4 Jul · 13:30 · Business Lunch", color:"#0A5E4E", icon:"🍽", url:"https://www.mandarinoriental.com/en/bodrum" },
-    ],
-    istanbul: [
-      { name:"Radisson Blu Vadistanbul", lat:41.1075, lng:29.0235, day:"4 Jul · Hotel", color:"#163D6A", icon:"🏨", url:"https://www.radissonhotels.com/en-us/hotels/radisson-blu-istanbul-vadi" },
-      { name:"Seraf Restaurant", lat:41.1080, lng:29.0240, day:"4 Jul · 21:30 · Dinner", color:"#163D6A", icon:"🍽" },
-      { name:"IstMarina · DAP Yapı", lat:41.0497, lng:28.9173, day:"5 Jul · 10:30", color:"#163D6A", icon:"⚓", url:"https://dapyapi.com.tr/projeler/ist-marina" },
-      { name:"SeaPearl Ataköy · Kuzu Group", lat:40.9990, lng:28.8770, day:"5 Jul · 13:00", color:"#163D6A", icon:"🐚", url:"http://www.seapearlatakoy.com" },
-      { name:"Istanbul Financial Center", lat:40.9887, lng:29.1267, day:"6 Jul · 10:00", color:"#163D6A", icon:"🏦", url:"https://www.ifc.com.tr/en" },
-      { name:"Istanbul Finance City · Sinpaş", lat:40.9895, lng:29.1280, day:"6 Jul · 13:00", color:"#163D6A", icon:"🏗", url:"https://www.sinpasfinanssehir.com" },
-      { name:"Metropol Istanbul · Emlak Konut", lat:41.0690, lng:28.7920, day:"6 Jul · 14:20", color:"#163D6A", icon:"🌆" },
-      { name:"Hilltown Küçükyalı · Rönesans", lat:40.9360, lng:29.0570, day:"6 Jul · 15:50", color:"#163D6A", icon:"🏢", url:"https://ronesans.com/projeler/gayrimenkul-grubu/ronesansbiz-kucukyali" },
-      { name:"Galataport Istanbul", lat:41.0255, lng:28.9734, day:"7 Jul · 10:30", color:"#163D6A", icon:"🚢", url:"https://galataport.com.tr/en" },
-    ]
-  };
-
-  const ALL_LOCS = [...LOCS.ankara, ...LOCS.bodrum, ...LOCS.istanbul];
-
-  // ── MAP INIT ────────────────────────────────────────────
-  let map = null;
-  let markers = [];
-  let currentView = 'all';
-
-  const CITY_VIEWS = {
-    all:     { center:[39.2,29.8], zoom:6 },
-    ankara:  { center:[39.913,32.780], zoom:12 },
-    bodrum:  { center:[37.09,27.28], zoom:11 },
-    istanbul:{ center:[41.015,29.01], zoom:11 },
-  };
-
-  function initMap() {
-    if(map) return;
-    map = L.map('map-container').setView([39.2,29.8], 6);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution:'&copy; OpenStreetMap contributors &copy; CARTO',
-      subdomains:'abcd', maxZoom:19
-    }).addTo(map);
-    addMarkers(ALL_LOCS);
-  }
-
-  function makeIcon(loc) {
-    return L.divIcon({
-      className:'',
-      html:`<div style="background:${loc.color};color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 6px rgba(0,0,0,.35);border:2px solid rgba(255,255,255,.8)">${loc.icon}</div>`,
-      iconSize:[32,32], iconAnchor:[16,16], popupAnchor:[0,-18]
-    });
-  }
-
-  function addMarkers(locs) {
-    markers.forEach(m => m.remove());
-    markers = [];
-    locs.forEach(loc => {
-      const popup = `<div style="font-family:Inter,sans-serif;min-width:180px">
-        <div style="font-weight:600;font-size:13px;margin-bottom:4px">${loc.icon} ${loc.name}</div>
-        <div style="font-size:11px;color:#666;margin-bottom:6px">${loc.day}</div>
-        ${loc.url ? `<a href="${loc.url}" target="_blank" style="font-size:11px;color:#163D6A;font-weight:500">🔗 Website ↗</a>` : ''}
-      </div>`;
-      const m = L.marker([loc.lat, loc.lng], {icon: makeIcon(loc)})
-        .bindPopup(popup).addTo(map);
-      markers.push(m);
-    });
-  }
-
-  function switchMap(city, btn) {
-    if(!map) initMap();
-    currentView = city;
-    const v = CITY_VIEWS[city];
-    map.setView(v.center, v.zoom);
-    const locs = city === 'all' ? ALL_LOCS : LOCS[city];
-    addMarkers(locs);
-    document.querySelectorAll('#panel-map .filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    // trigger map resize
-    setTimeout(() => map.invalidateSize(), 100);
-  }
-
-  // Init when map panel opens
-  document.addEventListener('DOMContentLoaded', () => {
-    // Observe when map panel becomes visible
-    const obs = new MutationObserver(() => {
-      if(document.getElementById('panel-map').classList.contains('active')) {
-        setTimeout(initMap, 50);
-      }
-    });
-    obs.observe(document.getElementById('panel-map'), {attributes:true, attributeFilter:['class']});
-  });
-  </script>
+  <div id="mc-bodrum" style="display:none">
+    <iframe src="https://maps.app.goo.gl/hujrphG8HNGzPntW8" width="100%" height="460" style="border:0;border-radius:var(--r);filter:grayscale(30%)" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+      <a href="https://maps.app.goo.gl/oG566pohgdmYQSR16" class="ext ext-map" target="_blank">Bodrum Detail</a>
+      <a href="https://maps.app.goo.gl/6WqQ5qdhXCN1Q1EB9" class="ext ext-map" target="_blank">METT Hotel</a>
+    </div>
+  </div>
+  <div id="mc-istanbul" style="display:none">
+    <iframe src="https://maps.app.goo.gl/oG566pohgdmYQSR16" width="100%" height="460" style="border:0;border-radius:var(--r);filter:grayscale(30%)" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+      <a href="https://maps.app.goo.gl/rm33RpSUuWGxZCU58" class="ext ext-map" target="_blank">IstMarina</a>
+    </div>
+  </div>
+  <div class="location-list" style="margin-top:14px">
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Sinpas Altinoran</div><div class="loc-addr">Ankara</div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Ministry of Environment</div><div class="loc-addr">Ankara</div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Sheraton Hotel</div><div class="loc-addr">Ankara Day 0-2</div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">METT Hotel Yalikavak</div><div class="loc-addr">Bodrum Day 2-4</div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">Mandarin Oriental Bodrum</div><div class="loc-addr">ASTAS Holding</div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">Radisson Blu Vadistanbul</div><div class="loc-addr">Istanbul Day 4-7</div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">IstMarina DAP Yapi</div><div class="loc-addr">Istanbul</div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">Galataport Istanbul</div><div class="loc-addr">Karakoy</div></div></div>
+  </div>
 </div>
 
 </main>
@@ -1618,6 +1538,15 @@ function exportSchedule(){csv([['Date','Day','From','To','Duration','Activity','
 function exportPeople(){csv([['Name','Position','Company','City','Project Visit','Website'],['Ramazan Bülbül','Chairman','RAMS','Bodrum','RAMS Resort Bodrum','ramsgroup.com.tr'],['Erman Ilıcak','Chairman','Rönesans','Bodrum/Istanbul','Bodrum Edition+Hilltown','ronesans.com'],['Erhan Boysanoğlu','Chairman','MESA','Bodrum','Mesa Demirbükü','mesa.com.tr'],['Dr. M. Emre Çamlıbel','Chairman','Re Pie Holding','Bodrum','Amanruya Bodrum','repie.com.tr'],['Vedat Aşçı','Chairman','ASTAŞ Holding','Bodrum','Mandarin Oriental','astas-holding.com'],['Ziya Yılmaz','Chairman+KONUTDER','DAP Yapı','Istanbul','IstMarina','dapholding.com'],['Avni Çelik','Founder','Sinpaş Holding','Istanbul','Sinpaş Finance City','sinpas.com.tr'],['Özen Kuzu','Chairman CEO','Kuzu Group','Istanbul','SeaPearl Ataköy','kuzugroup.com'],['Yasir Yılmaz','GM','Emlak Konut GYO','Istanbul','Metropol Istanbul','emlakkonut.com.tr'],['Süleyman/Serhan Çetinsaya','Owner','Artaş Holding','Istanbul','','artas.com.tr'],['Ferit F. Şahenk','Chairman','Doğuş Group','Istanbul','Galataport','dogusgroup.com.tr'],['Ahmet İhsan Erdem','CEO','Istanbul Financial Center','Istanbul','IFC','ifc.com.tr'],['Levent Sungur','President','TOKİ','Ankara','','toki.gov.tr'],['Fatih Erdoğan','Chairman','Pasifik Holding','Ankara','Next Level','pasifik.com'],['Aziz Torun','Chairman','Torunlar GYO','Istanbul','','torunlargyo.com.tr'],['Mesut Toprak','Chairman','Astay','Istanbul','Four Seasons Istanbul',''],['Mahmut/Zeki Akbal','Chairman/Deputy','Fuzul GYO','Istanbul','Fuzul Barbaros 48','fuzulgroup.com'],['H.E. Murat Kurum','Minister','Ministry of Environment','Ankara','','csb.gov.tr']],'turkey-people-2026.csv');}
 function exportCompanies(){csv([['Company','Sector','Contact','City','Assets','Website'],['ASTAŞ Holding','Ultra-Luxury RE','Vedat Aşçı','Bodrum','Multi-billion $','astas-holding.com'],['Rönesans Holding','Construction/Healthcare/RE','Erman Ilıcak','Bodrum/Istanbul','~205B TL','ronesans.com'],['MESA','Residential','Erhan Boysanoğlu','Bodrum','~25-30B TL','mesa.com.tr'],['Re Pie Holding','Investment/RE','Dr. M. Emre Çamlıbel','Bodrum','TBC','repie.com.tr'],['DAP Holding','Premium Residential','Ziya Yılmaz','Istanbul','~30.4B TL','dapholding.com'],['Sinpaş GYO','Lifestyle Residential','Avni Çelik','Istanbul','~74.8B TL','sinpas.com.tr'],['Kuzu Group','Mixed-Use','Özen Kuzu','Istanbul','~15.4B TL','kuzugroup.com'],['Emlak Konut GYO','Public RE','Yasir Yılmaz','Istanbul','Largest public RE TR','emlakkonut.com.tr'],['Artaş Holding','Luxury RE/Hospitality','Süleyman Çetinsaya','Istanbul','TBC','artas.com.tr'],['Doğuş Group','Tourism/Hospitality/RE','Ferit F. Şahenk','Istanbul','~17.4B TL','dogusgroup.com.tr'],['IFC','Financial District','Ahmet İhsan Erdem','Istanbul','State-backed','ifc.com.tr'],['TOKİ','Public Housing','Levent Sungur','Ankara','National','toki.gov.tr'],['Pasifik Holding','Mixed-Use','Fatih Erdoğan','Ankara','TBC','pasifik.com'],['Torunlar GYO','Retail/Commercial','Aziz Torun','Istanbul','~136.5B TL','torunlargyo.com.tr'],['Fuzul GYO','Residential','Mahmut/Zeki Akbal','Istanbul','~11.9B TL','fuzulgroup.com'],['RAMS Group','Construction/RE','Ramazan Bülbül','Bodrum','TBC','ramsgroup.com.tr'],['KONUTDER','Association','Ziya Yılmaz','Istanbul','Industry-wide','konutder.org.tr']],'turkey-companies-2026.csv');}
 function exportProjects(){csv([['Project','Company','City','Type','Website'],['Sinpaş Altınoran','Sinpaş GYO','Ankara','Residential Community','sinpasaltinoran.com.tr'],['Next Level Project','Pasifik Holding','Ankara','Mixed-Use/Mall','pasifik.com'],['Bodrum Edition Hotel','Rönesans','Bodrum','Luxury Hotel','marriott.com'],['Mesa Demirbükü','MESA','Bodrum','Residential','mesa.com.tr'],['Aman Ruya Resort','Re Pie Holding','Bodrum','Ultra-Luxury Resort','aman.com'],['Mandarin Oriental Bodrum','ASTAŞ','Bodrum','Luxury Coastal Resort','mandarinoriental.com'],['Six Senses Kaplankaya','Six Senses','Bodrum','Wellness Resort','sixsenses.com'],['IstMarina','DAP Yapı','Istanbul','Waterfront Mixed-Use','dapyapi.com.tr'],['SeaPearl Ataköy','Kuzu Group','Istanbul','Seafront Mixed-Use','seapearlatakoy.com'],['Istanbul Financial Center','IFC','Istanbul','Financial District','ifc.com.tr'],['Istanbul Finance City','Sinpaş GYO','Istanbul','Financial/Mixed-Use','sinpasfinanssehir.com'],['Metropol Istanbul','Emlak Konut GYO','Istanbul','Urban Transformation','emlakkonut.com.tr'],['Hilltown Küçükyalı','Rönesans','Istanbul','Commercial/Mixed-Use','ronesans.com'],['Galataport Istanbul','Doğuş Group','Istanbul','Waterfront Regeneration','galataport.com.tr']],'turkey-projects-2026.csv');}
+
+function swMap(c,btn){
+  ['ankara','bodrum','istanbul'].forEach(function(x){
+    var el=document.getElementById('mc-'+x);
+    if(el) el.style.display=x===c?'block':'none';
+  });
+  btn.closest('div').querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+}
 </script>
 </body>
 </html>
