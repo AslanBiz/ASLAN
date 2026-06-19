@@ -3,384 +3,220 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ankara Real Estate Intelligence — ASLAN</title>
-<meta name="description" content="ASLAN real estate intelligence report for Ankara — districts, developers, projects, indicators and site-visit routes.">
-<meta name="theme-color" content="#0E2233">
-<meta property="og:title" content="Ankara Real Estate Intelligence — ASLAN">
-<meta property="og:description" content="ASLAN real estate intelligence report for Ankara — districts, developers, projects, indicators and site-visit routes.">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..560;1,9..144,320..480&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Ankara Real Estate Investor Route — ASLAN / Powered by SP Architects</title>
+<meta name="description" content="ASLAN Real Estate Intelligence — bilingual investor route & site-visit guide. Powered by SP Architects.">
 <style>
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{margin:0}
-img,svg{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
-
 :root{
-  --ink:#0E2233; --ink-2:#143049; --ink-3:#1C3D5A;
-  --paper:#F4F1E9; --paper-2:#EBE5D8;
-  --brass:#B8923D; --brass-bright:#D9B868;
-  --text:#17262F; --muted:#5C6970;
-  --on-ink:#ECE6D8; --on-ink-muted:rgba(236,230,216,.60);
-  --line:#D7CDB6; --line-ink:rgba(216,178,98,.22);
-  --display:'Fraunces',Georgia,'Times New Roman',serif;
-  --body:'Spectral',Georgia,serif;
-  --label:'Space Grotesk',ui-sans-serif,system-ui,'Segoe UI',sans-serif;
-  --wrap:1180px;
-  --pad-y:clamp(72px,9vw,128px);
+  --ink:#13171d; --navy:#0e2a47; --navy2:#16405f; --gold:#b98a3e; --gold2:#c8a35b;
+  --paper:#fbfaf7; --soft:#f4f1ea; --soft2:#f8f6f1; --line:#e8e2d6; --muted:#6b7280;
+  --green:#2f5d4f; --blue:#1877f2; --white:#fff; --chip:#efe7d6;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink);line-height:1.6;background:var(--paper);-webkit-font-smoothing:antialiased}
+a{color:#0b5cad;text-decoration:none}
+.t-tr{display:none}
+body.show-tr .t-en{display:none}
+body.show-tr .t-tr{display:inline}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(14,42,71,.97);backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(255,255,255,.08)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;letter-spacing:.16em;font-size:15px}
+.brand img{height:30px;width:auto;filter:brightness(0) invert(1)}
+.brand small{font-weight:500;letter-spacing:.14em;color:#cdb888;font-size:10px;display:block;margin-top:1px}
+.nav{margin-left:auto;display:flex;align-items:center;gap:8px}
+.nav a.lnk{color:#cfd8e6;font-size:12.5px;letter-spacing:.04em;padding:6px 10px;border-radius:8px}
+.nav a.lnk:hover{color:#fff;background:rgba(255,255,255,.08)}
+.langtog{display:inline-flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden}
+.langtog button{background:transparent;border:0;color:#cdb888;font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 12px;cursor:pointer;font-family:inherit}
+.langtog button.active{background:var(--gold);color:#1a1208}
+
+/* layout */
+.wrap{max-width:1180px;margin:0 auto;padding:28px 24px 60px}
+.hero{position:relative;overflow:hidden;color:#fff;border-radius:22px;margin:22px 0 26px;
+  background:linear-gradient(125deg,#0b2238 0%,#123a59 55%,#1d4f4a 100%);padding:48px 40px}
+.hero .kicker{letter-spacing:.20em;text-transform:uppercase;font-size:11.5px;color:#d8bd8c;font-weight:700}
+.hero h1{font-size:40px;line-height:1.08;margin:14px 0 14px;font-weight:800;letter-spacing:-.01em}
+.hero p.sub{font-size:17.5px;max-width:880px;color:#e9eff4;margin:0}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.pill{border:1px solid rgba(255,255,255,.34);border-radius:999px;padding:6px 13px;font-size:12.5px;color:#fff}
+.pill.solid{background:var(--gold);border-color:var(--gold);color:#1a1208;font-weight:700}
+
+.section{margin:34px 0}
+.kick{letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:var(--gold);font-weight:800;margin-bottom:6px}
+.section h2{font-size:25px;color:var(--navy);margin:0 0 6px;font-weight:800;letter-spacing:-.01em}
+.rule{height:3px;width:64px;background:var(--gold);border-radius:3px;margin:8px 0 16px}
+.section h3{font-size:18px;color:var(--green);margin:22px 0 8px}
+.lead{font-size:16px;color:#26303a}
+
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{border:1px solid var(--line);border-radius:16px;padding:18px 18px;background:#fff;box-shadow:0 2px 12px rgba(19,23,29,.04)}
+.card h3,.card h4{margin-top:0}
+.card h4{font-size:15.5px;color:var(--navy)}
+.stat{font-size:25px;font-weight:800;color:var(--navy);line-height:1.12;letter-spacing:-.01em}
+.stat.gold{color:var(--gold)}
+.small{font-size:12.5px;color:var(--muted)}
+.src-tag{font-size:11px;color:#9a8e76;margin-top:8px;display:block;font-style:italic}
+
+.tag{display:inline-block;font-size:11.5px;color:var(--green);background:#eef3f0;border:1px solid #d8e6df;
+  border-radius:999px;padding:3px 9px;margin:3px 4px 3px 0}
+.tag.gold{background:#fbf4e7;color:#7b5a24;border-color:#ecd9b6}
+.tag.blue{background:#eaf2fe;color:#11569d;border-color:#cfe0fb}
+
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:12px 0}
+.table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:760px}
+.table th{background:var(--navy);color:#fff;text-align:left;font-weight:700;font-size:12.5px;letter-spacing:.02em}
+.table th,.table td{border-bottom:1px solid var(--line);border-right:1px solid #eef0f3;padding:10px 11px;vertical-align:top}
+.table tr:last-child td{border-bottom:0}
+.table td:last-child,.table th:last-child{border-right:0}
+.table tbody tr:nth-child(even){background:var(--soft2)}
+.table b{color:var(--navy)}
+
+.callout{border-left:4px solid var(--gold);background:#fbf6ec;padding:15px 18px;border-radius:12px;margin:16px 0;font-size:14.5px}
+.callout.navy{border-left-color:var(--navy2);background:#eef4f8}
+
+.route-step{display:flex;gap:12px;margin:11px 0;align-items:flex-start}
+.num{min-width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:flex;
+  align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:none}
+.route-step div{font-size:14px}
+.bestfor{font-size:13px;color:#33414e;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+
+.cta{background:linear-gradient(125deg,#0b2238,#1d4f4a);color:#fff;border-radius:18px;padding:30px 30px;margin:30px 0}
+.cta h2{color:#fff;font-size:23px;margin:0 0 8px}
+.cta p{color:#e6eef3;font-size:15px;margin:0 0 16px;max-width:760px}
+.btn{display:inline-block;background:var(--gold);color:#1a1208;font-weight:800;padding:12px 22px;border-radius:999px;
+  letter-spacing:.03em;font-size:14px}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.45);color:#fff;margin-left:8px}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px 26px;margin-top:14px}
+.checklist div{font-size:13.5px;color:#dbe6ee;padding-left:18px;position:relative}
+.checklist div::before{content:"›";position:absolute;left:0;color:var(--gold2);font-weight:800}
+
+/* city hub cards */
+.city-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  background:#fff;box-shadow:0 2px 12px rgba(19,23,29,.05);transition:transform .15s ease,box-shadow .15s ease}
+.city-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(19,23,29,.10)}
+.city-top{padding:20px 20px 6px;background:linear-gradient(125deg,#0b2238,#16405f);color:#fff}
+.city-top .cc-country{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#d8bd8c;font-weight:700}
+.city-top h3{margin:6px 0 2px;font-size:23px;font-weight:800}
+.city-body{padding:14px 20px 18px;display:flex;flex-direction:column;flex:1}
+.city-body p{font-size:13.5px;color:#33414e;margin:0 0 12px;flex:1}
+.city-go{font-weight:800;color:var(--gold);font-size:13.5px;letter-spacing:.03em}
+.city-card.soon{opacity:.62}
+.city-card.soon .city-go{color:var(--muted)}
+.badge-soon{font-size:10px;background:#efe7d6;color:#7b5a24;border-radius:999px;padding:2px 8px;font-weight:700;letter-spacing:.04em}
+
+.howrow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+.how{border:1px solid var(--line);border-radius:16px;padding:18px;background:#fff}
+.how .hn{width:30px;height:30px;border-radius:50%;background:var(--gold);color:#1a1208;font-weight:800;
+  display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.how h4{margin:0 0 4px;font-size:15.5px;color:var(--navy)}
+.how p{margin:0;font-size:13.5px;color:#475260}
+
+/* sources + footer */
+.sources{margin-top:40px;border-top:1px solid var(--line);padding-top:18px}
+.sources h2{font-size:16px;color:var(--navy);margin:0 0 6px}
+.sources .disc{font-size:11px;color:#8a8270;margin:0 0 10px;line-height:1.5}
+.src-table{width:100%;border-collapse:collapse;font-size:10.5px;color:#5c6470}
+.src-table th{text-align:left;background:#f1ede3;color:#5b5240;padding:5px 7px;font-weight:700;border:1px solid var(--line)}
+.src-table td{padding:5px 7px;border:1px solid var(--line);vertical-align:top}
+.src-table a{color:#0b5cad;word-break:break-all}
+.footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:12.5px;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.powered{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:#3a4654}
+.powered b{color:var(--blue);letter-spacing:.02em}
+.footer .loc{color:#9a8e76;letter-spacing:.06em;font-size:11.5px}
+
+@media(max-width:920px){
+  .grid,.grid2,.grid4,.howrow,.checklist{grid-template-columns:1fr}
+  .hero h1{font-size:30px}.hero{padding:32px 22px}.wrap{padding:20px 15px 50px}
+  .topbar-in{padding:10px 15px}.brand{font-size:13px}
+}
+@media print{
+  .topbar,.cta .btn{display:none}.wrap{max-width:100%}.hero{border-radius:0}
+  .card,.city-card{box-shadow:none}.section{page-break-inside:avoid}
+  body.show-tr .t-en, .t-tr{display:inline !important}
 }
 
-body{
-  font-family:var(--body);
-  color:var(--text);
-  background:var(--paper);
-  font-size:clamp(16.5px,1.05vw,18px);
-  line-height:1.66;
-  -webkit-font-smoothing:antialiased;
-  font-weight:400;
-}
-
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(20px,5vw,56px)}
-
-/* ---- type ---- */
-h1,h2,h3{font-family:var(--display);font-weight:380;line-height:1.04;letter-spacing:-.012em;margin:0}
-h2{font-size:clamp(2rem,4.2vw,3.15rem)}
-h3{font-size:clamp(1.3rem,2.2vw,1.65rem);line-height:1.12}
-p{margin:0 0 1.05em}
-.lead{font-size:clamp(1.12rem,1.55vw,1.34rem);line-height:1.5;color:var(--text);max-width:42ch}
-.s-ink .lead{color:var(--on-ink)}
-.eyebrow{font-family:var(--label);font-weight:500;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin:0 0 1.1rem;display:flex;align-items:center;gap:.7rem}
-.eyebrow::before{content:"";width:26px;height:1px;background:var(--brass);opacity:.7}
-.s-ink .eyebrow{color:var(--brass-bright)}
-
-em,.ital{font-style:italic}
-
-/* ---- buttons ---- */
-.btn{display:inline-flex;align-items:center;gap:.6em;font-family:var(--label);font-weight:500;font-size:.84rem;letter-spacing:.04em;padding:.92em 1.5em;border-radius:2px;transition:transform .25s ease,background .25s ease,color .25s ease,border-color .25s ease}
-.btn .arr{transition:transform .3s ease}
-.btn:hover .arr{transform:translateX(4px)}
-.btn-brass{background:var(--brass);color:#1a1407}
-.btn-brass:hover{background:var(--brass-bright);transform:translateY(-2px)}
-.btn-line{border:1px solid rgba(236,230,216,.34);color:var(--on-ink)}
-.btn-line:hover{border-color:var(--brass-bright);color:#fff}
-.btn-dark{border:1px solid var(--ink);color:var(--ink)}
-.btn-dark:hover{background:var(--ink);color:var(--paper)}
-
-/* ---- header ---- */
-.skip{position:absolute;left:-9999px;top:0;background:var(--brass);color:#160f04;padding:.7em 1.2em;font-family:var(--label);z-index:200}
-.skip:focus{left:8px;top:8px}
-.site-header{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .35s ease,border-color .35s ease,padding .35s ease;border-bottom:1px solid transparent;padding:clamp(14px,1.6vw,22px) 0}
-.site-header.scrolled{background:rgba(11,28,43,.93);-webkit-backdrop-filter:saturate(140%) blur(10px);backdrop-filter:saturate(140%) blur(10px);border-bottom-color:var(--line-ink);padding:11px 0}
-.hbar{display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
-.brand{display:flex;align-items:center;gap:.62rem;color:var(--on-ink)}
-.brand .mark{width:30px;height:30px;flex:0 0 auto}
-.brand .wordmark{font-family:var(--display);font-weight:450;font-size:1.33rem;letter-spacing:.30em;padding-left:.18em;color:var(--on-ink)}
-.nav{display:flex;align-items:center;gap:clamp(1rem,1.9vw,2rem)}
-.nav a{font-family:var(--label);font-weight:400;font-size:.8rem;letter-spacing:.07em;color:var(--on-ink-muted);position:relative;padding:.3em 0;transition:color .25s ease}
-.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-1px;height:1px;background:var(--brass-bright);transition:right .3s ease}
-.nav a:hover,.nav a.active{color:var(--on-ink)}
-.nav a:hover::after,.nav a.active::after{right:0}
-.htools{display:flex;align-items:center;gap:1rem}
-.lang{display:inline-flex;align-items:center;font-family:var(--label);font-size:.74rem;letter-spacing:.08em;border:1px solid var(--line-ink);border-radius:2px;overflow:hidden}
-.lang button{padding:.42em .72em;color:var(--on-ink-muted);transition:background .2s,color .2s}
-.lang button[aria-pressed="true"]{background:var(--brass);color:#160f04}
-.menu-btn{display:none;color:var(--on-ink)}
-.menu-btn svg{width:26px;height:26px}
-
-/* ---- hero ---- */
-.hero{position:relative;background:var(--ink);color:var(--on-ink);overflow:hidden;padding:clamp(150px,17vw,210px) 0 clamp(72px,9vw,118px)}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 95% at 82% 18%,rgba(184,146,61,.16),transparent 55%),radial-gradient(80% 70% at 8% 100%,rgba(28,61,90,.6),transparent 60%);pointer-events:none}
-.hero .wrap{position:relative;display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
-.hero h1{font-size:clamp(2.9rem,7.4vw,5.7rem);font-weight:340;letter-spacing:-.02em;line-height:.98;margin:.1em 0 .45em}
-.hero .thesis{font-size:clamp(1.15rem,1.7vw,1.42rem);line-height:1.48;color:var(--on-ink);max-width:36ch;margin-bottom:2.1rem}
-.hero .cta-row{display:flex;flex-wrap:wrap;gap:.9rem}
-.anim-up{opacity:0;transform:translateY(18px);animation:up .9s cubic-bezier(.2,.7,.2,1) forwards}
-.d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.32s}.d4{animation-delay:.46s}.d5{animation-delay:.6s}
-@keyframes up{to{opacity:1;transform:none}}
-
-/* ---- constellation ---- */
-.net{width:100%;height:auto;overflow:visible}
-.net .edge{fill:none;stroke:var(--brass);stroke-width:1;opacity:.42;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.7s ease forwards}
-.net .edge.cross{stroke:var(--brass-bright);opacity:.55;stroke-width:1.1}
-@keyframes draw{to{stroke-dashoffset:0}}
-.net .node{fill:var(--ink);stroke:var(--brass);stroke-width:1.3}
-.net .node.on{fill:var(--brass)}
-.net .halo{fill:none;stroke:var(--brass-bright);opacity:0;transform-origin:center;transform-box:fill-box}
-.net .on + .halo{animation:halo 3.4s ease-in-out infinite}
-@keyframes halo{0%,100%{opacity:0;transform:scale(.8)}50%{opacity:.5;transform:scale(1.9)}}
-.net .lab{font-family:var(--label);font-size:11px;letter-spacing:.12em;fill:var(--on-ink-muted)}
-.net .lab.on{fill:var(--on-ink)}
-.net g{opacity:0;animation:fadeIn .7s ease forwards}
-@keyframes fadeIn{to{opacity:1}}
-
-/* ---- sections ---- */
-.section{padding:var(--pad-y) 0}
-.s-paper{background:var(--paper);color:var(--text)}
-.s-paper-2{background:var(--paper-2);color:var(--text)}
-.s-ink{background:var(--ink);color:var(--on-ink)}
-.s-ink-2{background:var(--ink-2);color:var(--on-ink)}
-.sec-head{max-width:60ch}
-.sec-head h2{margin-bottom:.55em}
-
-/* reveal */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
-.reveal.in{opacity:1;transform:none}
-
-/* ---- about / capabilities ---- */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:start}
-.about-grid .lead{max-width:34ch;font-family:var(--display);font-weight:360;font-size:clamp(1.55rem,2.7vw,2.3rem);line-height:1.16;letter-spacing:-.01em;color:var(--ink)}
-.caps{display:grid;gap:0}
-.cap{display:grid;grid-template-columns:auto 1fr;gap:1rem;padding:1.25rem 0;border-top:1px solid var(--line)}
-.cap:last-child{border-bottom:1px solid var(--line)}
-.cap .k{font-family:var(--label);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);padding-top:.2em;white-space:nowrap}
-.cap .v{margin:0;color:var(--muted);line-height:1.5}
-
-/* ---- cards ---- */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.6rem);margin-top:clamp(2rem,4vw,3.2rem)}
-.card{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:clamp(1.5rem,2.4vw,2.1rem);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
-.s-ink .card,.s-ink-2 .card{background:rgba(255,255,255,.03);border-color:var(--line-ink)}
-.card:hover{transform:translateY(-5px);border-color:var(--brass);box-shadow:0 18px 40px -28px rgba(14,34,51,.5)}
-.card .num{font-family:var(--label);font-size:.74rem;letter-spacing:.14em;color:var(--brass);margin-bottom:1.4rem}
-.card h3{margin-bottom:.55rem}
-.s-ink .card h3{color:var(--on-ink)}
-.card p{color:var(--muted);font-size:.98rem;line-height:1.5;margin-bottom:1.3rem}
-.s-ink .card p{color:var(--on-ink-muted)}
-.card .go{margin-top:auto;font-family:var(--label);font-size:.78rem;letter-spacing:.08em;color:var(--ink);display:inline-flex;gap:.45em;align-items:center}
-.s-ink .card .go{color:var(--brass-bright)}
-.card .go .arr{transition:transform .3s ease}
-.card:hover .go .arr{transform:translateX(4px)}
-
-/* ---- city index ---- */
-.city-list{margin-top:clamp(2rem,4vw,3rem);border-top:1px solid var(--line-ink)}
-.city-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1.4rem;padding:1.25rem .2rem;border-bottom:1px solid var(--line-ink);transition:padding-left .3s ease,background .3s ease}
-a.city-row:hover{padding-left:1rem;background:rgba(216,178,98,.05)}
-.city-row .cn{font-family:var(--display);font-size:clamp(1.5rem,2.6vw,2.1rem);font-weight:360;color:var(--on-ink)}
-.city-row .meta{font-family:var(--label);font-size:.78rem;letter-spacing:.06em;color:var(--on-ink-muted)}
-.pill{font-family:var(--label);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:.34em .7em;border-radius:999px;border:1px solid var(--line-ink);color:var(--on-ink-muted)}
-.pill.live{color:var(--brass-bright);border-color:rgba(216,178,98,.5)}
-.future{margin-top:1.9rem;display:flex;flex-wrap:wrap;gap:.6rem .9rem;align-items:center}
-.future .fl{font-family:var(--label);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--on-ink-muted);margin-right:.4rem}
-.future span.c{font-family:var(--label);font-size:.84rem;letter-spacing:.05em;color:var(--on-ink-muted);opacity:.62;padding:.2em 0}
-
-/* ---- two-col list (advisory/connect) ---- */
-.split{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2rem,5vw,5rem);align-items:start}
-.ilist{list-style:none;margin:0;padding:0;columns:2;column-gap:2.5rem}
-.ilist li{break-inside:avoid;padding:.85rem 0;border-top:1px solid var(--line-ink);font-size:1.02rem;display:flex;gap:.7rem;align-items:baseline}
-.s-paper .ilist li,.s-paper-2 .ilist li{border-top-color:var(--line)}
-.ilist li::before{content:"";width:6px;height:6px;flex:0 0 auto;background:var(--brass);border-radius:1px;transform:translateY(-2px)}
-.note{font-family:var(--label);font-size:.82rem;letter-spacing:.06em;color:var(--brass);margin-top:1.8rem}
-.s-ink .note{color:var(--brass-bright)}
-
-/* ---- products ---- */
-.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-top:clamp(2rem,4vw,3rem)}
-.prod{background:var(--paper);padding:clamp(1.6rem,2.6vw,2.4rem)}
-.prod .pn{font-family:var(--display);font-size:clamp(1.3rem,2.1vw,1.7rem);font-weight:400;margin-bottom:.3rem}
-.prod .pk{font-family:var(--label);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass);margin-bottom:.7rem}
-.prod p{color:var(--muted);font-size:.96rem;margin:0}
-
-/* ---- statement / closing ---- */
-.statement{font-family:var(--display);font-weight:330;font-size:clamp(1.7rem,3.6vw,2.9rem);line-height:1.22;letter-spacing:-.012em;max-width:24ch;margin:0 0 2rem}
-.statement em{color:var(--brass-bright)}
-
-/* ---- page hero (subpages) ---- */
-.phero{background:var(--ink);color:var(--on-ink);padding:clamp(140px,16vw,200px) 0 clamp(54px,7vw,86px);position:relative;overflow:hidden}
-.phero::before{content:"";position:absolute;inset:0;background:radial-gradient(110% 120% at 90% 0%,rgba(184,146,61,.13),transparent 55%);pointer-events:none}
-.phero .wrap{position:relative}
-.phero h1{font-size:clamp(2.4rem,5.6vw,4.1rem);font-weight:340;max-width:18ch;margin-top:.15em}
-.phero .lead{color:var(--on-ink);margin-top:1.2rem;max-width:50ch}
-.crumb{font-family:var(--label);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--on-ink-muted)}
-.crumb a:hover{color:var(--brass-bright)}
-
-/* ---- report (city) ---- */
-.statusbar{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;margin-top:1.6rem}
-.report{display:grid;grid-template-columns:1fr;gap:0;max-width:880px}
-.report-block{padding:clamp(1.6rem,3vw,2.4rem) 0;border-top:1px solid var(--line)}
-.report-block:first-child{border-top:0}
-.report-block .rh{display:flex;align-items:baseline;gap:1rem;margin-bottom:.9rem}
-.report-block .rn{font-family:var(--label);font-size:.78rem;letter-spacing:.12em;color:var(--brass)}
-.report-block h2{font-size:clamp(1.4rem,2.4vw,1.9rem)}
-.report-block p{color:var(--text);max-width:62ch}
-.slot{border:1px dashed var(--line);border-radius:3px;padding:1.05rem 1.2rem;color:var(--muted);font-style:italic;font-size:.96rem;background:rgba(184,146,61,.04)}
-.toc-rail{position:sticky;top:96px;font-family:var(--label)}
-.report-wrap{display:grid;grid-template-columns:200px 1fr;gap:clamp(2rem,5vw,4rem);align-items:start}
-.toc-rail .tt{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);margin-bottom:1rem}
-.toc-rail a{display:block;font-size:.82rem;letter-spacing:.02em;color:var(--muted);padding:.32em 0;transition:color .2s}
-.toc-rail a:hover{color:var(--ink)}
-
-/* ---- footer ---- */
-.site-footer{background:var(--ink);color:var(--on-ink);padding:clamp(56px,7vw,86px) 0 2.4rem}
-.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2rem;padding-bottom:2.8rem;border-bottom:1px solid var(--line-ink)}
-.foot-brand .wordmark{font-family:var(--display);font-size:1.5rem;letter-spacing:.28em;color:var(--on-ink);margin-bottom:1rem}
-.foot-brand p{color:var(--on-ink-muted);max-width:30ch;font-size:.98rem;font-style:italic}
-.fcol h4{font-family:var(--label);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);margin:0 0 1.1rem;font-weight:500}
-.fcol a,.fcol span{display:block;font-size:.92rem;color:var(--on-ink-muted);padding:.32em 0;transition:color .2s}
-.fcol a:hover{color:var(--on-ink)}
-.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;padding-top:1.8rem;align-items:center}
-.foot-note{font-family:var(--label);font-size:.78rem;letter-spacing:.04em;color:var(--brass-bright);max-width:60ch}
-.foot-cr{font-family:var(--label);font-size:.76rem;letter-spacing:.06em;color:var(--on-ink-muted)}
-
-/* ---- focus ---- */
-:focus-visible{outline:2px solid var(--brass-bright);outline-offset:3px;border-radius:2px}
-
-/* ---- responsive ---- */
-@media (max-width:920px){
-  .hero .wrap{grid-template-columns:1fr;gap:2.5rem}
-  .net-wrap{max-width:440px;margin:0 auto;order:2}
-  .about-grid,.split,.report-wrap{grid-template-columns:1fr;gap:2rem}
-  .cards{grid-template-columns:1fr}
-  .toc-rail{position:static;display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-bottom:1.2rem}
-  .toc-rail a{padding:.2em 0}
-  .nav,.lang{display:none}
-  .menu-btn{display:inline-flex}
-  .foot-top{grid-template-columns:1fr 1fr}
-  .ilist{columns:1}
-  .prod-grid{grid-template-columns:1fr}
-  body.nav-open{overflow:hidden}
-  .mobile-nav{display:flex}
-}
-@media (max-width:560px){
-  .foot-top{grid-template-columns:1fr}
-  .brand .wordmark{font-size:1.18rem;letter-spacing:.24em}
-  .city-row{grid-template-columns:1fr auto;gap:.4rem 1rem}
-  .city-row .meta{display:none}
-}
-
-/* ---- mobile nav panel ---- */
-.mobile-nav{display:none;position:fixed;inset:0;z-index:90;background:var(--ink);flex-direction:column;justify-content:center;padding:2rem clamp(20px,6vw,40px);transform:translateY(-100%);transition:transform .4s cubic-bezier(.4,0,.2,1);visibility:hidden}
-body.nav-open .mobile-nav{transform:translateY(0);visibility:visible}
-.mobile-nav a{font-family:var(--display);font-size:clamp(1.7rem,8vw,2.4rem);font-weight:360;color:var(--on-ink);padding:.32rem 0;border-bottom:1px solid var(--line-ink)}
-.mobile-nav a:hover{color:var(--brass-bright)}
-.mobile-nav .mlang{margin-top:2rem;display:flex;gap:.5rem}
-.mobile-nav .mlang button{font-family:var(--label);font-size:.85rem;letter-spacing:.08em;border:1px solid var(--line-ink);padding:.5em 1em;border-radius:2px;color:var(--on-ink-muted)}
-.mobile-nav .mlang button[aria-pressed="true"]{background:var(--brass);color:#160f04}
-
-@media (prefers-reduced-motion:reduce){
-  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
-  .reveal{opacity:1;transform:none}
-  .anim-up{opacity:1;transform:none}
-}
+/* --- site-wide additions (kept minimal) --- */
+.nav{flex-wrap:wrap;row-gap:6px}
+.nav a.lnk.active{color:#fff;background:rgba(255,255,255,.12)}
+.btnrow{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.btnrow .btn{margin:0}
+.lead2{font-size:15px;color:#475260;max-width:780px;margin:0 0 6px}
+.center{text-align:center}
+.card.dark{background:linear-gradient(125deg,#0b2238,#16405f);color:#fff;border-color:transparent}
+.card.dark h4{color:#fff}.card.dark p{color:#dbe6ee}
+.card .go{display:inline-block;margin-top:10px;font-weight:800;color:var(--gold);font-size:13.5px;letter-spacing:.03em}
+.card.dark .go{color:var(--gold2)}
+.muted-card{opacity:.7}
+@media(max-width:920px){.nav a.lnk{font-size:11.5px;padding:5px 7px}}
 </style>
 </head>
-<body>
+<body class="show-en">
 
-<a class="skip" href="#main" data-en="Skip to content" data-tr="İçeriğe geç">Skip to content</a>
-<header class="site-header">
-  <div class="wrap hbar">
-    <a class="brand" href="../index.html" aria-label="ASLAN — home"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#B8923D" stroke-width="1.3"/><path d="M20 9.5 L12.4 30.5 M20 9.5 L27.6 30.5 M15.1 24.2 L24.9 24.2" fill="none" stroke="#D9B868" stroke-width="1.5" stroke-linecap="round"/></svg><span class="wordmark">ASLAN</span></a>
-    <nav class="nav" aria-label="Primary"><a href="../intelligence/index.html" class="" data-en="Intelligence" data-tr="Intelligence">Intelligence</a><a href="../real-estate/index.html" class="active" data-en="Real Estate" data-tr="Gayrimenkul">Real Estate</a><a href="../advisory/index.html" class="" data-en="Advisory" data-tr="Danışmanlık">Advisory</a><a href="../connect/index.html" class="" data-en="Connect" data-tr="Connect">Connect</a><a href="../products/index.html" class="" data-en="Products" data-tr="Ürünler">Products</a><a href="../about.html" class="" data-en="About" data-tr="Hakkımızda">About</a></nav>
-    <div class="htools">
-      <div class="lang" role="group" aria-label="Language">
-        <button data-l="en" aria-pressed="true">EN</button><button data-l="tr" aria-pressed="false">TR</button>
-      </div>
-      <a class="btn btn-brass" href="../contact.html" data-en="Contact" data-tr="İletişim">Contact</a>
-      <button class="menu-btn" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="../index.html"><img src="https://www.aslanbusiness.com/aslan-logo.png" alt="ASLAN"><span>ASLAN<small>Real Estate Intelligence</small></span></a>
+  <div class="nav">
+    <a class="lnk" href="../index.html"><span class="t-en">Home</span><span class="t-tr">Anasayfa</span></a><a class="lnk" href="../intelligence/index.html"><span class="t-en">Intelligence</span><span class="t-tr">Intelligence</span></a><a class="lnk active" href="../real-estate/index.html"><span class="t-en">Real Estate</span><span class="t-tr">Gayrimenkul</span></a><a class="lnk" href="../advisory/index.html"><span class="t-en">Advisory</span><span class="t-tr">Danışmanlık</span></a><a class="lnk" href="../connect/index.html"><span class="t-en">Connect</span><span class="t-tr">Connect</span></a><a class="lnk" href="../products/index.html"><span class="t-en">Products</span><span class="t-tr">Ürünler</span></a><a class="lnk" href="../about.html"><span class="t-en">About</span><span class="t-tr">Hakkımızda</span></a><a class="lnk" href="../contact.html"><span class="t-en">Contact</span><span class="t-tr">İletişim</span></a>
+    <div class="langtog">
+      <button data-l="en" class="active" onclick="setLang('en')">EN</button>
+      <button data-l="tr" onclick="setLang('tr')">TR</button>
     </div>
   </div>
-</header>
-<nav class="mobile-nav" aria-label="Mobile">
-  <a href="../index.html" data-en="Home" data-tr="Ana Sayfa">Home</a><a href="../intelligence/index.html" data-en="Intelligence" data-tr="Intelligence">Intelligence</a><a href="../real-estate/index.html" data-en="Real Estate" data-tr="Gayrimenkul">Real Estate</a><a href="../advisory/index.html" data-en="Advisory" data-tr="Danışmanlık">Advisory</a><a href="../connect/index.html" data-en="Connect" data-tr="Connect">Connect</a><a href="../products/index.html" data-en="Products" data-tr="Ürünler">Products</a><a href="../about.html" data-en="About" data-tr="Hakkımızda">About</a><a href="../contact.html" data-en="Contact" data-tr="İletişim">Contact</a>
-  <div class="mlang"><button data-l="en" aria-pressed="true">EN</button><button data-l="tr" aria-pressed="false">TR</button></div>
-</nav>
-<main id="main">
+</div></div>
+<div class="wrap">
+<div class="hero">
+  <div class="kicker">ASLAN · Real Estate Intelligence · <span class="t-en">Investor Route & Site-Visit Guide</span><span class="t-tr">Yatırımcı Rotası & Saha Ziyareti Rehberi</span></div>
+  <h1><span class="t-en">Ankara</span><span class="t-tr">Ankara</span></h1>
+  <p class="sub"><span class="t-en">A bilingual investor route across the capital’s mixed-use flagships, business corridor, heritage renewal and premium residential axis — a market of stability and value entry.</span><span class="t-tr">Başkentin karma kullanım amiralleri, iş koridoru, miras dönüşümü ve prim konut ekseni için çift dilli yatırımcı rotası — istikrar ve değerli giriş pazarı.</span></p>
+  <div class="meta"><span class="pill solid"><span class="t-en">City: Ankara</span><span class="t-tr">Şehir: Ankara</span></span><span class="pill"><span class="t-en">Türkiye / capital</span><span class="t-tr">Türkiye / başkent</span></span><span class="pill">TR / EN</span><span class="pill"><span class="t-en">Updated</span><span class="t-tr">Güncelleme</span>: 19 June 2026 / 19 Haziran 2026</span></div>
+</div><div class="section"><div class="kick"><span class="t-en">01 · Executive summary</span><span class="t-tr">01 · Yönetici özeti</span></div><h2><span class="t-en">Why Ankara</span><span class="t-tr">Neden Ankara</span></h2><div class="rule"></div><p class="lead"><span class="t-en">Ankara is Türkiye’s capital and its most defensive real-estate market: demand is anchored by government, ministries, embassies, universities and hospitals rather than tourism or speculation. Entry prices are materially lower than Istanbul or Bodrum, and rental demand runs 12 months a year.</span><span class="t-tr">Ankara, Türkiye’nin başkenti ve en savunmacı gayrimenkul pazarı: talep turizm veya spekülasyondan çok devlet, bakanlıklar, büyükelçilikler, üniversiteler ve hastanelere dayanır. Giriş fiyatları İstanbul veya Bodrum’dan belirgin düşüktür ve kira talebi yılın 12 ayı sürer.</span></p><p><span class="t-en">The story is mixed-use and renewal rather than branded villas: the Merkez Ankara flagship and the Eskişehir Road business corridor, the heritage-led Saraçoğlu renewal in the centre, and the premium Çankaya / Oran residential axis. For foreign delegations Ankara reads as stability, value entry and institutional growth.</span><span class="t-tr">Hikâye markalı villadan çok karma kullanım ve dönüşümdür: amiral Merkez Ankara ve Eskişehir Yolu iş koridoru, merkezde miras odaklı Saraçoğlu dönüşümü ve prim Çankaya / Oran konut ekseni. Yabancı heyetler için Ankara; istikrar, değerli giriş ve kurumsal büyüme demektir.</span></p></div><div class="section"><div class="kick"><span class="t-en">02 · Market numbers</span><span class="t-tr">02 · Piyasa rakamları</span></div><h2><span class="t-en">The headline data</span><span class="t-tr">Öne çıkan veriler</span></h2><div class="rule"></div><div class="grid"><div class="card"><div class="stat">152,534</div><p style="margin:8px 0 0;font-size:13.5px"><span class="t-en">House sales in Ankara in 2025 — #2 city in Türkiye</span><span class="t-tr">Ankara’da 2025 konut satışı — Türkiye’de 2. sıra</span></p><span class="src-tag">TÜİK</span></div><div class="card"><div class="stat gold">+36.7%</div><p style="margin:8px 0 0;font-size:13.5px"><span class="t-en">Ankara region annual house-price index, Apr 2026 — the highest of any region in Türkiye</span><span class="t-tr">Ankara bölgesi yıllık konut fiyat endeksi, Nis 2026 — Türkiye’nin tüm bölgeleri içinde en yükseği</span></p><span class="src-tag">TCMB KFE</span></div><div class="card"><div class="stat">Value entry</div><p style="margin:8px 0 0;font-size:13.5px"><span class="t-en">Lower average sqm price and shorter payback than Istanbul or Bodrum</span><span class="t-tr">İstanbul veya Bodrum’a göre düşük ortalama m² ve kısa amortisman</span></p><span class="src-tag">Endeksa</span></div><div class="card"><div class="stat">12 months</div><p style="margin:8px 0 0;font-size:13.5px"><span class="t-en">Year-round rental demand from embassies, ministries, universities and hospitals</span><span class="t-tr">Büyükelçilik, bakanlık, üniversite ve hastanelerden yıl boyu kira talebi</span></p><span class="src-tag">Sector</span></div><div class="card"><div class="stat">1,688,910</div><p style="margin:8px 0 0;font-size:13.5px"><span class="t-en">Total house sales in Türkiye, 2025 (foreigners 21,534; 1.3%)</span><span class="t-tr">Türkiye geneli konut satışı, 2025 (yabancı 21.534; %1,3)</span></p><span class="src-tag">TÜİK</span></div><div class="card"><div class="stat">+26.6% / −4.3%</div><p style="margin:8px 0 0;font-size:13.5px"><span class="t-en">Türkiye house-price index, Apr 2026 — nominal vs real (y/y)</span><span class="t-tr">Türkiye konut fiyat endeksi, Nis 2026 — nominal vs reel (y/y)</span></p><span class="src-tag">TCMB KFE</span></div></div></div><div class="section"><div class="kick"><span class="t-en">03 · Investor logic</span><span class="t-tr">03 · Yatırımcı mantığı</span></div><h2><span class="t-en">What works and why</span><span class="t-tr">Ne, neden işe yarar?</span></h2><div class="rule"></div><div class="grid2"><div class="card"><h4><span class="t-en">What works in the capital</span><span class="t-tr">Başkentte ne işe yarar?</span></h4><p style="font-size:14px"><span class="t-en">Institutional, salaried, year-round tenants make Ankara defensive. Mixed-use projects with offices and retail, plus premium Çankaya/Oran apartments, capture the most reliable demand. Heritage renewal (Saraçoğlu) adds a unique central product.</span><span class="t-tr">Kurumsal, maaşlı, yıl boyu kiracılar Ankara’yı savunmacı kılar. Ofis ve perakende içeren karma kullanım projeleri ile prim Çankaya/Oran daireleri en güvenilir talebi yakalar. Miras dönüşümü (Saraçoğlu) merkezde benzersiz bir ürün ekler.</span></p></div><div class="card"><h4><span class="t-en">How to position Ankara</span><span class="t-tr">Ankara nasıl konumlanır?</span></h4><p style="font-size:14px"><span class="t-en">Not a trophy-asset market, but a stable income and capital-preservation market — and currently the fastest-rising region in the national price index. Best paired with a corporate-housing or institutional thesis.</span><span class="t-tr">Prestij-varlık pazarı değil; istikrarlı gelir ve sermaye koruma pazarı — ve şu an ulusal fiyat endeksinde en hızlı yükselen bölge. En iyi, kurumsal konut veya kurumsal tezle eşleştirilir.</span></p></div></div></div><div class="section"><div class="kick"><span class="t-en">04 · Project radar</span><span class="t-tr">04 · Proje radarı</span></div><h2><span class="t-en">Core projects to know</span><span class="t-tr">Bilinmesi gereken ana projeler</span></h2><div class="rule"></div><div class="table-wrap"><table class="table"><thead><tr><th><span class="t-en">Project</span><span class="t-tr">Proje</span></th><th><span class="t-en">Type</span><span class="t-tr">Tip</span></th><th><span class="t-en">Investor / developer</span><span class="t-tr">Yatırımcı / geliştirici</span></th><th><span class="t-en">Brand / operator</span><span class="t-tr">Marka / operatör</span></th><th><span class="t-en">Scale / status</span><span class="t-tr">Ölçek / durum</span></th><th><span class="t-en">Why it matters</span><span class="t-tr">Neden önemli</span></th></tr></thead><tbody><tr><td><b>Merkez Ankara</b><br><span class="tag gold">AKM / city centre</span><span class="tag gold">Flagship</span></td><td><span class="t-en">Residential + office + retail + hotel — city-within-a-city</span><span class="t-tr">Konut + ofis + perakende + otel — şehir içinde şehir</span></td><td>Emlak Konut GYO (land) + Pasifik İnşaat / Pasifik GYO</td><td>KPF (design)</td><td><span class="t-en">125-acre single parcel; next to the 1.7M m² National Garden; ≈1,578 homes</span><span class="t-tr">125 dönümlük tek parsel; 1,7M m² Millet Bahçesi’ne bitişik; ≈1.578 konut</span></td><td><span class="t-en">Ankara’s most important current mixed-use benchmark and a must-see for delegations.</span><span class="t-tr">Ankara’nın en önemli güncel karma kullanım benchmark’ı ve heyetler için görülmesi şart.</span></td></tr><tr><td><b>Next Level Ankara</b><br><span class="tag ">Söğütözü / Eskişehir Rd</span></td><td><span class="t-en">Offices + residences + shopping mall</span><span class="t-tr">Ofis + rezidans + AVM</span></td><td>Pasifik GYO</td><td>—</td><td><span class="t-en">19,590 m² land; 190,000 m² construction area</span><span class="t-tr">19.590 m² arsa; 190.000 m² inşaat alanı</span></td><td><span class="t-en">Ankara’s first major mixed-use project; proves integrated-living demand in the capital.</span><span class="t-tr">Ankara’nın ilk büyük karma kullanım projesi; başkentte entegre yaşam talebini kanıtlar.</span></td></tr><tr><td><b>YDA Center</b><br><span class="tag ">Çankaya / Karakusunlar</span></td><td><span class="t-en">Office-led mixed-use / commercial</span><span class="t-tr">Ofis ağırlıklı karma kullanım / ticari</span></td><td>YDA Group</td><td>Yazgan (design)</td><td><span class="t-en">Commercial-office development on the main growth corridor</span><span class="t-tr">Ana büyüme koridorunda ticari-ofis geliştirmesi</span></td><td><span class="t-en">Strong office-business hub reference on Ankara’s primary axis.</span><span class="t-tr">Ankara’nın birincil ekseninde güçlü ofis-iş merkezi referansı.</span></td></tr><tr><td><b>Mahall Ankara</b><br><span class="tag ">Çankaya / Eskişehir Rd</span></td><td><span class="t-en">Residences + offices + retail + suites / home-office</span><span class="t-tr">Rezidans + ofis + perakende + suit / home-office</span></td><td>Türkerler İnşaat</td><td>RMJM (design)</td><td><span class="t-en">≈317,650 m²; 315 offices + residences, city suites, home-offices, stores</span><span class="t-tr">≈317.650 m²; 315 ofis + rezidans, şehir suitleri, home-office, mağazalar</span></td><td><span class="t-en">Large day/night mixed-use destination with a diverse unit mix.</span><span class="t-tr">Çeşitli ünite karışımına sahip büyük gündüz/gece karma kullanım destinasyonu.</span></td></tr><tr><td><b>Sinpaş Altınoran</b><br><span class="tag ">Oran / Çankaya</span></td><td><span class="t-en">Large themed residential community</span><span class="t-tr">Büyük temalı konut topluluğu</span></td><td>Sinpaş GYO</td><td>—</td><td><span class="t-en">One of Türkiye’s largest themed residential projects; multi-phase</span><span class="t-tr">Türkiye’nin en büyük temalı konut projelerinden; çok etaplı</span></td><td><span class="t-en">Good reference for upper-middle and family-oriented residential demand.</span><span class="t-tr">Üst-orta ve aile odaklı konut talebi için iyi referans.</span></td></tr><tr><td><b>Saraçoğlu Mahallesi</b><br><span class="tag gold">Kızılay / Çankaya</span><span class="tag gold">Heritage renewal</span></td><td><span class="t-en">Heritage housing + offices + shops + hotel</span><span class="t-tr">Miras konut + ofis + dükkân + otel</span></td><td>Emlak Konut / public renewal</td><td>—</td><td><span class="t-en">119 residences, 172 offices, 112 shops, 159-room historic hotel (restored)</span><span class="t-tr">119 rezidans, 172 ofis, 112 dükkân, 159 odalı tarihi otel (restore)</span></td><td><span class="t-en">The best Ankara example of heritage-led renewal and adaptive reuse in the centre.</span><span class="t-tr">Merkezde miras odaklı dönüşüm ve yeniden işlevlendirmenin en iyi Ankara örneği.</span></td></tr><tr><td><b>Atakule</b><br><span class="tag gold">Çankaya</span><span class="tag gold">Landmark</span></td><td><span class="t-en">Retail / gastronomy / lifestyle landmark</span><span class="t-tr">Perakende / gastronomi / yaşam simgesi</span></td><td>Atakule GYO</td><td>—</td><td><span class="t-en">Reconstructed landmark; active retail & F&B destination</span><span class="t-tr">Yeniden inşa edilmiş simge; faal perakende & yeme-içme destinasyonu</span></td><td><span class="t-en">Not residential, but key to reading Çankaya’s premium lifestyle axis.</span><span class="t-tr">Konut değil ama Çankaya’nın prim yaşam eksenini okumak için kritik.</span></td></tr><tr><td><b>Çayyolu / Yaşamkent / İncek corridor</b><br><span class="tag ">Growth area</span></td><td><span class="t-en">Residential growth + schools + family living</span><span class="t-tr">Konut büyümesi + okullar + aile yaşamı</span></td><td>Multiple local & national developers</td><td>—</td><td><span class="t-en">Ongoing villa/apartment stock and land development</span><span class="t-tr">Süregelen villa/daire stoğu ve arsa geliştirme</span></td><td><span class="t-en">Relevant for family rentals and a lower entry price than Istanbul/Bodrum.</span><span class="t-tr">Aile kiralamaları ve İstanbul/Bodrum’dan düşük giriş fiyatı için uygun.</span></td></tr></tbody></table></div></div><div class="section"><div class="kick"><span class="t-en">05 · Site-visit routes</span><span class="t-tr">05 · Saha ziyareti rotaları</span></div><h2><span class="t-en">Suggested routes</span><span class="t-tr">Önerilen rotalar</span></h2><div class="rule"></div><div class="grid"><div class="card"><h3><span class="t-en">Route A — Capital mixed-use flagship</span><span class="t-tr">Rota A — Başkent karma kullanım amirali</span></h3><p class="small"><span class="t-en">Half day</span><span class="t-tr">Yarım gün</span></p><div class="route-step"><span class="num">1</span><div><span class="t-en">Merkez Ankara + National Garden adjacency</span><span class="t-tr">Merkez Ankara + Millet Bahçesi bitişikliği</span></div></div><div class="route-step"><span class="num">2</span><div><span class="t-en">AKM / city-centre transformation context</span><span class="t-tr">AKM / kent merkezi dönüşümü</span></div></div><div class="route-step"><span class="num">3</span><div><span class="t-en">Saraçoğlu Mahallesi as a heritage-renewal case</span><span class="t-tr">Miras dönüşümü örneği Saraçoğlu Mahallesi</span></div></div><div class="bestfor"><b><span class="t-en">Best for:</span><span class="t-tr">En uygun:</span></b> <span class="t-en">Official delegations, institutional investors, urban-regeneration visitors.</span><span class="t-tr">Resmi heyetler, kurumsal yatırımcılar, kentsel dönüşüm ziyaretçileri.</span></div></div><div class="card"><h3><span class="t-en">Route B — Eskişehir Road business corridor</span><span class="t-tr">Rota B — Eskişehir Yolu iş koridoru</span></h3><p class="small"><span class="t-en">Half day to 1 day</span><span class="t-tr">Yarım–1 gün</span></p><div class="route-step"><span class="num">1</span><div><span class="t-en">Next Level Ankara</span><span class="t-tr">Next Level Ankara</span></div></div><div class="route-step"><span class="num">2</span><div><span class="t-en">YDA Center</span><span class="t-tr">YDA Center</span></div></div><div class="route-step"><span class="num">3</span><div><span class="t-en">Mahall Ankara + Söğütözü office-retail context</span><span class="t-tr">Mahall Ankara + Söğütözü ofis-perakende</span></div></div><div class="bestfor"><b><span class="t-en">Best for:</span><span class="t-tr">En uygun:</span></b> <span class="t-en">Office, mixed-use, rental-income and corporate-housing investors.</span><span class="t-tr">Ofis, karma kullanım, kira geliri ve kurumsal konut yatırımcıları.</span></div></div><div class="card"><h3><span class="t-en">Route C — Premium residential Ankara</span><span class="t-tr">Rota C — Prim konut Ankara</span></h3><p class="small"><span class="t-en">Half day</span><span class="t-tr">Yarım gün</span></p><div class="route-step"><span class="num">1</span><div><span class="t-en">Çankaya / Oran: Altınoran and premium stock</span><span class="t-tr">Çankaya / Oran: Altınoran ve prim stok</span></div></div><div class="route-step"><span class="num">2</span><div><span class="t-en">Atakule / Çankaya lifestyle reference</span><span class="t-tr">Atakule / Çankaya yaşam referansı</span></div></div><div class="route-step"><span class="num">3</span><div><span class="t-en">İncek / Çayyolu / Yaşamkent family growth areas</span><span class="t-tr">İncek / Çayyolu / Yaşamkent aile büyüme bölgeleri</span></div></div><div class="bestfor"><b><span class="t-en">Best for:</span><span class="t-tr">En uygun:</span></b> <span class="t-en">Buyers seeking stable rentals, families, and embassy/university demand.</span><span class="t-tr">İstikrarlı kira, aileler ve büyükelçilik/üniversite talebi arayan alıcılar.</span></div></div></div></div>
+<div class="cta">
+  <h2><span class="t-en">Plan a private site visit</span><span class="t-tr">Özel saha ziyareti planlayın</span></h2>
+  <p><span class="t-en">Read the market, shortlist the projects that fit your strategy, then let ASLAN arrange a curated, private site-visit route — with the right introductions and local due-diligence support.</span><span class="t-tr">Pazarı okuyun, stratejinize uyan projeleri kısa listeye alın; ardından ASLAN sizin için özel, kürasyonlu bir saha ziyareti rotası kursun — doğru tanışmalar ve yerel inceleme desteğiyle.</span></p>
+  <div class="checklist">
+    <div><span class="t-en">Visitor profile: buyer / family office / developer / operator</span><span class="t-tr">Ziyaretçi profili: alıcı / aile ofisi / geliştirici / operatör</span></div>
+    <div><span class="t-en">Budget band and product type</span><span class="t-tr">Bütçe aralığı ve ürün tipi</span></div>
+    <div><span class="t-en">Preferred route and dates</span><span class="t-tr">Tercih edilen rota ve tarihler</span></div>
+    <div><span class="t-en">Private appointments required?</span><span class="t-tr">Özel randevu gerekli mi?</span></div>
+    <div><span class="t-en">Legal / tax / residency support needed?</span><span class="t-tr">Hukuk / vergi / oturum desteği gerekli mi?</span></div>
+    <div><span class="t-en">Rental management & resale questions</span><span class="t-tr">Kiralama yönetimi & yeniden satış soruları</span></div>
+  </div>
+  <div style="margin-top:18px">
+    <a class="btn" href="mailto:info@aslanbusiness.com?subject=ASLAN%20Real%20Estate%20-%20Site%20Visit%20Request"><span class="t-en">Request a site visit</span><span class="t-tr">Saha ziyareti talep et</span></a>
+    <a class="btn ghost" href="index.html"><span class="t-en">Back to all markets</span><span class="t-tr">Tüm pazarlara dön</span></a>
+  </div>
+</div>
+<div class="sources" id="sources">
+  <h2><span class="t-en">Sources used</span><span class="t-tr">Kullanılan kaynaklar</span></h2>
+  <p class="disc"><span class="t-en">This report is based on public sources (statistics offices, sector associations, developer and brand pages, market research and press). Project status, inventory, prices, ownership, permits and availability must be verified directly before investment or arranging a private site visit. Market figures are period-specific and indicative.</span><span class="t-tr">Bu rapor açık kaynaklara dayanır (istatistik kurumları, sektör dernekleri, geliştirici ve marka sayfaları, piyasa araştırmaları ve basın). Yatırım veya özel saha ziyareti öncesinde proje durumu, stok, fiyat, mülkiyet, izinler ve müsaitlik doğrudan teyit edilmelidir. Piyasa rakamları döneme özgü ve göstergeseldir.</span></p>
+  <table class="src-table"><thead><tr><th>#</th><th><span class="t-en">Source</span><span class="t-tr">Kaynak</span></th><th><span class="t-en">Used for</span><span class="t-tr">Kullanım</span></th><th>URL</th></tr></thead>
+  <tbody><tr><td>1</td><td>TÜİK — Konut Satış İstatistikleri 2025</td><td><span class="t-en">Ankara and national sales, foreign-buyer data</span><span class="t-tr">Ankara ve ulusal satış, yabancı alıcı verisi</span></td><td><a href='https://data.tuik.gov.tr/Kategori/GetKategori?p=insaat-ve-konut-116' target='_blank'>https://data.tuik.gov.tr/Kategori/GetKategori?p=insaat-ve-konut-116</a></td></tr><tr><td>2</td><td>GYODER — Gösterge (Sayı 41, 2025)</td><td><span class="t-en">Sector context and foreign-acquisition ranking</span><span class="t-tr">Sektör bağlamı ve yabancı edinim sıralaması</span></td><td><a href='https://portal.gyoder.org.tr/_lib/file/doc/GYODER%20G%C3%B6sterge%20-say%C4%B1%2041-%20WEB.pdf' target='_blank'>https://portal.gyoder.org.tr/_lib/file/doc/GYODER%20G%C3%B6sterge%20-say%C4%B1%2041-%20WEB.pdf</a></td></tr><tr><td>3</td><td>TCMB — Konut Fiyat Endeksi (Nis. 2026)</td><td><span class="t-en">Ankara region had the highest annual price rise</span><span class="t-tr">Ankara bölgesi en yüksek yıllık fiyat artışına sahip</span></td><td><a href='https://www.tcmb.gov.tr/wps/wcm/connect/8bbac42a-c854-4c58-8b0c-e7e55c35ec2d/KFE.pdf?MOD=AJPERES' target='_blank'>https://www.tcmb.gov.tr/wps/wcm/connect/8bbac42a-c854-4c58-8b0c-e7e55c35ec2d/KFE.pdf?MOD=AJPERES</a></td></tr><tr><td>4</td><td>Endeksa — Ankara housing index</td><td><span class="t-en">Ankara sqm price and payback</span><span class="t-tr">Ankara m² fiyatı ve amortisman</span></td><td><a href='https://www.endeksa.com/tr/analiz/turkiye/ankara/endeks/satilik/konut' target='_blank'>https://www.endeksa.com/tr/analiz/turkiye/ankara/endeks/satilik/konut</a></td></tr><tr><td>5</td><td>KONUTDER & İNDER</td><td><span class="t-en">Developer-association sector reports (context)</span><span class="t-tr">Geliştirici derneği sektör raporları (bağlam)</span></td><td><a href='https://www.konutder.org.tr' target='_blank'>https://www.konutder.org.tr</a></td></tr><tr><td>6</td><td>Emlak Konut — Merkez Ankara</td><td><span class="t-en">Project scale and National Garden adjacency</span><span class="t-tr">Proje ölçeği ve Millet Bahçesi bitişikliği</span></td><td><a href='https://www.emlakkonut.com.tr/en-US/merkez-ankara-en' target='_blank'>https://www.emlakkonut.com.tr/en-US/merkez-ankara-en</a></td></tr><tr><td>7</td><td>Pasifik GYO — Merkez Ankara</td><td><span class="t-en">Status, location, investor/landowner</span><span class="t-tr">Durum, konum, yatırımcı/arsa sahibi</span></td><td><a href='https://www.pasifikgyo.com.tr/en/projects/ongoing-projects/merkez-ankara' target='_blank'>https://www.pasifikgyo.com.tr/en/projects/ongoing-projects/merkez-ankara</a></td></tr><tr><td>8</td><td>Pasifik GYO — Next Level Ankara</td><td><span class="t-en">Land and construction area, functions</span><span class="t-tr">Arsa ve inşaat alanı, fonksiyonlar</span></td><td><a href='https://www.pasifikgyo.com.tr/en/projects/completed-projects/next-level-ankara' target='_blank'>https://www.pasifikgyo.com.tr/en/projects/completed-projects/next-level-ankara</a></td></tr><tr><td>9</td><td>YDA Group — YDA Center</td><td><span class="t-en">Developer and commercial-office description</span><span class="t-tr">Geliştirici ve ticari-ofis tanımı</span></td><td><a href='https://www.yda.com.tr/en/ydagroup/yda-center/' target='_blank'>https://www.yda.com.tr/en/ydagroup/yda-center/</a></td></tr><tr><td>10</td><td>Türkerler — Mahall Ankara</td><td><span class="t-en">Functions and unit mix</span><span class="t-tr">Fonksiyonlar ve ünite karışımı</span></td><td><a href='https://www.turkerler.com/en-EN/proje/mahall-ankara/121' target='_blank'>https://www.turkerler.com/en-EN/proje/mahall-ankara/121</a></td></tr><tr><td>11</td><td>RMJM — Mahall Ankara</td><td><span class="t-en">Project size and masterplanning role</span><span class="t-tr">Proje boyutu ve master plan rolü</span></td><td><a href='https://rmjm.com/portfolio/mahall-ankara/' target='_blank'>https://rmjm.com/portfolio/mahall-ankara/</a></td></tr><tr><td>12</td><td>Sinpaş — Altınoran</td><td><span class="t-en">Large themed residential positioning</span><span class="t-tr">Büyük temalı konut konumlandırması</span></td><td><a href='https://sinpasaltinoran.com.tr/' target='_blank'>https://sinpasaltinoran.com.tr/</a></td></tr><tr><td>13</td><td>Atakule</td><td><span class="t-en">Ankara retail/lifestyle landmark</span><span class="t-tr">Ankara perakende/yaşam simgesi</span></td><td><a href='https://atakule.com.tr/en/' target='_blank'>https://atakule.com.tr/en/</a></td></tr><tr><td>14</td><td>Emlak Konut — Saraçoğlu Mahallesi</td><td><span class="t-en">Heritage renewal positioning</span><span class="t-tr">Miras dönüşümü konumlandırması</span></td><td><a href='https://www.emlakkonut.com.tr/tr-TR/saracoglu-mahallesi%CC%87' target='_blank'>https://www.emlakkonut.com.tr/tr-TR/saracoglu-mahallesi%CC%87</a></td></tr><tr><td>15</td><td>Anadolu Ajansı — Saraçoğlu project</td><td><span class="t-en">Restored program and unit counts</span><span class="t-tr">Restore program ve ünite sayıları</span></td><td><a href='https://www.aa.com.tr/tr/gundem/yenileme-calismalari-tamamlanan-saracoglu-mahallesi-projesinde-konutlar-satisa-sunuldu/2965700' target='_blank'>https://www.aa.com.tr/tr/gundem/yenileme-calismalari-tamamlanan-saracoglu-mahallesi-projesinde-konutlar-satisa-sunuldu/2965700</a></td></tr></tbody></table>
+</div>
 
-<section class="phero">
-  <div class="wrap">
-    <p class="crumb"><a href="../index.html" data-en="Home" data-tr="Ana Sayfa">Home</a> &nbsp;/&nbsp; <a href="../real-estate/index.html" data-en="Real Estate" data-tr="Gayrimenkul">Real Estate</a> &nbsp;/&nbsp; <span>Ankara</span></p>
-    <p class="eyebrow" style="margin-top:1.4rem" data-en="Real Estate Intelligence" data-tr="Real Estate Intelligence">Real Estate Intelligence</p>
-    <h1>Ankara</h1>
-    <p class="lead" data-en="Türkiye’s capital, in Central Anatolia." data-tr="İç Anadolu’da, Türkiye’nin başkenti.">Türkiye’s capital, in Central Anatolia.</p>
-    <div class="statusbar"><span class="pill live" data-en="In preparation" data-tr="Hazırlanıyor">In preparation</span><span class="crumb" data-en="Standard 9-section report" data-tr="Standart 9 bölümlü rapor">Standard 9-section report</span></div>
-  </div>
-</section>
-<section class="section s-paper reveal">
-  <div class="wrap report-wrap">
-    <aside class="toc-rail"><div class="tt" data-en="Contents" data-tr="İçindekiler">Contents</div><a href="#s0" data-en="Executive Summary" data-tr="Yönetici Özeti">Executive Summary</a><a href="#s1" data-en="Why This Market" data-tr="Bu Pazar Neden Önemli">Why This Market</a><a href="#s2" data-en="Key Districts" data-tr="Önemli Bölgeler">Key Districts</a><a href="#s3" data-en="Major Developers" data-tr="Büyük Geliştiriciler">Major Developers</a><a href="#s4" data-en="Major Projects" data-tr="Önemli Projeler">Major Projects</a><a href="#s5" data-en="Market Indicators" data-tr="Pazar Göstergeleri">Market Indicators</a><a href="#s6" data-en="Site Visit Routes" data-tr="Site Visit Rotaları">Site Visit Routes</a><a href="#s7" data-en="Investment Considerations" data-tr="Yatırımda Dikkat Edilmesi Gerekenler">Investment Considerations</a><a href="#s8" data-en="Sources" data-tr="Kaynaklar">Sources</a></aside>
-    <div class="report"><section class="report-block" id="s0"><div class="rh"><span class="rn">01</span><h2 data-en="Executive Summary" data-tr="Yönetici Özeti">Executive Summary</h2></div><p data-en="Ankara is Türkiye’s capital in Central Anatolia and the country’s administrative hub. This report will set out its districts, developers, projects, indicators and site-visit routes. In preparation." data-tr="Ankara, İç Anadolu’da Türkiye’nin başkenti ve ülkenin idari merkezidir. Bu rapor; bölgelerini, geliştiricilerini, projelerini, göstergelerini ve site visit rotalarını ortaya koyacak. Hazırlanıyor.">Ankara is Türkiye’s capital in Central Anatolia and the country’s administrative hub. This report will set out its districts, developers, projects, indicators and site-visit routes. In preparation.</p></section><section class="report-block" id="s1"><div class="rh"><span class="rn">02</span><h2 data-en="Why This Market" data-tr="Bu Pazar Neden Önemli">Why This Market</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s2"><div class="rh"><span class="rn">03</span><h2 data-en="Key Districts" data-tr="Önemli Bölgeler">Key Districts</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s3"><div class="rh"><span class="rn">04</span><h2 data-en="Major Developers" data-tr="Büyük Geliştiriciler">Major Developers</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s4"><div class="rh"><span class="rn">05</span><h2 data-en="Major Projects" data-tr="Önemli Projeler">Major Projects</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s5"><div class="rh"><span class="rn">06</span><h2 data-en="Market Indicators" data-tr="Pazar Göstergeleri">Market Indicators</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s6"><div class="rh"><span class="rn">07</span><h2 data-en="Site Visit Routes" data-tr="Site Visit Rotaları">Site Visit Routes</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s7"><div class="rh"><span class="rn">08</span><h2 data-en="Investment Considerations" data-tr="Yatırımda Dikkat Edilmesi Gerekenler">Investment Considerations</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s8"><div class="rh"><span class="rn">09</span><h2 data-en="Sources" data-tr="Kaynaklar">Sources</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section></div>
-  </div>
-</section>
-<section class="section s-ink reveal">
-  <div class="wrap" style="text-align:left">
-    <p class="eyebrow" data-en="Need this market sooner?" data-tr="Bu pazar daha erken mi lazım?">Need this market sooner?</p>
-    <h2 data-en="Ask for a private briefing." data-tr="Özel bir brifing isteyin.">Ask for a private briefing.</h2>
-    <a class="btn btn-brass" style="margin-top:1.6rem" href="../contact.html" data-en="Contact ASLAN" data-tr="ASLAN ile iletişime geçin">Contact ASLAN<span class="arr">→</span></a>
-  </div>
-</section>
-</main>
-
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="foot-top">
-      <div class="foot-brand">
-        <div class="wordmark">ASLAN</div>
-        <p data-en="ASLAN turns market knowledge into trusted opportunities." data-tr="ASLAN, pazar bilgisini güvenilir fırsatlara dönüştürür.">ASLAN turns market knowledge into trusted opportunities.</p>
-      </div>
-      <div class="fcol"><h4 data-en="Platform" data-tr="Platform">Platform</h4><a href="../intelligence/index.html" data-en="Intelligence" data-tr="Intelligence">Intelligence</a><a href="../real-estate/index.html" data-en="Real Estate" data-tr="Gayrimenkul">Real Estate</a><a href="../advisory/index.html" data-en="Advisory" data-tr="Danışmanlık">Advisory</a><a href="../connect/index.html" data-en="Connect" data-tr="Connect">Connect</a><a href="../products/index.html" data-en="Products" data-tr="Ürünler">Products</a></div>
-      <div class="fcol"><h4 data-en="Regions" data-tr="Bölgeler">Regions</h4><span data-en="Türkiye" data-tr="Türkiye">Türkiye</span><span data-en="Oman" data-tr="Umman">Oman</span><span data-en="Saudi Arabia" data-tr="Suudi Arabistan">Saudi Arabia</span><span data-en="UAE" data-tr="BAE">UAE</span><span data-en="Azerbaijan" data-tr="Azerbaycan">Azerbaijan</span><span data-en="Iraq" data-tr="Irak">Iraq</span></div>
-      <div class="fcol"><h4 data-en="Company" data-tr="Kurumsal">Company</h4><a href="../about.html" data-en="About" data-tr="Hakkımızda">About</a><a href="../contact.html" data-en="Contact" data-tr="İletişim">Contact</a></div>
-    </div>
-    <div class="foot-bottom">
-      <div class="foot-note" data-en="Facts only. No hype, no vague promises — sources, real costs and honest risk." data-tr="Yalnızca gerçekler. Abartı yok, belirsiz vaat yok — kaynak, gerçek maliyet ve dürüst risk.">Facts only. No hype, no vague promises — sources, real costs and honest risk.</div>
-      <div class="foot-cr">© 2026 ASLAN · aslanbusiness.com</div>
-    </div>
-  </div>
-</footer>
+<div class="footer">
+  <span class="powered"><span class="t-en">Powered by</span><span class="t-tr">Hazırlayan</span> <b>SP Architects</b> · <span class="t-en">for</span><span class="t-tr">×</span> ASLAN Advisory Platform</span>
+  <span class="loc">DUBAI · ISTANBUL · GLOBAL</span>
+</div>
+<p class="small" style="margin-top:10px;font-size:11px;color:#9a8e76">
+  <span class="t-en">© ASLAN Business — Content package for investor education and site-visit planning. Not investment, legal or tax advice. Verify all figures, ownership, permits and availability before acting.</span><span class="t-tr">© ASLAN Business — Yatırımcı bilgilendirme ve saha ziyareti planlaması için içerik paketidir. Yatırım, hukuk veya vergi tavsiyesi değildir. Hareket etmeden önce tüm rakamları, mülkiyeti, izinleri ve müsaitliği teyit ediniz.</span>
+</p>
+</div>
 <script>
-(function(){
-  var hdr=document.querySelector('.site-header');
-  function onScroll(){ if(hdr){ hdr.classList.toggle('scrolled', window.scrollY>40); } }
-  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
-
-  // mobile menu
-  var mb=document.querySelector('.menu-btn');
-  if(mb){ mb.addEventListener('click',function(){ document.body.classList.toggle('nav-open'); var open=document.body.classList.contains('nav-open'); mb.setAttribute('aria-expanded',open); }); }
-  document.querySelectorAll('.mobile-nav a').forEach(function(a){ a.addEventListener('click',function(){ document.body.classList.remove('nav-open'); }); });
-
-  // language
-  function rewrite(lang){
-    document.querySelectorAll('a[href]').forEach(function(a){
-      var h=a.getAttribute('href'); if(!h) return;
-      try{
-        var u=new URL(h, location.href);
-        if(u.origin===location.origin && (u.pathname.endsWith('.html')||u.pathname.endsWith('/'))){
-          if(lang==='tr'){u.searchParams.set('lang','tr');} else {u.searchParams.delete('lang');}
-          a.setAttribute('href', u.pathname + u.search + u.hash);
-        }
-      }catch(e){}
-    });
-  }
-  function apply(lang){
-    document.documentElement.lang = lang;
-    document.querySelectorAll('[data-en]').forEach(function(el){
-      var v=el.getAttribute('data-'+lang); if(v!==null) el.textContent=v;
-    });
-    document.querySelectorAll('.lang button, .mlang button').forEach(function(b){
-      b.setAttribute('aria-pressed', b.getAttribute('data-l')===lang);
-    });
-  }
-  function set(lang){
-    apply(lang); rewrite(lang);
-    try{ var u=new URL(location.href); if(lang==='tr')u.searchParams.set('lang','tr'); else u.searchParams.delete('lang'); history.replaceState(null,'',u); }catch(e){}
-  }
-  document.querySelectorAll('.lang button, .mlang button').forEach(function(b){
-    b.addEventListener('click',function(){ set(b.getAttribute('data-l')); });
+function setLang(l){
+  document.body.classList.toggle('show-tr', l==='tr');
+  document.body.classList.toggle('show-en', l!=='tr');
+  document.querySelectorAll('.langtog button').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-l')===l);
   });
-  var start='en';
-  try{ if(new URLSearchParams(location.search).get('lang')==='tr') start='tr'; }catch(e){}
-  apply(start); rewrite(start);
-
-  // reveal
-  var els=document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
-    },{rootMargin:'0px 0px -8% 0px',threshold:.08});
-    els.forEach(function(el){ io.observe(el); });
-  } else { els.forEach(function(el){ el.classList.add('in'); }); }
-})();
+}
+document.addEventListener('DOMContentLoaded',function(){ setLang('en'); });
 </script>
 </body>
 </html>

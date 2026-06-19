@@ -3,384 +3,220 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bodrum Real Estate Intelligence — ASLAN</title>
-<meta name="description" content="ASLAN real estate intelligence report for Bodrum — districts, developers, projects, indicators and site-visit routes.">
-<meta name="theme-color" content="#0E2233">
-<meta property="og:title" content="Bodrum Real Estate Intelligence — ASLAN">
-<meta property="og:description" content="ASLAN real estate intelligence report for Bodrum — districts, developers, projects, indicators and site-visit routes.">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..560;1,9..144,320..480&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Bodrum Real Estate Investor Route — ASLAN / Powered by SP Architects</title>
+<meta name="description" content="ASLAN Real Estate Intelligence — bilingual investor route & site-visit guide. Powered by SP Architects.">
 <style>
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{margin:0}
-img,svg{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
-
 :root{
-  --ink:#0E2233; --ink-2:#143049; --ink-3:#1C3D5A;
-  --paper:#F4F1E9; --paper-2:#EBE5D8;
-  --brass:#B8923D; --brass-bright:#D9B868;
-  --text:#17262F; --muted:#5C6970;
-  --on-ink:#ECE6D8; --on-ink-muted:rgba(236,230,216,.60);
-  --line:#D7CDB6; --line-ink:rgba(216,178,98,.22);
-  --display:'Fraunces',Georgia,'Times New Roman',serif;
-  --body:'Spectral',Georgia,serif;
-  --label:'Space Grotesk',ui-sans-serif,system-ui,'Segoe UI',sans-serif;
-  --wrap:1180px;
-  --pad-y:clamp(72px,9vw,128px);
+  --ink:#13171d; --navy:#0e2a47; --navy2:#16405f; --gold:#b98a3e; --gold2:#c8a35b;
+  --paper:#fbfaf7; --soft:#f4f1ea; --soft2:#f8f6f1; --line:#e8e2d6; --muted:#6b7280;
+  --green:#2f5d4f; --blue:#1877f2; --white:#fff; --chip:#efe7d6;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink);line-height:1.6;background:var(--paper);-webkit-font-smoothing:antialiased}
+a{color:#0b5cad;text-decoration:none}
+.t-tr{display:none}
+body.show-tr .t-en{display:none}
+body.show-tr .t-tr{display:inline}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(14,42,71,.97);backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(255,255,255,.08)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;letter-spacing:.16em;font-size:15px}
+.brand img{height:30px;width:auto;filter:brightness(0) invert(1)}
+.brand small{font-weight:500;letter-spacing:.14em;color:#cdb888;font-size:10px;display:block;margin-top:1px}
+.nav{margin-left:auto;display:flex;align-items:center;gap:8px}
+.nav a.lnk{color:#cfd8e6;font-size:12.5px;letter-spacing:.04em;padding:6px 10px;border-radius:8px}
+.nav a.lnk:hover{color:#fff;background:rgba(255,255,255,.08)}
+.langtog{display:inline-flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden}
+.langtog button{background:transparent;border:0;color:#cdb888;font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 12px;cursor:pointer;font-family:inherit}
+.langtog button.active{background:var(--gold);color:#1a1208}
+
+/* layout */
+.wrap{max-width:1180px;margin:0 auto;padding:28px 24px 60px}
+.hero{position:relative;overflow:hidden;color:#fff;border-radius:22px;margin:22px 0 26px;
+  background:linear-gradient(125deg,#0b2238 0%,#123a59 55%,#1d4f4a 100%);padding:48px 40px}
+.hero .kicker{letter-spacing:.20em;text-transform:uppercase;font-size:11.5px;color:#d8bd8c;font-weight:700}
+.hero h1{font-size:40px;line-height:1.08;margin:14px 0 14px;font-weight:800;letter-spacing:-.01em}
+.hero p.sub{font-size:17.5px;max-width:880px;color:#e9eff4;margin:0}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.pill{border:1px solid rgba(255,255,255,.34);border-radius:999px;padding:6px 13px;font-size:12.5px;color:#fff}
+.pill.solid{background:var(--gold);border-color:var(--gold);color:#1a1208;font-weight:700}
+
+.section{margin:34px 0}
+.kick{letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:var(--gold);font-weight:800;margin-bottom:6px}
+.section h2{font-size:25px;color:var(--navy);margin:0 0 6px;font-weight:800;letter-spacing:-.01em}
+.rule{height:3px;width:64px;background:var(--gold);border-radius:3px;margin:8px 0 16px}
+.section h3{font-size:18px;color:var(--green);margin:22px 0 8px}
+.lead{font-size:16px;color:#26303a}
+
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{border:1px solid var(--line);border-radius:16px;padding:18px 18px;background:#fff;box-shadow:0 2px 12px rgba(19,23,29,.04)}
+.card h3,.card h4{margin-top:0}
+.card h4{font-size:15.5px;color:var(--navy)}
+.stat{font-size:25px;font-weight:800;color:var(--navy);line-height:1.12;letter-spacing:-.01em}
+.stat.gold{color:var(--gold)}
+.small{font-size:12.5px;color:var(--muted)}
+.src-tag{font-size:11px;color:#9a8e76;margin-top:8px;display:block;font-style:italic}
+
+.tag{display:inline-block;font-size:11.5px;color:var(--green);background:#eef3f0;border:1px solid #d8e6df;
+  border-radius:999px;padding:3px 9px;margin:3px 4px 3px 0}
+.tag.gold{background:#fbf4e7;color:#7b5a24;border-color:#ecd9b6}
+.tag.blue{background:#eaf2fe;color:#11569d;border-color:#cfe0fb}
+
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:12px 0}
+.table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:760px}
+.table th{background:var(--navy);color:#fff;text-align:left;font-weight:700;font-size:12.5px;letter-spacing:.02em}
+.table th,.table td{border-bottom:1px solid var(--line);border-right:1px solid #eef0f3;padding:10px 11px;vertical-align:top}
+.table tr:last-child td{border-bottom:0}
+.table td:last-child,.table th:last-child{border-right:0}
+.table tbody tr:nth-child(even){background:var(--soft2)}
+.table b{color:var(--navy)}
+
+.callout{border-left:4px solid var(--gold);background:#fbf6ec;padding:15px 18px;border-radius:12px;margin:16px 0;font-size:14.5px}
+.callout.navy{border-left-color:var(--navy2);background:#eef4f8}
+
+.route-step{display:flex;gap:12px;margin:11px 0;align-items:flex-start}
+.num{min-width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:flex;
+  align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:none}
+.route-step div{font-size:14px}
+.bestfor{font-size:13px;color:#33414e;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+
+.cta{background:linear-gradient(125deg,#0b2238,#1d4f4a);color:#fff;border-radius:18px;padding:30px 30px;margin:30px 0}
+.cta h2{color:#fff;font-size:23px;margin:0 0 8px}
+.cta p{color:#e6eef3;font-size:15px;margin:0 0 16px;max-width:760px}
+.btn{display:inline-block;background:var(--gold);color:#1a1208;font-weight:800;padding:12px 22px;border-radius:999px;
+  letter-spacing:.03em;font-size:14px}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.45);color:#fff;margin-left:8px}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px 26px;margin-top:14px}
+.checklist div{font-size:13.5px;color:#dbe6ee;padding-left:18px;position:relative}
+.checklist div::before{content:"›";position:absolute;left:0;color:var(--gold2);font-weight:800}
+
+/* city hub cards */
+.city-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  background:#fff;box-shadow:0 2px 12px rgba(19,23,29,.05);transition:transform .15s ease,box-shadow .15s ease}
+.city-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(19,23,29,.10)}
+.city-top{padding:20px 20px 6px;background:linear-gradient(125deg,#0b2238,#16405f);color:#fff}
+.city-top .cc-country{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#d8bd8c;font-weight:700}
+.city-top h3{margin:6px 0 2px;font-size:23px;font-weight:800}
+.city-body{padding:14px 20px 18px;display:flex;flex-direction:column;flex:1}
+.city-body p{font-size:13.5px;color:#33414e;margin:0 0 12px;flex:1}
+.city-go{font-weight:800;color:var(--gold);font-size:13.5px;letter-spacing:.03em}
+.city-card.soon{opacity:.62}
+.city-card.soon .city-go{color:var(--muted)}
+.badge-soon{font-size:10px;background:#efe7d6;color:#7b5a24;border-radius:999px;padding:2px 8px;font-weight:700;letter-spacing:.04em}
+
+.howrow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+.how{border:1px solid var(--line);border-radius:16px;padding:18px;background:#fff}
+.how .hn{width:30px;height:30px;border-radius:50%;background:var(--gold);color:#1a1208;font-weight:800;
+  display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.how h4{margin:0 0 4px;font-size:15.5px;color:var(--navy)}
+.how p{margin:0;font-size:13.5px;color:#475260}
+
+/* sources + footer */
+.sources{margin-top:40px;border-top:1px solid var(--line);padding-top:18px}
+.sources h2{font-size:16px;color:var(--navy);margin:0 0 6px}
+.sources .disc{font-size:11px;color:#8a8270;margin:0 0 10px;line-height:1.5}
+.src-table{width:100%;border-collapse:collapse;font-size:10.5px;color:#5c6470}
+.src-table th{text-align:left;background:#f1ede3;color:#5b5240;padding:5px 7px;font-weight:700;border:1px solid var(--line)}
+.src-table td{padding:5px 7px;border:1px solid var(--line);vertical-align:top}
+.src-table a{color:#0b5cad;word-break:break-all}
+.footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:12.5px;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.powered{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:#3a4654}
+.powered b{color:var(--blue);letter-spacing:.02em}
+.footer .loc{color:#9a8e76;letter-spacing:.06em;font-size:11.5px}
+
+@media(max-width:920px){
+  .grid,.grid2,.grid4,.howrow,.checklist{grid-template-columns:1fr}
+  .hero h1{font-size:30px}.hero{padding:32px 22px}.wrap{padding:20px 15px 50px}
+  .topbar-in{padding:10px 15px}.brand{font-size:13px}
+}
+@media print{
+  .topbar,.cta .btn{display:none}.wrap{max-width:100%}.hero{border-radius:0}
+  .card,.city-card{box-shadow:none}.section{page-break-inside:avoid}
+  body.show-tr .t-en, .t-tr{display:inline !important}
 }
 
-body{
-  font-family:var(--body);
-  color:var(--text);
-  background:var(--paper);
-  font-size:clamp(16.5px,1.05vw,18px);
-  line-height:1.66;
-  -webkit-font-smoothing:antialiased;
-  font-weight:400;
-}
-
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(20px,5vw,56px)}
-
-/* ---- type ---- */
-h1,h2,h3{font-family:var(--display);font-weight:380;line-height:1.04;letter-spacing:-.012em;margin:0}
-h2{font-size:clamp(2rem,4.2vw,3.15rem)}
-h3{font-size:clamp(1.3rem,2.2vw,1.65rem);line-height:1.12}
-p{margin:0 0 1.05em}
-.lead{font-size:clamp(1.12rem,1.55vw,1.34rem);line-height:1.5;color:var(--text);max-width:42ch}
-.s-ink .lead{color:var(--on-ink)}
-.eyebrow{font-family:var(--label);font-weight:500;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin:0 0 1.1rem;display:flex;align-items:center;gap:.7rem}
-.eyebrow::before{content:"";width:26px;height:1px;background:var(--brass);opacity:.7}
-.s-ink .eyebrow{color:var(--brass-bright)}
-
-em,.ital{font-style:italic}
-
-/* ---- buttons ---- */
-.btn{display:inline-flex;align-items:center;gap:.6em;font-family:var(--label);font-weight:500;font-size:.84rem;letter-spacing:.04em;padding:.92em 1.5em;border-radius:2px;transition:transform .25s ease,background .25s ease,color .25s ease,border-color .25s ease}
-.btn .arr{transition:transform .3s ease}
-.btn:hover .arr{transform:translateX(4px)}
-.btn-brass{background:var(--brass);color:#1a1407}
-.btn-brass:hover{background:var(--brass-bright);transform:translateY(-2px)}
-.btn-line{border:1px solid rgba(236,230,216,.34);color:var(--on-ink)}
-.btn-line:hover{border-color:var(--brass-bright);color:#fff}
-.btn-dark{border:1px solid var(--ink);color:var(--ink)}
-.btn-dark:hover{background:var(--ink);color:var(--paper)}
-
-/* ---- header ---- */
-.skip{position:absolute;left:-9999px;top:0;background:var(--brass);color:#160f04;padding:.7em 1.2em;font-family:var(--label);z-index:200}
-.skip:focus{left:8px;top:8px}
-.site-header{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .35s ease,border-color .35s ease,padding .35s ease;border-bottom:1px solid transparent;padding:clamp(14px,1.6vw,22px) 0}
-.site-header.scrolled{background:rgba(11,28,43,.93);-webkit-backdrop-filter:saturate(140%) blur(10px);backdrop-filter:saturate(140%) blur(10px);border-bottom-color:var(--line-ink);padding:11px 0}
-.hbar{display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
-.brand{display:flex;align-items:center;gap:.62rem;color:var(--on-ink)}
-.brand .mark{width:30px;height:30px;flex:0 0 auto}
-.brand .wordmark{font-family:var(--display);font-weight:450;font-size:1.33rem;letter-spacing:.30em;padding-left:.18em;color:var(--on-ink)}
-.nav{display:flex;align-items:center;gap:clamp(1rem,1.9vw,2rem)}
-.nav a{font-family:var(--label);font-weight:400;font-size:.8rem;letter-spacing:.07em;color:var(--on-ink-muted);position:relative;padding:.3em 0;transition:color .25s ease}
-.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-1px;height:1px;background:var(--brass-bright);transition:right .3s ease}
-.nav a:hover,.nav a.active{color:var(--on-ink)}
-.nav a:hover::after,.nav a.active::after{right:0}
-.htools{display:flex;align-items:center;gap:1rem}
-.lang{display:inline-flex;align-items:center;font-family:var(--label);font-size:.74rem;letter-spacing:.08em;border:1px solid var(--line-ink);border-radius:2px;overflow:hidden}
-.lang button{padding:.42em .72em;color:var(--on-ink-muted);transition:background .2s,color .2s}
-.lang button[aria-pressed="true"]{background:var(--brass);color:#160f04}
-.menu-btn{display:none;color:var(--on-ink)}
-.menu-btn svg{width:26px;height:26px}
-
-/* ---- hero ---- */
-.hero{position:relative;background:var(--ink);color:var(--on-ink);overflow:hidden;padding:clamp(150px,17vw,210px) 0 clamp(72px,9vw,118px)}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 95% at 82% 18%,rgba(184,146,61,.16),transparent 55%),radial-gradient(80% 70% at 8% 100%,rgba(28,61,90,.6),transparent 60%);pointer-events:none}
-.hero .wrap{position:relative;display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
-.hero h1{font-size:clamp(2.9rem,7.4vw,5.7rem);font-weight:340;letter-spacing:-.02em;line-height:.98;margin:.1em 0 .45em}
-.hero .thesis{font-size:clamp(1.15rem,1.7vw,1.42rem);line-height:1.48;color:var(--on-ink);max-width:36ch;margin-bottom:2.1rem}
-.hero .cta-row{display:flex;flex-wrap:wrap;gap:.9rem}
-.anim-up{opacity:0;transform:translateY(18px);animation:up .9s cubic-bezier(.2,.7,.2,1) forwards}
-.d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.32s}.d4{animation-delay:.46s}.d5{animation-delay:.6s}
-@keyframes up{to{opacity:1;transform:none}}
-
-/* ---- constellation ---- */
-.net{width:100%;height:auto;overflow:visible}
-.net .edge{fill:none;stroke:var(--brass);stroke-width:1;opacity:.42;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.7s ease forwards}
-.net .edge.cross{stroke:var(--brass-bright);opacity:.55;stroke-width:1.1}
-@keyframes draw{to{stroke-dashoffset:0}}
-.net .node{fill:var(--ink);stroke:var(--brass);stroke-width:1.3}
-.net .node.on{fill:var(--brass)}
-.net .halo{fill:none;stroke:var(--brass-bright);opacity:0;transform-origin:center;transform-box:fill-box}
-.net .on + .halo{animation:halo 3.4s ease-in-out infinite}
-@keyframes halo{0%,100%{opacity:0;transform:scale(.8)}50%{opacity:.5;transform:scale(1.9)}}
-.net .lab{font-family:var(--label);font-size:11px;letter-spacing:.12em;fill:var(--on-ink-muted)}
-.net .lab.on{fill:var(--on-ink)}
-.net g{opacity:0;animation:fadeIn .7s ease forwards}
-@keyframes fadeIn{to{opacity:1}}
-
-/* ---- sections ---- */
-.section{padding:var(--pad-y) 0}
-.s-paper{background:var(--paper);color:var(--text)}
-.s-paper-2{background:var(--paper-2);color:var(--text)}
-.s-ink{background:var(--ink);color:var(--on-ink)}
-.s-ink-2{background:var(--ink-2);color:var(--on-ink)}
-.sec-head{max-width:60ch}
-.sec-head h2{margin-bottom:.55em}
-
-/* reveal */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
-.reveal.in{opacity:1;transform:none}
-
-/* ---- about / capabilities ---- */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:start}
-.about-grid .lead{max-width:34ch;font-family:var(--display);font-weight:360;font-size:clamp(1.55rem,2.7vw,2.3rem);line-height:1.16;letter-spacing:-.01em;color:var(--ink)}
-.caps{display:grid;gap:0}
-.cap{display:grid;grid-template-columns:auto 1fr;gap:1rem;padding:1.25rem 0;border-top:1px solid var(--line)}
-.cap:last-child{border-bottom:1px solid var(--line)}
-.cap .k{font-family:var(--label);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);padding-top:.2em;white-space:nowrap}
-.cap .v{margin:0;color:var(--muted);line-height:1.5}
-
-/* ---- cards ---- */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.6rem);margin-top:clamp(2rem,4vw,3.2rem)}
-.card{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:clamp(1.5rem,2.4vw,2.1rem);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
-.s-ink .card,.s-ink-2 .card{background:rgba(255,255,255,.03);border-color:var(--line-ink)}
-.card:hover{transform:translateY(-5px);border-color:var(--brass);box-shadow:0 18px 40px -28px rgba(14,34,51,.5)}
-.card .num{font-family:var(--label);font-size:.74rem;letter-spacing:.14em;color:var(--brass);margin-bottom:1.4rem}
-.card h3{margin-bottom:.55rem}
-.s-ink .card h3{color:var(--on-ink)}
-.card p{color:var(--muted);font-size:.98rem;line-height:1.5;margin-bottom:1.3rem}
-.s-ink .card p{color:var(--on-ink-muted)}
-.card .go{margin-top:auto;font-family:var(--label);font-size:.78rem;letter-spacing:.08em;color:var(--ink);display:inline-flex;gap:.45em;align-items:center}
-.s-ink .card .go{color:var(--brass-bright)}
-.card .go .arr{transition:transform .3s ease}
-.card:hover .go .arr{transform:translateX(4px)}
-
-/* ---- city index ---- */
-.city-list{margin-top:clamp(2rem,4vw,3rem);border-top:1px solid var(--line-ink)}
-.city-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1.4rem;padding:1.25rem .2rem;border-bottom:1px solid var(--line-ink);transition:padding-left .3s ease,background .3s ease}
-a.city-row:hover{padding-left:1rem;background:rgba(216,178,98,.05)}
-.city-row .cn{font-family:var(--display);font-size:clamp(1.5rem,2.6vw,2.1rem);font-weight:360;color:var(--on-ink)}
-.city-row .meta{font-family:var(--label);font-size:.78rem;letter-spacing:.06em;color:var(--on-ink-muted)}
-.pill{font-family:var(--label);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:.34em .7em;border-radius:999px;border:1px solid var(--line-ink);color:var(--on-ink-muted)}
-.pill.live{color:var(--brass-bright);border-color:rgba(216,178,98,.5)}
-.future{margin-top:1.9rem;display:flex;flex-wrap:wrap;gap:.6rem .9rem;align-items:center}
-.future .fl{font-family:var(--label);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--on-ink-muted);margin-right:.4rem}
-.future span.c{font-family:var(--label);font-size:.84rem;letter-spacing:.05em;color:var(--on-ink-muted);opacity:.62;padding:.2em 0}
-
-/* ---- two-col list (advisory/connect) ---- */
-.split{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2rem,5vw,5rem);align-items:start}
-.ilist{list-style:none;margin:0;padding:0;columns:2;column-gap:2.5rem}
-.ilist li{break-inside:avoid;padding:.85rem 0;border-top:1px solid var(--line-ink);font-size:1.02rem;display:flex;gap:.7rem;align-items:baseline}
-.s-paper .ilist li,.s-paper-2 .ilist li{border-top-color:var(--line)}
-.ilist li::before{content:"";width:6px;height:6px;flex:0 0 auto;background:var(--brass);border-radius:1px;transform:translateY(-2px)}
-.note{font-family:var(--label);font-size:.82rem;letter-spacing:.06em;color:var(--brass);margin-top:1.8rem}
-.s-ink .note{color:var(--brass-bright)}
-
-/* ---- products ---- */
-.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-top:clamp(2rem,4vw,3rem)}
-.prod{background:var(--paper);padding:clamp(1.6rem,2.6vw,2.4rem)}
-.prod .pn{font-family:var(--display);font-size:clamp(1.3rem,2.1vw,1.7rem);font-weight:400;margin-bottom:.3rem}
-.prod .pk{font-family:var(--label);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass);margin-bottom:.7rem}
-.prod p{color:var(--muted);font-size:.96rem;margin:0}
-
-/* ---- statement / closing ---- */
-.statement{font-family:var(--display);font-weight:330;font-size:clamp(1.7rem,3.6vw,2.9rem);line-height:1.22;letter-spacing:-.012em;max-width:24ch;margin:0 0 2rem}
-.statement em{color:var(--brass-bright)}
-
-/* ---- page hero (subpages) ---- */
-.phero{background:var(--ink);color:var(--on-ink);padding:clamp(140px,16vw,200px) 0 clamp(54px,7vw,86px);position:relative;overflow:hidden}
-.phero::before{content:"";position:absolute;inset:0;background:radial-gradient(110% 120% at 90% 0%,rgba(184,146,61,.13),transparent 55%);pointer-events:none}
-.phero .wrap{position:relative}
-.phero h1{font-size:clamp(2.4rem,5.6vw,4.1rem);font-weight:340;max-width:18ch;margin-top:.15em}
-.phero .lead{color:var(--on-ink);margin-top:1.2rem;max-width:50ch}
-.crumb{font-family:var(--label);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--on-ink-muted)}
-.crumb a:hover{color:var(--brass-bright)}
-
-/* ---- report (city) ---- */
-.statusbar{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;margin-top:1.6rem}
-.report{display:grid;grid-template-columns:1fr;gap:0;max-width:880px}
-.report-block{padding:clamp(1.6rem,3vw,2.4rem) 0;border-top:1px solid var(--line)}
-.report-block:first-child{border-top:0}
-.report-block .rh{display:flex;align-items:baseline;gap:1rem;margin-bottom:.9rem}
-.report-block .rn{font-family:var(--label);font-size:.78rem;letter-spacing:.12em;color:var(--brass)}
-.report-block h2{font-size:clamp(1.4rem,2.4vw,1.9rem)}
-.report-block p{color:var(--text);max-width:62ch}
-.slot{border:1px dashed var(--line);border-radius:3px;padding:1.05rem 1.2rem;color:var(--muted);font-style:italic;font-size:.96rem;background:rgba(184,146,61,.04)}
-.toc-rail{position:sticky;top:96px;font-family:var(--label)}
-.report-wrap{display:grid;grid-template-columns:200px 1fr;gap:clamp(2rem,5vw,4rem);align-items:start}
-.toc-rail .tt{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);margin-bottom:1rem}
-.toc-rail a{display:block;font-size:.82rem;letter-spacing:.02em;color:var(--muted);padding:.32em 0;transition:color .2s}
-.toc-rail a:hover{color:var(--ink)}
-
-/* ---- footer ---- */
-.site-footer{background:var(--ink);color:var(--on-ink);padding:clamp(56px,7vw,86px) 0 2.4rem}
-.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2rem;padding-bottom:2.8rem;border-bottom:1px solid var(--line-ink)}
-.foot-brand .wordmark{font-family:var(--display);font-size:1.5rem;letter-spacing:.28em;color:var(--on-ink);margin-bottom:1rem}
-.foot-brand p{color:var(--on-ink-muted);max-width:30ch;font-size:.98rem;font-style:italic}
-.fcol h4{font-family:var(--label);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);margin:0 0 1.1rem;font-weight:500}
-.fcol a,.fcol span{display:block;font-size:.92rem;color:var(--on-ink-muted);padding:.32em 0;transition:color .2s}
-.fcol a:hover{color:var(--on-ink)}
-.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;padding-top:1.8rem;align-items:center}
-.foot-note{font-family:var(--label);font-size:.78rem;letter-spacing:.04em;color:var(--brass-bright);max-width:60ch}
-.foot-cr{font-family:var(--label);font-size:.76rem;letter-spacing:.06em;color:var(--on-ink-muted)}
-
-/* ---- focus ---- */
-:focus-visible{outline:2px solid var(--brass-bright);outline-offset:3px;border-radius:2px}
-
-/* ---- responsive ---- */
-@media (max-width:920px){
-  .hero .wrap{grid-template-columns:1fr;gap:2.5rem}
-  .net-wrap{max-width:440px;margin:0 auto;order:2}
-  .about-grid,.split,.report-wrap{grid-template-columns:1fr;gap:2rem}
-  .cards{grid-template-columns:1fr}
-  .toc-rail{position:static;display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-bottom:1.2rem}
-  .toc-rail a{padding:.2em 0}
-  .nav,.lang{display:none}
-  .menu-btn{display:inline-flex}
-  .foot-top{grid-template-columns:1fr 1fr}
-  .ilist{columns:1}
-  .prod-grid{grid-template-columns:1fr}
-  body.nav-open{overflow:hidden}
-  .mobile-nav{display:flex}
-}
-@media (max-width:560px){
-  .foot-top{grid-template-columns:1fr}
-  .brand .wordmark{font-size:1.18rem;letter-spacing:.24em}
-  .city-row{grid-template-columns:1fr auto;gap:.4rem 1rem}
-  .city-row .meta{display:none}
-}
-
-/* ---- mobile nav panel ---- */
-.mobile-nav{display:none;position:fixed;inset:0;z-index:90;background:var(--ink);flex-direction:column;justify-content:center;padding:2rem clamp(20px,6vw,40px);transform:translateY(-100%);transition:transform .4s cubic-bezier(.4,0,.2,1);visibility:hidden}
-body.nav-open .mobile-nav{transform:translateY(0);visibility:visible}
-.mobile-nav a{font-family:var(--display);font-size:clamp(1.7rem,8vw,2.4rem);font-weight:360;color:var(--on-ink);padding:.32rem 0;border-bottom:1px solid var(--line-ink)}
-.mobile-nav a:hover{color:var(--brass-bright)}
-.mobile-nav .mlang{margin-top:2rem;display:flex;gap:.5rem}
-.mobile-nav .mlang button{font-family:var(--label);font-size:.85rem;letter-spacing:.08em;border:1px solid var(--line-ink);padding:.5em 1em;border-radius:2px;color:var(--on-ink-muted)}
-.mobile-nav .mlang button[aria-pressed="true"]{background:var(--brass);color:#160f04}
-
-@media (prefers-reduced-motion:reduce){
-  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
-  .reveal{opacity:1;transform:none}
-  .anim-up{opacity:1;transform:none}
-}
+/* --- site-wide additions (kept minimal) --- */
+.nav{flex-wrap:wrap;row-gap:6px}
+.nav a.lnk.active{color:#fff;background:rgba(255,255,255,.12)}
+.btnrow{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.btnrow .btn{margin:0}
+.lead2{font-size:15px;color:#475260;max-width:780px;margin:0 0 6px}
+.center{text-align:center}
+.card.dark{background:linear-gradient(125deg,#0b2238,#16405f);color:#fff;border-color:transparent}
+.card.dark h4{color:#fff}.card.dark p{color:#dbe6ee}
+.card .go{display:inline-block;margin-top:10px;font-weight:800;color:var(--gold);font-size:13.5px;letter-spacing:.03em}
+.card.dark .go{color:var(--gold2)}
+.muted-card{opacity:.7}
+@media(max-width:920px){.nav a.lnk{font-size:11.5px;padding:5px 7px}}
 </style>
 </head>
-<body>
+<body class="show-en">
 
-<a class="skip" href="#main" data-en="Skip to content" data-tr="İçeriğe geç">Skip to content</a>
-<header class="site-header">
-  <div class="wrap hbar">
-    <a class="brand" href="../index.html" aria-label="ASLAN — home"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#B8923D" stroke-width="1.3"/><path d="M20 9.5 L12.4 30.5 M20 9.5 L27.6 30.5 M15.1 24.2 L24.9 24.2" fill="none" stroke="#D9B868" stroke-width="1.5" stroke-linecap="round"/></svg><span class="wordmark">ASLAN</span></a>
-    <nav class="nav" aria-label="Primary"><a href="../intelligence/index.html" class="" data-en="Intelligence" data-tr="Intelligence">Intelligence</a><a href="../real-estate/index.html" class="active" data-en="Real Estate" data-tr="Gayrimenkul">Real Estate</a><a href="../advisory/index.html" class="" data-en="Advisory" data-tr="Danışmanlık">Advisory</a><a href="../connect/index.html" class="" data-en="Connect" data-tr="Connect">Connect</a><a href="../products/index.html" class="" data-en="Products" data-tr="Ürünler">Products</a><a href="../about.html" class="" data-en="About" data-tr="Hakkımızda">About</a></nav>
-    <div class="htools">
-      <div class="lang" role="group" aria-label="Language">
-        <button data-l="en" aria-pressed="true">EN</button><button data-l="tr" aria-pressed="false">TR</button>
-      </div>
-      <a class="btn btn-brass" href="../contact.html" data-en="Contact" data-tr="İletişim">Contact</a>
-      <button class="menu-btn" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="../index.html"><img src="https://www.aslanbusiness.com/aslan-logo.png" alt="ASLAN"><span>ASLAN<small>Real Estate Intelligence</small></span></a>
+  <div class="nav">
+    <a class="lnk" href="../index.html"><span class="t-en">Home</span><span class="t-tr">Anasayfa</span></a><a class="lnk" href="../intelligence/index.html"><span class="t-en">Intelligence</span><span class="t-tr">Intelligence</span></a><a class="lnk active" href="../real-estate/index.html"><span class="t-en">Real Estate</span><span class="t-tr">Gayrimenkul</span></a><a class="lnk" href="../advisory/index.html"><span class="t-en">Advisory</span><span class="t-tr">Danışmanlık</span></a><a class="lnk" href="../connect/index.html"><span class="t-en">Connect</span><span class="t-tr">Connect</span></a><a class="lnk" href="../products/index.html"><span class="t-en">Products</span><span class="t-tr">Ürünler</span></a><a class="lnk" href="../about.html"><span class="t-en">About</span><span class="t-tr">Hakkımızda</span></a><a class="lnk" href="../contact.html"><span class="t-en">Contact</span><span class="t-tr">İletişim</span></a>
+    <div class="langtog">
+      <button data-l="en" class="active" onclick="setLang('en')">EN</button>
+      <button data-l="tr" onclick="setLang('tr')">TR</button>
     </div>
   </div>
-</header>
-<nav class="mobile-nav" aria-label="Mobile">
-  <a href="../index.html" data-en="Home" data-tr="Ana Sayfa">Home</a><a href="../intelligence/index.html" data-en="Intelligence" data-tr="Intelligence">Intelligence</a><a href="../real-estate/index.html" data-en="Real Estate" data-tr="Gayrimenkul">Real Estate</a><a href="../advisory/index.html" data-en="Advisory" data-tr="Danışmanlık">Advisory</a><a href="../connect/index.html" data-en="Connect" data-tr="Connect">Connect</a><a href="../products/index.html" data-en="Products" data-tr="Ürünler">Products</a><a href="../about.html" data-en="About" data-tr="Hakkımızda">About</a><a href="../contact.html" data-en="Contact" data-tr="İletişim">Contact</a>
-  <div class="mlang"><button data-l="en" aria-pressed="true">EN</button><button data-l="tr" aria-pressed="false">TR</button></div>
-</nav>
-<main id="main">
+</div></div>
+<div class="wrap">
+<div class="hero">
+  <div class="kicker">ASLAN · Real Estate Intelligence · <span class="t-en">Investor Route & Site-Visit Guide</span><span class="t-tr">Yatırımcı Rotası & Saha Ziyareti Rehberi</span></div>
+  <h1><span class="t-en">Bodrum</span><span class="t-tr">Bodrum</span></h1>
+  <p class="sub"><span class="t-en">A bilingual investor route for foreign buyers who want to understand, compare and visit Bodrum’s branded residences, resort-villa communities and tourism-allocation pipelines.</span><span class="t-tr">Bodrum’un markalı rezidanslarını, resort-villa topluluklarını ve turizm tahsis hatlarını anlamak, karşılaştırmak ve gezmek isteyen yabancı alıcılar için çift dilli yatırımcı rotası.</span></p>
+  <div class="meta"><span class="pill solid"><span class="t-en">City: Bodrum</span><span class="t-tr">Şehir: Bodrum</span></span><span class="pill"><span class="t-en">Türkiye / Aegean</span><span class="t-tr">Türkiye / Ege</span></span><span class="pill">TR / EN</span><span class="pill"><span class="t-en">Updated</span><span class="t-tr">Güncelleme</span>: 19 June 2026 / 19 Haziran 2026</span></div>
+</div><div class="section"><div class="kick"><span class="t-en">01 · Executive summary</span><span class="t-tr">01 · Yönetici özeti</span></div><h2><span class="t-en">Why Bodrum</span><span class="t-tr">Neden Bodrum</span></h2><div class="rule"></div><p class="lead"><span class="t-en">Bodrum is Turkey’s clearest international luxury-residential story: scarce coastal land, marina culture, global hospitality brands, wellness demand and private-bay living overlap in one peninsula. Foreign attention has moved beyond villas to <b>hotel-managed branded residences, serviced mansions, resort-villa communities, marina-linked mixed-use and tourism-allocation pipelines</b>.</span><span class="t-tr">Bodrum, Türkiye’nin uluslararası lüks konut hikâyesi en net olan pazarıdır: sınırlı sahil arazisi, marina kültürü, global otel markaları, wellness talebi ve özel koy yaşamı aynı yarımadada buluşur. Yabancı ilgisi artık villadan öteye; <b>otel yönetimli markalı rezidanslar, servisli mansion projeleri, resort-villa toplulukları, marina bağlantılı karma kullanım ve turizm tahsis hatlarına</b> kaydı.</span></p><p><span class="t-en">Two clusters define the top of the market: the discreet Göltürkbükü / Cennet Koyu belt (Mandarin Oriental, Bvlgari, Aman, Kempinski) and the cosmopolitan Yalıkavak marina axis (Ritz-Carlton, Missoni, Shangri-La, The One). A southern corridor (Yalıçiftlik, Aspat) and an active tender/allocation pipeline complete the picture.</span><span class="t-tr">Pazarın zirvesini iki küme tanımlar: mahrem Göltürkbükü / Cennet Koyu hattı (Mandarin Oriental, Bvlgari, Aman, Kempinski) ve kozmopolit Yalıkavak marina ekseni (Ritz-Carlton, Missoni, Shangri-La, The One). Güney koridoru (Yalıçiftlik, Aspat) ve aktif ihale/tahsis hattı tabloyu tamamlar.</span></p></div><div class="section"><div class="kick"><span class="t-en">02 · Market numbers</span><span class="t-tr">02 · Piyasa rakamları</span></div><h2><span class="t-en">The headline data</span><span class="t-tr">Öne çıkan veriler</span></h2><div class="rule"></div><div class="grid"><div class="card"><div class="stat">1,688,910</div><p style="margin:8px 0 0;font-size:13.5px"><span class="t-en">Total house sales in Türkiye, 2025</span><span class="t-tr">Türkiye geneli konut satışı, 2025</span></p><span class="src-tag">TÜİK</span></div><div class="card"><div class="stat">21,534</div><p style="margin:8px 0 0;font-size:13.5px"><span class="t-en">Sales to foreigners in 2025 (−9.4% y/y; 1.3% of all sales)</span><span class="t-tr">2025’te yabancıya satış (y/y −%9,4; toplamın %1,3’ü)</span></p><span class="src-tag">TÜİK</span></div><div class="card"><div class="stat">≈ ₺125,000/m²</div><p style="margin:8px 0 0;font-size:13.5px"><span class="t-en">Indicative Bodrum average asking price, mid-2026 — well above the national average</span><span class="t-tr">Bodrum gösterge ortalama satılık m² fiyatı, 2026 ortası — ülke ortalamasının belirgin üzerinde</span></p><span class="src-tag">Endeksa</span></div><div class="card"><div class="stat">≈ 3.46M</div><p style="margin:8px 0 0;font-size:13.5px"><span class="t-en">Foreign tourists hosted by Muğla in 2025</span><span class="t-tr">Muğla’nın 2025 yabancı turist sayısı</span></p><span class="src-tag">TRT / KTB</span></div><div class="card"><div class="stat gold">+16.7%</div><p style="margin:8px 0 0;font-size:13.5px"><span class="t-en">Aydın-Denizli-Muğla region annual house-price index (Apr 2026) — the lowest in Türkiye, i.e. a maturing market on a high base</span><span class="t-tr">Aydın-Denizli-Muğla bölgesi yıllık konut fiyat endeksi (Nis 2026) — Türkiye’nin en düşüğü; yüksek tabandan olgunlaşan pazar</span></p><span class="src-tag">TCMB KFE</span></div><div class="card"><div class="stat">Top-10</div><p style="margin:8px 0 0;font-size:13.5px"><span class="t-en">Muğla ranks among Türkiye’s leading provinces for foreign real-estate acquisition</span><span class="t-tr">Muğla, yabancı gayrimenkul ediniminde Türkiye’nin önde gelen illeri arasında</span></p><span class="src-tag">GYODER</span></div></div></div><div class="section"><div class="kick"><span class="t-en">03 · Investor logic</span><span class="t-tr">03 · Yatırımcı mantığı</span></div><h2><span class="t-en">What foreigners buy and why</span><span class="t-tr">Yabancı ne, neden alıyor?</span></h2><div class="rule"></div><div class="grid2"><div class="card"><h4><span class="t-en">What foreigners are buying</span><span class="t-tr">Yabancı ne satın alıyor?</span></h4><p style="font-size:14px"><span class="t-en">Not just a house — privacy, service, brand security, rental optionality, marina access, concierge, wellness and a safe second-home base. The most resilient projects solve property management and lifestyle for absentee owners.</span><span class="t-tr">Sadece ev değil — mahremiyet, servis, marka güveni, kiralama opsiyonu, marina erişimi, concierge, wellness ve güvenli ikinci ev üssü. En dayanıklı projeler, sürekli yaşamayan sahibe mülk yönetimi ve yaşam tarzı sunanlardır.</span></p></div><div class="card"><h4><span class="t-en">Where the value sits</span><span class="t-tr">Değer nerede?</span></h4><p style="font-size:14px"><span class="t-en">Scarcity (protected sites, military and natural zones) plus brand premium are already priced in. Differentiation — design, low density, wellness, gastronomy and managed rental — drives both resale and yield. Peak-season branded villas can rent at $15,000–$50,000+ per week.</span><span class="t-tr">Kıtlık (sit alanları, askeri ve doğal bölgeler) ve marka primi fiyatlara işlenmiş durumda. Farklılaşma — tasarım, düşük yoğunluk, wellness, gastronomi ve yönetimli kiralama — hem yeniden satışı hem getiriyi belirler. Zirve sezonda markalı villalar haftalık 15.000–50.000+ USD kiralanabilir.</span></p></div></div></div><div class="section"><div class="kick"><span class="t-en">04 · Project radar</span><span class="t-tr">04 · Proje radarı</span></div><h2><span class="t-en">Core projects to know</span><span class="t-tr">Bilinmesi gereken ana projeler</span></h2><div class="rule"></div><div class="table-wrap"><table class="table"><thead><tr><th><span class="t-en">Project</span><span class="t-tr">Proje</span></th><th><span class="t-en">Type</span><span class="t-tr">Tip</span></th><th><span class="t-en">Investor / developer</span><span class="t-tr">Yatırımcı / geliştirici</span></th><th><span class="t-en">Brand / operator</span><span class="t-tr">Marka / operatör</span></th><th><span class="t-en">Scale / status</span><span class="t-tr">Ölçek / durum</span></th><th><span class="t-en">Why it matters</span><span class="t-tr">Neden önemli</span></th></tr></thead><tbody><tr><td><b>Mandarin Oriental Hotel Residences</b><br><span class="tag gold">Cennet Koyu / Göltürkbükü</span><span class="tag ">Benchmark</span></td><td><span class="t-en">Hotel + branded residences + villas</span><span class="t-tr">Otel + markalı rezidans + villa</span></td><td>Astaş Holding</td><td>Mandarin Oriental</td><td><span class="t-en">≈96–98 villas + ≈102–116 residences; 60 ha; completed (LEED Gold)</span><span class="t-tr">≈96–98 villa + ≈102–116 rezidans; 60 ha; tamamlandı (LEED Gold)</span></td><td><span class="t-en">Defines the hotel-managed luxury-residence standard in Bodrum.</span><span class="t-tr">Bodrum’da otel yönetimli lüks rezidans standardını tanımlar.</span></td></tr><tr><td><b>Bvlgari Resort & Mansions Bodrum</b><br><span class="tag gold">Cennet Koyu</span><span class="tag gold">2027 pipeline</span></td><td><span class="t-en">Resort + private mansions</span><span class="t-tr">Resort + özel konaklar (mansion)</span></td><td>AHEN (Cengiz Holding)</td><td>Bvlgari Hotels & Resorts</td><td><span class="t-en">101 mansions (850–2,800 m²) + resort; €20–60M/mansion; opens 2027</span><span class="t-tr">101 konak (850–2.800 m²) + resort; konak başı €20–60M; 2027</span></td><td><span class="t-en">Fashion-luxury brand power; Bvlgari’s 11th property globally.</span><span class="t-tr">Moda-lüks marka gücü; Bvlgari’nin küresel 11. tesisi.</span></td></tr><tr><td><b>Four Seasons Resort & Private Residences</b><br><span class="tag gold">Yalıçiftlik</span><span class="tag ">Under construction</span></td><td><span class="t-en">Resort + yalı / villa / residences (+ allocation pipeline)</span><span class="t-tr">Resort + yalı / villa / rezidans (+ tahsis hattı)</span></td><td>Astay / Halikarnas Turizm</td><td>Four Seasons</td><td><span class="t-en">28 yalı + 52 villas + 32 residences; ~500 dönüm; 2027; +2 villages via 49-yr ministry allocation</span><span class="t-tr">28 yalı + 52 villa + 32 rezidans; ~500 dönüm; 2027; +2 tatil köyü 49 yıllık Bakanlık tahsisiyle</span></td><td><span class="t-en">Mediterranean’s first Four Seasons resort + a live public-land tender story.</span><span class="t-tr">Akdeniz’in ilk Four Seasons resortu + canlı kamu taşınmazı tahsis hikâyesi.</span></td></tr><tr><td><b>St. Regis Karya Cove Resort & Residences</b><br><span class="tag gold">Kazıklı Koyu</span><span class="tag gold">Pipeline</span></td><td><span class="t-en">Luxury resort + branded residences</span><span class="t-tr">Lüks resort + markalı rezidans</span></td><td>Kuzu Group</td><td>St. Regis / Marriott</td><td><span class="t-en">221 residences + 138 keys; Marriott’s 100th in Türkiye</span><span class="t-tr">221 rezidans + 138 oda; Marriott’ın Türkiye’deki 100. tesisi</span></td><td><span class="t-en">Large future anchor for the northern coastal expansion.</span><span class="t-tr">Kuzey kıyı genişlemesinin büyük gelecek çıpası.</span></td></tr><tr><td><b>Aman Residences Bodrum (Amanruya)</b><br><span class="tag gold">North coast</span><span class="tag gold">Quiet luxury</span></td><td><span class="t-en">Invitation-led villas + resort expansion</span><span class="t-tr">Davetiye usulü villalar + resort genişlemesi</span></td><td>RePie Asset Management</td><td>Aman</td><td><span class="t-en">12 beachfront villas + new spa/beach club; design Denniston / SAOTA</span><span class="t-tr">12 deniz kıyısı villası + yeni spa/plaj kulübü; tasarım Denniston / SAOTA</span></td><td><span class="t-en">The strongest signal for discreet, low-density, wellness-driven luxury.</span><span class="t-tr">Mahrem, düşük yoğunluklu, wellness odaklı lüksün en güçlü sinyali.</span></td></tr><tr><td><b>The Ritz-Carlton Residences (Epique Island)</b><br><span class="tag ">Yalıkavak / Tilkicik</span></td><td><span class="t-en">Private-peninsula branded villas</span><span class="t-tr">Özel yarımada markalı villalar</span></td><td>Aksoy Holding</td><td>Ritz-Carlton / Marriott</td><td><span class="t-en">74–75 villas; €200M; completed benchmark</span><span class="t-tr">74–75 villa; €200M; tamamlanmış benchmark</span></td><td><span class="t-en">Marriott’s first stand-alone branded residence in EMEA; peninsula privacy + marina proximity.</span><span class="t-tr">Marriott’ın EMEA’deki ilk bağımsız markalı konutu; yarımada mahremiyeti + marina yakınlığı.</span></td></tr><tr><td><b>Kempinski Residences Nef Reserve Gölköy</b><br><span class="tag gold">Gölköy</span><span class="tag gold">2026</span></td><td><span class="t-en">Branded villas + boutique hotel</span><span class="t-tr">Markalı villalar + butik otel</span></td><td>Nef</td><td>Kempinski</td><td><span class="t-en">≈150 villas; 120,000 m²; 2026 target</span><span class="t-tr">≈150 villa; 120.000 m²; 2026 hedefi</span></td><td><span class="t-en">Branded-villa product beyond the most exclusive Cennet Koyu cluster.</span><span class="t-tr">En seçkin Cennet Koyu kümesinin ötesinde markalı-villa ürünü.</span></td></tr><tr><td><b>Kempinski Barbaros Reserve Residences</b><br><span class="tag ">Gökova / Barbaros Bay</span></td><td><span class="t-en">Branded residences + 5★ hotel</span><span class="t-tr">Markalı rezidans + 5★ otel</span></td><td>United Group iştiraki</td><td>Kempinski</td><td><span class="t-en">Residences next to Kempinski Hotel Barbaros Bay; ~70,000 m²</span><span class="t-tr">Kempinski Hotel Barbaros Bay’e bitişik rezidanslar; ~70.000 m²</span></td><td><span class="t-en">Established managed-residence option on an untouched bay.</span><span class="t-tr">Bakir bir koyda yerleşik yönetimli rezidans seçeneği.</span></td></tr><tr><td><b>Six Senses Residences Kaplankaya</b><br><span class="tag ">Bozbük / Milas</span></td><td><span class="t-en">Wellness resort + serviced villas</span><span class="t-tr">Wellness resort + servisli villalar</span></td><td>Kaplankaya (Capital Partners)</td><td>Six Senses</td><td><span class="t-en">141 keys + 3–6BR villas; Panorama phase 76 villas; 10,000 m² spa</span><span class="t-tr">141 oda + 3–6 yatak odalı villalar; Panorama etabı 76 villa; 10.000 m² spa</span></td><td><span class="t-en">Wellness and sustainability as the core value driver.</span><span class="t-tr">Değerin merkezinde wellness ve sürdürülebilirlik.</span></td></tr><tr><td><b>Montes by Missoni</b><br><span class="tag gold">Yalıkavak</span><span class="tag gold">2027</span></td><td><span class="t-en">Fashion-branded residences</span><span class="t-tr">Moda markalı rezidanslar</span></td><td>RMA Holding</td><td>Missoni</td><td><span class="t-en">53 residences; design by Alberto Caliri; life starts 2027</span><span class="t-tr">53 rezidans; tasarım Alberto Caliri; yaşam 2027</span></td><td><span class="t-en">Missoni’s first branded residences in Türkiye.</span><span class="t-tr">Missoni’nin Türkiye’deki ilk markalı konutları.</span></td></tr><tr><td><b>The One Bodrum</b><br><span class="tag ">Yalıkavak / Tilkicik</span></td><td><span class="t-en">Unbranded luxury villa community</span><span class="t-tr">Markasız lüks villa topluluğu</span></td><td>Birleşik Gayrimenkul</td><td>—</td><td><span class="t-en">400 units in 5 phases; Phase 1 = 79 villas (≈85% sold); own beach</span><span class="t-tr">5 etapta 400 ünite; 1. etap = 79 villa (≈%85 satıldı); özel plaj</span></td><td><span class="t-en">The most accessible local-developer luxury entry near Yalıkavak Marina.</span><span class="t-tr">Yalıkavak Marina yakınında en erişilebilir yerli-geliştirici lüks giriş.</span></td></tr><tr><td><b>Anthaven Aspat + Radisson Collection</b><br><span class="tag ">Aspat / Akyarlar</span></td><td><span class="t-en">Residential + hotel + inner harbour + beach</span><span class="t-tr">Konut + otel + iç liman + plaj</span></td><td>Ant Yapı</td><td>Radisson Collection</td><td><span class="t-en">167 houses/duplex villas + 80-key Radisson Collection</span><span class="t-tr">167 ev/dubleks villa + 80 odalı Radisson Collection</span></td><td><span class="t-en">Best canal/harbour, hotel and year-round hospitality reference on the south-west corridor.</span><span class="t-tr">Güneybatı koridorunda kanal/liman, otel ve yıl boyu konaklamanın en iyi referansı.</span></td></tr><tr><td><b>Maxx Royal Bodrum + Caja by Maxx Royal</b><br><span class="tag ">Hebil / north coast</span></td><td><span class="t-en">Ultra-luxury resort + serviced villas</span><span class="t-tr">Ultra-lüks resort + servisli villalar</span></td><td>Maxx Royal</td><td>Maxx Royal</td><td><span class="t-en">Active resort + serviced-villa ecosystem</span><span class="t-tr">Faal resort + servisli-villa ekosistemi</span></td><td><span class="t-en">Gastronomy, wellness and beach-club lifestyle as a value driver.</span><span class="t-tr">Değer üreten gastronomi, wellness ve plaj-kulübü yaşam tarzı.</span></td></tr><tr><td><b>Shangri-La Bodrum</b><br><span class="tag gold">Yalıkavak</span><span class="tag gold">2029 pipeline</span></td><td><span class="t-en">Luxury resort + private villas</span><span class="t-tr">Lüks resort + özel villalar</span></td><td>United Bodrum Turizm (United Group)</td><td>Shangri-La</td><td><span class="t-en">70 rooms + 10 villas; opens H1 2029; next to The One Bodrum</span><span class="t-tr">70 oda + 10 villa; 2029 1. yarı; The One Bodrum’a bitişik</span></td><td><span class="t-en">Stronger Asia/GCC brand recognition for the Yalıkavak axis.</span><span class="t-tr">Yalıkavak ekseni için güçlü Asya/Körfez marka tanınırlığı.</span></td></tr><tr><td><b>TÜYA Turizm accommodation complex</b><br><span class="tag gold">Göl Mah.</span><span class="tag gold">EIA / planning</span></td><td><span class="t-en">Low-density, spread-out resort/residence complex</span><span class="t-tr">Düşük yoğunluklu, yayılı resort/rezidans kompleksi</span></td><td>TÜYA Turizm (RePie)</td><td>—</td><td><span class="t-en">227 rooms / 454 beds; 133,049 m²; ₺2.77B; adjacent to Aman</span><span class="t-tr">227 oda / 454 yatak; 133.049 m²; ₺2,77 milyar; Aman’a bitişik</span></td><td><span class="t-en">A large new pipeline confirming the north-coast luxury corridor.</span><span class="t-tr">Kuzey-kıyı lüks koridorunu doğrulayan büyük yeni hat.</span></td></tr><tr><td><b>Ministry land allocations (Kızılağaç · Göl · Torba)</b><br><span class="tag gold">Tourism pipeline</span><span class="tag gold">Tender / Tahsis</span></td><td><span class="t-en">Hotel / resort / special-accommodation land</span><span class="t-tr">Otel / resort / özel konaklama arazisi</span></td><td>Culture & Tourism Ministry process</td><td>To be defined</td><td><span class="t-en">1,200-bed Kızılağaç + 160-bed Göl + 120-bed Torba; 49-yr allocations</span><span class="t-tr">1.200 yataklı Kızılağaç + 160 yataklı Göl + 120 yataklı Torba; 49 yıllık tahsis</span></td><td><span class="t-en">Large-scale hotel/wellness opportunities, open to foreign investors (subject to permits).</span><span class="t-tr">Yabancı yatırımcıya açık büyük ölçekli otel/wellness fırsatları (izinlere tabi).</span></td></tr><tr><td><b>TOKİ Gündoğan land auction</b><br><span class="tag gold">Gündoğan</span><span class="tag gold">Land / Arsa</span></td><td><span class="t-en">Residential + commercial development land</span><span class="t-tr">Konut + ticari geliştirme arazisi</span></td><td>TOKİ public land sale</td><td>—</td><td><span class="t-en">≈107 decares across 5 parcels; ~₺5B in press coverage</span><span class="t-tr">5 parselde ≈107 dönüm; basında ~₺5 milyar</span></td><td><span class="t-en">Early-stage watch item for land-led development.</span><span class="t-tr">Arsa odaklı geliştirme için erken aşama takip kalemi.</span></td></tr></tbody></table></div></div><div class="section"><div class="kick"><span class="t-en">05 · Site-visit routes</span><span class="t-tr">05 · Saha ziyareti rotaları</span></div><h2><span class="t-en">Suggested routes</span><span class="t-tr">Önerilen rotalar</span></h2><div class="rule"></div><div class="grid"><div class="card"><h3><span class="t-en">Route A — Global branded luxury belt</span><span class="t-tr">Rota A — Global markalı lüks hattı</span></h3><p class="small"><span class="t-en">Half to full day · private appointments</span><span class="t-tr">Yarım–tam gün · özel randevu</span></p><div class="route-step"><span class="num">1</span><div><span class="t-en">Cennet Koyu: Mandarin Oriental benchmark + Bvlgari pipeline context</span><span class="t-tr">Cennet Koyu: Mandarin Oriental benchmark + Bvlgari hattı</span></div></div><div class="route-step"><span class="num">2</span><div><span class="t-en">Amanruya / Aman Residences (discreet ultra-luxury)</span><span class="t-tr">Amanruya / Aman Residences (mahrem ultra-lüks)</span></div></div><div class="route-step"><span class="num">3</span><div><span class="t-en">Gölköy / Demirbükü: Kempinski-Nef and quiet-luxury comparison</span><span class="t-tr">Gölköy / Demirbükü: Kempinski-Nef ve sakin-lüks karşılaştırması</span></div></div><div class="bestfor"><b><span class="t-en">Best for:</span><span class="t-tr">En uygun:</span></b> <span class="t-en">HNWI / GCC buyers, hotel-brand partnerships, villa & residence developers.</span><span class="t-tr">Üst gelir/Körfez alıcıları, otel-marka ortaklıkları, villa & rezidans geliştiricileri.</span></div></div><div class="card"><h3><span class="t-en">Route B — Yalıkavak marina lifestyle</span><span class="t-tr">Rota B — Yalıkavak marina yaşamı</span></h3><p class="small"><span class="t-en">Half day · public + private mix</span><span class="t-tr">Yarım gün · kamuya açık + özel</span></p><div class="route-step"><span class="num">1</span><div><span class="t-en">Yalıkavak Marina as the value anchor</span><span class="t-tr">Değer çıpası olarak Yalıkavak Marina</span></div></div><div class="route-step"><span class="num">2</span><div><span class="t-en">Ritz-Carlton / Epique Island context + The One Bodrum</span><span class="t-tr">Ritz-Carlton / Epique Island + The One Bodrum</span></div></div><div class="route-step"><span class="num">3</span><div><span class="t-en">Shangri-La pipeline area + Montes by Missoni</span><span class="t-tr">Shangri-La hattı + Montes by Missoni</span></div></div><div class="bestfor"><b><span class="t-en">Best for:</span><span class="t-tr">En uygun:</span></b> <span class="t-en">Investors comparing social life, yacht access, resale liquidity and rental demand.</span><span class="t-tr">Sosyal yaşam, yat erişimi, yeniden satış likiditesi ve kira talebini karşılaştıranlar.</span></div></div><div class="card"><h3><span class="t-en">Route C — Aspat / Turgutreis corridor</span><span class="t-tr">Rota C — Aspat / Turgutreis koridoru</span></h3><p class="small"><span class="t-en">Half day · accessible for first visits</span><span class="t-tr">Yarım gün · ilk ziyaretlere uygun</span></p><div class="route-step"><span class="num">1</span><div><span class="t-en">Anthaven Aspat + Radisson Collection</span><span class="t-tr">Anthaven Aspat + Radisson Collection</span></div></div><div class="route-step"><span class="num">2</span><div><span class="t-en">Turgutreis / Akyarlar coastal hospitality</span><span class="t-tr">Turgutreis / Akyarlar sahil konaklaması</span></div></div><div class="route-step"><span class="num">3</span><div><span class="t-en">Entry-level coastal alternatives beyond the north coast</span><span class="t-tr">Kuzey kıyının ötesinde giriş seviyesi sahil alternatifleri</span></div></div><div class="bestfor"><b><span class="t-en">Best for:</span><span class="t-tr">En uygun:</span></b> <span class="t-en">Investors looking beyond the most expensive north-coast cluster.</span><span class="t-tr">En pahalı kuzey-kıyı kümesinin ötesine bakan yatırımcılar.</span></div></div><div class="card"><h3><span class="t-en">Route D — Tourism allocation & land watch</span><span class="t-tr">Rota D — Turizm tahsisi & arsa takibi</span></h3><p class="small"><span class="t-en">Advisory session · permits-led</span><span class="t-tr">Danışmanlık oturumu · izin odaklı</span></p><div class="route-step"><span class="num">1</span><div><span class="t-en">Kızılağaç / Göl Mah. ministry allocation sites</span><span class="t-tr">Kızılağaç / Göl Mah. Bakanlık tahsis sahaları</span></div></div><div class="route-step"><span class="num">2</span><div><span class="t-en">TÜYA Turizm complex context</span><span class="t-tr">TÜYA Turizm kompleksi</span></div></div><div class="route-step"><span class="num">3</span><div><span class="t-en">TOKİ Gündoğan land auction</span><span class="t-tr">TOKİ Gündoğan arsa ihalesi</span></div></div><div class="bestfor"><b><span class="t-en">Best for:</span><span class="t-tr">En uygun:</span></b> <span class="t-en">Developers/operators seeking large-scale or land-led entry (subject to permits and public sensitivity).</span><span class="t-tr">Büyük ölçekli veya arsa odaklı giriş arayan geliştiriciler/operatörler (izinlere ve kamu hassasiyetine tabi).</span></div></div></div></div>
+<div class="cta">
+  <h2><span class="t-en">Plan a private site visit</span><span class="t-tr">Özel saha ziyareti planlayın</span></h2>
+  <p><span class="t-en">Read the market, shortlist the projects that fit your strategy, then let ASLAN arrange a curated, private site-visit route — with the right introductions and local due-diligence support.</span><span class="t-tr">Pazarı okuyun, stratejinize uyan projeleri kısa listeye alın; ardından ASLAN sizin için özel, kürasyonlu bir saha ziyareti rotası kursun — doğru tanışmalar ve yerel inceleme desteğiyle.</span></p>
+  <div class="checklist">
+    <div><span class="t-en">Visitor profile: buyer / family office / developer / operator</span><span class="t-tr">Ziyaretçi profili: alıcı / aile ofisi / geliştirici / operatör</span></div>
+    <div><span class="t-en">Budget band and product type</span><span class="t-tr">Bütçe aralığı ve ürün tipi</span></div>
+    <div><span class="t-en">Preferred route and dates</span><span class="t-tr">Tercih edilen rota ve tarihler</span></div>
+    <div><span class="t-en">Private appointments required?</span><span class="t-tr">Özel randevu gerekli mi?</span></div>
+    <div><span class="t-en">Legal / tax / residency support needed?</span><span class="t-tr">Hukuk / vergi / oturum desteği gerekli mi?</span></div>
+    <div><span class="t-en">Rental management & resale questions</span><span class="t-tr">Kiralama yönetimi & yeniden satış soruları</span></div>
+  </div>
+  <div style="margin-top:18px">
+    <a class="btn" href="mailto:info@aslanbusiness.com?subject=ASLAN%20Real%20Estate%20-%20Site%20Visit%20Request"><span class="t-en">Request a site visit</span><span class="t-tr">Saha ziyareti talep et</span></a>
+    <a class="btn ghost" href="index.html"><span class="t-en">Back to all markets</span><span class="t-tr">Tüm pazarlara dön</span></a>
+  </div>
+</div>
+<div class="sources" id="sources">
+  <h2><span class="t-en">Sources used</span><span class="t-tr">Kullanılan kaynaklar</span></h2>
+  <p class="disc"><span class="t-en">This report is based on public sources (statistics offices, sector associations, developer and brand pages, market research and press). Project status, inventory, prices, ownership, permits and availability must be verified directly before investment or arranging a private site visit. Market figures are period-specific and indicative.</span><span class="t-tr">Bu rapor açık kaynaklara dayanır (istatistik kurumları, sektör dernekleri, geliştirici ve marka sayfaları, piyasa araştırmaları ve basın). Yatırım veya özel saha ziyareti öncesinde proje durumu, stok, fiyat, mülkiyet, izinler ve müsaitlik doğrudan teyit edilmelidir. Piyasa rakamları döneme özgü ve göstergeseldir.</span></p>
+  <table class="src-table"><thead><tr><th>#</th><th><span class="t-en">Source</span><span class="t-tr">Kaynak</span></th><th><span class="t-en">Used for</span><span class="t-tr">Kullanım</span></th><th>URL</th></tr></thead>
+  <tbody><tr><td>1</td><td>TÜİK — Konut Satış İstatistikleri 2025</td><td><span class="t-en">National housing sales and foreign-buyer totals</span><span class="t-tr">Ulusal konut satışı ve yabancı alıcı toplamları</span></td><td><a href='https://data.tuik.gov.tr/Kategori/GetKategori?p=insaat-ve-konut-116' target='_blank'>https://data.tuik.gov.tr/Kategori/GetKategori?p=insaat-ve-konut-116</a></td></tr><tr><td>2</td><td>GYODER — Gösterge (Sayı 41, 2025)</td><td><span class="t-en">Market context and foreign-acquisition city ranking</span><span class="t-tr">Piyasa bağlamı ve yabancı edinim il sıralaması</span></td><td><a href='https://portal.gyoder.org.tr/_lib/file/doc/GYODER%20G%C3%B6sterge%20-say%C4%B1%2041-%20WEB.pdf' target='_blank'>https://portal.gyoder.org.tr/_lib/file/doc/GYODER%20G%C3%B6sterge%20-say%C4%B1%2041-%20WEB.pdf</a></td></tr><tr><td>3</td><td>TCMB — Konut Fiyat Endeksi (Nis. 2026)</td><td><span class="t-en">Regional annual house-price change</span><span class="t-tr">Bölgesel yıllık konut fiyat değişimi</span></td><td><a href='https://www.tcmb.gov.tr/wps/wcm/connect/8bbac42a-c854-4c58-8b0c-e7e55c35ec2d/KFE.pdf?MOD=AJPERES' target='_blank'>https://www.tcmb.gov.tr/wps/wcm/connect/8bbac42a-c854-4c58-8b0c-e7e55c35ec2d/KFE.pdf?MOD=AJPERES</a></td></tr><tr><td>4</td><td>Endeksa — Bodrum / Muğla housing index</td><td><span class="t-en">Indicative Bodrum sqm price and payback</span><span class="t-tr">Gösterge Bodrum m² fiyatı ve amortisman</span></td><td><a href='https://www.endeksa.com/tr/analiz/turkiye/mugla/bodrum/endeks/satilik/konut' target='_blank'>https://www.endeksa.com/tr/analiz/turkiye/mugla/bodrum/endeks/satilik/konut</a></td></tr><tr><td>5</td><td>KONUTDER & İNDER</td><td><span class="t-en">Developer-association sector reports (context)</span><span class="t-tr">Geliştirici derneği sektör raporları (bağlam)</span></td><td><a href='https://www.konutder.org.tr' target='_blank'>https://www.konutder.org.tr</a></td></tr><tr><td>6</td><td>Mandarin Oriental — Bodrum Residences</td><td><span class="t-en">Scale, developer, villas/residences, amenities</span><span class="t-tr">Ölçek, geliştirici, villa/rezidans, olanaklar</span></td><td><a href='https://www.mandarinoriental.com/en/residences/current/bodrum' target='_blank'>https://www.mandarinoriental.com/en/residences/current/bodrum</a></td></tr><tr><td>7</td><td>Bvlgari Hotels & Resorts — Bodrum</td><td><span class="t-en">Bvlgari Resort & Mansions pipeline</span><span class="t-tr">Bvlgari Resort & Mansions hattı</span></td><td><a href='https://www.bulgarihotels.com/en_US/bodrum' target='_blank'>https://www.bulgarihotels.com/en_US/bodrum</a></td></tr><tr><td>8</td><td>Astay — Four Seasons Resort & Private Residences Bodrum</td><td><span class="t-en">Composition, design team, timeline</span><span class="t-tr">Bileşim, tasarım ekibi, takvim</span></td><td><a href='https://www.astay.com/projeler/devam-eden-projeler/four-seasons-resort-and-private-residences-bodrum/' target='_blank'>https://www.astay.com/projeler/devam-eden-projeler/four-seasons-resort-and-private-residences-bodrum/</a></td></tr><tr><td>9</td><td>Kuzu Group / Marriott — St. Regis Karya Cove</td><td><span class="t-en">Residence/room counts and brand</span><span class="t-tr">Rezidans/oda sayıları ve marka</span></td><td><a href='https://www.kuzugrup.com/proje/st-regis-karya-cove-resort-bodrum-the-residences/' target='_blank'>https://www.kuzugrup.com/proje/st-regis-karya-cove-resort-bodrum-the-residences/</a></td></tr><tr><td>10</td><td>RePie Holding — Aman Residences Bodrum</td><td><span class="t-en">Amanruya expansion, investor/partner</span><span class="t-tr">Amanruya genişlemesi, yatırımcı/ortak</span></td><td><a href='https://www.repieholding.com/en/news-from-us/aman-announces-aman-residences-bodrum/' target='_blank'>https://www.repieholding.com/en/news-from-us/aman-announces-aman-residences-bodrum/</a></td></tr><tr><td>11</td><td>Aksoy Holding — Ritz-Carlton Residences (Epique Island)</td><td><span class="t-en">Villa count, investment, rebranding</span><span class="t-tr">Villa sayısı, yatırım, marka geçişi</span></td><td><a href='https://www.aksoy.com/epique-island-got-branded-as-the-ritz-carlton-residences-bodrum/' target='_blank'>https://www.aksoy.com/epique-island-got-branded-as-the-ritz-carlton-residences-bodrum/</a></td></tr><tr><td>12</td><td>Nef — Kempinski Residences Nef Reserve Gölköy</td><td><span class="t-en">Villa count, project area, timeline</span><span class="t-tr">Villa sayısı, proje alanı, takvim</span></td><td><a href='https://www.nef.com.tr/en/projects/nef-konut/nef-reserve/kempinski-residences-nef-reserve-golkoy/' target='_blank'>https://www.nef.com.tr/en/projects/nef-konut/nef-reserve/kempinski-residences-nef-reserve-golkoy/</a></td></tr><tr><td>13</td><td>Six Senses — Kaplankaya Residences</td><td><span class="t-en">Keys, villa types, spa</span><span class="t-tr">Oda, villa tipleri, spa</span></td><td><a href='https://www.sixsenses.com/en/residences/kaplankaya/' target='_blank'>https://www.sixsenses.com/en/residences/kaplankaya/</a></td></tr><tr><td>14</td><td>Shangri-La — Bodrum signing</td><td><span class="t-en">Rooms/villas, location, 2029 opening</span><span class="t-tr">Oda/villa, konum, 2029 açılış</span></td><td><a href='https://tophotel.news/shangri-la-to-develop-luxury-bodrum-resort/' target='_blank'>https://tophotel.news/shangri-la-to-develop-luxury-bodrum-resort/</a></td></tr><tr><td>15</td><td>Fortune Türkiye / InStyle — Montes by Missoni</td><td><span class="t-en">Residence count, designer, timeline</span><span class="t-tr">Rezidans sayısı, tasarımcı, takvim</span></td><td><a href='https://www.fortuneturkey.com/rma-holding-yeni-projelerle-kuresel-olcekte-buyuyor' target='_blank'>https://www.fortuneturkey.com/rma-holding-yeni-projelerle-kuresel-olcekte-buyuyor</a></td></tr><tr><td>16</td><td>İnşaat Teknik / Birleşik Gayrimenkul — The One Bodrum</td><td><span class="t-en">Phasing, villa count, sales</span><span class="t-tr">Etap, villa sayısı, satış</span></td><td><a href='https://insaatteknik.com/proje/bodrumda-dogayla-uyumlu-ve-modern-bir-proje-the-one-bodrum/' target='_blank'>https://insaatteknik.com/proje/bodrumda-dogayla-uyumlu-ve-modern-bir-proje-the-one-bodrum/</a></td></tr><tr><td>17</td><td>Ant Yapı — Anthaven Aspat</td><td><span class="t-en">Mixed-use scale and Radisson Collection</span><span class="t-tr">Karma kullanım ölçeği ve Radisson Collection</span></td><td><a href='https://www.antyapi.com.tr/en/projeler/anthaven/' target='_blank'>https://www.antyapi.com.tr/en/projeler/anthaven/</a></td></tr><tr><td>18</td><td>emlaknews / Taşınmaz Haber — TÜYA Turizm</td><td><span class="t-en">EIA project capacity and budget</span><span class="t-tr">ÇED proje kapasitesi ve bütçe</span></td><td><a href='https://www.emlaknews.com.tr/haberler/tuya-turizmden-bodruma-277-milyar-tllik-turizm-yatirimi-geliyor/' target='_blank'>https://www.emlaknews.com.tr/haberler/tuya-turizmden-bodruma-277-milyar-tllik-turizm-yatirimi-geliyor/</a></td></tr><tr><td>19</td><td>Turizm Aktüel — Ministry public-land allocation</td><td><span class="t-en">Bodrum allocation parcels and capacities</span><span class="t-tr">Bodrum tahsis parselleri ve kapasiteleri</span></td><td><a href='https://www.turizmaktuel.com/haber/sektore-4-bin-yeni-yatak-geliyor' target='_blank'>https://www.turizmaktuel.com/haber/sektore-4-bin-yeni-yatak-geliyor</a></td></tr><tr><td>20</td><td>Turizm Ajansı — TOKİ Gündoğan tender</td><td><span class="t-en">Gündoğan land-auction reference</span><span class="t-tr">Gündoğan arsa ihalesi referansı</span></td><td><a href='https://www.turizmajansi.com/haber/deniz-manzarali-arsalar-satista-bodrum-da-milyarlik-ihale-h72689' target='_blank'>https://www.turizmajansi.com/haber/deniz-manzarali-arsalar-satista-bodrum-da-milyarlik-ihale-h72689</a></td></tr><tr><td>21</td><td>TRT Haber — Muğla tourism 2025</td><td><span class="t-en">Muğla foreign tourist count</span><span class="t-tr">Muğla yabancı turist sayısı</span></td><td><a href='https://www.trthaber.com/haber/turkiye/mugla-gecen-yil-3-milyon-461-bin-yabanci-turisti-agirladi-930742.html' target='_blank'>https://www.trthaber.com/haber/turkiye/mugla-gecen-yil-3-milyon-461-bin-yabanci-turisti-agirladi-930742.html</a></td></tr></tbody></table>
+</div>
 
-<section class="phero">
-  <div class="wrap">
-    <p class="crumb"><a href="../index.html" data-en="Home" data-tr="Ana Sayfa">Home</a> &nbsp;/&nbsp; <a href="../real-estate/index.html" data-en="Real Estate" data-tr="Gayrimenkul">Real Estate</a> &nbsp;/&nbsp; <span>Bodrum</span></p>
-    <p class="eyebrow" style="margin-top:1.4rem" data-en="Real Estate Intelligence" data-tr="Real Estate Intelligence">Real Estate Intelligence</p>
-    <h1>Bodrum</h1>
-    <p class="lead" data-en="A peninsula market on Türkiye’s southwest Aegean coast." data-tr="Türkiye’nin güneybatı Ege kıyısında bir yarımada pazarı.">A peninsula market on Türkiye’s southwest Aegean coast.</p>
-    <div class="statusbar"><span class="pill live" data-en="In preparation" data-tr="Hazırlanıyor">In preparation</span><span class="crumb" data-en="Standard 9-section report" data-tr="Standart 9 bölümlü rapor">Standard 9-section report</span></div>
-  </div>
-</section>
-<section class="section s-paper reveal">
-  <div class="wrap report-wrap">
-    <aside class="toc-rail"><div class="tt" data-en="Contents" data-tr="İçindekiler">Contents</div><a href="#s0" data-en="Executive Summary" data-tr="Yönetici Özeti">Executive Summary</a><a href="#s1" data-en="Why This Market" data-tr="Bu Pazar Neden Önemli">Why This Market</a><a href="#s2" data-en="Key Districts" data-tr="Önemli Bölgeler">Key Districts</a><a href="#s3" data-en="Major Developers" data-tr="Büyük Geliştiriciler">Major Developers</a><a href="#s4" data-en="Major Projects" data-tr="Önemli Projeler">Major Projects</a><a href="#s5" data-en="Market Indicators" data-tr="Pazar Göstergeleri">Market Indicators</a><a href="#s6" data-en="Site Visit Routes" data-tr="Site Visit Rotaları">Site Visit Routes</a><a href="#s7" data-en="Investment Considerations" data-tr="Yatırımda Dikkat Edilmesi Gerekenler">Investment Considerations</a><a href="#s8" data-en="Sources" data-tr="Kaynaklar">Sources</a></aside>
-    <div class="report"><section class="report-block" id="s0"><div class="rh"><span class="rn">01</span><h2 data-en="Executive Summary" data-tr="Yönetici Özeti">Executive Summary</h2></div><p data-en="Bodrum sits on a peninsula in Muğla province on Türkiye’s southwest Aegean coast, long associated with tourism and holiday and second-home property. This report sets out the districts, developers, projects, indicators and site-visit routes that matter before a visit. Verified figures and sources are being added." data-tr="Bodrum, Türkiye’nin güneybatı Ege kıyısındaki Muğla ilinde bir yarımadada yer alır ve uzun süredir turizm ile tatil ve ikinci konut gayrimenkulüyle anılır. Bu rapor; bir ziyaretten önce önem taşıyan bölgeleri, geliştiricileri, projeleri, göstergeleri ve site visit rotalarını ortaya koyar. Doğrulanmış veriler ve kaynaklar ekleniyor.">Bodrum sits on a peninsula in Muğla province on Türkiye’s southwest Aegean coast, long associated with tourism and holiday and second-home property. This report sets out the districts, developers, projects, indicators and site-visit routes that matter before a visit. Verified figures and sources are being added.</p></section><section class="report-block" id="s1"><div class="rh"><span class="rn">02</span><h2 data-en="Why This Market" data-tr="Bu Pazar Neden Önemli">Why This Market</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s2"><div class="rh"><span class="rn">03</span><h2 data-en="Key Districts" data-tr="Önemli Bölgeler">Key Districts</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s3"><div class="rh"><span class="rn">04</span><h2 data-en="Major Developers" data-tr="Büyük Geliştiriciler">Major Developers</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s4"><div class="rh"><span class="rn">05</span><h2 data-en="Major Projects" data-tr="Önemli Projeler">Major Projects</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s5"><div class="rh"><span class="rn">06</span><h2 data-en="Market Indicators" data-tr="Pazar Göstergeleri">Market Indicators</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s6"><div class="rh"><span class="rn">07</span><h2 data-en="Site Visit Routes" data-tr="Site Visit Rotaları">Site Visit Routes</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s7"><div class="rh"><span class="rn">08</span><h2 data-en="Investment Considerations" data-tr="Yatırımda Dikkat Edilmesi Gerekenler">Investment Considerations</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section><section class="report-block" id="s8"><div class="rh"><span class="rn">09</span><h2 data-en="Sources" data-tr="Kaynaklar">Sources</h2></div><div class="slot" data-en="In preparation — verified content, sources and figures will be added here." data-tr="Hazırlanıyor — doğrulanmış içerik, kaynaklar ve veriler buraya eklenecek.">In preparation — verified content, sources and figures will be added here.</div></section></div>
-  </div>
-</section>
-<section class="section s-ink reveal">
-  <div class="wrap" style="text-align:left">
-    <p class="eyebrow" data-en="Need this market sooner?" data-tr="Bu pazar daha erken mi lazım?">Need this market sooner?</p>
-    <h2 data-en="Ask for a private briefing." data-tr="Özel bir brifing isteyin.">Ask for a private briefing.</h2>
-    <a class="btn btn-brass" style="margin-top:1.6rem" href="../contact.html" data-en="Contact ASLAN" data-tr="ASLAN ile iletişime geçin">Contact ASLAN<span class="arr">→</span></a>
-  </div>
-</section>
-</main>
-
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="foot-top">
-      <div class="foot-brand">
-        <div class="wordmark">ASLAN</div>
-        <p data-en="ASLAN turns market knowledge into trusted opportunities." data-tr="ASLAN, pazar bilgisini güvenilir fırsatlara dönüştürür.">ASLAN turns market knowledge into trusted opportunities.</p>
-      </div>
-      <div class="fcol"><h4 data-en="Platform" data-tr="Platform">Platform</h4><a href="../intelligence/index.html" data-en="Intelligence" data-tr="Intelligence">Intelligence</a><a href="../real-estate/index.html" data-en="Real Estate" data-tr="Gayrimenkul">Real Estate</a><a href="../advisory/index.html" data-en="Advisory" data-tr="Danışmanlık">Advisory</a><a href="../connect/index.html" data-en="Connect" data-tr="Connect">Connect</a><a href="../products/index.html" data-en="Products" data-tr="Ürünler">Products</a></div>
-      <div class="fcol"><h4 data-en="Regions" data-tr="Bölgeler">Regions</h4><span data-en="Türkiye" data-tr="Türkiye">Türkiye</span><span data-en="Oman" data-tr="Umman">Oman</span><span data-en="Saudi Arabia" data-tr="Suudi Arabistan">Saudi Arabia</span><span data-en="UAE" data-tr="BAE">UAE</span><span data-en="Azerbaijan" data-tr="Azerbaycan">Azerbaijan</span><span data-en="Iraq" data-tr="Irak">Iraq</span></div>
-      <div class="fcol"><h4 data-en="Company" data-tr="Kurumsal">Company</h4><a href="../about.html" data-en="About" data-tr="Hakkımızda">About</a><a href="../contact.html" data-en="Contact" data-tr="İletişim">Contact</a></div>
-    </div>
-    <div class="foot-bottom">
-      <div class="foot-note" data-en="Facts only. No hype, no vague promises — sources, real costs and honest risk." data-tr="Yalnızca gerçekler. Abartı yok, belirsiz vaat yok — kaynak, gerçek maliyet ve dürüst risk.">Facts only. No hype, no vague promises — sources, real costs and honest risk.</div>
-      <div class="foot-cr">© 2026 ASLAN · aslanbusiness.com</div>
-    </div>
-  </div>
-</footer>
+<div class="footer">
+  <span class="powered"><span class="t-en">Powered by</span><span class="t-tr">Hazırlayan</span> <b>SP Architects</b> · <span class="t-en">for</span><span class="t-tr">×</span> ASLAN Advisory Platform</span>
+  <span class="loc">DUBAI · ISTANBUL · GLOBAL</span>
+</div>
+<p class="small" style="margin-top:10px;font-size:11px;color:#9a8e76">
+  <span class="t-en">© ASLAN Business — Content package for investor education and site-visit planning. Not investment, legal or tax advice. Verify all figures, ownership, permits and availability before acting.</span><span class="t-tr">© ASLAN Business — Yatırımcı bilgilendirme ve saha ziyareti planlaması için içerik paketidir. Yatırım, hukuk veya vergi tavsiyesi değildir. Hareket etmeden önce tüm rakamları, mülkiyeti, izinleri ve müsaitliği teyit ediniz.</span>
+</p>
+</div>
 <script>
-(function(){
-  var hdr=document.querySelector('.site-header');
-  function onScroll(){ if(hdr){ hdr.classList.toggle('scrolled', window.scrollY>40); } }
-  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
-
-  // mobile menu
-  var mb=document.querySelector('.menu-btn');
-  if(mb){ mb.addEventListener('click',function(){ document.body.classList.toggle('nav-open'); var open=document.body.classList.contains('nav-open'); mb.setAttribute('aria-expanded',open); }); }
-  document.querySelectorAll('.mobile-nav a').forEach(function(a){ a.addEventListener('click',function(){ document.body.classList.remove('nav-open'); }); });
-
-  // language
-  function rewrite(lang){
-    document.querySelectorAll('a[href]').forEach(function(a){
-      var h=a.getAttribute('href'); if(!h) return;
-      try{
-        var u=new URL(h, location.href);
-        if(u.origin===location.origin && (u.pathname.endsWith('.html')||u.pathname.endsWith('/'))){
-          if(lang==='tr'){u.searchParams.set('lang','tr');} else {u.searchParams.delete('lang');}
-          a.setAttribute('href', u.pathname + u.search + u.hash);
-        }
-      }catch(e){}
-    });
-  }
-  function apply(lang){
-    document.documentElement.lang = lang;
-    document.querySelectorAll('[data-en]').forEach(function(el){
-      var v=el.getAttribute('data-'+lang); if(v!==null) el.textContent=v;
-    });
-    document.querySelectorAll('.lang button, .mlang button').forEach(function(b){
-      b.setAttribute('aria-pressed', b.getAttribute('data-l')===lang);
-    });
-  }
-  function set(lang){
-    apply(lang); rewrite(lang);
-    try{ var u=new URL(location.href); if(lang==='tr')u.searchParams.set('lang','tr'); else u.searchParams.delete('lang'); history.replaceState(null,'',u); }catch(e){}
-  }
-  document.querySelectorAll('.lang button, .mlang button').forEach(function(b){
-    b.addEventListener('click',function(){ set(b.getAttribute('data-l')); });
+function setLang(l){
+  document.body.classList.toggle('show-tr', l==='tr');
+  document.body.classList.toggle('show-en', l!=='tr');
+  document.querySelectorAll('.langtog button').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-l')===l);
   });
-  var start='en';
-  try{ if(new URLSearchParams(location.search).get('lang')==='tr') start='tr'; }catch(e){}
-  apply(start); rewrite(start);
-
-  // reveal
-  var els=document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
-    },{rootMargin:'0px 0px -8% 0px',threshold:.08});
-    els.forEach(function(el){ io.observe(el); });
-  } else { els.forEach(function(el){ el.classList.add('in'); }); }
-})();
+}
+document.addEventListener('DOMContentLoaded',function(){ setLang('en'); });
 </script>
 </body>
 </html>
