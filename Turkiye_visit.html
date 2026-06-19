@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Türkiye Visit Programme · MoHUP · July 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1B2A;--navy2:#162436;--gold:#C4973A;--gold-l:#FBF3DC;
+  --ink:#1C1C1C;--ink2:#4A4540;--ink3:#8A8278;
+  --bg:#F9F7F3;--white:#FFFEFB;--border:#E4DDD4;
+  --ank:#7A3800;--ank-l:#FEF3E6;--bod:#0A5E4E;--bod-l:#E0F5EF;
+  --ist:#163D6A;--ist-l:#E6EEF8;--green:#2A5A14;--green-l:#EBF5E2;
+  --amber:#7A3C0A;--amber-l:#FEF0E0;--r:8px;--shadow:0 2px 12px rgba(0,0,0,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;font-size:14px}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:210px;background:var(--navy);position:fixed;top:0;left:0;height:100vh;display:flex;flex-direction:column;z-index:200;overflow-y:auto}
+.sidebar-logo{display:flex;align-items:center;gap:10px;padding:18px 16px 14px;border-bottom:0.5px solid rgba(255,255,255,.08)}
+.sidebar-logo img{width:30px;height:30px;object-fit:contain}
+.sidebar-brand{font-family:'Playfair Display',serif;font-size:13px;color:#D0C8BC;line-height:1.2}
+.sidebar-title{padding:14px 16px 6px;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.nav-item{display:flex;align-items:center;gap:9px;padding:10px 16px;font-size:12px;font-weight:500;color:rgba(255,255,255,.5);border-left:2px solid transparent;transition:all .18s;cursor:pointer;background:none;border-right:none;border-top:none;border-bottom:none;width:100%;text-align:left;font-family:'Inter',sans-serif}
+.nav-item:hover{color:#fff;background:rgba(255,255,255,.05);border-left-color:rgba(196,151,58,.3)}
+.nav-item.active{color:#fff;background:rgba(196,151,58,.1);border-left-color:var(--gold)}
+.nav-icon{font-size:15px;flex-shrink:0;width:18px;text-align:center}
+.sidebar-foot{margin-top:auto;padding:12px 16px;font-size:10px;color:rgba(255,255,255,.18);border-top:0.5px solid rgba(255,255,255,.06);line-height:1.6}
+.main{margin-left:210px;flex:1}
+.panel{display:none;padding:28px 32px;max-width:1080px;margin:0 auto}
+.panel.active{display:block}
+.top-bar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.page-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--navy)}
+.page-title em{font-style:italic;color:var(--gold)}
+.page-sub{font-size:12px;color:var(--ink3);margin-top:2px}
+.export-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:6px 13px;border:0.5px solid var(--border);border-radius:var(--r);cursor:pointer;background:var(--white);color:var(--ink2);font-family:'Inter',sans-serif;transition:background .15s;text-decoration:none}
+.export-btn:hover{background:var(--gold-l)}
+.tag{display:inline-block;font-size:10px;font-weight:600;border-radius:4px;padding:2px 7px;white-space:nowrap}
+.tag-key{background:var(--navy);color:var(--gold)}
+.tag-visit{background:var(--bod-l);color:var(--bod)}
+.tag-dinner{background:var(--amber-l);color:var(--amber)}
+.tag-transfer{background:#EEEEEE;color:#555}
+.tag-tbc{background:#F0F0F0;color:var(--ink3);border:0.5px solid var(--border)}
+.tag-ank{background:var(--ank-l);color:var(--ank)}
+.tag-bod{background:var(--bod-l);color:var(--bod)}
+.tag-ist{background:var(--ist-l);color:var(--ist)}
+.tag-confirmed{background:var(--green-l);color:var(--green)}
+.tag-flight{background:#E8EEF8;color:#2A3A7A}
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:20px}
+.stat-card{background:var(--white);border:0.5px solid var(--border);border-radius:var(--r);padding:12px 14px;text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--navy)}
+.stat-label{font-size:10px;color:var(--ink3);margin-top:3px}
+/* LEGEND */
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px;padding:9px 14px;background:var(--white);border:0.5px solid var(--border);border-radius:var(--r)}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)}
+.leg-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+/* DAY BLOCKS */
+.day-block{margin-bottom:14px}
+.day-hdr{display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:var(--r) var(--r) 0 0;cursor:pointer;user-select:none}
+.day-hdr.ank{background:var(--ank);color:#fff}
+.day-hdr.bod{background:var(--bod);color:#fff}
+.day-hdr.ist{background:var(--ist);color:#fff}
+.day-hdr.travel{background:var(--navy2);color:#fff}
+.day-hdr-date{font-family:'Playfair Display',serif;font-size:16px}
+.day-hdr-city{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+.day-hdr-toggle{margin-left:auto;font-size:13px;transition:transform .2s}
+.day-body{background:var(--white);border:0.5px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r)}
+/* SLOTS */
+.slot{display:flex;align-items:stretch;border-bottom:0.5px solid var(--border)}
+.slot:last-child{border-bottom:none}
+.slot-time{width:88px;flex-shrink:0;padding:10px 12px;background:#FAFAF8;border-right:0.5px solid var(--border);display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start}
+.slot-hour{font-size:12px;font-weight:600;color:var(--navy)}
+.slot-to{font-size:10px;color:var(--ink3)}
+.slot-dur{font-size:10px;color:var(--ink3);margin-top:1px}
+.slot-transfer .slot-time,.slot-transfer{background:#F5F4F0}
+.slot-content{flex:1;padding:10px 16px}
+.slot-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.slot-desc{font-size:12px;color:var(--ink2);line-height:1.55;margin-bottom:5px}
+.slot-links{display:flex;flex-wrap:wrap;gap:5px;margin-top:3px}
+.ext{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;color:var(--ist);text-decoration:none;border:0.5px solid var(--border);border-radius:4px;padding:2px 8px;background:var(--white);transition:background .15s}
+.ext:hover{background:var(--ist-l)}
+.ext-map{color:var(--bod);border-color:rgba(10,94,78,.2)}
+.ext-map:hover{background:var(--bod-l)}
+/* PEOPLE */
+.search-box{display:flex;align-items:center;gap:8px;background:var(--white);border:0.5px solid var(--border);border-radius:var(--r);padding:7px 12px;margin-bottom:14px;max-width:340px}
+.search-box input{border:none;outline:none;font-family:'Inter',sans-serif;font-size:13px;color:var(--ink);background:transparent;flex:1}
+.filter-bar{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
+.filter-btn{font-size:11px;font-weight:600;padding:4px 11px;border:0.5px solid var(--border);border-radius:20px;cursor:pointer;background:var(--white);color:var(--ink2);font-family:'Inter',sans-serif;transition:all .18s}
+.filter-btn:hover{border-color:var(--navy);color:var(--navy)}
+.filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.people-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.person-card{background:var(--white);border:0.5px solid var(--border);border-radius:var(--r);padding:14px;box-shadow:var(--shadow);transition:box-shadow .2s}
+.person-card:hover{box-shadow:0 4px 18px rgba(0,0,0,.1)}
+.person-top{display:flex;align-items:center;gap:11px;margin-bottom:9px}
+.person-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.person-role{font-size:11px;color:var(--ink3);line-height:1.4}
+.person-company{font-size:11px;color:var(--ink2);font-weight:500;margin-top:1px}
+.person-meta{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px}
+/* COMPANIES */
+.company-list{display:flex;flex-direction:column;gap:8px}
+.company-card{background:var(--white);border:0.5px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.company-hdr{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;transition:background .15s}
+.company-hdr:hover{background:var(--bg)}
+.company-name{font-size:13px;font-weight:600;color:var(--ink);flex:1}
+.company-sector{font-size:11px;color:var(--ink3)}
+.company-chevron{font-size:12px;color:var(--ink3);transition:transform .2s;margin-left:8px}
+.company-chevron.open{transform:rotate(180deg)}
+.company-body{display:none;padding:12px 16px;background:#FAFAF8;border-top:0.5px solid var(--border)}
+.company-body.open{display:block}
+.company-body p{font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:8px}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:7px;margin-bottom:10px}
+.info-item{background:var(--white);border:0.5px solid var(--border);border-radius:5px;padding:6px 10px}
+.info-label{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:2px}
+.info-val{font-size:12px;font-weight:500;color:var(--ink)}
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.project-card{background:var(--white);border:0.5px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.project-img{width:100%;height:100px;background:linear-gradient(135deg,var(--navy2),var(--navy));display:flex;align-items:center;justify-content:center;font-size:34px;flex-shrink:0}
+.project-body{padding:12px;flex:1;display:flex;flex-direction:column;gap:5px}
+.project-name{font-size:13px;font-weight:600;color:var(--ink)}
+.project-company{font-size:11px;color:var(--ink3)}
+.project-desc{font-size:12px;color:var(--ink2);line-height:1.55;flex:1}
+.project-links{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+/* MAP */
+.map-section{background:var(--white);border:0.5px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:18px}
+.map-header{padding:14px 18px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.map-title{font-size:14px;font-weight:600;color:var(--ink)}
+.map-frame{width:100%;height:460px;border:none;display:block}
+.location-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:9px;margin-top:14px}
+.loc-card{background:var(--white);border:0.5px solid var(--border);border-radius:var(--r);padding:10px 13px;display:flex;align-items:flex-start;gap:9px}
+.loc-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.loc-name{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.loc-addr{font-size:11px;color:var(--ink3)}
+@media(max-width:660px){.sidebar{width:100%;height:auto;position:relative}.main{margin-left:0}.panel{padding:16px}.people-grid,.projects-grid{grid-template-columns:1fr}}
+@media print{.sidebar,.filter-bar,.search-box,.export-btn{display:none}.main{margin-left:0}.company-body{display:block!important}}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <img src="data:image/png;base64,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" alt="Aslan Business">
+    <div class="sidebar-brand">Aslan<br>Business</div>
+  </div>
+  <div class="sidebar-title">Visit Programme</div>
+  <button class="nav-item active" onclick="show('schedule',this)"><span class="nav-icon">📅</span>Schedule</button>
+  <button class="nav-item" onclick="show('people',this)"><span class="nav-icon">👤</span>People</button>
+  <button class="nav-item" onclick="show('companies',this)"><span class="nav-icon">🏢</span>Companies</button>
+  <button class="nav-item" onclick="show('projects',this)"><span class="nav-icon">🏗</span>Projects</button>
+  <button class="nav-item" onclick="show('map',this)"><span class="nav-icon">📍</span>Map & Route</button>
+  <div class="sidebar-foot">🇴🇲 Sultanate of Oman<br>Ministerial Delegation<br>Türkiye · July 2026<br><br>aslanbusiness.com</div>
+</nav>
+<main class="main">
+
+<!-- ══ SCHEDULE ══ -->
+<div id="panel-schedule" class="panel active">
+  <div class="top-bar">
+    <div><div class="page-title">Visit Schedule — <em>Türkiye</em></div><div class="page-sub">MoHUP Ministerial Delegation · 30 June – 7 July 2026</div></div>
+    <button class="export-btn" onclick="exportSchedule()">⬇ Export CSV</button>
+  </div>
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Days</div></div>
+    <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Cities</div></div>
+    <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Site Visits</div></div>
+    <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">Dinners</div></div>
+    <div class="stat-card"><div class="stat-num">1</div><div class="stat-label">MoU Signing</div></div>
+    <div class="stat-card"><div class="stat-num">17+</div><div class="stat-label">Companies</div></div>
+  </div>
+  <div class="legend">
+    <div class="leg-item"><span class="leg-dot" style="background:var(--navy)"></span>Key Meeting</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--bod)"></span>Site Visit</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--amber)"></span>Dinner</div>
+    <div class="leg-item"><span class="leg-dot" style="background:#5A5A9A"></span>Flight/Transfer</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--ank)"></span>Ankara</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--bod)"></span>Bodrum</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--ist)"></span>Istanbul</div>
+  </div>
+
+  <!-- DAY 0 -->
+  <div class="day-block">
+    <div class="day-hdr travel" onclick="tog(this)">
+      <span class="day-hdr-date">Tuesday · 30 June 2026</span>
+      <span class="day-hdr-city">Travel Day — TBC</span>
+      <span class="day-hdr-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">13:00</div><div class="slot-to">→ 17:50</div><div class="slot-dur">5h 50m</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-flight">Flight Option A</span>Muscat → Istanbul · Oman Air</div><div class="slot-desc">Arrival Istanbul 17:50</div><div class="slot-links"><a href="https://www.omanair.com" class="ext" target="_blank">🔗 Oman Air</a></div></div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">22:00</div><div class="slot-to">→ 23:10</div><div class="slot-dur">1h 10m</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-flight">Flight Option B</span>Istanbul → Ankara · Qatar Airways</div></div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">00:00</div><div class="slot-to">→ 01:00</div><div class="slot-dur">60 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Ankara Airport → Sheraton Hotel</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">01:00</div></div>
+        <div class="slot-content"><div class="slot-title">🏨 Check-in · Sheraton Hotel · Ankara</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="day-block">
+    <div class="day-hdr ank" onclick="tog(this)">
+      <span class="day-hdr-date">Wednesday · 1 July 2026</span>
+      <span class="day-hdr-city">Ankara — Day 1</span>
+      <span class="day-hdr-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">10:30</div><div class="slot-to">→ 11:00</div><div class="slot-dur">30 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Hotel → Sinpaş Altınoran</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">11:00</div><div class="slot-to">→ 12:30</div><div class="slot-dur">1.5 hrs</div></div>
+        <div class="slot-content">
+          <div class="slot-title"><span class="tag tag-visit">Site Visit</span>Sinpaş Altınoran Project</div>
+          <div class="slot-desc">Large-scale branded residential community in Ankara. Benchmark for residential district planning in Oman new cities.</div>
+          <div class="slot-links"><a href="https://maps.app.goo.gl/FQRSZQsXxcAuugFv8" class="ext ext-map" target="_blank">📍 Map</a><a href="https://sinpasaltinoran.com.tr" class="ext" target="_blank">🔗 Website</a></div>
+        </div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">12:30</div><div class="slot-to">→ 13:00</div><div class="slot-dur">30 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Sinpaş → Pasifik Holding</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">13:00</div><div class="slot-to">→ 14:30</div><div class="slot-dur">1.5 hrs</div></div>
+        <div class="slot-content">
+          <div class="slot-title"><span class="tag tag-visit">Site Visit</span>Pasifik Holding — Next Level Project</div>
+          <div class="slot-desc">Mixed-use development with shopping mall, Ankara.</div>
+          <div class="slot-links"><a href="http://pasifik.com" class="ext" target="_blank">🔗 Pasifik Holding</a></div>
+        </div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">14:30</div><div class="slot-to">→ 15:00</div><div class="slot-dur">30 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>→ Business Lunch venue</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">15:00</div><div class="slot-to">→ 16:00</div><div class="slot-dur">1 hr</div></div>
+        <div class="slot-content"><div class="slot-title">Business Lunch</div><div class="slot-desc">Venue TBC.</div></div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">16:00</div><div class="slot-to">→ 16:30</div><div class="slot-dur">30 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>→ Sheraton Hotel</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">20:00</div><div class="slot-to">→ 21:00</div><div class="slot-dur">1 hr</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-dinner">Dinner</span><span class="tag tag-tbc">TBC</span>Dinner with Minister of Housing</div><div class="slot-desc">Alternative venue: YDA Center, Ankara.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-block">
+    <div class="day-hdr ank" onclick="tog(this)">
+      <span class="day-hdr-date">Thursday · 2 July 2026</span>
+      <span class="day-hdr-city">Ankara — Day 2 · Transfer to Bodrum</span>
+      <span class="day-hdr-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">10:30</div><div class="slot-to">→ 11:00</div><div class="slot-dur">30 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Hotel → Ministry</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">11:00</div><div class="slot-to">→ 13:00</div><div class="slot-dur">2 hrs</div></div>
+        <div class="slot-content">
+          <div class="slot-title"><span class="tag tag-key">Key Meeting</span><span class="tag tag-confirmed">Confirmed</span>Ministry of Environment, Urbanisation & Climate Change</div>
+          <div class="slot-desc">Joint meeting with Emlak Konut GYO & TOKİ. Urban development, new city planning and housing partnership framework.</div>
+          <div class="slot-links"><a href="https://maps.app.goo.gl/kLn757fysf6NYdnM9" class="ext ext-map" target="_blank">📍 Map</a><a href="https://www.csb.gov.tr/en" class="ext" target="_blank">🔗 Ministry</a><a href="https://www.emlakkonut.com.tr/en-US" class="ext" target="_blank">🔗 Emlak Konut</a><a href="https://www.toki.gov.tr/en" class="ext" target="_blank">🔗 TOKİ</a></div>
+        </div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">13:00</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-key">Ceremony</span>MoU Signing Ceremony</div></div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">13:00</div><div class="slot-to">→ 13:45</div><div class="slot-dur">45 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Ministry → Ankara Airport (ESB)</div><div class="slot-links"><a href="https://maps.app.goo.gl/rcvKdi67XentezTe6" class="ext ext-map" target="_blank">📍 Airport Map</a></div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">17:00</div><div class="slot-to">→ 18:30</div><div class="slot-dur">1.5 hrs</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-flight">Flight</span>Ankara (ESB) → Bodrum (BJV) · AJET</div></div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">19:00</div><div class="slot-to">→ 19:40</div><div class="slot-dur">40 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Bodrum Airport → METT Hotel · Yalıkavak Marina</div><div class="slot-links"><a href="https://maps.app.goo.gl/6WqQ5qdhXCN1Q1EB9" class="ext ext-map" target="_blank">📍 Hotel Map</a><a href="https://www.metthotels.com" class="ext" target="_blank">🔗 METT Hotel</a></div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">20:30</div><div class="slot-to">→ 21:30</div><div class="slot-dur">1 hr</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-dinner">Dinner</span>Sait Restaurant (Fish) · Walking Distance from Hotel</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-block">
+    <div class="day-hdr bod" onclick="tog(this)">
+      <span class="day-hdr-date">Friday · 3 July 2026</span>
+      <span class="day-hdr-city">Bodrum — Day 1</span>
+      <span class="day-hdr-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">09:00</div><div class="slot-to">→ 09:30</div><div class="slot-dur">30 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Hotel → Boat</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">10:00</div><div class="slot-to">→ 16:00</div><div class="slot-dur">6 hrs</div></div>
+        <div class="slot-content">
+          <div class="slot-title"><span class="tag tag-visit">Boat Tour</span>Seafront Project Views from Sea</div>
+          <div class="slot-desc"><strong>To see from sea:</strong> MESA Demirbükü · Mandarin Oriental Bodrum · Bulgurca Bay · Aman Ruya · D-Marina Didim<br><strong>Stop at:</strong> Six Senses Kaplankaya (site visit)</div>
+          <div class="slot-links"><a href="https://www.sixsenses.com/en/resorts/kaplankaya" class="ext" target="_blank">🔗 Six Senses Kaplankaya</a><a href="https://www.mandarinoriental.com/en/bodrum" class="ext" target="_blank">🔗 Mandarin Oriental</a><a href="https://www.aman.com/resorts/amanruya" class="ext" target="_blank">🔗 Aman Ruya</a></div>
+        </div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">16:00</div><div class="slot-to">→ 17:00</div><div class="slot-dur">60 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Six Senses Kaplankaya → Yalıkavak Marina Hotel</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">19:30</div><div class="slot-to">→ 21:30</div><div class="slot-dur">2 hrs</div></div>
+        <div class="slot-content">
+          <div class="slot-title"><span class="tag tag-visit">Site Visit</span><span class="tag tag-dinner">Business Dinner</span>Yalıkavak Marina + RAMS Group</div>
+          <div class="slot-desc">Walking distance from hotel. Commercial marina visit followed by business dinner with RAMS Group.</div>
+          <div class="slot-links"><a href="https://www.yalikavakmarina.com/en" class="ext" target="_blank">🔗 Yalıkavak Marina</a><a href="https://www.ramsgroup.com.tr" class="ext" target="_blank">🔗 RAMS Group</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-block">
+    <div class="day-hdr bod" onclick="tog(this)">
+      <span class="day-hdr-date">Saturday · 4 July 2026</span>
+      <span class="day-hdr-city">Bodrum — Day 2 · Transfer to Istanbul</span>
+      <span class="day-hdr-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">09:30</div><div class="slot-to">→ 10:30</div><div class="slot-dur">60 min</div></div>
+        <div class="slot-content">
+          <div class="slot-title"><span class="tag tag-visit">Site Visit</span>Rönesans — The Bodrum Edition Hotel + Rev Blue Zone Residence</div>
+          <div class="slot-links"><a href="https://www.marriott.com/en-us/hotels/bjwbr-the-bodrum-edition" class="ext" target="_blank">🔗 Bodrum Edition</a><a href="https://www.ronesans.com" class="ext" target="_blank">🔗 Rönesans</a></div>
+        </div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">10:30</div><div class="slot-to">→ 11:00</div><div class="slot-dur">30 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Bodrum Edition → Mesa Demirbükü</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">11:00</div><div class="slot-to">→ 12:00</div><div class="slot-dur">60 min</div></div>
+        <div class="slot-content">
+          <div class="slot-title"><span class="tag tag-visit">Site Visit</span>Mesa Bodrum Demirbükü Project · MESA</div>
+          <div class="slot-links"><a href="https://www.mesa.com.tr/en" class="ext" target="_blank">🔗 MESA</a></div>
+        </div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">12:00</div><div class="slot-to">→ 12:15</div><div class="slot-dur">15 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Mesa Demirbükü → Aman Ruya Resort</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">12:15</div><div class="slot-to">→ 13:00</div><div class="slot-dur">60 min</div></div>
+        <div class="slot-content">
+          <div class="slot-title"><span class="tag tag-visit">Site Visit</span>Aman Ruya Resort · Re Pie Holding</div>
+          <div class="slot-desc">Ultra-luxury resort chain. High-end coastal destination benchmark.</div>
+          <div class="slot-links"><a href="https://www.aman.com/resorts/amanruya" class="ext" target="_blank">🔗 Aman Ruya</a></div>
+        </div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">13:00</div><div class="slot-to">→ 13:30</div><div class="slot-dur">30 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Aman Ruya → Mandarin Oriental Bodrum</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">13:30</div><div class="slot-to">→ 14:30</div><div class="slot-dur">60 min</div></div>
+        <div class="slot-content">
+          <div class="slot-title"><span class="tag tag-key">Business Lunch</span>ASTAŞ Holding · Mandarin Oriental Bodrum</div>
+          <div class="slot-links"><a href="https://www.mandarinoriental.com/en/bodrum" class="ext" target="_blank">🔗 Mandarin Oriental Bodrum</a><a href="https://www.astas-holding.com/en/" class="ext" target="_blank">🔗 ASTAŞ Holding</a></div>
+        </div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">14:30</div><div class="slot-to">→ 15:10</div><div class="slot-dur">40 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Mandarin Oriental → Yalıkavak Marina Hotel</div></div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">16:00</div><div class="slot-to">→ 16:40</div><div class="slot-dur">40 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Hotel → Bodrum Airport</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">18:25</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-flight">Flight</span>Bodrum (BJV) → Istanbul</div></div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">~20:00</div><div class="slot-dur">40 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Istanbul Airport → Radisson Blu Vadistanbul</div><div class="slot-links"><a href="https://www.radissonhotels.com/en-us/hotels/radisson-blu-istanbul-vadi" class="ext" target="_blank">🔗 Radisson Blu</a></div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">20:00</div></div>
+        <div class="slot-content"><div class="slot-title">🏨 Check-in · Radisson Blu Vadistanbul · Istanbul</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">21:30</div><div class="slot-to">→ 22:30</div><div class="slot-dur">60 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-dinner">Dinner</span>Seraf Restaurant · Walking Distance from Hotel</div><div class="slot-links"><a href="https://www.seraf.com.tr" class="ext" target="_blank">🔗 Seraf</a></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-block">
+    <div class="day-hdr ist" onclick="tog(this)">
+      <span class="day-hdr-date">Sunday · 5 July 2026</span>
+      <span class="day-hdr-city">Istanbul — Day 1</span>
+      <span class="day-hdr-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">09:00</div><div class="slot-to">→ 10:30</div><div class="slot-dur">1.5 hrs</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Radisson Blu → IstMarina</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">10:30</div><div class="slot-to">→ 12:00</div><div class="slot-dur">1.5 hrs</div></div>
+        <div class="slot-content">
+          <div class="slot-title"><span class="tag tag-visit">Site Visit</span>IstMarina · DAP Yapı</div>
+          <div class="slot-desc">Waterfront mixed-use on the Marmara coast. European Property Awards winner.</div>
+          <div class="slot-links"><a href="https://maps.app.goo.gl/rm33RpSUuWGxZCU58" class="ext ext-map" target="_blank">📍 Map</a><a href="https://dapyapi.com.tr/projeler/ist-marina" class="ext" target="_blank">🔗 IstMarina</a></div>
+        </div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">12:00</div><div class="slot-to">→ 13:00</div><div class="slot-dur">60 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>IstMarina → SeaPearl Ataköy</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">13:00</div><div class="slot-to">→ 14:30</div><div class="slot-dur">1.5 hrs</div></div>
+        <div class="slot-content">
+          <div class="slot-title"><span class="tag tag-visit">Site Visit</span>SeaPearl Ataköy · Kuzu Group</div>
+          <div class="slot-desc">One of Istanbul's largest seafront mixed-use developments on the Marmara coast.</div>
+          <div class="slot-links"><a href="http://www.seapearlatakoy.com" class="ext" target="_blank">🔗 SeaPearl Ataköy</a></div>
+        </div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">14:30</div><div class="slot-to">→ 15:10</div><div class="slot-dur">40 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>SeaPearl → Radisson Blu Vadistanbul</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">20:00</div><div class="slot-to">→ 21:00</div><div class="slot-dur">60 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-key">Business Dinner</span>ARTAŞ Group</div><div class="slot-links"><a href="https://www.artas.com.tr" class="ext" target="_blank">🔗 ARTAŞ Group</a></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-block">
+    <div class="day-hdr ist" onclick="tog(this)">
+      <span class="day-hdr-date">Monday · 6 July 2026</span>
+      <span class="day-hdr-city">Istanbul — Day 2</span>
+      <span class="day-hdr-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">09:00</div><div class="slot-to">→ 09:40</div><div class="slot-dur">40 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Radisson Blu → Istanbul Financial Center</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">10:00</div><div class="slot-to">→ 12:00</div><div class="slot-dur">2 hrs</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-visit">Site Visit</span>Istanbul Financial Center (IFC)</div><div class="slot-desc">New landmark financial district on the Asian side. Benchmark for Al Khuwair Downtown.</div><div class="slot-links"><a href="https://www.ifc.com.tr/en" class="ext" target="_blank">🔗 IFC</a></div></div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">12:00</div><div class="slot-to">→ 12:45</div><div class="slot-dur">45 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>IFC → Istanbul Finance City</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">13:00</div><div class="slot-to">→ 14:00</div><div class="slot-dur">60 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-visit">Site Visit</span>Istanbul Finance City · Sinpaş GYO</div><div class="slot-desc">Mixed-use financial district development adjacent to IFC.</div><div class="slot-links"><a href="https://www.sinpasfinanssehir.com" class="ext" target="_blank">🔗 Istanbul Finance City</a></div></div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">14:00</div><div class="slot-to">→ 14:20</div><div class="slot-dur">20 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Istanbul Finance City → Metropol Istanbul</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">14:20</div><div class="slot-to">→ 15:30</div><div class="slot-dur">1h 10m</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-visit">Site Visit</span>Metropol Istanbul · Emlak Konut GYO</div><div class="slot-links"><a href="https://www.emlakkonut.com.tr/en-US" class="ext" target="_blank">🔗 Emlak Konut</a></div></div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">15:30</div><div class="slot-to">→ 15:50</div><div class="slot-dur">20 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Metropol Istanbul → Hilltown Küçükyalı</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">15:50</div><div class="slot-to">→ 17:00</div><div class="slot-dur">1h 10m</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-visit">Site Visit</span>Hilltown Küçükyalı · Rönesans Holding</div><div class="slot-links"><a href="https://ronesans.com/projeler/gayrimenkul-grubu/ronesansbiz-kucukyali" class="ext" target="_blank">🔗 Hilltown Küçükyalı</a></div></div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">17:00</div><div class="slot-to">→ 17:40</div><div class="slot-dur">40 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Hilltown → Radisson Blu Vadistanbul</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">19:00</div><div class="slot-to">→ 21:00</div><div class="slot-dur">2 hrs</div></div>
+        <div class="slot-content">
+          <div class="slot-title"><span class="tag tag-key">Association Dinner</span>KONUTDER — 15+ Members · At Radisson Blu Vadistanbul Hotel</div>
+          <div class="slot-desc">Fer Yapı · DAP · Bahaş · Sinpaş GYO · Ağaoğlu · Dumankaya · Sur Yapı · Torunlar GYO · İş GYO · Çukurova · Halk GYO · Fuzul · Ege Yapı · MESA · Kuzu Group</div>
+          <div class="slot-links"><a href="https://www.konutder.org.tr" class="ext" target="_blank">🔗 KONUTDER</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 7 -->
+  <div class="day-block">
+    <div class="day-hdr ist" onclick="tog(this)">
+      <span class="day-hdr-date">Tuesday · 7 July 2026</span>
+      <span class="day-hdr-city">Istanbul — Day 3 · Departure</span>
+      <span class="day-hdr-toggle">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">10:00</div><div class="slot-to">→ 10:30</div><div class="slot-dur">30 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Radisson Blu → Galataport</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">10:30</div><div class="slot-to">→ 12:00</div><div class="slot-dur">1.5 hrs</div></div>
+        <div class="slot-content">
+          <div class="slot-title"><span class="tag tag-visit">Site Visit</span>Galataport Istanbul · Doğuş Group</div>
+          <div class="slot-desc">Flagship Bosphorus waterfront regeneration — cruise terminal, heritage retail and public realm. Benchmark for Salalah Marina / Waterfront development.</div>
+          <div class="slot-links"><a href="https://galataport.com.tr/en" class="ext" target="_blank">🔗 Galataport</a><a href="https://www.dogusgroup.com.tr" class="ext" target="_blank">🔗 Doğuş Group</a></div>
+        </div>
+      </div>
+      <div class="slot slot-transfer">
+        <div class="slot-time"><div class="slot-hour">15:00</div><div class="slot-to">→ 16:00</div><div class="slot-dur">60 min</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Hotel → Istanbul Airport</div></div>
+      </div>
+      <div class="slot">
+        <div class="slot-time"><div class="slot-hour">18:15</div><div class="slot-to">→ 00:45</div><div class="slot-dur">6 hrs</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-flight">Flight</span>Istanbul → Muscat · TBC</div><div class="slot-links"><a href="https://www.omanair.com" class="ext" target="_blank">🔗 Oman Air</a></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PEOPLE ══ -->
+<div id="panel-people" class="panel">
+  <div class="top-bar">
+    <div><div class="page-title">Key Contacts</div><div class="page-sub">19 contacts · Ankara · Bodrum · Istanbul</div></div>
+    <button class="export-btn" onclick="exportPeople()">⬇ Export CSV</button>
+  </div>
+  <div class="search-box"><span>🔍</span><input type="text" id="people-search" placeholder="Search by name or company..." oninput="filterPeople()"></div>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="fCity('all',this)">All</button>
+    <button class="filter-btn" onclick="fCity('Ankara',this)">Ankara</button>
+    <button class="filter-btn" onclick="fCity('Bodrum',this)">Bodrum</button>
+    <button class="filter-btn" onclick="fCity('Istanbul',this)">Istanbul</button>
+  </div>
+  <div class="people-grid" id="people-grid">
+    <div class="person-card" data-city="Bodrum">
+      <div class="person-top">
+        <img src="images/ramazan-bulbul.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#5A2A3A\'>RB</div>'" alt="Ramazan Bülbül">
+        <div>
+          <div class="person-name">Ramazan Bülbül</div>
+          <div class="person-role">Chairman</div>
+          <div class="person-role" style="color:var(--ink)">RAMS Group</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-bod">Bodrum</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 RAMS Resort Bodrum</div>
+      <a href="https://www.ramsgroup.com.tr" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Bodrum/Istanbul">
+      <div class="person-top">
+        <img src="images/erman-ilicak.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#3A2A6A\'>EI</div>'" alt="Erman Ilıcak">
+        <div>
+          <div class="person-name">Erman Ilıcak</div>
+          <div class="person-role">Chairman</div>
+          <div class="person-role" style="color:var(--ink)">Rönesans Holding</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-bod">Bodrum</span><span class="tag tag-ist" style="margin-left:3px">Istanbul</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 Bodrum Edition · Hilltown Küçükyalı</div>
+      <a href="https://www.ronesans.com" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Bodrum">
+      <div class="person-top">
+        <img src="images/mert-boysanoglu.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#2A4A6A\'>EB</div>'" alt="Erhan Boysanoğlu">
+        <div>
+          <div class="person-name">Erhan Boysanoğlu</div>
+          <div class="person-role">Chairman</div>
+          <div class="person-role" style="color:var(--ink)">MESA</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-bod">Bodrum</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 Mesa Demirbükü Project</div>
+      <a href="https://www.mesa.com.tr/en" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Bodrum">
+      <div class="person-top">
+        <div class="avatar" style="width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#1A5A4A">EC</div>
+        <div>
+          <div class="person-name">Dr. M. Emre Çamlıbel</div>
+          <div class="person-role">Chairman</div>
+          <div class="person-role" style="color:var(--ink)">Re Pie Holding</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-bod">Bodrum</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 Amanruya Bodrum</div>
+      <a href="https://www.repie.com.tr" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Bodrum">
+      <div class="person-top">
+        <img src="images/vedat-asci.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#6A2A2A\'>VA</div>'" alt="Vedat Aşçı">
+        <div>
+          <div class="person-name">Vedat Aşçı</div>
+          <div class="person-role">Chairman</div>
+          <div class="person-role" style="color:var(--ink)">ASTAŞ Holding</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-bod">Bodrum</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 Mandarin Oriental Bodrum</div>
+      <a href="https://www.astas-holding.com/en/" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Istanbul">
+      <div class="person-top">
+        <img src="images/ziya-yilmaz.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#2A4A2A\'>ZY</div>'" alt="Ziya Yılmaz">
+        <div>
+          <div class="person-name">Ziya Yılmaz</div>
+          <div class="person-role">Chairman / KONUTDER President</div>
+          <div class="person-role" style="color:var(--ink)">DAP Yapı</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ist">Istanbul</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 IstMarina</div>
+      <a href="https://www.dapholding.com" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Istanbul">
+      <div class="person-top">
+        <img src="images/avni-celik.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#4A3A1A\'>AÇ</div>'" alt="Avni Çelik">
+        <div>
+          <div class="person-name">Avni Çelik</div>
+          <div class="person-role">Founder</div>
+          <div class="person-role" style="color:var(--ink)">Sinpaş Holding</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ist">Istanbul</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 Sinpaş Finans Şehir</div>
+      <a href="https://www.sinpas.com.tr" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Istanbul">
+      <div class="person-top">
+        <img src="images/ozen-kuzu.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#1A3A5A\'>ÖK</div>'" alt="Özen Kuzu">
+        <div>
+          <div class="person-name">Özen Kuzu</div>
+          <div class="person-role">Chairman & CEO</div>
+          <div class="person-role" style="color:var(--ink)">Kuzu Group</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ist">Istanbul</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 SeaPearl Ataköy</div>
+      <a href="https://www.kuzugroup.com" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Istanbul">
+      <div class="person-top">
+        <img src="images/yasir-yilmaz.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#2A5A2A\'>YY</div>'" alt="Yasir Yılmaz">
+        <div>
+          <div class="person-name">Yasir Yılmaz</div>
+          <div class="person-role">General Manager</div>
+          <div class="person-role" style="color:var(--ink)">Emlak Konut GYO</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ist">Istanbul</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 Metropol Istanbul · Financial Center</div>
+      <a href="https://www.emlakkonut.com.tr/en-US" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Istanbul">
+      <div class="person-top">
+        <div class="avatar" style="width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#3A1A5A">SC</div>
+        <div>
+          <div class="person-name">Süleyman / Serhan Çetinsaya</div>
+          <div class="person-role">Owner</div>
+          <div class="person-role" style="color:var(--ink)">Artaş Holding</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ist">Istanbul</span>
+        
+      </div>
+      
+      <a href="https://www.artas.com.tr" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Istanbul">
+      <div class="person-top">
+        <img src="images/ferit-sahenk.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#1A2A5A\'>FŞ</div>'" alt="Ferit F. Şahenk">
+        <div>
+          <div class="person-name">Ferit F. Şahenk</div>
+          <div class="person-role">Chairman</div>
+          <div class="person-role" style="color:var(--ink)">Doğuş Group</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ist">Istanbul</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 Galataport</div>
+      <a href="https://www.dogusgroup.com.tr" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Istanbul">
+      <div class="person-top">
+        <div class="avatar" style="width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#2A2A5A">AE</div>
+        <div>
+          <div class="person-name">Ahmet İhsan Erdem</div>
+          <div class="person-role">CEO</div>
+          <div class="person-role" style="color:var(--ink)">Istanbul Financial Center</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ist">Istanbul</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 IFC</div>
+      <a href="https://www.ifc.com.tr/en" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Ankara">
+      <div class="person-top">
+        <img src="images/levent-sungur.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#1A4A2A\'>LS</div>'" alt="Levent Sungur">
+        <div>
+          <div class="person-name">Levent Sungur</div>
+          <div class="person-role">President</div>
+          <div class="person-role" style="color:var(--ink)">TOKİ</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ank">Ankara</span>
+        
+      </div>
+      
+      <a href="https://www.toki.gov.tr/en" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Ankara">
+      <div class="person-top">
+        <div class="avatar" style="width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#4A2A1A">FE</div>
+        <div>
+          <div class="person-name">Fatih Erdoğan</div>
+          <div class="person-role">Chairman</div>
+          <div class="person-role" style="color:var(--ink)">Pasifik Holding</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ank">Ankara</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 Next Level Project</div>
+      <a href="http://pasifik.com" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Istanbul">
+      <div class="person-top">
+        <img src="images/aziz-torun.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#2A1A4A\'>AT</div>'" alt="Aziz Torun">
+        <div>
+          <div class="person-name">Aziz Torun</div>
+          <div class="person-role">Chairman</div>
+          <div class="person-role" style="color:var(--ink)">Torunlar GYO</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ist">Istanbul</span>
+        
+      </div>
+      
+      <a href="https://www.torunlargyo.com.tr/en" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Istanbul">
+      <div class="person-top">
+        <img src="images/mesut-toprak.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#3A3A1A\'>MT</div>'" alt="Mesut Toprak">
+        <div>
+          <div class="person-name">Mesut Toprak</div>
+          <div class="person-role">Chairman</div>
+          <div class="person-role" style="color:var(--ink)">Astay</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ist">Istanbul</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 Four Seasons Istanbul</div>
+      
+    </div>
+    <div class="person-card" data-city="Istanbul">
+      <div class="person-top">
+        <img src="images/zeki-akbal.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#2A3A3A\'>MA</div>'" alt="Mahmut / Zeki Akbal">
+        <div>
+          <div class="person-name">Mahmut / Zeki Akbal</div>
+          <div class="person-role">Chairman / Deputy Chairman</div>
+          <div class="person-role" style="color:var(--ink)">Fuzul GYO</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ist">Istanbul</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 Fuzul Barbaros 48</div>
+      <a href="https://www.fuzulgroup.com" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Ankara">
+      <div class="person-top">
+        <img src="images/murat-kurum.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#163D6A\'>MK</div>'" alt="H.E. Murat Kurum">
+        <div>
+          <div class="person-name">H.E. Murat Kurum</div>
+          <div class="person-role">Minister</div>
+          <div class="person-role" style="color:var(--ink)">Ministry of Environment, Urbanisation & Climate Change</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ank">Ankara</span>
+        
+      </div>
+      
+      <a href="https://www.csb.gov.tr/en" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div>
+    <div class="person-card" data-city="Ankara">
+      <div class="person-top">
+        <img src="images/yasir-yilmaz.jpg" class="avatar" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0" onerror="this.outerHTML='<div class=\'avatar\' style=\'width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#fff;background:#0A5E4E\'>YY</div>'" alt="Yasir Yılmaz">
+        <div>
+          <div class="person-name">Yasir Yılmaz</div>
+          <div class="person-role">General Manager</div>
+          <div class="person-role" style="color:var(--ink)">Emlak Konut GYO</div>
+        </div>
+      </div>
+      <div class="person-meta">
+        <span class="tag tag-ank">Ankara</span>
+        
+      </div>
+      <div style="font-size:11px;color:var(--ink2);margin-top:4px">🏗 Metropol Istanbul</div>
+      <a href="https://www.emlakkonut.com.tr/en-US" class="ext" target="_blank" style="margin-top:6px;display:inline-flex">🔗 Website</a>
+    </div></div>
+</div>
+
+<!-- ══ COMPANIES ══ -->
+<div id="panel-companies" class="panel">
+  <div class="top-bar">
+    <div><div class="page-title">Companies</div><div class="page-sub">Turkish real estate, construction and investment groups</div></div>
+    <button class="export-btn" onclick="exportCompanies()">⬇ Export CSV</button>
+  </div>
+  <div class="search-box"><span>🔍</span><input type="text" id="co-search" placeholder="Search companies..." oninput="filterCo()"></div>
+  <div class="company-list" id="company-list">
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">ASTAŞ Holding</div>
+          <div class="company-sector">Ultra-Luxury Real Estate / Hospitality</div>
+        </div>
+        <span class="tag tag-bod">Bodrum</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Vedat Aşçı</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Bodrum</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">Multi-billion $</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">#6 — Salalah waterfront & luxury resort typology</div></div>
+        </div>
+        <p>Türkiye's premier ultra-luxury developer. Projects: Mandarin Oriental Bodrum, MO Bosphorus, MO Etiler, Kempinski Residences, Swissotel Gündoğan Bodrum. Known for branded residence model at the highest international standard.</p>
+        <a href="https://www.astas-holding.com/en/" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.astas-holding.com</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">Rönesans Holding</div>
+          <div class="company-sector">Construction / Healthcare / Real Estate</div>
+        </div>
+        <span class="tag tag-bod">Bodrum</span><span class="tag tag-ist" style="margin-left:3px">Istanbul</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Erman Ilıcak</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Bodrum/Istanbul</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">~205B TL</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">EPC + Healthcare + Mixed-use</div></div>
+        </div>
+        <p>One of Türkiye's largest construction and investment conglomerates. City hospitals PPP programme — one of the world's largest healthcare infrastructure programmes. Bodrum Edition Hotel, Rev Blue Zone Residence, Hilltown Küçükyalı.</p>
+        <a href="https://www.ronesans.com" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.ronesans.com</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">MESA</div>
+          <div class="company-sector">Residential Development</div>
+        </div>
+        <span class="tag tag-bod">Bodrum</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Erhan Boysanoğlu</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Bodrum</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">~25-30B TL</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">#15 — Conventional housing districts</div></div>
+        </div>
+        <p>Long-established residential developer with consistent delivery track record across Turkey. Mesa Demirbükü Project (Bodrum). Mid-to-upper segment residential communities across Istanbul and Ankara.</p>
+        <a href="https://www.mesa.com.tr/en" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.mesa.com.tr</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">Re Pie Holding</div>
+          <div class="company-sector">Investment / Real Estate</div>
+        </div>
+        <span class="tag tag-bod">Bodrum</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Dr. M. Emre Çamlıbel</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Bodrum</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">TBC</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">High-end coastal hospitality reference</div></div>
+        </div>
+        <p>Investment holding group. Partner in Amanruya Bodrum — ultra-luxury resort by Aman Resorts. Former Galataport partner with Doğuş Group.</p>
+        <a href="https://www.repie.com.tr" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.repie.com.tr</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">DAP Holding</div>
+          <div class="company-sector">Premium Residential / KONUTDER</div>
+        </div>
+        <span class="tag tag-ist">Istanbul</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Ziya Yılmaz</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Istanbul</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">~30.4B TL · Equity ~14.1B TL</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">#5 — Al Jabal Al Aali & Al Thuraya City</div></div>
+        </div>
+        <p>Leading premium residential developer — luxury, design-led, topography-sensitive projects. IstMarina (Marmara coast waterfront mixed-use), Nişantaşı Koru. Ziya Yılmaz also serves as KONUTDER President.</p>
+        <a href="https://www.dapholding.com" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.dapholding.com</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">Sinpaş GYO</div>
+          <div class="company-sector">Lifestyle Residential</div>
+        </div>
+        <span class="tag tag-ist">Istanbul</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Avni Çelik</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Istanbul</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">~74.8B TL · Equity ~53.1B TL</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">#8 — Residential districts in Oman new cities</div></div>
+        </div>
+        <p>Lifestyle-oriented residential community developer. Bosphorus City, Aydos Country, Sinpaş Finance City (adjacent to Istanbul Financial Center). Green living and lifestyle-branded neighbourhoods.</p>
+        <a href="https://www.sinpas.com.tr" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.sinpas.com.tr</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">Kuzu Group</div>
+          <div class="company-sector">Mixed-Use / Complex Development</div>
+        </div>
+        <span class="tag tag-ist">Istanbul</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Özen Kuzu</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Istanbul</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">~15.4B TL · Equity ~11.5B TL</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">#10 — Salalah New City selected parcels</div></div>
+        </div>
+        <p>Private developer with strong Middle East investment experience. SeaPearl Ataköy — one of Istanbul's largest seafront mixed-use developments (marina, residences, hotel, retail on Marmara coast).</p>
+        <a href="https://www.kuzugroup.com" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.kuzugroup.com</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">Emlak Konut GYO</div>
+          <div class="company-sector">Public Real Estate Developer</div>
+        </div>
+        <span class="tag tag-ist">Istanbul</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Yasir Yılmaz</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Istanbul</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">Largest public RE developer in Türkiye</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">#1 — Sultan Haitham City / Salalah New City master developer</div></div>
+        </div>
+        <p>Türkiye's largest public real estate developer — master developer for major urban transformation and new city projects. Metropol Istanbul, Istanbul Financial Center co-developer. Government-backed, massive scale.</p>
+        <a href="https://www.emlakkonut.com.tr/en-US" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.emlakkonut.com.tr</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">Artaş Holding</div>
+          <div class="company-sector">Luxury Real Estate / Hospitality</div>
+        </div>
+        <span class="tag tag-ist">Istanbul</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Süleyman / Serhan Çetinsaya</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Istanbul</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">TBC</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">Luxury integrated urban development</div></div>
+        </div>
+        <p>Owner: Mandarin Oriental Bosphorus, Vadi Istanbul integrated city complex, Radisson Blu Vadistanbul, Swissotel The Bosphorus. One of Türkiye's most prominent integrated urban development groups.</p>
+        <a href="https://www.artas.com.tr" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.artas.com.tr</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">Doğuş Group</div>
+          <div class="company-sector">Tourism / Hospitality / Automotive / RE</div>
+        </div>
+        <span class="tag tag-ist">Istanbul</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Ferit F. Şahenk</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Istanbul</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">~17.4B TL · Equity ~12.4B TL</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">#4 — Salalah Marina / Waterfront</div></div>
+        </div>
+        <p>One of Türkiye's largest conglomerates. Galataport Istanbul — flagship Bosphorus waterfront regeneration (cruise terminal, heritage retail, F&B, public realm). Active in Bodrum and Aegean hospitality.</p>
+        <a href="https://www.dogusgroup.com.tr" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.dogusgroup.com.tr</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">Istanbul Financial Center</div>
+          <div class="company-sector">Financial District</div>
+        </div>
+        <span class="tag tag-ist">Istanbul</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Ahmet İhsan Erdem</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Istanbul</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">State-backed mega project</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">Al Khuwair Downtown reference</div></div>
+        </div>
+        <p>New landmark financial district on the Asian side of Istanbul. Hub integrating banks, regulators, offices and public realm at scale. Turkey's answer to Canary Wharf / Dubai International Financial Centre.</p>
+        <a href="https://www.ifc.com.tr/en" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.ifc.com.tr</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">TOKİ</div>
+          <div class="company-sector">Public Housing Authority</div>
+        </div>
+        <span class="tag tag-ank">Ankara</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Levent Sungur</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Ankara</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">National housing mandate</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">Mass housing / new city authority reference</div></div>
+        </div>
+        <p>Türkiye's national housing authority — responsible for mass housing, urban transformation and social housing projects nationwide. Operates under the Presidency. Direct counterpart to Oman's mass housing agenda.</p>
+        <a href="https://www.toki.gov.tr/en" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.toki.gov.tr</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">Pasifik Holding</div>
+          <div class="company-sector">Mixed-Use Development</div>
+        </div>
+        <span class="tag tag-ank">Ankara</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Fatih Erdoğan</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Ankara</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">TBC</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">Commercial / mixed-use district</div></div>
+        </div>
+        <p>Next Level Project in Ankara — mixed-use development with shopping mall component. Active developer in Ankara's commercial real estate market.</p>
+        <a href="http://pasifik.com" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 pasifik.com</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">Torunlar GYO</div>
+          <div class="company-sector">Retail / Commercial / Mixed-Use</div>
+        </div>
+        <span class="tag tag-ist">Istanbul</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Aziz Torun</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Istanbul</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">~136.5B TL · Equity ~113.9B TL</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">#3 — Al Khuwair Downtown</div></div>
+        </div>
+        <p>One of Türkiye's largest private developers. Mall of Istanbul (one of Europe's largest shopping centres), Torun Tower. Mega-scale balance sheet — among the strongest in the sector.</p>
+        <a href="https://www.torunlargyo.com.tr/en" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.torunlargyo.com.tr</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">Fuzul GYO</div>
+          <div class="company-sector">Residential Development</div>
+        </div>
+        <span class="tag tag-ist">Istanbul</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Mahmut / Zeki Akbal</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Istanbul</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">~11.9B TL · Equity ~4.2B TL</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">Residential clusters</div></div>
+        </div>
+        <p>Active private residential developer. Fuzul Barbaros 48 (Istanbul). Sales-driven housing projects across Turkey — affordable to mid-market residential.</p>
+        <a href="https://www.fuzulgroup.com" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.fuzulgroup.com</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">RAMS Group</div>
+          <div class="company-sector">Construction / Real Estate</div>
+        </div>
+        <span class="tag tag-bod">Bodrum</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Ramazan Bülbül</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Bodrum</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">TBC</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">Construction / coastal development</div></div>
+        </div>
+        <p>Major construction, real estate and investment conglomerate. RAMS Resort Bodrum. Strong presence in Aegean coastal development and hospitality.</p>
+        <a href="https://www.ramsgroup.com.tr" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.ramsgroup.com.tr</a>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="company-hdr" onclick="toggleCompany(this)">
+        <div>
+          <div class="company-name">KONUTDER</div>
+          <div class="company-sector">Industry Association</div>
+        </div>
+        <span class="tag tag-ist">Istanbul</span>
+        <div class="company-chevron">▼</div>
+      </div>
+      <div class="company-body">
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Contact</div><div class="info-val">Ziya Yılmaz (President)</div></div>
+          <div class="info-item"><div class="info-label">City</div><div class="info-val">Istanbul</div></div>
+          <div class="info-item"><div class="info-label">Scale</div><div class="info-val">Industry-wide</div></div>
+          <div class="info-item"><div class="info-label">Benchmark</div><div class="info-val">Industry association — comprehensive access</div></div>
+        </div>
+        <p>Housing Developers & Investors Association of Turkey. Members include all major Turkish residential and mixed-use developers. Dinner on Day 6 brings together 15+ leading firms — Fer Yapı, DAP, Bahaş, Sinpaş GYO, Ağaoğlu, Dumankaya, Sur Yapı, Torunlar GYO, İş GYO, Çukurova, Halk GYO, Fuzul, Ege Yapı, MESA, Kuzu.</p>
+        <a href="https://www.konutder.org.tr" class="ext" target="_blank" style="margin-top:8px;display:inline-flex">🔗 www.konutder.org.tr</a>
+      </div>
+    </div></div>
+</div>
+
+<!-- ══ PROJECTS ══ -->
+<div id="panel-projects" class="panel">
+  <div class="top-bar">
+    <div><div class="page-title">Projects</div><div class="page-sub">Site visits and reference projects</div></div>
+    <button class="export-btn" onclick="exportProjects()">⬇ Export CSV</button>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="fProj('all',this)">All</button>
+    <button class="filter-btn" onclick="fProj('Ankara',this)">Ankara</button>
+    <button class="filter-btn" onclick="fProj('Bodrum',this)">Bodrum</button>
+    <button class="filter-btn" onclick="fProj('Istanbul',this)">Istanbul</button>
+  </div>
+  <div class="projects-grid" id="projects-grid">
+    <div class="project-card" data-city="Ankara">
+      <div class="project-img">🏘</div>
+      <div class="project-body">
+        <div class="project-name">Sinpaş Altınoran</div>
+        <div class="project-company">Sinpaş GYO · Ankara</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Residential Community</span></div>
+        <div class="project-desc">Large-scale branded residential community in Ankara. Benchmark for residential district planning in Oman new cities.</div>
+        <div class="project-links">
+          <a href="https://sinpasaltinoran.com.tr" class="ext" target="_blank">🔗 Website</a>
+          <a href="https://maps.app.goo.gl/FQRSZQsXxcAuugFv8" class="ext ext-map" target="_blank">📍 Map</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Ankara">
+      <div class="project-img">🏬</div>
+      <div class="project-body">
+        <div class="project-name">Next Level Project</div>
+        <div class="project-company">Pasifik Holding · Ankara</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Mixed-Use / Mall</span></div>
+        <div class="project-desc">Mixed-use development with shopping mall component in Ankara central area.</div>
+        <div class="project-links">
+          <a href="http://pasifik.com" class="ext" target="_blank">🔗 Website</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Bodrum">
+      <div class="project-img">🏨</div>
+      <div class="project-body">
+        <div class="project-name">Bodrum Edition Hotel</div>
+        <div class="project-company">Rönesans Holding · Bodrum</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Luxury Hotel</span></div>
+        <div class="project-desc">The Bodrum Edition — international luxury hotel brand. Part of Marriott International portfolio. Benchmark for luxury coastal hospitality.</div>
+        <div class="project-links">
+          <a href="https://www.marriott.com/en-us/hotels/bjwbr-the-bodrum-edition" class="ext" target="_blank">🔗 Website</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Bodrum">
+      <div class="project-img">🏡</div>
+      <div class="project-body">
+        <div class="project-name">Mesa Demirbükü Project</div>
+        <div class="project-company">MESA · Bodrum</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Residential</span></div>
+        <div class="project-desc">Coastal residential project by MESA in Demirbükü area, Bodrum peninsula.</div>
+        <div class="project-links">
+          <a href="https://www.mesa.com.tr/en" class="ext" target="_blank">🔗 Website</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Bodrum">
+      <div class="project-img">🌊</div>
+      <div class="project-body">
+        <div class="project-name">Aman Ruya Resort</div>
+        <div class="project-company">Re Pie Holding / Bilgili Holding · Bodrum</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Ultra-Luxury Resort</span></div>
+        <div class="project-desc">Aman Resorts property in Bodrum — one of the world's most exclusive resort brands. Direct benchmark for premium coastal destination development in Oman.</div>
+        <div class="project-links">
+          <a href="https://www.aman.com/resorts/amanruya" class="ext" target="_blank">🔗 Website</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Bodrum">
+      <div class="project-img">🏝</div>
+      <div class="project-body">
+        <div class="project-name">Mandarin Oriental Bodrum</div>
+        <div class="project-company">ASTAŞ Holding · Bodrum</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Luxury Coastal Resort</span></div>
+        <div class="project-desc">Ultra-luxury coastal resort and residence. Direct benchmark for Salalah Marina waterfront luxury development. ASTAŞ owns MO Bodrum, MO Bosphorus, MO Etiler.</div>
+        <div class="project-links">
+          <a href="https://www.mandarinoriental.com/en/bodrum" class="ext" target="_blank">🔗 Website</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Bodrum">
+      <div class="project-img">🌿</div>
+      <div class="project-body">
+        <div class="project-name">Six Senses Kaplankaya</div>
+        <div class="project-company">Six Senses · Bodrum</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Ultra-Luxury Wellness Resort</span></div>
+        <div class="project-desc">World-class wellness resort on the Aegean coast. ~2 hours from Yalıkavak by road. Benchmark for premium integrated wellness and hospitality in a coastal destination.</div>
+        <div class="project-links">
+          <a href="https://www.sixsenses.com/en/resorts/kaplankaya" class="ext" target="_blank">🔗 Website</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Istanbul">
+      <div class="project-img">⚓</div>
+      <div class="project-body">
+        <div class="project-name">IstMarina</div>
+        <div class="project-company">DAP Yapı · Istanbul</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Waterfront Mixed-Use</span></div>
+        <div class="project-desc">Waterfront mixed-use development on the Marmara coast. Marina, residences, hotel and commercial. European Property Awards winner. 1h 20min from Radisson Blu Vadistanbul.</div>
+        <div class="project-links">
+          <a href="https://dapyapi.com.tr/projeler/ist-marina" class="ext" target="_blank">🔗 Website</a>
+          <a href="https://maps.app.goo.gl/rm33RpSUuWGxZCU58" class="ext ext-map" target="_blank">📍 Map</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Istanbul">
+      <div class="project-img">🐚</div>
+      <div class="project-body">
+        <div class="project-name">SeaPearl Ataköy</div>
+        <div class="project-company">Kuzu Group · Istanbul</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Seafront Mixed-Use</span></div>
+        <div class="project-desc">One of Istanbul's largest seafront mixed-use developments. Marina, residences, hotel and retail on the Marmara coast. 60 min from IstMarina.</div>
+        <div class="project-links">
+          <a href="http://www.seapearlatakoy.com" class="ext" target="_blank">🔗 Website</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Istanbul">
+      <div class="project-img">🏦</div>
+      <div class="project-body">
+        <div class="project-name">Istanbul Financial Center</div>
+        <div class="project-company">IFC · Istanbul</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Financial District</span></div>
+        <div class="project-desc">New landmark financial district on the Asian side. Hub integrating major banks, regulators, offices and public realm at urban scale. Benchmark for Al Khuwair Downtown.</div>
+        <div class="project-links">
+          <a href="https://www.ifc.com.tr/en" class="ext" target="_blank">🔗 Website</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Istanbul">
+      <div class="project-img">🏗</div>
+      <div class="project-body">
+        <div class="project-name">Sinpaş Finance City</div>
+        <div class="project-company">Sinpaş GYO · Istanbul</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Financial / Mixed-Use</span></div>
+        <div class="project-desc">Mixed-use financial district development adjacent to Istanbul Financial Center (Ataşehir). Office, commercial and residential components.</div>
+        <div class="project-links">
+          <a href="https://www.sinpasfinanssehir.com" class="ext" target="_blank">🔗 Website</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Istanbul">
+      <div class="project-img">🌆</div>
+      <div class="project-body">
+        <div class="project-name">Metropol Istanbul</div>
+        <div class="project-company">Emlak Konut GYO · Istanbul</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Urban Transformation</span></div>
+        <div class="project-desc">Emlak Konut GYO flagship urban transformation project in Istanbul. Large-scale mixed-use master development — direct reference for Oman new city master developer typology.</div>
+        <div class="project-links">
+          <a href="https://www.emlakkonut.com.tr/en-US" class="ext" target="_blank">🔗 Website</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Istanbul">
+      <div class="project-img">🏢</div>
+      <div class="project-body">
+        <div class="project-name">Hilltown Küçükyalı</div>
+        <div class="project-company">Rönesans Holding · Istanbul</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Commercial / Mixed-Use</span></div>
+        <div class="project-desc">Integrated commercial and mixed-use project by Rönesans Holding on the Asian side of Istanbul. Retail, office and lifestyle components.</div>
+        <div class="project-links">
+          <a href="https://ronesans.com/projeler/gayrimenkul-grubu/ronesansbiz-kucukyali" class="ext" target="_blank">🔗 Website</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Istanbul">
+      <div class="project-img">🚢</div>
+      <div class="project-body">
+        <div class="project-name">Galataport Istanbul</div>
+        <div class="project-company">Doğuş Group · Istanbul</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Waterfront Regeneration</span></div>
+        <div class="project-desc">Flagship Bosphorus waterfront regeneration. Cruise terminal, heritage retail, restaurants and extensive public realm on the historic Bosphorus waterfront. Direct benchmark for Salalah Marina / Waterfront development.</div>
+        <div class="project-links">
+          <a href="https://galataport.com.tr/en" class="ext" target="_blank">🔗 Website</a>
+          
+        </div>
+      </div>
+    </div></div>
+</div>
+
+<!-- ══ MAP ══ -->
+<div id="panel-map" class="panel">
+  <div class="top-bar">
+    <div><div class="page-title">Map & Route</div><div class="page-sub">Ankara · Bodrum · Istanbul · July 2026</div></div>
+    <a href="https://maps.app.goo.gl/jc8JSoaqNSnWjeCb8" class="export-btn" target="_blank">🗺 Open Full Route</a>
+  </div>
+  <div class="map-section">
+    <div class="map-header">
+      <div class="map-title">📍 Ankara · Bodrum · Istanbul — Full Visit Area</div>
+    </div>
+    <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d3171987.384050974!2d27.4203192!3d39.069028!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2str!4v1781865114792!5m2!1sen!2str" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+  <div class="location-list">
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Sinpaş Altınoran</div><div class="loc-addr">Ankara · <a href="https://maps.app.goo.gl/FQRSZQsXxcAuugFv8" class="ext ext-map" style="display:inline;border:none;padding:0;font-size:10px" target="_blank">📍</a></div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Ministry of Environment</div><div class="loc-addr">Ankara · <a href="https://maps.app.goo.gl/kLn757fysf6NYdnM9" class="ext ext-map" style="display:inline;border:none;padding:0;font-size:10px" target="_blank">📍</a></div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Ankara Airport (ESB)</div><div class="loc-addr">Ankara · <a href="https://maps.app.goo.gl/rcvKdi67XentezTe6" class="ext ext-map" style="display:inline;border:none;padding:0;font-size:10px" target="_blank">📍</a></div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Sheraton Hotel</div><div class="loc-addr">Ankara · Accommodation Day 0–2</div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">METT Hotel · Yalıkavak Marina</div><div class="loc-addr">Bodrum · <a href="https://maps.app.goo.gl/6WqQ5qdhXCN1Q1EB9" class="ext ext-map" style="display:inline;border:none;padding:0;font-size:10px" target="_blank">📍</a></div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">Six Senses Kaplankaya</div><div class="loc-addr">Bodrum · <a href="https://www.sixsenses.com/en/resorts/kaplankaya" class="ext" style="display:inline;border:none;padding:0;font-size:10px" target="_blank">🔗</a></div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">The Bodrum Edition Hotel</div><div class="loc-addr">Bodrum · Rönesans</div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">Mandarin Oriental Bodrum</div><div class="loc-addr">Bodrum · ASTAŞ Holding</div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">Aman Ruya Resort</div><div class="loc-addr">Bodrum · Re Pie Holding</div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">Radisson Blu Vadistanbul</div><div class="loc-addr">Istanbul · Accommodation Day 4–7</div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">IstMarina · DAP Yapı</div><div class="loc-addr">Istanbul · <a href="https://maps.app.goo.gl/rm33RpSUuWGxZCU58" class="ext ext-map" style="display:inline;border:none;padding:0;font-size:10px" target="_blank">📍</a></div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">Istanbul Financial Center</div><div class="loc-addr">Istanbul · Ataşehir</div></div></div>
+    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">Galataport Istanbul</div><div class="loc-addr">Karaköy · <a href="https://galataport.com.tr/en" class="ext" style="display:inline;border:none;padding:0;font-size:10px" target="_blank">🔗</a></div></div></div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+function show(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+function tog(hdr){
+  const body=hdr.nextElementSibling;
+  const t=hdr.querySelector('.day-hdr-toggle');
+  const open=body.style.display==='none';
+  body.style.display=open?'':'none';
+  t.textContent=open?'▼':'▶';
+}
+function toggleCompany(hdr){
+  const body=hdr.nextElementSibling;
+  const chev=hdr.querySelector('.company-chevron');
+  const open=body.classList.contains('open');
+  body.classList.toggle('open',!open);
+  chev.classList.toggle('open',!open);
+}
+function fCity(city,btn){
+  document.querySelectorAll('#people-grid .person-card').forEach(c=>{
+    c.style.display=(city==='all'||c.dataset.city.includes(city))?'':'none';
+  });
+  btn.closest('.filter-bar').querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function fProj(city,btn){
+  document.querySelectorAll('#projects-grid .project-card').forEach(c=>{
+    c.style.display=(city==='all'||c.dataset.city===city)?'':'none';
+  });
+  btn.closest('.filter-bar').querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function filterPeople(){
+  const q=document.getElementById('people-search').value.toLowerCase();
+  document.querySelectorAll('#people-grid .person-card').forEach(c=>{
+    c.style.display=c.textContent.toLowerCase().includes(q)?'':'none';
+  });
+}
+function filterCo(){
+  const q=document.getElementById('co-search').value.toLowerCase();
+  document.querySelectorAll('#company-list .company-card').forEach(c=>{
+    c.style.display=c.textContent.toLowerCase().includes(q)?'':'none';
+  });
+}
+function csv(rows,fn){
+  const d=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(d);a.download=fn;a.click();
+}
+function exportSchedule(){csv([['Date','Day','From','To','Duration','Activity','Type'],['30 Jun','Travel','13:00','17:50','5h 50m','Muscat→Istanbul Oman Air','Flight TBC'],['30 Jun','Travel','22:00','23:10','1h 10m','Istanbul→Ankara Qatar','Flight'],['1 Jul','Ankara','11:00','12:30','1.5h','Sinpaş Altınoran','Site Visit'],['1 Jul','Ankara','13:00','14:30','1.5h','Pasifik Holding Next Level','Site Visit'],['1 Jul','Ankara','20:00','21:00','1h','Dinner Minister Housing','Dinner TBC'],['2 Jul','Ankara','11:00','13:00','2h','Ministry+Emlak Konut+TOKİ','Key Meeting'],['2 Jul','Ankara','13:00','','','MoU Signing','Ceremony'],['2 Jul','Bodrum','17:00','18:30','1.5h','Flight Ankara→Bodrum AJET','Flight'],['2 Jul','Bodrum','20:30','21:30','1h','Dinner Sait Restaurant','Dinner'],['3 Jul','Bodrum','10:00','16:00','6h','Boat Tour+Six Senses','Site Visit/Boat'],['3 Jul','Bodrum','19:30','21:30','2h','Yalıkavak Marina+RAMS Dinner','Site Visit+Dinner'],['4 Jul','Bodrum','09:30','10:30','1h','Rönesans Bodrum Edition','Site Visit'],['4 Jul','Bodrum','11:00','12:00','1h','Mesa Demirbükü MESA','Site Visit'],['4 Jul','Bodrum','12:15','13:00','1h','Aman Ruya Re Pie','Site Visit'],['4 Jul','Bodrum','13:30','14:30','1h','ASTAŞ Lunch MO Bodrum','Business Lunch'],['4 Jul','Istanbul','18:25','','','Flight Bodrum→Istanbul','Flight'],['4 Jul','Istanbul','21:30','22:30','1h','Dinner Seraf','Dinner'],['5 Jul','Istanbul','10:30','12:00','1.5h','IstMarina DAP','Site Visit'],['5 Jul','Istanbul','13:00','14:30','1.5h','SeaPearl Ataköy Kuzu','Site Visit'],['5 Jul','Istanbul','20:00','21:00','1h','ARTAŞ Dinner','Business Dinner'],['6 Jul','Istanbul','10:00','12:00','2h','Istanbul Financial Center','Site Visit'],['6 Jul','Istanbul','13:00','14:00','1h','Istanbul Finance City Sinpaş','Site Visit'],['6 Jul','Istanbul','14:20','15:30','1h 10m','Metropol Istanbul Emlak Konut','Site Visit'],['6 Jul','Istanbul','15:50','17:00','1h 10m','Hilltown Küçükyalı Rönesans','Site Visit'],['6 Jul','Istanbul','19:00','21:00','2h','KONUTDER Dinner at Radisson','Association Dinner'],['7 Jul','Istanbul','10:30','12:00','1.5h','Galataport Doğuş Group','Site Visit'],['7 Jul','Muscat','18:15','00:45','6h','Istanbul→Muscat','Flight TBC']],'turkey-schedule-2026.csv');}
+function exportPeople(){csv([['Name','Position','Company','City','Project Visit','Website'],['Ramazan Bülbül','Chairman','RAMS','Bodrum','RAMS Resort Bodrum','ramsgroup.com.tr'],['Erman Ilıcak','Chairman','Rönesans','Bodrum/Istanbul','Bodrum Edition+Hilltown','ronesans.com'],['Erhan Boysanoğlu','Chairman','MESA','Bodrum','Mesa Demirbükü','mesa.com.tr'],['Dr. M. Emre Çamlıbel','Chairman','Re Pie Holding','Bodrum','Amanruya Bodrum','repie.com.tr'],['Vedat Aşçı','Chairman','ASTAŞ Holding','Bodrum','Mandarin Oriental','astas-holding.com'],['Ziya Yılmaz','Chairman+KONUTDER','DAP Yapı','Istanbul','IstMarina','dapholding.com'],['Avni Çelik','Founder','Sinpaş Holding','Istanbul','Sinpaş Finance City','sinpas.com.tr'],['Özen Kuzu','Chairman CEO','Kuzu Group','Istanbul','SeaPearl Ataköy','kuzugroup.com'],['Yasir Yılmaz','GM','Emlak Konut GYO','Istanbul','Metropol Istanbul','emlakkonut.com.tr'],['Süleyman/Serhan Çetinsaya','Owner','Artaş Holding','Istanbul','','artas.com.tr'],['Ferit F. Şahenk','Chairman','Doğuş Group','Istanbul','Galataport','dogusgroup.com.tr'],['Ahmet İhsan Erdem','CEO','Istanbul Financial Center','Istanbul','IFC','ifc.com.tr'],['Levent Sungur','President','TOKİ','Ankara','','toki.gov.tr'],['Fatih Erdoğan','Chairman','Pasifik Holding','Ankara','Next Level','pasifik.com'],['Aziz Torun','Chairman','Torunlar GYO','Istanbul','','torunlargyo.com.tr'],['Mesut Toprak','Chairman','Astay','Istanbul','Four Seasons Istanbul',''],['Mahmut/Zeki Akbal','Chairman/Deputy','Fuzul GYO','Istanbul','Fuzul Barbaros 48','fuzulgroup.com'],['H.E. Murat Kurum','Minister','Ministry of Environment','Ankara','','csb.gov.tr']],'turkey-people-2026.csv');}
+function exportCompanies(){csv([['Company','Sector','Contact','City','Assets','Website'],['ASTAŞ Holding','Ultra-Luxury RE','Vedat Aşçı','Bodrum','Multi-billion $','astas-holding.com'],['Rönesans Holding','Construction/Healthcare/RE','Erman Ilıcak','Bodrum/Istanbul','~205B TL','ronesans.com'],['MESA','Residential','Erhan Boysanoğlu','Bodrum','~25-30B TL','mesa.com.tr'],['Re Pie Holding','Investment/RE','Dr. M. Emre Çamlıbel','Bodrum','TBC','repie.com.tr'],['DAP Holding','Premium Residential','Ziya Yılmaz','Istanbul','~30.4B TL','dapholding.com'],['Sinpaş GYO','Lifestyle Residential','Avni Çelik','Istanbul','~74.8B TL','sinpas.com.tr'],['Kuzu Group','Mixed-Use','Özen Kuzu','Istanbul','~15.4B TL','kuzugroup.com'],['Emlak Konut GYO','Public RE','Yasir Yılmaz','Istanbul','Largest public RE TR','emlakkonut.com.tr'],['Artaş Holding','Luxury RE/Hospitality','Süleyman Çetinsaya','Istanbul','TBC','artas.com.tr'],['Doğuş Group','Tourism/Hospitality/RE','Ferit F. Şahenk','Istanbul','~17.4B TL','dogusgroup.com.tr'],['IFC','Financial District','Ahmet İhsan Erdem','Istanbul','State-backed','ifc.com.tr'],['TOKİ','Public Housing','Levent Sungur','Ankara','National','toki.gov.tr'],['Pasifik Holding','Mixed-Use','Fatih Erdoğan','Ankara','TBC','pasifik.com'],['Torunlar GYO','Retail/Commercial','Aziz Torun','Istanbul','~136.5B TL','torunlargyo.com.tr'],['Fuzul GYO','Residential','Mahmut/Zeki Akbal','Istanbul','~11.9B TL','fuzulgroup.com'],['RAMS Group','Construction/RE','Ramazan Bülbül','Bodrum','TBC','ramsgroup.com.tr'],['KONUTDER','Association','Ziya Yılmaz','Istanbul','Industry-wide','konutder.org.tr']],'turkey-companies-2026.csv');}
+function exportProjects(){csv([['Project','Company','City','Type','Website'],['Sinpaş Altınoran','Sinpaş GYO','Ankara','Residential Community','sinpasaltinoran.com.tr'],['Next Level Project','Pasifik Holding','Ankara','Mixed-Use/Mall','pasifik.com'],['Bodrum Edition Hotel','Rönesans','Bodrum','Luxury Hotel','marriott.com'],['Mesa Demirbükü','MESA','Bodrum','Residential','mesa.com.tr'],['Aman Ruya Resort','Re Pie Holding','Bodrum','Ultra-Luxury Resort','aman.com'],['Mandarin Oriental Bodrum','ASTAŞ','Bodrum','Luxury Coastal Resort','mandarinoriental.com'],['Six Senses Kaplankaya','Six Senses','Bodrum','Wellness Resort','sixsenses.com'],['IstMarina','DAP Yapı','Istanbul','Waterfront Mixed-Use','dapyapi.com.tr'],['SeaPearl Ataköy','Kuzu Group','Istanbul','Seafront Mixed-Use','seapearlatakoy.com'],['Istanbul Financial Center','IFC','Istanbul','Financial District','ifc.com.tr'],['Istanbul Finance City','Sinpaş GYO','Istanbul','Financial/Mixed-Use','sinpasfinanssehir.com'],['Metropol Istanbul','Emlak Konut GYO','Istanbul','Urban Transformation','emlakkonut.com.tr'],['Hilltown Küçükyalı','Rönesans','Istanbul','Commercial/Mixed-Use','ronesans.com'],['Galataport Istanbul','Doğuş Group','Istanbul','Waterfront Regeneration','galataport.com.tr']],'turkey-projects-2026.csv');}
+</script>
+</body>
+</html>
