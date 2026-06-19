@@ -1,1 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intelligence Hub — ASLAN</title>
+<meta name="description" content="ASLAN intelligence: real estate reports, market notes and verified investment basics.">
+<meta name="theme-color" content="#0e2a47">
+<style>
+:root{
+  --ink:#13171d; --navy:#0e2a47; --navy2:#16405f; --gold:#b98a3e; --gold2:#c8a35b;
+  --paper:#fbfaf7; --soft:#f4f1ea; --soft2:#f8f6f1; --line:#e8e2d6; --muted:#6b7280;
+  --green:#2f5d4f; --blue:#1877f2; --white:#fff; --chip:#efe7d6;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink);line-height:1.6;background:var(--paper);-webkit-font-smoothing:antialiased}
+a{color:#0b5cad;text-decoration:none}
+.t-tr{display:none}
+body.show-tr .t-en{display:none}
+body.show-tr .t-tr{display:inline}
 
+/* top bar */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(14,42,71,.97);backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(255,255,255,.08)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;letter-spacing:.16em;font-size:15px}
+.brand img{height:30px;width:auto;filter:brightness(0) invert(1)}
+.brand small{font-weight:500;letter-spacing:.14em;color:#cdb888;font-size:10px;display:block;margin-top:1px}
+.nav{margin-left:auto;display:flex;align-items:center;gap:8px}
+.nav a.lnk{color:#cfd8e6;font-size:12.5px;letter-spacing:.04em;padding:6px 10px;border-radius:8px}
+.nav a.lnk:hover{color:#fff;background:rgba(255,255,255,.08)}
+.langtog{display:inline-flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden}
+.langtog button{background:transparent;border:0;color:#cdb888;font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 12px;cursor:pointer;font-family:inherit}
+.langtog button.active{background:var(--gold);color:#1a1208}
+
+/* layout */
+.wrap{max-width:1180px;margin:0 auto;padding:28px 24px 60px}
+.hero{position:relative;overflow:hidden;color:#fff;border-radius:22px;margin:22px 0 26px;
+  background:linear-gradient(125deg,#0b2238 0%,#123a59 55%,#1d4f4a 100%);padding:48px 40px}
+.hero .kicker{letter-spacing:.20em;text-transform:uppercase;font-size:11.5px;color:#d8bd8c;font-weight:700}
+.hero h1{font-size:40px;line-height:1.08;margin:14px 0 14px;font-weight:800;letter-spacing:-.01em}
+.hero p.sub{font-size:17.5px;max-width:880px;color:#e9eff4;margin:0}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.pill{border:1px solid rgba(255,255,255,.34);border-radius:999px;padding:6px 13px;font-size:12.5px;color:#fff}
+.pill.solid{background:var(--gold);border-color:var(--gold);color:#1a1208;font-weight:700}
+
+.section{margin:34px 0}
+.kick{letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:var(--gold);font-weight:800;margin-bottom:6px}
+.section h2{font-size:25px;color:var(--navy);margin:0 0 6px;font-weight:800;letter-spacing:-.01em}
+.rule{height:3px;width:64px;background:var(--gold);border-radius:3px;margin:8px 0 16px}
+.section h3{font-size:18px;color:var(--green);margin:22px 0 8px}
+.lead{font-size:16px;color:#26303a}
+
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{border:1px solid var(--line);border-radius:16px;padding:18px 18px;background:#fff;box-shadow:0 2px 12px rgba(19,23,29,.04)}
+.card h3,.card h4{margin-top:0}
+.card h4{font-size:15.5px;color:var(--navy)}
+.stat{font-size:25px;font-weight:800;color:var(--navy);line-height:1.12;letter-spacing:-.01em}
+.stat.gold{color:var(--gold)}
+.small{font-size:12.5px;color:var(--muted)}
+.src-tag{font-size:11px;color:#9a8e76;margin-top:8px;display:block;font-style:italic}
+
+.tag{display:inline-block;font-size:11.5px;color:var(--green);background:#eef3f0;border:1px solid #d8e6df;
+  border-radius:999px;padding:3px 9px;margin:3px 4px 3px 0}
+.tag.gold{background:#fbf4e7;color:#7b5a24;border-color:#ecd9b6}
+.tag.blue{background:#eaf2fe;color:#11569d;border-color:#cfe0fb}
+
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:12px 0}
+.table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:760px}
+.table th{background:var(--navy);color:#fff;text-align:left;font-weight:700;font-size:12.5px;letter-spacing:.02em}
+.table th,.table td{border-bottom:1px solid var(--line);border-right:1px solid #eef0f3;padding:10px 11px;vertical-align:top}
+.table tr:last-child td{border-bottom:0}
+.table td:last-child,.table th:last-child{border-right:0}
+.table tbody tr:nth-child(even){background:var(--soft2)}
+.table b{color:var(--navy)}
+
+.callout{border-left:4px solid var(--gold);background:#fbf6ec;padding:15px 18px;border-radius:12px;margin:16px 0;font-size:14.5px}
+.callout.navy{border-left-color:var(--navy2);background:#eef4f8}
+
+.route-step{display:flex;gap:12px;margin:11px 0;align-items:flex-start}
+.num{min-width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:flex;
+  align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:none}
+.route-step div{font-size:14px}
+.bestfor{font-size:13px;color:#33414e;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+
+.cta{background:linear-gradient(125deg,#0b2238,#1d4f4a);color:#fff;border-radius:18px;padding:30px 30px;margin:30px 0}
+.cta h2{color:#fff;font-size:23px;margin:0 0 8px}
+.cta p{color:#e6eef3;font-size:15px;margin:0 0 16px;max-width:760px}
+.btn{display:inline-block;background:var(--gold);color:#1a1208;font-weight:800;padding:12px 22px;border-radius:999px;
+  letter-spacing:.03em;font-size:14px}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.45);color:#fff;margin-left:8px}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px 26px;margin-top:14px}
+.checklist div{font-size:13.5px;color:#dbe6ee;padding-left:18px;position:relative}
+.checklist div::before{content:"›";position:absolute;left:0;color:var(--gold2);font-weight:800}
+
+/* city hub cards */
+.city-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  background:#fff;box-shadow:0 2px 12px rgba(19,23,29,.05);transition:transform .15s ease,box-shadow .15s ease}
+.city-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(19,23,29,.10)}
+.city-top{padding:20px 20px 6px;background:linear-gradient(125deg,#0b2238,#16405f);color:#fff}
+.city-top .cc-country{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#d8bd8c;font-weight:700}
+.city-top h3{margin:6px 0 2px;font-size:23px;font-weight:800}
+.city-body{padding:14px 20px 18px;display:flex;flex-direction:column;flex:1}
+.city-body p{font-size:13.5px;color:#33414e;margin:0 0 12px;flex:1}
+.city-go{font-weight:800;color:var(--gold);font-size:13.5px;letter-spacing:.03em}
+.city-card.soon{opacity:.62}
+.city-card.soon .city-go{color:var(--muted)}
+.badge-soon{font-size:10px;background:#efe7d6;color:#7b5a24;border-radius:999px;padding:2px 8px;font-weight:700;letter-spacing:.04em}
+
+.howrow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+.how{border:1px solid var(--line);border-radius:16px;padding:18px;background:#fff}
+.how .hn{width:30px;height:30px;border-radius:50%;background:var(--gold);color:#1a1208;font-weight:800;
+  display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.how h4{margin:0 0 4px;font-size:15.5px;color:var(--navy)}
+.how p{margin:0;font-size:13.5px;color:#475260}
+
+/* sources + footer */
+.sources{margin-top:40px;border-top:1px solid var(--line);padding-top:18px}
+.sources h2{font-size:16px;color:var(--navy);margin:0 0 6px}
+.sources .disc{font-size:11px;color:#8a8270;margin:0 0 10px;line-height:1.5}
+.src-table{width:100%;border-collapse:collapse;font-size:10.5px;color:#5c6470}
+.src-table th{text-align:left;background:#f1ede3;color:#5b5240;padding:5px 7px;font-weight:700;border:1px solid var(--line)}
+.src-table td{padding:5px 7px;border:1px solid var(--line);vertical-align:top}
+.src-table a{color:#0b5cad;word-break:break-all}
+.footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:12.5px;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.powered{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:#3a4654}
+.powered b{color:var(--blue);letter-spacing:.02em}
+.footer .loc{color:#9a8e76;letter-spacing:.06em;font-size:11.5px}
+
+@media(max-width:920px){
+  .grid,.grid2,.grid4,.howrow,.checklist{grid-template-columns:1fr}
+  .hero h1{font-size:30px}.hero{padding:32px 22px}.wrap{padding:20px 15px 50px}
+  .topbar-in{padding:10px 15px}.brand{font-size:13px}
+}
+@media print{
+  .topbar,.cta .btn{display:none}.wrap{max-width:100%}.hero{border-radius:0}
+  .card,.city-card{box-shadow:none}.section{page-break-inside:avoid}
+  body.show-tr .t-en, .t-tr{display:inline !important}
+}
+
+/* --- site-wide additions (kept minimal) --- */
+.nav{flex-wrap:wrap;row-gap:6px}
+.nav a.lnk.active{color:#fff;background:rgba(255,255,255,.12)}
+.btnrow{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.btnrow .btn{margin:0}
+.lead2{font-size:15px;color:#475260;max-width:780px;margin:0 0 6px}
+.center{text-align:center}
+.card.dark{background:linear-gradient(125deg,#0b2238,#16405f);color:#fff;border-color:transparent}
+.card.dark h4{color:#fff}.card.dark p{color:#dbe6ee}
+.card .go{display:inline-block;margin-top:10px;font-weight:800;color:var(--gold);font-size:13.5px;letter-spacing:.03em}
+.card.dark .go{color:var(--gold2)}
+.muted-card{opacity:.7}
+@media(max-width:920px){.nav a.lnk{font-size:11.5px;padding:5px 7px}}
+</style>
+</head>
+<body class="show-en">
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="../index.html"><img src="https://www.aslanbusiness.com/aslan-logo.png" alt="ASLAN"><span>ASLAN<small>Advisory &amp; Growth Platform</small></span></a>
+  <div class="nav">
+    <a class="lnk" href="../index.html"><span class="t-en">Home</span><span class="t-tr">Anasayfa</span></a><a class="lnk active" href="../intelligence/index.html"><span class="t-en">Intelligence</span><span class="t-tr">Intelligence</span></a><a class="lnk" href="../real-estate/index.html"><span class="t-en">Real Estate</span><span class="t-tr">Gayrimenkul</span></a><a class="lnk" href="../advisory/index.html"><span class="t-en">Advisory</span><span class="t-tr">Danışmanlık</span></a><a class="lnk" href="../connect/index.html"><span class="t-en">Connect</span><span class="t-tr">Connect</span></a><a class="lnk" href="../products/index.html"><span class="t-en">Products</span><span class="t-tr">Ürünler</span></a><a class="lnk" href="../about.html"><span class="t-en">About</span><span class="t-tr">Hakkımızda</span></a><a class="lnk" href="../contact.html"><span class="t-en">Contact</span><span class="t-tr">İletişim</span></a>
+    <div class="langtog">
+      <button data-l="en" class="active" onclick="setLang('en')">EN</button>
+      <button data-l="tr" onclick="setLang('tr')">TR</button>
+    </div>
+  </div>
+</div></div>
+<div class="wrap">
+<div class="hero">
+  <div class="kicker"><span class="t-en">Intelligence Hub</span><span class="t-tr">Intelligence Hub</span></div>
+  <h1><span class="t-en">Knowledge, made practical.</span><span class="t-tr">Bilgi, pratiğe dönüşmüş hali.</span></h1>
+  <p class="sub"><span class="t-en">Research, market reports and city briefings — built to be trusted, sourced, bilingual and easy to act on.</span><span class="t-tr">Araştırma, pazar raporları ve şehir brifingleri — güvenilir, kaynaklı, çift dilli ve harekete geçirmesi kolay olacak şekilde.</span></p>
+  <div class="meta"><span class="pill solid"><span class="t-en">Sourced &amp; verified</span><span class="t-tr">Kaynaklı &amp; doğrulanmış</span></span><span class="pill"><span class="t-en">TR / EN</span><span class="t-tr">TR / EN</span></span></div>
+</div><div class="section">
+  <div class="kick"><span class="t-en">What we publish</span><span class="t-tr">Neyi yayımlarız</span></div>
+  <h2><span class="t-en">Three ways we turn knowledge into facts.</span><span class="t-tr">Bilgiyi gerçeğe dönüştürmenin üç yolu.</span></h2><div class="rule"></div>
+  <div class="grid"><a class="card dark" style="color:inherit;display:block" href="real-estate/index.html"><h4><span class="t-en">Real Estate Intelligence</span><span class="t-tr">Real Estate Intelligence</span></h4><p><span class="t-en">City reports in one standard format: districts, project radar, indicators, site-visit routes and public sources.</span><span class="t-tr">Tek standart formatta şehir raporları: bölgeler, proje radarı, göstergeler, saha ziyareti rotaları ve açık kaynaklar.</span></p><span class="go"><span class="t-en">Open reports →</span><span class="t-tr">Raporları aç →</span></span></a><div class="card muted-card"><h4><span class="t-en">Market Intelligence</span><span class="t-tr">Market Intelligence</span></h4><p><span class="t-en">Country and sector opportunity notes — what is moving, where and why it matters now.</span><span class="t-tr">Ülke ve sektör fırsat notları — ne, nerede hareket ediyor ve neden şimdi önemli.</span></p><span class="go"><span class="t-en">In preparation</span><span class="t-tr">Hazırlanıyor</span></span></div><div class="card muted-card"><h4><span class="t-en">Facts Only</span><span class="t-tr">Facts Only</span></h4><p><span class="t-en">Clear, practical investment basics — sourced, verified and free of hype.</span><span class="t-tr">Net, pratik yatırım temelleri — kaynaklı, doğrulanmış ve abartıdan uzak.</span></p><span class="go"><span class="t-en">In preparation</span><span class="t-tr">Hazırlanıyor</span></span></div></div>
+</div><div class="section">
+  <div class="kick"><span class="t-en">Facts Only</span><span class="t-tr">Facts Only</span></div>
+  <h2><span class="t-en">What we publish, and what we refuse to.</span><span class="t-tr">Neyi yayımlarız, neyi yayımlamayız.</span></h2><div class="rule"></div>
+  <div class="grid2"><div><div style="margin-bottom:12px"><span class="tag gold">How to invest in Türkiye</span><span class="tag gold">Company setup</span><span class="tag gold">Legal &amp; tax basics</span><span class="tag gold">Average costs</span><span class="tag gold">Banking &amp; compliance</span><span class="tag gold">Common mistakes</span></div></div><div><p class="lead2"><span class="t-en">Every note carries its sources. We name real costs and real risks, share bad stories alongside good ones, and add verified expert comment where it helps. No exaggerated returns, no broker talk, no vague opportunities.</span><span class="t-tr">Her not kaynağını taşır. Gerçek maliyetleri ve riskleri adıyla söyleriz, iyi örneklerin yanında kötü örnekleri de paylaşırız ve faydalı olduğunda doğrulanmış uzman görüşü ekleriz. Abartılı getiri yok, komisyoncu dili yok, belirsiz fırsat yok.</span></p><div class="btnrow"><a class="btn" href="../contact.html"><span class="t-en">Request a briefing</span><span class="t-tr">Brifing talep et</span></a></div></div></div>
+</div>
+<div class="footer">
+  <span class="powered"><span class="t-en">Powered by</span><span class="t-tr">Hazırlayan</span> <b>SP Architects</b> · <span class="t-en">for ASLAN Advisory Platform</span><span class="t-tr">ASLAN Advisory Platform için</span></span>
+  <span class="loc">DUBAI · ISTANBUL · GLOBAL</span>
+</div>
+<p class="small" style="margin-top:10px;font-size:11px;color:#9a8e76"><span class="t-en">© 2026 ASLAN Business — Independent intelligence &amp; advisory platform. Content is for information and planning only; not investment, legal or tax advice. Verify all figures, ownership and permits before acting.</span><span class="t-tr">© 2026 ASLAN Business — Bağımsız intelligence &amp; advisory platformu. İçerik yalnızca bilgilendirme ve planlama içindir; yatırım, hukuk veya vergi tavsiyesi değildir. Hareket etmeden önce tüm rakamları, mülkiyeti ve izinleri teyit ediniz.</span></p>
+</div>
+<script>
+function setLang(l){
+  document.body.classList.toggle('show-tr', l==='tr');
+  document.body.classList.toggle('show-en', l!=='tr');
+  document.querySelectorAll('.langtog button').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-l')===l);
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){ setLang('en'); });
+</script>
+</body>
+</html>
