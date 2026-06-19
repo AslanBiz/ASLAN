@@ -155,6 +155,54 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);-webkit
 .loc-addr{font-size:11px;color:var(--ink3)}
 @media(max-width:660px){.sidebar{width:100%;height:auto;position:relative}.main{margin-left:0}.panel{padding:16px}.people-grid,.projects-grid{grid-template-columns:1fr}}
 @media print{.sidebar,.filter-bar,.search-box,.export-btn{display:none}.main{margin-left:0}.company-body{display:block!important}}
+
+/* ══ MOBILE FIRST ══ */
+@media(max-width:768px){
+  .sidebar{
+    width:100%;height:auto;position:fixed;bottom:0;top:auto;
+    flex-direction:row;border-top:1px solid rgba(255,255,255,.1);
+    z-index:300;overflow-x:auto;overflow-y:hidden;
+    border-right:none;
+  }
+  .sidebar-logo,.sidebar-title,.sidebar-foot{display:none}
+  .nav-item{
+    flex-direction:column;gap:3px;padding:8px 14px;
+    font-size:10px;border-left:none;border-top:2px solid transparent;
+    min-width:60px;justify-content:center;align-items:center;
+    white-space:nowrap;
+  }
+  .nav-item.active{border-left:none;border-top-color:var(--gold)}
+  .nav-icon{font-size:20px;width:auto}
+  .main{margin-left:0;margin-bottom:64px;padding-bottom:20px}
+  .panel{padding:16px 14px}
+  .top-bar{flex-direction:column;gap:8px;margin-bottom:16px}
+  .page-title{font-size:18px}
+  .stats-row{grid-template-columns:repeat(3,1fr);gap:8px}
+  .stat-card{padding:10px 8px}
+  .stat-num{font-size:20px}
+  .day-hdr-date{font-size:14px}
+  .slot-time{width:72px;padding:10px 8px}
+  .slot-hour{font-size:11px}
+  .slot-content{padding:10px 12px}
+  .slot-title{font-size:12px;gap:4px}
+  .slot-desc{font-size:11px}
+  .ext{font-size:10px;padding:2px 6px}
+  .people-grid{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .filter-bar{gap:4px}
+  .filter-btn{font-size:10px;padding:4px 8px}
+  .search-box{max-width:100%}
+  .export-btn{font-size:10px;padding:5px 10px}
+  .legend{gap:8px;padding:8px 10px}
+  .leg-item{font-size:10px}
+}
+@media(min-width:769px){
+  .sidebar{width:210px;height:100vh;position:fixed;top:0;left:0;flex-direction:column;bottom:auto;overflow-y:auto;border-top:none}
+  .sidebar-logo,.sidebar-title,.sidebar-foot{display:flex}
+  .sidebar-title{display:block}
+  .sidebar-foot{display:block}
+  .main{margin-left:210px;margin-bottom:0}
+}
 </style>
 </head>
 <body>
@@ -271,7 +319,7 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);-webkit
       </div>
       <div class="slot">
         <div class="slot-time"><div class="slot-hour">20:00</div><div class="slot-to">→ 21:00</div><div class="slot-dur">1 hr</div></div>
-        <div class="slot-content"><div class="slot-title"><span class="tag tag-dinner">Dinner</span><span class="tag tag-tbc">TBC</span>Dinner with Delegation </div><div class="slot-desc">Alternative venue: YDA Center, Ankara.</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-dinner">Dinner</span><span class="tag tag-tbc">TBC</span>Dinner with Minister of Housing</div><div class="slot-desc">Alternative venue: YDA Center, Ankara.</div></div>
       </div>
     </div>
   </div>
@@ -310,7 +358,7 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);-webkit
       </div>
       <div class="slot slot-transfer">
         <div class="slot-time"><div class="slot-hour">19:00</div><div class="slot-to">→ 19:40</div><div class="slot-dur">40 min</div></div>
-        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Bodrum Airport → METT Hotel · Yalıkavak Marina</div><div class="slot-links"><a href="https://maps.app.goo.gl/6WqQ5qdhXCN1Q1EB9" class="ext ext-map" target="_blank">📍 Hotel Map</a><a href="https://www.metthotels.com" class="ext" target="_blank">🔗 METT Hotel</a></div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Bodrum Airport → Hotel (The Bodrum Edition or Mandarin Oriental)</div><div class="slot-links"><a href="https://www.marriott.com/en-us/hotels/bjwbr-the-bodrum-edition" class="ext" target="_blank">🔗 The Bodrum Edition</a><a href="https://www.mandarinoriental.com/en/bodrum" class="ext" target="_blank">🔗 Mandarin Oriental</a></div></div>
       </div>
       <div class="slot">
         <div class="slot-time"><div class="slot-hour">20:30</div><div class="slot-to">→ 21:30</div><div class="slot-dur">1 hr</div></div>
@@ -341,7 +389,7 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);-webkit
       </div>
       <div class="slot slot-transfer">
         <div class="slot-time"><div class="slot-hour">16:00</div><div class="slot-to">→ 17:00</div><div class="slot-dur">60 min</div></div>
-        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Six Senses Kaplankaya → Yalıkavak Marina Hotel</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Six Senses Kaplankaya → Hotel (Bodrum peninsula)</div></div>
       </div>
       <div class="slot">
         <div class="slot-time"><div class="slot-hour">19:30</div><div class="slot-to">→ 21:30</div><div class="slot-dur">2 hrs</div></div>
@@ -405,7 +453,7 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);-webkit
       </div>
       <div class="slot slot-transfer">
         <div class="slot-time"><div class="slot-hour">14:30</div><div class="slot-to">→ 15:10</div><div class="slot-dur">40 min</div></div>
-        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Mandarin Oriental → Yalıkavak Marina Hotel</div></div>
+        <div class="slot-content"><div class="slot-title"><span class="tag tag-transfer">Transfer</span>Mandarin Oriental → Hotel</div></div>
       </div>
       <div class="slot slot-transfer">
         <div class="slot-time"><div class="slot-hour">16:00</div><div class="slot-to">→ 16:40</div><div class="slot-dur">40 min</div></div>
@@ -1429,54 +1477,74 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);-webkit
 
 <!-- ══ MAP ══ -->
 <div id="panel-map" class="panel">
-  <div class="top-bar">
-    <div><div class="page-title">Map & Route</div><div class="page-sub">All visit locations with pins · Ankara · Bodrum · Istanbul</div></div>
-    <a href="https://maps.app.goo.gl/jc8JSoaqNSnWjeCb8" class="export-btn" target="_blank">🗺 Open Route in Google Maps</a>
+  <div class="page-title" style="margin-bottom:6px">Map &amp; Route</div>
+  <div class="page-sub" style="margin-bottom:20px">Open each city map directly in Google Maps</div>
+
+  <!-- BIG CITY MAP BUTTONS -->
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
+
+    <a href="https://maps.app.goo.gl/6X6DtH5774qUira66" target="_blank"
+       style="display:flex;align-items:center;gap:14px;background:var(--ank);color:#fff;border-radius:var(--r);padding:18px 20px;text-decoration:none;font-weight:600;font-size:15px">
+      <span style="font-size:26px">📍</span>
+      <div>
+        <div style="font-size:16px;font-weight:700;letter-spacing:.02em">Ankara</div>
+        <div style="font-size:12px;opacity:.75;margin-top:2px;font-weight:400">Tap to open in Google Maps</div>
+      </div>
+      <span style="margin-left:auto;font-size:20px;opacity:.8">→</span>
+    </a>
+
+    <a href="https://maps.app.goo.gl/hujrphG8HNGzPntW8" target="_blank"
+       style="display:flex;align-items:center;gap:14px;background:var(--bod);color:#fff;border-radius:var(--r);padding:18px 20px;text-decoration:none;font-weight:600;font-size:15px">
+      <span style="font-size:26px">📍</span>
+      <div>
+        <div style="font-size:16px;font-weight:700;letter-spacing:.02em">Bodrum</div>
+        <div style="font-size:12px;opacity:.75;margin-top:2px;font-weight:400">Tap to open in Google Maps</div>
+      </div>
+      <span style="margin-left:auto;font-size:20px;opacity:.8">→</span>
+    </a>
+
+    <a href="https://maps.app.goo.gl/oG566pohgdmYQSR16" target="_blank"
+       style="display:flex;align-items:center;gap:14px;background:var(--ist);color:#fff;border-radius:var(--r);padding:18px 20px;text-decoration:none;font-weight:600;font-size:15px">
+      <span style="font-size:26px">📍</span>
+      <div>
+        <div style="font-size:16px;font-weight:700;letter-spacing:.02em">Istanbul</div>
+        <div style="font-size:12px;opacity:.75;margin-top:2px;font-weight:400">Tap to open in Google Maps</div>
+      </div>
+      <span style="margin-left:auto;font-size:20px;opacity:.8">→</span>
+    </a>
+
   </div>
 
-  <!-- City tabs -->
-  <div class="filter-bar" style="margin-bottom:16px">
-    <button class="filter-btn active" onclick="switchMap('all',this)">All Cities</button>
-    <button class="filter-btn" onclick="switchMap('ankara',this)">📍 Ankara</button>
-    <button class="filter-btn" onclick="switchMap('bodrum',this)">📍 Bodrum</button>
-    <button class="filter-btn" onclick="switchMap('istanbul',this)">📍 Istanbul</button>
+  <!-- EMBEDDED MAPS WITH TABS -->
+  <div style="background:#fff;border:0.5px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:20px">
+    <div style="display:flex;border-bottom:0.5px solid var(--border)">
+      <button onclick="swMap('ankara',this)" class="maptab active" style="flex:1;padding:12px;font-size:13px;font-weight:600;background:#fff;border:none;cursor:pointer;color:var(--ank);border-bottom:2px solid var(--ank)">Ankara</button>
+      <button onclick="swMap('bodrum',this)" class="maptab" style="flex:1;padding:12px;font-size:13px;font-weight:600;background:#fff;border:none;cursor:pointer;color:var(--ink3);border-bottom:2px solid transparent">Bodrum</button>
+      <button onclick="swMap('istanbul',this)" class="maptab" style="flex:1;padding:12px;font-size:13px;font-weight:600;background:#fff;border:none;cursor:pointer;color:var(--ink3);border-bottom:2px solid transparent">Istanbul</button>
+    </div>
+    <div id="mc-ankara">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d97500!2d32.8!3d39.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2str!4v1" width="100%" height="380" style="border:0;display:block" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div id="mc-bodrum" style="display:none">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d150000!2d27.3!3d37.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2str!4v1" width="100%" height="380" style="border:0;display:block" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div id="mc-istanbul" style="display:none">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d192000!2d28.95!3d41.01!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2str!4v1" width="100%" height="380" style="border:0;display:block" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
   </div>
 
-  <div style="margin-bottom:12px;display:flex;gap:6px">
-    <button class="filter-btn active" onclick="swMap('ankara',this)">Ankara</button>
-    <button class="filter-btn" onclick="swMap('bodrum',this)">Bodrum</button>
-    <button class="filter-btn" onclick="swMap('istanbul',this)">Istanbul</button>
-  </div>
-  <div id="mc-ankara">
-    <iframe src="https://maps.app.goo.gl/6X6DtH5774qUira66" width="100%" height="460" style="border:0;border-radius:var(--r);filter:grayscale(30%)" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
-      <a href="https://maps.app.goo.gl/FQRSZQsXxcAuugFv8" class="ext ext-map" target="_blank">Sinpas Altinoran</a>
-      <a href="https://maps.app.goo.gl/kLn757fysf6NYdnM9" class="ext ext-map" target="_blank">Ministry</a>
-      <a href="https://maps.app.goo.gl/rcvKdi67XentezTe6" class="ext ext-map" target="_blank">Airport ESB</a>
-    </div>
-  </div>
-  <div id="mc-bodrum" style="display:none">
-    <iframe src="https://maps.app.goo.gl/hujrphG8HNGzPntW8" width="100%" height="460" style="border:0;border-radius:var(--r);filter:grayscale(30%)" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
-      <a href="https://maps.app.goo.gl/oG566pohgdmYQSR16" class="ext ext-map" target="_blank">Bodrum Detail</a>
-      <a href="https://maps.app.goo.gl/6WqQ5qdhXCN1Q1EB9" class="ext ext-map" target="_blank">METT Hotel</a>
-    </div>
-  </div>
-  <div id="mc-istanbul" style="display:none">
-    <iframe src="https://maps.app.goo.gl/oG566pohgdmYQSR16" width="100%" height="460" style="border:0;border-radius:var(--r);filter:grayscale(30%)" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
-      <a href="https://maps.app.goo.gl/rm33RpSUuWGxZCU58" class="ext ext-map" target="_blank">IstMarina</a>
-    </div>
-  </div>
-  <div class="location-list" style="margin-top:14px">
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Sinpas Altinoran</div><div class="loc-addr">Ankara</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Ministry of Environment</div><div class="loc-addr">Ankara</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ank)"></div><div><div class="loc-name">Sheraton Hotel</div><div class="loc-addr">Ankara Day 0-2</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">METT Hotel Yalikavak</div><div class="loc-addr">Bodrum Day 2-4</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--bod)"></div><div><div class="loc-name">Mandarin Oriental Bodrum</div><div class="loc-addr">ASTAS Holding</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">Radisson Blu Vadistanbul</div><div class="loc-addr">Istanbul Day 4-7</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">IstMarina DAP Yapi</div><div class="loc-addr">Istanbul</div></div></div>
-    <div class="loc-card"><div class="loc-dot" style="background:var(--ist)"></div><div><div class="loc-name">Galataport Istanbul</div><div class="loc-addr">Karakoy</div></div></div>
+  <!-- KEY LOCATIONS LIST -->
+  <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px">Key Locations</div>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:0.5px solid var(--border);border-radius:var(--r)"><div style="width:10px;height:10px;border-radius:50%;background:var(--ank);flex-shrink:0"></div><span style="font-size:13px;font-weight:500">Sinpaş Altınoran</span><span style="font-size:11px;color:var(--ink3);margin-left:auto">Ankara</span></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:0.5px solid var(--border);border-radius:var(--r)"><div style="width:10px;height:10px;border-radius:50%;background:var(--ank);flex-shrink:0"></div><span style="font-size:13px;font-weight:500">Ministry of Environment</span><span style="font-size:11px;color:var(--ink3);margin-left:auto">Ankara</span></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:0.5px solid var(--border);border-radius:var(--r)"><div style="width:10px;height:10px;border-radius:50%;background:var(--ank);flex-shrink:0"></div><span style="font-size:13px;font-weight:500">Sheraton Hotel</span><span style="font-size:11px;color:var(--ink3);margin-left:auto">Ankara · Night 0–2</span></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:0.5px solid var(--border);border-radius:var(--r)"><div style="width:10px;height:10px;border-radius:50%;background:var(--bod);flex-shrink:0"></div><span style="font-size:13px;font-weight:500">Six Senses Kaplankaya</span><span style="font-size:11px;color:var(--ink3);margin-left:auto">Bodrum</span></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:0.5px solid var(--border);border-radius:var(--r)"><div style="width:10px;height:10px;border-radius:50%;background:var(--bod);flex-shrink:0"></div><span style="font-size:13px;font-weight:500">Mandarin Oriental Bodrum</span><span style="font-size:11px;color:var(--ink3);margin-left:auto">Bodrum · ASTAŞ</span></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:0.5px solid var(--border);border-radius:var(--r)"><div style="width:10px;height:10px;border-radius:50%;background:var(--bod);flex-shrink:0"></div><span style="font-size:13px;font-weight:500">The Bodrum Edition · Rönesans</span><span style="font-size:11px;color:var(--ink3);margin-left:auto">Bodrum · Hotel</span></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:0.5px solid var(--border);border-radius:var(--r)"><div style="width:10px;height:10px;border-radius:50%;background:var(--ist);flex-shrink:0"></div><span style="font-size:13px;font-weight:500">Radisson Blu Vadistanbul</span><span style="font-size:11px;color:var(--ink3);margin-left:auto">Istanbul · Night 4–7</span></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:0.5px solid var(--border);border-radius:var(--r)"><div style="width:10px;height:10px;border-radius:50%;background:var(--ist);flex-shrink:0"></div><span style="font-size:13px;font-weight:500">IstMarina · DAP Yapı</span><span style="font-size:11px;color:var(--ink3);margin-left:auto">Istanbul</span></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:0.5px solid var(--border);border-radius:var(--r)"><div style="width:10px;height:10px;border-radius:50%;background:var(--ist);flex-shrink:0"></div><span style="font-size:13px;font-weight:500">Galataport Istanbul</span><span style="font-size:11px;color:var(--ink3);margin-left:auto">Istanbul</span></div>
   </div>
 </div>
 
@@ -1544,8 +1612,13 @@ function swMap(c,btn){
     var el=document.getElementById('mc-'+x);
     if(el) el.style.display=x===c?'block':'none';
   });
-  btn.closest('div').querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
+  document.querySelectorAll('.maptab').forEach(function(b){
+    b.style.color='var(--ink3)';
+    b.style.borderBottomColor='transparent';
+  });
+  var col = c==='ankara'?'var(--ank)':c==='bodrum'?'var(--bod)':'var(--ist)';
+  btn.style.color=col;
+  btn.style.borderBottomColor=col;
 }
 </script>
 </body>
