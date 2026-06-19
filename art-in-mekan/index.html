@@ -1,1 +1,553 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ART IN MEKAN — Sanatı her mekânda yaşa</title>
+<meta name="description" content="Sanatı gerçek mekâna taşıyan premium platform: sanatçılar, mimarlar ve koleksiyonerler için pratik AR ile görselleştirme." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --black:#0A0A0A; --white:#FFFFFF; --gold:#C6A972;
+    --charcoal:#1C1C1C; --mist:#E8E8E8;
+    --gold-soft:rgba(198,169,114,.14);
+    --line:rgba(232,232,232,.12);
+    --maxw:1200px;
+    --display:"Montserrat",Arial,Helvetica,sans-serif;
+    --body:"Inter",Arial,Helvetica,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--black); color:var(--white);
+    font-family:var(--body); line-height:1.6;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  html[dir="rtl"] body{font-family:"Noto Sans Arabic","Inter",Arial,sans-serif;}
+  h1,h2,h3,.logo-text,.eyebrow{font-family:var(--display); letter-spacing:.08em; font-weight:600;}
+  html[dir="rtl"] h1,html[dir="rtl"] h2,html[dir="rtl"] h3,html[dir="rtl"] .eyebrow{letter-spacing:0;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,48px);}
 
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:var(--display); font-size:.82rem; letter-spacing:.12em;
+    text-transform:uppercase; padding:15px 30px; border-radius:999px;
+    border:1px solid transparent; cursor:pointer; transition:.25s ease; background:transparent;
+  }
+  html[dir="rtl"] .btn{letter-spacing:0; text-transform:none;}
+  .btn-gold{border-color:var(--gold); color:var(--gold);}
+  .btn-gold:hover,.btn-gold:focus-visible{background:var(--gold); color:var(--black);}
+  .btn-ghost{border-color:var(--line); color:var(--mist);}
+  .btn-ghost:hover,.btn-ghost:focus-visible{border-color:var(--white); color:var(--white);}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  header.site{position:sticky; top:0; z-index:50; backdrop-filter:blur(12px); background:rgba(10,10,10,.72); border-bottom:1px solid var(--line);}
+  .nav{display:flex; align-items:center; justify-content:space-between; height:74px;}
+  .logo{display:flex; align-items:center;}
+  .logo svg{height:26px; width:auto;}
+  .nav-links{display:flex; align-items:center; gap:34px;}
+  .nav-links a{font-size:.8rem; letter-spacing:.06em; color:var(--mist); transition:.2s;}
+  .nav-links a:hover{color:var(--white);}
+  .nav-actions{display:flex; align-items:center; gap:18px;}
+  .lang{font-family:var(--display); font-size:.72rem; letter-spacing:.14em; color:var(--mist); border:1px solid var(--line); border-radius:999px; padding:7px 13px; cursor:pointer; background:transparent; transition:.2s; min-width:78px;}
+  .lang:hover{border-color:var(--gold); color:var(--gold);}
+  .menu-toggle{display:none; background:none; border:0; cursor:pointer; padding:6px;}
+  .menu-toggle span{display:block; width:24px; height:2px; background:var(--white); margin:5px 0; transition:.2s;}
+
+  .hero{position:relative; min-height:100svh; display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:48px; padding:60px 0 80px;}
+  .hero-copy .eyebrow{font-size:.74rem; letter-spacing:.28em; color:var(--gold); text-transform:uppercase; margin-bottom:26px; display:flex; align-items:center; gap:12px;}
+  html[dir="rtl"] .hero-copy .eyebrow{letter-spacing:.05em; text-transform:none;}
+  .hero-copy .eyebrow::before{content:""; width:34px; height:1px; background:var(--gold);}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.6rem); line-height:1.02; font-weight:700; margin:0 0 24px; letter-spacing:.02em;}
+  .hero h1 .em{color:var(--gold); font-style:normal;}
+  .hero .lede{font-size:1.12rem; color:var(--mist); max-width:34ch; margin:0 0 38px;}
+  .hero .actions{display:flex; gap:16px; flex-wrap:wrap;}
+  .hero .micro{margin-top:34px; display:flex; gap:30px; font-size:.78rem; color:#8a8a8a; letter-spacing:.04em; flex-wrap:wrap;}
+  .hero .micro b{color:var(--white); font-family:var(--display); font-weight:600; display:block; font-size:1.4rem; letter-spacing:.02em;}
+
+  .ar-stage{position:relative; aspect-ratio:4/5; width:100%; border-radius:4px; overflow:hidden; background:linear-gradient(180deg,#161616,#0d0d0d 60%,#080808); border:1px solid var(--line); box-shadow:0 40px 90px -50px rgba(0,0,0,.9);}
+  .ar-stage::before{content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 0 68%, rgba(0,0,0,.45) 68% 100%);}
+  .frame{position:absolute; top:24%; left:50%; transform:translateX(-50%) scale(.5); width:46%; aspect-ratio:3/4; opacity:0; border:7px solid #d9c9a0; box-shadow:0 26px 50px -20px rgba(0,0,0,.85), inset 0 0 0 1px rgba(0,0,0,.3); background:linear-gradient(135deg,#7a3b2e,#b9603f 38%,#e0a96b 70%,#c6a972); transition:transform 1.1s cubic-bezier(.2,.8,.2,1), opacity 1.1s ease;}
+  .frame.placed{opacity:1; transform:translateX(-50%) scale(1);}
+  .frame .art-strokes{position:absolute; inset:0; opacity:.5; mix-blend-mode:overlay;}
+  .scan{position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg,transparent,rgba(198,169,114,.5),transparent); height:140px; opacity:0; transform:translateY(-140px);}
+  .scanning .scan{animation:scan 1.1s ease forwards;}
+  @keyframes scan{0%{opacity:.9; transform:translateY(-140px);}100%{opacity:0; transform:translateY(125%);}}
+  .ar-badge{position:absolute; left:16px; bottom:16px; z-index:3; display:flex; align-items:center; gap:8px; font-family:var(--display); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); background:rgba(10,10,10,.6); border:1px solid var(--gold-soft); padding:7px 12px; border-radius:999px; backdrop-filter:blur(4px);}
+  html[dir="rtl"] .ar-badge{left:auto; right:16px; letter-spacing:0; text-transform:none;}
+  .ar-badge .dot{width:7px; height:7px; border-radius:50%; background:var(--gold); animation:pulse 1.6s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+  .ar-replay{position:absolute; right:16px; bottom:16px; z-index:3; font-family:var(--display); font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--mist); background:rgba(10,10,10,.6); border:1px solid var(--line); padding:7px 13px; border-radius:999px; cursor:pointer; backdrop-filter:blur(4px); transition:.2s;}
+  html[dir="rtl"] .ar-replay{right:auto; left:16px; letter-spacing:0; text-transform:none;}
+  .ar-replay:hover{color:var(--gold); border-color:var(--gold-soft);}
+
+  section{padding:clamp(72px,11vw,140px) 0;}
+  .sec-head{max-width:640px; margin-bottom:64px;}
+  .eyebrow.tag{font-size:.72rem; letter-spacing:.26em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:18px;}
+  html[dir="rtl"] .eyebrow.tag{letter-spacing:.05em; text-transform:none;}
+  .sec-head h2{font-size:clamp(1.9rem,4vw,3rem); line-height:1.08; margin:0 0 18px; font-weight:700; letter-spacing:.01em;}
+  .sec-head p{color:var(--mist); font-size:1.05rem; margin:0;}
+
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .step{background:var(--black); padding:42px 34px;}
+  .step .num{font-family:var(--display); font-size:.8rem; letter-spacing:.2em; color:var(--gold); margin-bottom:30px;}
+  .step h3{font-size:1.35rem; margin:0 0 12px; letter-spacing:.04em; font-weight:600;}
+  .step p{color:#9a9a9a; margin:0; font-size:.96rem;}
+
+  .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .card{border:1px solid var(--line); border-radius:6px; padding:38px 32px; background:linear-gradient(180deg,var(--charcoal),#121212); transition:.3s ease;}
+  .card:hover{border-color:var(--gold-soft); transform:translateY(-4px);}
+  .card .ic{width:42px; height:42px; margin-bottom:24px; color:var(--gold);}
+  .card h3{font-size:1.25rem; margin:0 0 12px; letter-spacing:.03em; font-weight:600;}
+  .card p{color:#9a9a9a; margin:0; font-size:.95rem;}
+
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:clamp(40px,6vw,90px); align-items:center;}
+  .split .feat-list{list-style:none; padding:0; margin:28px 0 0;}
+  .split .feat-list li{padding:18px 0; border-bottom:1px solid var(--line); display:flex; gap:16px; align-items:flex-start;}
+  .split .feat-list li::before{content:""; flex:0 0 auto; width:8px; height:8px; margin-top:9px; background:var(--gold); transform:rotate(45deg);}
+  .split .feat-list b{font-family:var(--display); font-weight:600; letter-spacing:.03em;}
+  .split .feat-list span{color:#9a9a9a; font-size:.94rem;}
+  .visual-panel{aspect-ratio:1/1; border:1px solid var(--line); border-radius:6px; background:radial-gradient(120% 80% at 30% 20%, rgba(198,169,114,.18), transparent 55%),linear-gradient(180deg,#161616,#0c0c0c); position:relative; overflow:hidden; display:grid; place-items:center;}
+  .visual-panel .room-grid{position:absolute; inset:0; background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px); background-size:40px 40px; opacity:.5; mask-image:radial-gradient(circle at center,#000 30%,transparent 75%);}
+  .visual-panel .floating{width:52%; aspect-ratio:3/4; border:6px solid #d9c9a0; background:linear-gradient(140deg,#1d4e4a,#2f7d6e 45%,#c6a972); box-shadow:0 30px 60px -25px rgba(0,0,0,.8); animation:float 6s ease-in-out infinite;}
+  @keyframes float{0%,100%{transform:translateY(-8px) rotate(-1deg);}50%{transform:translateY(8px) rotate(1deg);}}
+
+  .pricing{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; align-items:start;}
+  .plan{border:1px solid var(--line); border-radius:8px; padding:40px 34px; background:#0e0e0e; display:flex; flex-direction:column; gap:8px; transition:.3s;}
+  .plan.featured{border-color:var(--gold); background:linear-gradient(180deg,rgba(198,169,114,.06),#0e0e0e);}
+  .plan .pname{font-family:var(--display); letter-spacing:.1em; text-transform:uppercase; font-size:.84rem; color:var(--gold);}
+  html[dir="rtl"] .plan .pname{letter-spacing:0; text-transform:none;}
+  .plan .price{font-family:var(--display); font-size:2.4rem; font-weight:700; letter-spacing:.01em; margin:14px 0 2px;}
+  .plan .price small{font-size:.9rem; color:#8a8a8a; font-weight:400; letter-spacing:.04em;}
+  .plan .pdesc{color:#9a9a9a; font-size:.92rem; min-height:42px; margin-bottom:14px;}
+  .plan ul{list-style:none; padding:0; margin:0 0 30px; flex:1;}
+  .plan ul li{padding:11px 0; border-top:1px solid var(--line); font-size:.92rem; color:var(--mist); display:flex; gap:11px;}
+  .plan ul li::before{content:"+"; color:var(--gold); font-family:var(--display);}
+  .plan .btn{width:100%; justify-content:center;}
+  .ribbon{align-self:flex-start; font-family:var(--display); font-size:.64rem; letter-spacing:.18em; text-transform:uppercase; color:var(--black); background:var(--gold); padding:5px 12px; border-radius:999px; margin-bottom:10px;}
+  html[dir="rtl"] .ribbon{letter-spacing:0; text-transform:none;}
+
+  .vision{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:#070707;}
+  .vision .wrap{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+  .vision h2{font-size:clamp(1.7rem,3.5vw,2.6rem); line-height:1.12; margin:0 0 20px;}
+  .vision p{color:var(--mist); margin:0;}
+  .stat-row{display:flex; gap:40px; margin-top:36px; flex-wrap:wrap;}
+  .stat b{font-family:var(--display); font-size:2.2rem; font-weight:700; color:var(--gold); display:block; letter-spacing:.01em;}
+  .stat span{font-size:.82rem; color:#8a8a8a; letter-spacing:.06em;}
+
+  .closing{text-align:center;}
+  .closing h2{font-size:clamp(2rem,5vw,3.4rem); margin:0 auto 22px; max-width:18ch; line-height:1.05; font-weight:700;}
+  .closing p{color:var(--mist); margin:0 auto 38px; max-width:50ch;}
+
+  footer.site{border-top:1px solid var(--line); padding:64px 0 40px; background:#070707;}
+  .foot-top{display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap; margin-bottom:48px;}
+  .foot-brand{max-width:300px;}
+  .foot-brand svg{height:24px; margin-bottom:18px;}
+  .foot-brand p{color:#8a8a8a; font-size:.9rem; margin:0;}
+  .foot-cols{display:flex; gap:64px; flex-wrap:wrap;}
+  .foot-col h4{font-family:var(--display); font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin:0 0 18px;}
+  html[dir="rtl"] .foot-col h4{letter-spacing:0; text-transform:none;}
+  .foot-col a{display:block; color:#9a9a9a; font-size:.9rem; padding:5px 0; transition:.2s;}
+  .foot-col a:hover{color:var(--white);}
+  .foot-bottom{display:flex; justify-content:space-between; gap:20px; padding-top:28px; border-top:1px solid var(--line); flex-wrap:wrap; font-size:.8rem; color:#6e6e6e; letter-spacing:.04em;}
+
+  .reveal{opacity:0; transform:translateY(26px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:none;}
+
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr; gap:48px; padding-top:48px;}
+    .ar-stage{max-width:420px; margin:0 auto; aspect-ratio:4/5;}
+    .steps,.cards,.pricing{grid-template-columns:1fr;}
+    .split,.vision .wrap{grid-template-columns:1fr;}
+    .visual-panel{order:-1;}
+    .nav-links{display:none;}
+    .menu-toggle{display:block;}
+    .nav-links.open{display:flex; position:absolute; top:74px; left:0; right:0; flex-direction:column; gap:0; background:var(--black); border-bottom:1px solid var(--line); padding:8px 0;}
+    .nav-links.open a{padding:14px clamp(20px,5vw,48px); border-top:1px solid var(--line); width:100%;}
+  }
+  @media (max-width:520px){
+    .hero .actions{flex-direction:column;}
+    .hero .actions .btn{width:100%; justify-content:center;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important; scroll-behavior:auto;}
+    .frame{opacity:1; transform:translateX(-50%) scale(1);}
+    .reveal{opacity:1; transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="ART IN MEKAN">
+      <svg viewBox="0 0 320 28" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ART IN MEKAN">
+        <text x="0" y="21" fill="#FFFFFF" font-family="Montserrat, Arial, sans-serif" font-size="22" font-weight="600" letter-spacing="5">ART <tspan fill="#C6A972">IN</tspan> MEKAN</text>
+      </svg>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a href="#how" data-i18n="nav.how">Nasıl çalışır</a>
+      <a href="#who" data-i18n="nav.who">Kimler için</a>
+      <a href="#ar" data-i18n="nav.ar">AR önizleme</a>
+      <a href="#pricing" data-i18n="nav.pricing">Fiyatlandırma</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="lang" id="langToggle">TR · EN · ع</button>
+      <a class="btn btn-gold" href="#signup" data-i18n="nav.cta">Başla</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <div class="hero-copy reveal">
+      <p class="eyebrow" data-i18n="hero.eyebrow">Gerçek mekânlar için sanat-teknoloji</p>
+      <h1 data-i18n="hero.h1">Sanatı<br>her <span class="em">mekânda</span> yaşa</h1>
+      <p class="lede" data-i18n="hero.lede">Bir eser yükle, kendi duvarında gerçek ölçeğinde gör ve tek bir linkle paylaş. Uygulama indirmek yok.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="#signup" data-i18n="hero.cta1">Ücretsiz başla</a>
+        <a class="btn btn-ghost" href="#ar" data-i18n="hero.cta2">AR'da gör</a>
+      </div>
+      <div class="micro">
+        <span data-i18n="hero.m1"><b>Tek dokunuş</b> WebAR, indirme yok</span>
+        <span data-i18n="hero.m2"><b>3D</b> SketchUp'a hazır varlıklar</span>
+        <span data-i18n="hero.m3"><b>Yerel</b> ödeme yöntemleri</span>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="ar-stage scanning" id="arStage">
+        <div class="scan"></div>
+        <div class="frame" id="arFrame">
+          <svg class="art-strokes" viewBox="0 0 100 133" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 90 Q25 60 50 80 T100 70" fill="none" stroke="#fff" stroke-width="2"/>
+            <path d="M0 110 Q30 95 60 105 T100 100" fill="none" stroke="#000" stroke-width="1.5"/>
+            <circle cx="70" cy="35" r="14" fill="#f4e2bd" opacity=".6"/>
+          </svg>
+        </div>
+        <span class="ar-badge"><span class="dot"></span> <span id="arBadgeText">Duvara yerleştiriliyor</span></span>
+        <button class="ar-replay" id="arReplay" data-i18n="ar.replay">↻ Tekrar</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow tag" data-i18n="how.eyebrow">Nasıl çalışır</span>
+        <h2 data-i18n="how.h2">Yükle. Görselleştir. Paylaş.</h2>
+        <p data-i18n="how.p">Düz bir görselden birinin duvarında yaşayan esere üç adım — tüm döngü mobil tarayıcıda çalışır.</p>
+      </div>
+      <div class="steps reveal">
+        <div class="step"><div class="num">ADIM 01</div><h3 data-i18n="step1.h3">Yükle</h3><p data-i18n="step1.p">Yüksek çözünürlüklü görseli ekle, gerçek en ve boyu gir. Sistem gerçek ölçeğe sadık, AR'a hazır eseri otomatik oluşturur.</p></div>
+        <div class="step"><div class="num">ADIM 02</div><h3 data-i18n="step2.h3">Görselleştir</h3><p data-i18n="step2.p">Telefonu herhangi bir duvara doğrult; eser gerçek boyutunda yerine oturur — almadan önce ölçek, ışık ve uyum.</p></div>
+        <div class="step"><div class="num">ADIM 03</div><h3 data-i18n="step3.h3">Paylaş</h3><p data-i18n="step3.p">Her eserin kendi linki olur. Müşteriye ya da bir arkadaşa gönder; AR görünümünü anında açar — giriş gerekmez.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="who" style="background:#070707; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow tag" data-i18n="who.eyebrow">Kimler için</span>
+        <h2 data-i18n="who.h2">Tek platform, üç kitle</h2>
+        <p data-i18n="who.p">Sanatçılar, mimarlar ve koleksiyonerler aynı tuvalde buluşur — her biri diğerlerinin ürettiğinden değer kazanır.</p>
+      </div>
+      <div class="cards reveal">
+        <div class="card">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 3v18M3 12h18" stroke-linecap="round"/><circle cx="12" cy="12" r="9"/></svg>
+          <h3 data-i18n="who1.h3">Sanatçılar</h3>
+          <p data-i18n="who1.p">Fiziksel mekânın duvarlarının ötesindeki alıcılara ulaşan sanal bir galeri. Yaratıcı kontrolü koru, küresel görünürlük kazan.</p>
+        </div>
+        <div class="card">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>
+          <h3 data-i18n="who2.h3">Mimar &amp; tasarımcılar</h3>
+          <p data-i18n="who2.p">Seçilmiş sanatı 3D modellere ve müşteri sunumlarına bırak. SketchUp'a hazır varlıklar sanatı tasarımın parçası yapar.</p>
+        </div>
+        <div class="card">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 5h18v12H3zM3 17l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="9" r="1.5" fill="currentColor" stroke="none"/></svg>
+          <h3 data-i18n="who3.h3">Koleksiyonerler</h3>
+          <p data-i18n="who3.p">Hayal etme boşluğunu kapat. Bir eserin odanda nasıl durduğunu karar vermeden önce gör — tahmin değil, güven.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ar">
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="eyebrow tag" data-i18n="arsec.eyebrow">Mekânda AR</span>
+        <h2 style="font-size:clamp(1.8rem,4vw,2.8rem); line-height:1.1; margin:0 0 14px;" data-i18n="arsec.h2">Eseri gelmeden önce dene</h2>
+        <p style="color:var(--mist); margin:0;" data-i18n="arsec.p">WebAR doğrudan kameradan çalışır — bir tabloyu ya da heykeli gerçek yüzeye, gerçek ölçekte, gerçek zamanlı yerleştirir.</p>
+        <ul class="feat-list">
+          <li><div><b data-i18n="arsec.f1t">Gerçek ölçekte yerleşim</b><br><span data-i18n="arsec.f1s">Gerçek boyutlar render'ı belirler; gördüğün boyut, aldığın boyuttur.</span></div></li>
+          <li><div><b data-i18n="arsec.f2t">Uygulama yok, sürtünme yok</b><br><span data-i18n="arsec.f2s">İnsanların zaten taşıdığı cihazlarda Safari ve Chrome'da açılır.</span></div></li>
+          <li><div><b data-i18n="arsec.f3t">Tek dokunuşla paylaşılır</b><br><span data-i18n="arsec.f3s">Bir link tüm devir teslimdir — alıcı hesapsız görür.</span></div></li>
+          <li><div><b data-i18n="arsec.f4t">Zarif yedek görünüm</b><br><span data-i18n="arsec.f4s">Eski cihazlar çıkmaz sokak yerine temiz bir önizleme alır.</span></div></li>
+        </ul>
+      </div>
+      <div class="visual-panel reveal" aria-hidden="true"><div class="room-grid"></div><div class="floating"></div></div>
+    </div>
+  </section>
+
+  <section id="pricing" style="background:#070707; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow tag" data-i18n="pricing.eyebrow">Planlar</span>
+        <h2 data-i18n="pricing.h2">Ücretsiz başla, hazır olunca büyü</h2>
+        <p data-i18n="pricing.p">Fikri kanıtlamak için bir ücretsiz eser. Portföyün ve projelerin büyüdükçe ücretli katmanlar kapasite ve araç ekler.</p>
+      </div>
+      <div class="pricing reveal">
+        <div class="plan">
+          <span class="pname" data-i18n="plan1.name">Ücretsiz</span>
+          <div class="price" data-price="free"></div>
+          <p class="pdesc" data-i18n="plan1.desc">Deneyimi denemek ve ilk eserini paylaşmak için.</p>
+          <ul>
+            <li data-i18n="plan1.l1">1 AR eseri</li>
+            <li data-i18n="plan1.l2">Paylaşılabilir AR linki</li>
+            <li data-i18n="plan1.l3">Mobil WebAR görüntüleyici</li>
+          </ul>
+          <a class="btn btn-ghost" href="#signup" data-i18n="plan1.cta">Başla</a>
+        </div>
+        <div class="plan featured">
+          <span class="ribbon" data-i18n="plan2.ribbon">En popüler</span>
+          <span class="pname" data-i18n="plan2.name">Profesyonel</span>
+          <div class="price" data-price="pro"></div>
+          <p class="pdesc" data-i18n="plan2.desc">Gerçek bir katalog kuran aktif sanatçı ve tasarımcılar için.</p>
+          <ul>
+            <li data-i18n="plan2.l1">5–10 AR yüklemesi</li>
+            <li data-i18n="plan2.l2">Gelişmiş özelleştirme</li>
+            <li data-i18n="plan2.l3">SketchUp'a hazır dışa aktarım</li>
+            <li data-i18n="plan2.l4">Öncelikli destek</li>
+          </ul>
+          <a class="btn btn-gold" href="#signup" data-i18n="plan2.cta">Profesyonel'i seç</a>
+        </div>
+        <div class="plan">
+          <span class="pname" data-i18n="plan3.name">Kurumsal</span>
+          <div class="price" data-price="ent"></div>
+          <p class="pdesc" data-i18n="plan3.desc">Sanatı çok sayıda projeye yerleştiren stüdyo ve geliştiriciler için.</p>
+          <ul>
+            <li data-i18n="plan3.l1">Yüksek hacimli yükleme</li>
+            <li data-i18n="plan3.l2">Ekip iş birliği</li>
+            <li data-i18n="plan3.l3">API ve özel entegrasyonlar</li>
+            <li data-i18n="plan3.l4">White-label AR görüntüleyici</li>
+          </ul>
+          <a class="btn btn-ghost" href="#signup" data-i18n="plan3.cta">Bize ulaşın</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vision">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow tag" data-i18n="vision.eyebrow">Tam zamanında</span>
+        <h2 data-i18n="vision.h2">Vision 2030'un immersive sanatla buluştuğu yer</h2>
+        <p data-i18n="vision.p">Suudi Arabistan kültüre, tasarıma ve teknolojiye aynı anda yatırım yapıyor; inşaat patlaması da sanat isteyen duvarlar yaratıyor. ART IN MEKAN tam bu kesişimde: ilk günden çift dilli, RTL'e hazır ve yerel ödemeye uyumlu.</p>
+      </div>
+      <div class="reveal">
+        <div class="stat-row">
+          <div class="stat"><b>EN · ع · TR</b><span data-i18n="vision.s1">Çok dilli &amp; RTL hazır</span></div>
+          <div class="stat"><b>WebAR</b><span data-i18n="vision.s2">İndirme gerekmez</span></div>
+          <div class="stat"><b data-price="curlabel"></b><span data-i18n="vision.s3">Yerel ödeme ağ geçitleri</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="signup" class="closing">
+    <div class="wrap reveal">
+      <span class="eyebrow tag" style="text-align:center;" data-i18n="closing.eyebrow">Başla</span>
+      <h2 data-i18n="closing.h2">Sanatını ait olduğu duvara koy</h2>
+      <p data-i18n="closing.p">Bir eseri ücretsiz yükle ve bugün AR'da paylaş. Galerini, projeni ya da koleksiyonunu getir.</p>
+      <a class="btn btn-gold" href="#" style="font-size:.86rem; padding:17px 38px;" data-i18n="closing.cta">Ücretsiz başla</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <svg viewBox="0 0 320 28" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ART IN MEKAN">
+          <text x="0" y="21" fill="#FFFFFF" font-family="Montserrat, Arial, sans-serif" font-size="22" font-weight="600" letter-spacing="5">ART <tspan fill="#C6A972">IN</tspan> MEKAN</text>
+        </svg>
+        <p data-i18n="footer.about">Sanatı gerçek mekâna taşıyan premium platform — sanatçılar, mimarlar ve koleksiyonerler için.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col"><h4 data-i18n="footer.c1">Ürün</h4><a href="#how" data-i18n="nav.how">Nasıl çalışır</a><a href="#ar" data-i18n="nav.ar">AR önizleme</a><a href="#pricing" data-i18n="nav.pricing">Fiyatlandırma</a></div>
+        <div class="foot-col"><h4 data-i18n="footer.c2">Kitle</h4><a href="#who" data-i18n="who1.h3">Sanatçılar</a><a href="#who" data-i18n="who2.h3">Mimarlar</a><a href="#who" data-i18n="who3.h3">Koleksiyonerler</a></div>
+        <div class="foot-col"><h4 data-i18n="footer.c3">Şirket</h4><a href="#" data-i18n="footer.about2">Hakkımızda</a><a href="#" data-i18n="footer.partners">Ortaklar</a><a href="#" data-i18n="footer.contact">İletişim</a></div>
+      </div>
+    </div>
+    <div class="foot-bottom"><span data-i18n="footer.rights">© 2026 ART IN MEKAN. Tüm hakları saklıdır.</span><span>Riyad · İstanbul</span></div>
+  </div>
+</footer>
+
+<script>
+  const I18N = {
+    tr:{
+      "nav.how":"Nasıl çalışır","nav.who":"Kimler için","nav.ar":"AR önizleme","nav.pricing":"Fiyatlandırma","nav.cta":"Başla",
+      "hero.eyebrow":"Gerçek mekânlar için sanat-teknoloji","hero.h1":"Sanatı<br>her <span class='em'>mekânda</span> yaşa",
+      "hero.lede":"Bir eser yükle, kendi duvarında gerçek ölçeğinde gör ve tek bir linkle paylaş. Uygulama indirmek yok.",
+      "hero.cta1":"Ücretsiz başla","hero.cta2":"AR'da gör",
+      "hero.m1":"<b>Tek dokunuş</b> WebAR, indirme yok","hero.m2":"<b>3D</b> SketchUp'a hazır varlıklar","hero.m3":"<b>Yerel</b> ödeme yöntemleri",
+      "ar.replay":"↻ Tekrar","ar.scan":"Yüzey taranıyor","ar.placing":"Duvara yerleştiriliyor","ar.placed":"Gerçek ölçekte yerleşti",
+      "how.eyebrow":"Nasıl çalışır","how.h2":"Yükle. Görselleştir. Paylaş.","how.p":"Düz bir görselden birinin duvarında yaşayan esere üç adım — tüm döngü mobil tarayıcıda çalışır.",
+      "step1.h3":"Yükle","step1.p":"Yüksek çözünürlüklü görseli ekle, gerçek en ve boyu gir. Sistem gerçek ölçeğe sadık, AR'a hazır eseri otomatik oluşturur.",
+      "step2.h3":"Görselleştir","step2.p":"Telefonu herhangi bir duvara doğrult; eser gerçek boyutunda yerine oturur — almadan önce ölçek, ışık ve uyum.",
+      "step3.h3":"Paylaş","step3.p":"Her eserin kendi linki olur. Müşteriye ya da bir arkadaşa gönder; AR görünümünü anında açar — giriş gerekmez.",
+      "who.eyebrow":"Kimler için","who.h2":"Tek platform, üç kitle","who.p":"Sanatçılar, mimarlar ve koleksiyonerler aynı tuvalde buluşur — her biri diğerlerinin ürettiğinden değer kazanır.",
+      "who1.h3":"Sanatçılar","who1.p":"Fiziksel mekânın duvarlarının ötesindeki alıcılara ulaşan sanal bir galeri. Yaratıcı kontrolü koru, küresel görünürlük kazan.",
+      "who2.h3":"Mimar & tasarımcılar","who2.p":"Seçilmiş sanatı 3D modellere ve müşteri sunumlarına bırak. SketchUp'a hazır varlıklar sanatı tasarımın parçası yapar.",
+      "who3.h3":"Koleksiyonerler","who3.p":"Hayal etme boşluğunu kapat. Bir eserin odanda nasıl durduğunu karar vermeden önce gör — tahmin değil, güven.",
+      "arsec.eyebrow":"Mekânda AR","arsec.h2":"Eseri gelmeden önce dene","arsec.p":"WebAR doğrudan kameradan çalışır — bir tabloyu ya da heykeli gerçek yüzeye, gerçek ölçekte, gerçek zamanlı yerleştirir.",
+      "arsec.f1t":"Gerçek ölçekte yerleşim","arsec.f1s":"Gerçek boyutlar render'ı belirler; gördüğün boyut, aldığın boyuttur.",
+      "arsec.f2t":"Uygulama yok, sürtünme yok","arsec.f2s":"İnsanların zaten taşıdığı cihazlarda Safari ve Chrome'da açılır.",
+      "arsec.f3t":"Tek dokunuşla paylaşılır","arsec.f3s":"Bir link tüm devir teslimdir — alıcı hesapsız görür.",
+      "arsec.f4t":"Zarif yedek görünüm","arsec.f4s":"Eski cihazlar çıkmaz sokak yerine temiz bir önizleme alır.",
+      "pricing.eyebrow":"Planlar","pricing.h2":"Ücretsiz başla, hazır olunca büyü","pricing.p":"Fikri kanıtlamak için bir ücretsiz eser. Portföyün ve projelerin büyüdükçe ücretli katmanlar kapasite ve araç ekler.",
+      "plan1.name":"Ücretsiz","plan1.desc":"Deneyimi denemek ve ilk eserini paylaşmak için.","plan1.l1":"1 AR eseri","plan1.l2":"Paylaşılabilir AR linki","plan1.l3":"Mobil WebAR görüntüleyici","plan1.cta":"Başla",
+      "plan2.ribbon":"En popüler","plan2.name":"Profesyonel","plan2.desc":"Gerçek bir katalog kuran aktif sanatçı ve tasarımcılar için.","plan2.l1":"5–10 AR yüklemesi","plan2.l2":"Gelişmiş özelleştirme","plan2.l3":"SketchUp'a hazır dışa aktarım","plan2.l4":"Öncelikli destek","plan2.cta":"Profesyonel'i seç",
+      "plan3.name":"Kurumsal","plan3.desc":"Sanatı çok sayıda projeye yerleştiren stüdyo ve geliştiriciler için.","plan3.l1":"Yüksek hacimli yükleme","plan3.l2":"Ekip iş birliği","plan3.l3":"API ve özel entegrasyonlar","plan3.l4":"White-label AR görüntüleyici","plan3.cta":"Bize ulaşın",
+      "vision.eyebrow":"Tam zamanında","vision.h2":"Vision 2030'un immersive sanatla buluştuğu yer","vision.p":"Suudi Arabistan kültüre, tasarıma ve teknolojiye aynı anda yatırım yapıyor; inşaat patlaması da sanat isteyen duvarlar yaratıyor. ART IN MEKAN tam bu kesişimde: ilk günden çift dilli, RTL'e hazır ve yerel ödemeye uyumlu.",
+      "vision.s1":"Çok dilli & RTL hazır","vision.s2":"İndirme gerekmez","vision.s3":"Yerel ödeme ağ geçitleri",
+      "closing.eyebrow":"Başla","closing.h2":"Sanatını ait olduğu duvara koy","closing.p":"Bir eseri ücretsiz yükle ve bugün AR'da paylaş. Galerini, projeni ya da koleksiyonunu getir.","closing.cta":"Ücretsiz başla",
+      "footer.about":"Sanatı gerçek mekâna taşıyan premium platform — sanatçılar, mimarlar ve koleksiyonerler için.","footer.c1":"Ürün","footer.c2":"Kitle","footer.c3":"Şirket","footer.about2":"Hakkımızda","footer.partners":"Ortaklar","footer.contact":"İletişim","footer.rights":"© 2026 ART IN MEKAN. Tüm hakları saklıdır."
+    },
+    en:{
+      "nav.how":"How it works","nav.who":"Who it's for","nav.ar":"AR preview","nav.pricing":"Pricing","nav.cta":"Get started",
+      "hero.eyebrow":"Art-tech, for real spaces","hero.h1":"Experience<br>art <span class='em'>anywhere</span>",
+      "hero.lede":"Upload a piece, see it at true scale on your own wall, and share it with a single link. No app to install.",
+      "hero.cta1":"Get started free","hero.cta2":"See it in AR",
+      "hero.m1":"<b>1‑tap</b> WebAR, no download","hero.m2":"<b>3D</b> SketchUp-ready assets","hero.m3":"<b>Local</b> payment methods",
+      "ar.replay":"↻ Replay","ar.scan":"Scanning surface","ar.placing":"Placing on wall","ar.placed":"Placed at true scale",
+      "how.eyebrow":"How it works","how.h2":"Upload. Visualize. Share.","how.p":"Three steps from a flat image to a piece living on someone's wall — the whole loop runs in a mobile browser.",
+      "step1.h3":"Upload","step1.p":"Add a high-resolution image and enter the real width and height. We build an AR-ready, true-to-scale piece automatically.",
+      "step2.h3":"Visualize","step2.p":"Point a phone at any wall and the artwork anchors in place at its actual size — scale, light, and fit, before buying.",
+      "step3.h3":"Share","step3.p":"Every piece gets its own link. Send it to a client or a friend and they open the AR view instantly — no login.",
+      "who.eyebrow":"Who it's for","who.h2":"One platform, three audiences","who.p":"Artists, architects, and collectors meet on the same canvas — each gaining something the others create.",
+      "who1.h3":"Artists","who1.p":"A virtual gallery that reaches buyers beyond the wall of any physical space. Keep creative control, gain global exposure.",
+      "who2.h3":"Architects & designers","who2.p":"Drop curated art into 3D models and client walkthroughs. SketchUp-ready assets make art part of the design, not an afterthought.",
+      "who3.h3":"Collectors","who3.p":"Close the imagination gap. See exactly how a piece reads in your room before you commit — confidence, not guesswork.",
+      "arsec.eyebrow":"In-context AR","arsec.h2":"Try the piece before it ever ships","arsec.p":"WebAR runs straight from the camera — superimposing a painting or sculpture onto a real surface at true scale, in real time.",
+      "arsec.f1t":"True-to-scale placement","arsec.f1s":"Real dimensions drive the render, so what you see is the size you get.",
+      "arsec.f2t":"No app, no friction","arsec.f2s":"Opens in Safari and Chrome on the devices people already carry.",
+      "arsec.f3t":"Shareable in one tap","arsec.f3s":"A link is the whole handoff — recipients view without an account.",
+      "arsec.f4t":"Graceful fallback","arsec.f4s":"Older devices get a clean preview instead of a dead end.",
+      "pricing.eyebrow":"Plans","pricing.h2":"Start free, scale when you're ready","pricing.p":"One free piece to prove the idea. Paid tiers add capacity and tools as your portfolio and projects grow.",
+      "plan1.name":"Free","plan1.desc":"For trying the experience and sharing your first piece.","plan1.l1":"1 AR artwork","plan1.l2":"Shareable AR link","plan1.l3":"Mobile WebAR viewer","plan1.cta":"Get started",
+      "plan2.ribbon":"Most popular","plan2.name":"Professional","plan2.desc":"For working artists and designers building a real catalogue.","plan2.l1":"5–10 AR uploads","plan2.l2":"Advanced customization","plan2.l3":"SketchUp-ready exports","plan2.l4":"Priority support","plan2.cta":"Choose Professional",
+      "plan3.name":"Enterprise","plan3.desc":"For studios and developers staging art across many projects.","plan3.l1":"High-volume uploads","plan3.l2":"Team collaboration","plan3.l3":"API & custom integrations","plan3.l4":"White-label AR viewer","plan3.cta":"Talk to us",
+      "vision.eyebrow":"Built for the moment","vision.h2":"Where Vision 2030 meets immersive art","vision.p":"Saudi Arabia is investing in culture, design, and technology at once — and a construction boom is creating walls that want art. ART IN MEKAN sits at that intersection: bilingual from day one, RTL-ready, and tuned to local payments.",
+      "vision.s1":"Multilingual & RTL ready","vision.s2":"No download required","vision.s3":"Local payment gateways",
+      "closing.eyebrow":"Get started","closing.h2":"Put your art on the wall it was made for","closing.p":"Upload one piece for free and share it in AR today. Bring your gallery, your project, or your collection.","closing.cta":"Get started free",
+      "footer.about":"A premium platform that makes art feel native to real space — for artists, architects, and collectors.","footer.c1":"Product","footer.c2":"Audience","footer.c3":"Company","footer.about2":"About","footer.partners":"Partners","footer.contact":"Contact","footer.rights":"© 2026 ART IN MEKAN. All rights reserved."
+    },
+    ar:{
+      "nav.how":"كيف يعمل","nav.who":"لمن","nav.ar":"معاينة الواقع المعزز","nav.pricing":"الأسعار","nav.cta":"ابدأ",
+      "hero.eyebrow":"فن وتقنية، للمساحات الحقيقية","hero.h1":"عِش الفن<br>في <span class='em'>أي مكان</span>",
+      "hero.lede":"ارفع عملاً فنياً، شاهده بحجمه الحقيقي على جدارك، وشاركه برابط واحد. دون تثبيت أي تطبيق.",
+      "hero.cta1":"ابدأ مجاناً","hero.cta2":"شاهده بالواقع المعزز",
+      "hero.m1":"<b>بلمسة</b> واقع معزز دون تنزيل","hero.m2":"<b>ثلاثي الأبعاد</b> جاهز لـ SketchUp","hero.m3":"<b>وسائل دفع</b> محلية",
+      "ar.replay":"↻ إعادة","ar.scan":"يجري مسح السطح","ar.placing":"يجري وضعه على الجدار","ar.placed":"وُضع بالحجم الحقيقي",
+      "how.eyebrow":"كيف يعمل","how.h2":"ارفع. تصوّر. شارك.","how.p":"ثلاث خطوات من صورة مسطحة إلى عمل يعيش على جدار أحدهم — الدورة كاملة تعمل في متصفح الجوال.",
+      "step1.h3":"ارفع","step1.p":"أضف صورة عالية الدقة وأدخل العرض والارتفاع الحقيقيين. ننشئ تلقائياً عملاً جاهزاً للواقع المعزز وبالمقياس الصحيح.",
+      "step2.h3":"تصوّر","step2.p":"وجّه الهاتف نحو أي جدار فيثبت العمل بحجمه الفعلي — المقياس والإضاءة والملاءمة قبل الشراء.",
+      "step3.h3":"شارك","step3.p":"لكل عمل رابطه الخاص. أرسله لعميل أو صديق فيفتح عرض الواقع المعزز فوراً — دون تسجيل دخول.",
+      "who.eyebrow":"لمن","who.h2":"منصة واحدة، ثلاث فئات","who.p":"يلتقي الفنانون والمعماريون وجامعو الأعمال على اللوحة نفسها — كلٌّ يستفيد مما يبدعه الآخرون.",
+      "who1.h3":"الفنانون","who1.p":"معرض افتراضي يصل إلى مشترين خارج جدران أي مساحة فعلية. احتفظ بالتحكم الإبداعي واكسب حضوراً عالمياً.",
+      "who2.h3":"المعماريون والمصممون","who2.p":"أدرج الفن المنتقى في النماذج ثلاثية الأبعاد وجولات العملاء. أصول جاهزة لـ SketchUp تجعل الفن جزءاً من التصميم.",
+      "who3.h3":"جامعو الأعمال","who3.p":"اسدّ فجوة التخيّل. شاهد كيف يبدو العمل في غرفتك قبل أن تقرر — ثقة لا تخمين.",
+      "arsec.eyebrow":"واقع معزز في السياق","arsec.h2":"جرّب العمل قبل أن يُشحن","arsec.p":"يعمل الواقع المعزز مباشرة من الكاميرا — يضع لوحة أو منحوتة على سطح حقيقي بالمقياس الصحيح وفي الوقت الفعلي.",
+      "arsec.f1t":"وضع بالمقياس الحقيقي","arsec.f1s":"الأبعاد الحقيقية تحدد العرض، فما تراه هو الحجم الذي تحصل عليه.",
+      "arsec.f2t":"دون تطبيق ودون عناء","arsec.f2s":"يفتح في Safari وChrome على الأجهزة التي يحملها الناس بالفعل.",
+      "arsec.f3t":"قابل للمشاركة بلمسة","arsec.f3s":"الرابط هو التسليم كله — يشاهده المستلم دون حساب.",
+      "arsec.f4t":"بديل أنيق","arsec.f4s":"الأجهزة الأقدم تحصل على معاينة نظيفة بدل طريق مسدود.",
+      "pricing.eyebrow":"الباقات","pricing.h2":"ابدأ مجاناً وتوسّع حين تجهز","pricing.p":"عمل مجاني واحد لإثبات الفكرة. تضيف الباقات المدفوعة سعةً وأدواتٍ مع نمو أعمالك ومشاريعك.",
+      "plan1.name":"مجاني","plan1.desc":"لتجربة الخدمة ومشاركة عملك الأول.","plan1.l1":"عمل واقع معزز واحد","plan1.l2":"رابط واقع معزز قابل للمشاركة","plan1.l3":"عارض WebAR للجوال","plan1.cta":"ابدأ",
+      "plan2.ribbon":"الأكثر رواجاً","plan2.name":"احترافي","plan2.desc":"للفنانين والمصممين النشطين الذين يبنون كتالوجاً حقيقياً.","plan2.l1":"5–10 رفعات واقع معزز","plan2.l2":"تخصيص متقدم","plan2.l3":"تصدير جاهز لـ SketchUp","plan2.l4":"دعم ذو أولوية","plan2.cta":"اختر الاحترافي",
+      "plan3.name":"للمؤسسات","plan3.desc":"للاستوديوهات والمطوّرين الذين يعرضون الفن عبر مشاريع كثيرة.","plan3.l1":"رفع بكميات كبيرة","plan3.l2":"تعاون الفريق","plan3.l3":"واجهات برمجة وتكاملات مخصصة","plan3.l4":"عارض واقع معزز بعلامتك","plan3.cta":"تواصل معنا",
+      "vision.eyebrow":"في الوقت المناسب","vision.h2":"حيث تلتقي رؤية 2030 بالفن الغامر","vision.p":"تستثمر السعودية في الثقافة والتصميم والتقنية في آن واحد — وطفرة البناء تخلق جدراناً تشتهي الفن. تقف ART IN MEKAN عند هذا التقاطع: ثنائية اللغة منذ اليوم الأول، جاهزة للكتابة من اليمين لليسار، ومهيأة للدفع المحلي.",
+      "vision.s1":"متعددة اللغات وجاهزة للـ RTL","vision.s2":"لا حاجة للتنزيل","vision.s3":"بوابات دفع محلية",
+      "closing.eyebrow":"ابدأ","closing.h2":"ضع فنك على الجدار الذي صُنع له","closing.p":"ارفع عملاً واحداً مجاناً وشاركه بالواقع المعزز اليوم. أحضر معرضك أو مشروعك أو مجموعتك.","closing.cta":"ابدأ مجاناً",
+      "footer.about":"منصة متميزة تجعل الفن يبدو جزءاً أصيلاً من المكان الحقيقي — للفنانين والمعماريين وجامعي الأعمال.","footer.c1":"المنتج","footer.c2":"الفئات","footer.c3":"الشركة","footer.about2":"من نحن","footer.partners":"الشركاء","footer.contact":"اتصل بنا","footer.rights":"© 2026 ART IN MEKAN. جميع الحقوق محفوظة."
+    }
+  };
+
+  const PRICES = {
+    tr:{ free:"₺0", pro:'₺1.890 <small>/ay</small>', ent:"Özel", curlabel:"TRY" },
+    en:{ free:"$0", pro:'$49 <small>/ mo</small>', ent:"Custom", curlabel:"USD" },
+    ar:{ free:"0 ر.س", pro:'189 ر.س <small>/ شهرياً</small>', ent:"مخصص", curlabel:"SAR" }
+  };
+
+  const ORDER = ["tr","en","ar"];
+  const LANGLABEL = { tr:"TR · EN · ع", en:"EN · ع · TR", ar:"ع · TR · EN" };
+  let current = "tr";
+
+  function applyLang(lang){
+    current = lang;
+    const dict = I18N[lang];
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const k = el.getAttribute("data-i18n");
+      if(dict[k] !== undefined) el.innerHTML = dict[k];
+    });
+    const p = PRICES[lang];
+    document.querySelectorAll("[data-price]").forEach(el=>{
+      const k = el.getAttribute("data-price");
+      if(p[k] !== undefined) el.innerHTML = p[k];
+    });
+    const html = document.documentElement;
+    html.setAttribute("lang", lang);
+    html.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+    document.getElementById("langToggle").textContent = LANGLABEL[lang];
+    updateBadge();
+  }
+
+  // badge text reflects current animation phase + language
+  let badgePhase = "placing";
+  function updateBadge(){
+    const map = { scan:"ar.scan", placing:"ar.placing", placed:"ar.placed" };
+    document.getElementById("arBadgeText").textContent = I18N[current][map[badgePhase]];
+  }
+
+  document.getElementById("langToggle").addEventListener("click", ()=>{
+    const next = ORDER[(ORDER.indexOf(current)+1) % ORDER.length];
+    applyLang(next);
+  });
+
+  // mobile menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', ()=>{ const o=navLinks.classList.toggle('open'); menuToggle.setAttribute('aria-expanded',o); });
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ navLinks.classList.remove('open'); menuToggle.setAttribute('aria-expanded',false); }));
+
+  // AR placement animation
+  const stage = document.getElementById('arStage');
+  const frame = document.getElementById('arFrame');
+  const replay = document.getElementById('arReplay');
+  function runPlacement(){
+    frame.classList.remove('placed');
+    stage.classList.remove('scanning');
+    badgePhase = "scan"; updateBadge();
+    void stage.offsetWidth;
+    stage.classList.add('scanning');
+    setTimeout(()=>{ badgePhase = "placing"; updateBadge(); }, 200);
+    setTimeout(()=>{ frame.classList.add('placed'); badgePhase = "placed"; updateBadge(); }, 1000);
+  }
+  replay.addEventListener('click', runPlacement);
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold:0.12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // init
+  applyLang("tr");
+  setTimeout(runPlacement, 500);
+</script>
+</body>
+</html>
