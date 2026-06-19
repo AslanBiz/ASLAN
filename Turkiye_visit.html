@@ -137,7 +137,7 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);-webkit
 /* PROJECTS */
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
 .project-card{background:var(--white);border:0.5px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
-.project-img{width:100%;height:160px;background:linear-gradient(135deg,var(--navy2),var(--navy));display:flex;align-items:center;justify-content:center;font-size:34px;flex-shrink:0;position:relative;overflow:hidden}.project-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.project-img .emoji-fallback{position:relative;z-index:1}
+.project-img{width:100%;height:180px;background:linear-gradient(135deg,#1E1E38,#1A1A2E);display:flex;align-items:center;justify-content:center;font-size:34px;flex-shrink:0;overflow:hidden}.project-img img{width:100%;height:100%;object-fit:cover;display:block}
 .project-body{padding:12px;flex:1;display:flex;flex-direction:column;gap:5px}
 .project-name{font-size:13px;font-weight:600;color:var(--ink)}
 .project-company{font-size:11px;color:var(--ink3)}
@@ -1292,192 +1292,201 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);-webkit
   </div>
   <div class="projects-grid" id="projects-grid">
     <div class="project-card" data-city="Ankara">
-      <div class="project-img"><img src="galataport-istanbul.jpg" alt="Galataport Istanbul" onerror="this.style.display='none'"><span class="emoji-fallback"><img src="hilltown-kucukyali.jpeg" alt="Hilltown Küçükyalı" onerror="this.style.display='none'"><span class="emoji-fallback"><img src="metropol-istanbul.jpg" alt="Metropol Istanbul" onerror="this.style.display='none'"><span class="emoji-fallback"><img src="sinpas-finance-city.jpg" alt="Sinpaş Finance City" onerror="this.style.display='none'"><span class="emoji-fallback"><img src="istanbul-financial-center.jpg" alt="Istanbul Financial Center" onerror="this.style.display='none'"><span class="emoji-fallback"><img src="seapearl-atakoy.jpg" alt="SeaPearl Ataköy" onerror="this.style.display='none'"><span class="emoji-fallback"><img src="istmarina.jpg" alt="IstMarina" onerror="this.style.display='none'"><span class="emoji-fallback"><img src="six-senses-kaplankaya.jpg" alt="Six Senses Kaplankaya" onerror="this.style.display='none'"><span class="emoji-fallback"><img src="mandarin-oriental-bodrum.jpg" alt="Mandarin Oriental Bodrum" onerror="this.style.display='none'"><span class="emoji-fallback"><img src="aman-ruya.jpeg" alt="Aman Ruya Resort" onerror="this.style.display='none'"><span class="emoji-fallback"><img src="mesa-demirbuku.jpg" alt="Mesa Demirbükü Project" onerror="this.style.display='none'"><span class="emoji-fallback"><img src="bodrum-edition.jpg" alt="Bodrum Edition Hotel" onerror="this.style.display='none'"><span class="emoji-fallback"><img src="pasifik-nextlevel.jpg" alt="Next Level Project" onerror="this.style.display='none'"><span class="emoji-fallback"><img src="sinpasaltinoran.jpg" alt="Sinpaş Altınoran" onerror="this.style.display='none'"><span class="emoji-fallback">🏘</span></span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+      <div class="project-img">
+        <img src="sinpasaltinoran.jpg" alt="Sinpaş Altınoran" onerror="this.outerHTML='<div style=\'font-size:40px\'>🏘</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">Sinpaş Altınoran</div>
         <div class="project-company">Sinpaş GYO · Ankara</div>
         <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Residential Community</span></div>
         <div class="project-desc">Large-scale branded residential community in Ankara. Benchmark for residential district planning in Oman new cities.</div>
-        <div class="project-links">
-          <a href="https://sinpasaltinoran.com.tr" class="ext" target="_blank">🔗 Website</a>
-          <a href="https://maps.app.goo.gl/FQRSZQsXxcAuugFv8" class="ext ext-map" target="_blank">📍 Map</a>
-        </div>
+        <div class="project-links"><a href="https://sinpasaltinoran.com.tr" class="ext" target="_blank">🔗 Website</a></div>
       </div>
     </div>
     <div class="project-card" data-city="Ankara">
-      <div class="project-img">🏬</div>
+      <div class="project-img">
+        <img src="pasifik-nextlevel.jpg" alt="Next Level Project" onerror="this.outerHTML='<div style=\'font-size:40px\'>🏬</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">Next Level Project</div>
         <div class="project-company">Pasifik Holding · Ankara</div>
         <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Mixed-Use / Mall</span></div>
-        <div class="project-desc">Mixed-use development with shopping mall component in Ankara central area.</div>
-        <div class="project-links">
-          <a href="http://pasifik.com" class="ext" target="_blank">🔗 Website</a>
-          
-        </div>
+        <div class="project-desc">Mixed-use development with shopping mall component in Ankara.</div>
+        <div class="project-links"><a href="http://pasifik.com" class="ext" target="_blank">🔗 Website</a></div>
       </div>
     </div>
     <div class="project-card" data-city="Bodrum">
-      <div class="project-img">🏨</div>
+      <div class="project-img">
+        <img src="bodrum-edition.jpg" alt="Bodrum Edition Hotel" onerror="this.outerHTML='<div style=\'font-size:40px\'>🏨</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">Bodrum Edition Hotel</div>
         <div class="project-company">Rönesans Holding · Bodrum</div>
         <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Luxury Hotel</span></div>
-        <div class="project-desc">The Bodrum Edition — international luxury hotel brand. Part of Marriott International portfolio. Benchmark for luxury coastal hospitality.</div>
-        <div class="project-links">
-          <a href="https://www.marriott.com/en-us/hotels/bjwbr-the-bodrum-edition" class="ext" target="_blank">🔗 Website</a>
-          
-        </div>
+        <div class="project-desc">The Bodrum Edition — international luxury hotel by Marriott. Benchmark for luxury coastal hospitality.</div>
+        <div class="project-links"><a href="https://www.marriott.com/en-us/hotels/bjwbr-the-bodrum-edition" class="ext" target="_blank">🔗 Website</a></div>
       </div>
     </div>
     <div class="project-card" data-city="Bodrum">
-      <div class="project-img">🏡</div>
+      <div class="project-img">
+        <img src="bvlgari-bodrum.jpeg" alt="Bvlgari Hotel & Residences" onerror="this.outerHTML='<div style=\'font-size:40px\'>💎</div>'">
+      </div>
+      <div class="project-body">
+        <div class="project-name">Bvlgari Hotel & Residences</div>
+        <div class="project-company">Bvlgari / Bodrum</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Luxury Under Construction</span></div>
+        <div class="project-desc">Bvlgari branded luxury residences under construction on the Bodrum peninsula. Site visit on Day 3.</div>
+        <div class="project-links"></div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Bodrum">
+      <div class="project-img">
+        <img src="mesa-demirbuku.jpg" alt="Mesa Demirbükü Project" onerror="this.outerHTML='<div style=\'font-size:40px\'>🏡</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">Mesa Demirbükü Project</div>
         <div class="project-company">MESA · Bodrum</div>
         <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Residential</span></div>
         <div class="project-desc">Coastal residential project by MESA in Demirbükü area, Bodrum peninsula.</div>
-        <div class="project-links">
-          <a href="https://www.mesa.com.tr/en" class="ext" target="_blank">🔗 Website</a>
-          
-        </div>
+        <div class="project-links"><a href="https://www.mesa.com.tr/en" class="ext" target="_blank">🔗 Website</a></div>
       </div>
     </div>
     <div class="project-card" data-city="Bodrum">
-      <div class="project-img">🌊</div>
+      <div class="project-img">
+        <img src="aman-ruya.jpeg" alt="Aman Ruya Resort" onerror="this.outerHTML='<div style=\'font-size:40px\'>🌊</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">Aman Ruya Resort</div>
-        <div class="project-company">Re Pie Holding / Bilgili Holding · Bodrum</div>
+        <div class="project-company">Re Pie Holding / Bilgili · Bodrum</div>
         <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Ultra-Luxury Resort</span></div>
-        <div class="project-desc">Aman Resorts property in Bodrum — one of the world's most exclusive resort brands. Direct benchmark for premium coastal destination development in Oman.</div>
-        <div class="project-links">
-          <a href="https://www.aman.com/resorts/amanruya" class="ext" target="_blank">🔗 Website</a>
-          
-        </div>
+        <div class="project-desc">Aman Resorts property in Bodrum — one of the world's most exclusive resort brands. Benchmark for premium coastal destination.</div>
+        <div class="project-links"><a href="https://www.aman.com/resorts/amanruya" class="ext" target="_blank">🔗 Website</a></div>
       </div>
     </div>
     <div class="project-card" data-city="Bodrum">
-      <div class="project-img">🏝</div>
+      <div class="project-img">
+        <img src="mandarin-oriental-bodrum.jpg" alt="Mandarin Oriental Bodrum" onerror="this.outerHTML='<div style=\'font-size:40px\'>🏝</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">Mandarin Oriental Bodrum</div>
         <div class="project-company">ASTAŞ Holding · Bodrum</div>
         <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Luxury Coastal Resort</span></div>
-        <div class="project-desc">Ultra-luxury coastal resort and residence. Direct benchmark for Salalah Marina waterfront luxury development. ASTAŞ owns MO Bodrum, MO Bosphorus, MO Etiler.</div>
-        <div class="project-links">
-          <a href="https://www.mandarinoriental.com/en/bodrum" class="ext" target="_blank">🔗 Website</a>
-          
-        </div>
+        <div class="project-desc">Ultra-luxury coastal resort and residence. Benchmark for Salalah Marina waterfront luxury development.</div>
+        <div class="project-links"><a href="https://www.mandarinoriental.com/en/bodrum" class="ext" target="_blank">🔗 Website</a></div>
       </div>
     </div>
     <div class="project-card" data-city="Bodrum">
-      <div class="project-img">🌿</div>
+      <div class="project-img">
+        <img src="six-senses-kaplankaya.jpg" alt="Six Senses Kaplankaya" onerror="this.outerHTML='<div style=\'font-size:40px\'>🌿</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">Six Senses Kaplankaya</div>
         <div class="project-company">Six Senses · Bodrum</div>
-        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Ultra-Luxury Wellness Resort</span></div>
-        <div class="project-desc">World-class wellness resort on the Aegean coast. ~2 hours from Yalıkavak by road. Benchmark for premium integrated wellness and hospitality in a coastal destination.</div>
-        <div class="project-links">
-          <a href="https://www.sixsenses.com/en/resorts/kaplankaya" class="ext" target="_blank">🔗 Website</a>
-          
-        </div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Wellness Resort</span></div>
+        <div class="project-desc">World-class wellness resort on the Aegean coast. Benchmark for premium integrated wellness and hospitality.</div>
+        <div class="project-links"><a href="https://www.sixsenses.com/en/resorts/kaplankaya" class="ext" target="_blank">🔗 Website</a></div>
+      </div>
+    </div>
+    <div class="project-card" data-city="Bodrum">
+      <div class="project-img">
+        <img src="yalikavak-marina.jpg" alt="Yalıkavak Marina" onerror="this.outerHTML='<div style=\'font-size:40px\'>⛵</div>'">
+      </div>
+      <div class="project-body">
+        <div class="project-name">Yalıkavak Marina</div>
+        <div class="project-company">Yalıkavak · Bodrum</div>
+        <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Marina & Commercial</span></div>
+        <div class="project-desc">Premium superyacht marina with luxury retail, F&B and waterfront promenade. Business dinner venue with RAMS Group.</div>
+        <div class="project-links"><a href="https://www.yalikavakmarina.com/en" class="ext" target="_blank">🔗 Website</a></div>
       </div>
     </div>
     <div class="project-card" data-city="Istanbul">
-      <div class="project-img">⚓</div>
+      <div class="project-img">
+        <img src="istmarina.jpg" alt="IstMarina" onerror="this.outerHTML='<div style=\'font-size:40px\'>⚓</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">IstMarina</div>
         <div class="project-company">DAP Yapı · Istanbul</div>
         <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Waterfront Mixed-Use</span></div>
-        <div class="project-desc">Waterfront mixed-use development on the Marmara coast. Marina, residences, hotel and commercial. European Property Awards winner. 1h 20min from Radisson Blu Vadistanbul.</div>
-        <div class="project-links">
-          <a href="https://dapyapi.com.tr/projeler/ist-marina" class="ext" target="_blank">🔗 Website</a>
-          <a href="https://maps.app.goo.gl/rm33RpSUuWGxZCU58" class="ext ext-map" target="_blank">📍 Map</a>
-        </div>
+        <div class="project-desc">Waterfront mixed-use development on the Marmara coast. European Property Awards winner.</div>
+        <div class="project-links"><a href="https://dapyapi.com.tr/projeler/ist-marina" class="ext" target="_blank">🔗 Website</a><a href="https://maps.app.goo.gl/rm33RpSUuWGxZCU58" class="ext ext-map" target="_blank">📍 Map</a></div>
       </div>
     </div>
     <div class="project-card" data-city="Istanbul">
-      <div class="project-img">🐚</div>
+      <div class="project-img">
+        <img src="seapearl-atakoy.jpg" alt="SeaPearl Ataköy" onerror="this.outerHTML='<div style=\'font-size:40px\'>🐚</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">SeaPearl Ataköy</div>
         <div class="project-company">Kuzu Group · Istanbul</div>
         <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Seafront Mixed-Use</span></div>
-        <div class="project-desc">One of Istanbul's largest seafront mixed-use developments. Marina, residences, hotel and retail on the Marmara coast. 60 min from IstMarina.</div>
-        <div class="project-links">
-          <a href="http://www.seapearlatakoy.com" class="ext" target="_blank">🔗 Website</a>
-          
-        </div>
+        <div class="project-desc">One of Istanbul's largest seafront mixed-use developments — marina, residences, hotel and retail.</div>
+        <div class="project-links"><a href="http://www.seapearlatakoy.com" class="ext" target="_blank">🔗 Website</a></div>
       </div>
     </div>
     <div class="project-card" data-city="Istanbul">
-      <div class="project-img">🏦</div>
+      <div class="project-img">
+        <img src="istanbul-financial-center.jpg" alt="Istanbul Financial Center" onerror="this.outerHTML='<div style=\'font-size:40px\'>🏦</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">Istanbul Financial Center</div>
         <div class="project-company">IFC · Istanbul</div>
         <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Financial District</span></div>
-        <div class="project-desc">New landmark financial district on the Asian side. Hub integrating major banks, regulators, offices and public realm at urban scale. Benchmark for Al Khuwair Downtown.</div>
-        <div class="project-links">
-          <a href="https://www.ifc.com.tr/en" class="ext" target="_blank">🔗 Website</a>
-          
-        </div>
+        <div class="project-desc">Landmark financial district on the Asian side. Benchmark for Al Khuwair Downtown development in Oman.</div>
+        <div class="project-links"><a href="https://www.ifc.com.tr/en" class="ext" target="_blank">🔗 Website</a></div>
       </div>
     </div>
     <div class="project-card" data-city="Istanbul">
-      <div class="project-img">🏗</div>
+      <div class="project-img">
+        <img src="sinpas-finance-city.jpg" alt="Sinpaş Finance City" onerror="this.outerHTML='<div style=\'font-size:40px\'>🏗</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">Sinpaş Finance City</div>
         <div class="project-company">Sinpaş GYO · Istanbul</div>
         <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Financial / Mixed-Use</span></div>
-        <div class="project-desc">Mixed-use financial district development adjacent to Istanbul Financial Center (Ataşehir). Office, commercial and residential components.</div>
-        <div class="project-links">
-          <a href="https://www.sinpasfinanssehir.com" class="ext" target="_blank">🔗 Website</a>
-          
-        </div>
+        <div class="project-desc">Mixed-use financial district development adjacent to Istanbul Financial Center.</div>
+        <div class="project-links"><a href="https://www.sinpasfinanssehir.com" class="ext" target="_blank">🔗 Website</a></div>
       </div>
     </div>
     <div class="project-card" data-city="Istanbul">
-      <div class="project-img">🌆</div>
+      <div class="project-img">
+        <img src="metropol-istanbul.jpg" alt="Metropol Istanbul" onerror="this.outerHTML='<div style=\'font-size:40px\'>🌆</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">Metropol Istanbul</div>
         <div class="project-company">Emlak Konut GYO · Istanbul</div>
         <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Urban Transformation</span></div>
-        <div class="project-desc">Emlak Konut GYO flagship urban transformation project in Istanbul. Large-scale mixed-use master development — direct reference for Oman new city master developer typology.</div>
-        <div class="project-links">
-          <a href="https://www.emlakkonut.com.tr/en-US" class="ext" target="_blank">🔗 Website</a>
-          
-        </div>
+        <div class="project-desc">Emlak Konut GYO flagship urban transformation project. Master developer reference for Oman new city typology.</div>
+        <div class="project-links"><a href="https://www.emlakkonut.com.tr/en-US" class="ext" target="_blank">🔗 Website</a></div>
       </div>
     </div>
     <div class="project-card" data-city="Istanbul">
-      <div class="project-img">🏢</div>
+      <div class="project-img">
+        <img src="hilltown-kucukyali.jpeg" alt="Hilltown Küçükyalı" onerror="this.outerHTML='<div style=\'font-size:40px\'>🏢</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">Hilltown Küçükyalı</div>
         <div class="project-company">Rönesans Holding · Istanbul</div>
         <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Commercial / Mixed-Use</span></div>
-        <div class="project-desc">Integrated commercial and mixed-use project by Rönesans Holding on the Asian side of Istanbul. Retail, office and lifestyle components.</div>
-        <div class="project-links">
-          <a href="https://ronesans.com/projeler/gayrimenkul-grubu/ronesansbiz-kucukyali" class="ext" target="_blank">🔗 Website</a>
-          
-        </div>
+        <div class="project-desc">Integrated commercial and mixed-use project by Rönesans Holding on the Asian side of Istanbul.</div>
+        <div class="project-links"><a href="https://ronesans.com/projeler/gayrimenkul-grubu/ronesansbiz-kucukyali" class="ext" target="_blank">🔗 Website</a></div>
       </div>
     </div>
     <div class="project-card" data-city="Istanbul">
-      <div class="project-img">🚢</div>
+      <div class="project-img">
+        <img src="galataport-istanbul.jpg" alt="Galataport Istanbul" onerror="this.outerHTML='<div style=\'font-size:40px\'>🚢</div>'">
+      </div>
       <div class="project-body">
         <div class="project-name">Galataport Istanbul</div>
         <div class="project-company">Doğuş Group · Istanbul</div>
         <div><span class="tag tag-visit" style="margin:4px 0;display:inline-block">Waterfront Regeneration</span></div>
-        <div class="project-desc">Flagship Bosphorus waterfront regeneration. Cruise terminal, heritage retail, restaurants and extensive public realm on the historic Bosphorus waterfront. Direct benchmark for Salalah Marina / Waterfront development.</div>
-        <div class="project-links">
-          <a href="https://galataport.com.tr/en" class="ext" target="_blank">🔗 Website</a>
-          
-        </div>
+        <div class="project-desc">Flagship Bosphorus waterfront regeneration — cruise terminal, heritage retail and public realm. Benchmark for Salalah Marina.</div>
+        <div class="project-links"><a href="https://galataport.com.tr/en" class="ext" target="_blank">🔗 Website</a></div>
       </div>
-    </div></div>
+    </div>
+  </div>
+
 </div>
 
-<!-- ══ MAP ══ -->
-<div id="panel-map" class="panel">
-  <div class="page-title" style="margin-bottom:6px">Map &amp; Route</div>
   <div class="page-sub" style="margin-bottom:20px">Open each city map directly in Google Maps</div>
 
   <!-- BIG CITY MAP BUTTONS -->
