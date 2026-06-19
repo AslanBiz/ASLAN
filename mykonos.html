@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mykonos — 24–29 Haziran 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #EDF4FA;
+    --warm-white: #F8FBFF;
+    --stone: #A2BFCF;
+    --terracotta: #1C6FA8;
+    --deep-terra: #124E7A;
+    --aegean: #1A5F94;
+    --aegean-light: #4A9CC8;
+    --ink: #0B1F2E;
+    --muted: #4A7A96;
+    --gold: #2980B9;
+    --divider: #C0D8EA;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--sand);
+    font-family: 'Jost', sans-serif;
+    color: var(--ink);
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--divider);
+    margin-bottom: 56px;
+    position: relative;
+  }
+
+  .header-label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 64px;
+    letter-spacing: -1px;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .header-dates {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 18px;
+  }
+
+  .header-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  /* ── FLIGHT STRIP ── */
+  .flight-strip {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 56px;
+  }
+
+  .flight-card {
+    flex: 1;
+    background: var(--warm-white);
+    border: 1px solid var(--divider);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .flight-icon {
+    font-size: 20px;
+    opacity: 0.5;
+  }
+
+  .flight-info {
+    flex: 1;
+  }
+
+  .flight-direction {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+
+  .flight-route {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .flight-details {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── DAY CARD ── */
+  .day-card {
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .day-header {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 0;
+    align-items: start;
+    margin-bottom: 20px;
+  }
+
+  .day-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    line-height: 0.85;
+    color: var(--divider);
+    padding-top: 4px;
+  }
+
+  .day-info {
+    padding-left: 16px;
+    border-left: 2px solid var(--terracotta);
+    margin-left: 0;
+    padding-top: 4px;
+  }
+
+  .day-date {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+
+  .day-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .day-title em { font-style: italic; color: var(--aegean); }
+
+  .day-tagline {
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ── BLOCKS ── */
+  .blocks {
+    padding-left: 88px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .block {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--warm-white);
+    border: 1px solid var(--divider);
+    align-items: start;
+  }
+
+  .block.evening {
+    background: var(--warm-white);
+    border-color: var(--divider);
+  }
+
+  .block.wedding {
+    background: linear-gradient(135deg, #0A2A45 0%, #051828 100%);
+    border-color: #4A9CC8;
+    padding: 20px 24px;
+  }
+
+  .block.wedding .block-time { color: rgba(255,255,255,0.5); }
+  .block.wedding .block-label { color: var(--gold); }
+  .block.wedding .block-venue { color: #C8E8F8; font-size: 20px; }
+  .block.wedding .block-desc { color: rgba(255,255,255,0.6); }
+  .block.wedding .block-note { color: var(--gold); opacity: 0.7; }
+
+  .block-time {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    font-weight: 400;
+    padding-top: 2px;
+    text-transform: uppercase;
+  }
+
+  .block-content {}
+
+  .block-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 400;
+    margin-bottom: 3px;
+  }
+
+  .block-venue {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .block-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.6;
+  }
+
+  .block-note {
+    font-size: 10px;
+    color: var(--stone);
+    margin-top: 6px;
+    font-style: italic;
+    letter-spacing: 0.3px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    background: var(--sand);
+    border: 1px solid var(--divider);
+    color: var(--muted);
+    margin-top: 6px;
+    margin-right: 4px;
+  }
+
+  .block.evening .tag {
+    background: var(--sand);
+    border-color: var(--divider);
+    color: var(--muted);
+  }
+
+  /* style badge */
+  .style-note {
+    padding-left: 88px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .style-note-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-left: 2px solid var(--gold);
+    background: rgba(184,150,106,0.06);
+  }
+
+  .style-note-label {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 400;
+    flex-shrink: 0;
+  }
+
+  .style-note-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* ── DIVIDER ── */
+  .day-divider {
+    height: 1px;
+    background: var(--divider);
+    margin: 44px 0;
+  }
+
+  /* ── SUMMARY TABLE ── */
+  .summary-section {
+    margin-top: 60px;
+    padding-top: 48px;
+    border-top: 1px solid var(--divider);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--divider);
+    background: var(--warm-white);
+  }
+
+  .summary-row {
+    display: contents;
+  }
+
+  .summary-row > div {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--divider);
+    font-size: 13px;
+  }
+
+  .summary-row:last-child > div {
+    border-bottom: none;
+  }
+
+  .summary-day-col {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 400;
+    border-right: 1px solid var(--divider);
+    color: var(--ink);
+  }
+
+  .summary-day-col span {
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 2px;
+    font-weight: 400;
+  }
+
+  .summary-plan-col {
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .summary-plan-col strong {
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  /* ── RESERVATIONS ── */
+  .reservations {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .res-card {
+    border: 1px solid var(--divider);
+    padding: 16px 20px;
+    background: var(--warm-white);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .res-priority {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--divider);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 28px;
+  }
+
+  .res-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .res-note {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 60px;
+    padding-top: 28px;
+    border-top: 1px solid var(--divider);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--muted);
+  }
+
+  .footer-right {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  /* ── WEDDING BADGE ── */
+  .wedding-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    background: #4A9CC8;
+    color: white;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-top: 6px;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    .page {
+      padding: 36px 20px 60px;
+    }
+
+    .header h1 {
+      font-size: 48px;
+    }
+
+    .header-sub {
+      font-size: 14px;
+    }
+
+    .flight-strip {
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .flight-card {
+      padding: 16px 18px;
+    }
+
+    .day-header {
+      grid-template-columns: 52px 1fr;
+    }
+
+    .day-number {
+      font-size: 52px;
+    }
+
+    .day-title {
+      font-size: 22px;
+    }
+
+    .blocks {
+      padding-left: 0;
+    }
+
+    .block {
+      grid-template-columns: 1fr;
+      gap: 6px;
+      padding: 14px 16px;
+    }
+
+    .block-time {
+      font-size: 9px;
+      letter-spacing: 1px;
+      color: var(--terracotta);
+      border-bottom: 1px solid var(--divider);
+      padding-bottom: 6px;
+      margin-bottom: 4px;
+    }
+
+    .block.evening .block-time {
+      color: var(--gold);
+      border-bottom-color: rgba(255,255,255,0.1);
+    }
+
+    .block.wedding .block-time {
+      border-bottom-color: rgba(255,255,255,0.15);
+    }
+
+    .block-venue {
+      font-size: 17px;
+    }
+
+    .block-desc {
+      font-size: 12px;
+    }
+
+    .style-note {
+      padding-left: 0;
+    }
+
+    .style-note-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .summary-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .summary-row > div {
+      border-right: none !important;
+      padding: 12px 16px;
+    }
+
+    .summary-day-col {
+      border-bottom: none !important;
+      padding-bottom: 2px !important;
+      background: var(--sand);
+    }
+
+    .summary-plan-col {
+      padding-top: 4px !important;
+      border-bottom: 1px solid var(--divider) !important;
+    }
+
+    .reservations {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .footer {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .footer-left {
+      font-size: 13px;
+    }
+
+    .day-divider {
+      margin: 32px 0;
+    }
+
+    /* Hotel card mobile */
+    .hotel-conf {
+      flex-direction: column;
+      gap: 10px;
+    }
+    .hotel-conf-right {
+      display: none;
+    }
+    .hotel-conf-icon {
+      display: none;
+    }
+
+    /* Spotify mobile */
+    .spotify-card {
+      flex-direction: column;
+      gap: 12px;
+    }
+    .spotify-card a {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Wedding dress code mobile */
+    .dressode-swatch-row {
+      flex-direction: column;
+    }
+  }
+
+  /* optional: soft horizon decoration */
+  .horizon {
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #4A9CC8 30%, #1C6FA8 60%, #A8D8F0 80%, transparent);
+    opacity: 0.35;
+    margin: 0 auto 40px;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-label">Seyahat Planı</div>
+    <h1><em>Mykonos</em></h1>
+    <div class="horizon"></div>
+    <div class="header-dates">24 — 29 Haziran 2026</div>
+    <div class="header-sub">Casa Del Mar · Düğün: Santa Marina Hotel, 26 Haziran</div>
+  </div>
+
+  <!-- FLIGHTS -->
+  <div class="flight-strip">
+    <div class="flight-card">
+      <div class="flight-icon">↗</div>
+      <div class="flight-info">
+        <div class="flight-direction">Gidiş · A3441</div>
+        <div class="flight-route">İstanbul → Mykonos</div>
+        <div class="flight-details">24 Haziran Çarşamba · IST 08:25 – JMK 09:45 · Aegean Airlines · Ref: <strong>AGZVPG</strong></div>
+      </div>
+    </div>
+    <div class="flight-card">
+      <div class="flight-icon">↙</div>
+      <div class="flight-info">
+        <div class="flight-direction">Dönüş · A3440</div>
+        <div class="flight-route">Mykonos → İstanbul</div>
+        <div class="flight-details">29 Haziran Pazartesi · JMK 10:25 – IST 11:45 · Aegean Airlines · Ref: <strong>AGZVPG</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hotel-conf" style="background:var(--warm-white);border:1px solid var(--divider);padding:20px 24px;margin-bottom:40px;display:flex;gap:20px;align-items:flex-start;">
+    <div class="hotel-conf-icon" style="font-size:28px;opacity:0.3;flex-shrink:0;">⌂</div>
+    <div style="flex:1;">
+      <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--terracotta);font-weight:400;margin-bottom:4px;">Otel Konfirmasyonu</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:6px;">Casa Del Mar — Signature Sea View Jacuzzi Villa</div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.9;">
+        Aleomandra, Mykonos · Hotels.com: <strong style="color:var(--ink);">72075145679952</strong><br>
+        Check-in: <strong style="color:var(--ink);">24 Haz</strong> &nbsp;·&nbsp; Check-out: <strong style="color:var(--ink);">29 Haz</strong> &nbsp;·&nbsp; 5 gece<br>
+        Toplam: <strong style="color:var(--ink);">$2,774.21</strong> · kapıda $11.61
+      </div>
+    </div>
+    <div class="hotel-conf-right" style="flex-shrink:0;text-align:right;">
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Misafir</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--ink);">Ayten Pasayigit</div>
+    </div>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">01</div>
+      <div class="day-info">
+        <div class="day-date">24 Haziran Çarşamba</div>
+        <div class="day-title">Varış & <em>Soft Başlangıç</em></div>
+        <div class="day-tagline">Adaya merhaba</div>
+      </div>
+    </div>
+    <div class="blocks">
+      <div class="block">
+        <div class="block-time">10:30 – 16:30</div>
+        <div class="block-content">
+          <div class="block-label">Konaklama</div>
+          <div class="block-venue">Casa Del Mar — Private Cove</div>
+          <div class="block-desc">Yerleşme, dinlenme, otelin sakin private beach tarafı. Uçuş sonrası güne yumuşak giriş.</div>
+          <span class="tag">Pool</span><span class="tag">Deniz</span><span class="tag">Dinlenme</span>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-time">18:30 – 20:00</div>
+        <div class="block-content">
+          <div class="block-label">Şehir</div>
+          <div class="block-venue">Mykonos Town — Little Venice</div>
+          <div class="block-desc">Kısa yürüyüş, butiklere bakma, ara sokaklar. Adaya alışma turu.</div>
+        </div>
+      </div>
+      <div class="block evening">
+        <div class="block-time">20:30</div>
+        <div class="block-content">
+          <div class="block-label">Akşam Yemeği</div>
+          <div class="block-venue">Branco Mykonos</div>
+          <div class="block-desc">Platis Gialos Beach'te. Beach, hotel ve wellness konseptli, yumuşak ve şık başlangıç noktası.</div>
+          <div class="block-note">Bu gece erken dönelim — 25 ve 26 daha önemli.</div>
+        </div>
+      </div>
+    </div>
+    <div class="style-note">
+      <div class="style-note-inner">
+        <span class="style-note-label">Stil</span>
+        <span class="style-note-text">Keten elbise, gold aksesuar, düz sandalet — fresh island elegance</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-divider"></div>
+
+  <!-- DAY 2 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">02</div>
+      <div class="day-info">
+        <div class="day-date">25 Haziran Perşembe</div>
+        <div class="day-title"><em>Principote</em> + Apaggio</div>
+        <div class="day-tagline">Düğünden önceki en güzel tam gün</div>
+      </div>
+    </div>
+    <div class="blocks">
+      <div class="block">
+        <div class="block-time">09:30 – 11:00</div>
+        <div class="block-content">
+          <div class="block-label">Kahvaltı</div>
+          <div class="block-venue">Miramar Restaurant — Casa Del Mar</div>
+          <div class="block-desc">Denize bakan terastan à la carte kahvaltı. Cycladic çiftliklerden incir ve yoğurt, ballı Greek scramble, taze ekmekler, soğuk kesimler. 08:00–12:30 arası servis. İstersen villa terasına da getirtebilirsin.</div>
+          <span class="tag">08:00–12:30</span><span class="tag">Terasa Servis Mümkün</span>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-time">12:30 – 17:00</div>
+        <div class="block-content">
+          <div class="block-label">Beach Club</div>
+          <div class="block-venue">Principote — Panormos Beach</div>
+          <div class="block-desc">Elegant, polished, kaliteli servis. Mediterranean cuisine, lüks ama aşırı party değil. Discreet service konsepti. Beach bed + lunch birlikte rezervasyon — 14:00 öğle için ideal.</div>
+          <span class="tag">★ Ana Seçim</span><span class="tag">Rezervasyon Gerekli</span>
+        </div>
+      </div>
+      <div class="block evening">
+        <div class="block-time">20:30</div>
+        <div class="block-content">
+          <div class="block-label">Akşam Yemeği</div>
+          <div class="block-venue">Apaggio — Yunan Lokantası</div>
+          <div class="block-desc">Güzel bir Yunan lokantası. Düğünden önceki gece için ideal: otantik tatlar, kaliteli ama çok iddialı değil, güzel bir ortam. Grup için rezervasyon yapıldı.</div>
+          <div class="block-note">Rezervasyon tamamlandı ✓</div>
+        </div>
+      </div>
+    </div>
+    <div class="style-note">
+      <div class="style-note-inner">
+        <span class="style-note-label">Principote</span>
+        <span class="style-note-text">Kaftan, elegant cover-up, hasır çanta</span>
+      </div>
+    </div>
+    <div class="style-note" style="margin-top:6px;">
+      <div class="style-note-inner">
+        <span class="style-note-label">Apaggio</span>
+        <span class="style-note-text">Nude / amphora / champagne — sade ama iddialı</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-divider"></div>
+
+  <!-- DAY 3 — WEDDING -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">03</div>
+      <div class="day-info">
+        <div class="day-date">26 Haziran Cuma</div>
+        <div class="day-title">Düğün Günü — <em>Santa Marina</em></div>
+        <div class="day-tagline">Ana kural: yorulmak yok</div>
+      </div>
+    </div>
+    <div class="blocks">
+      <div class="block">
+        <div class="block-time">09:30 – 14:00</div>
+        <div class="block-content">
+          <div class="block-label">Sabah</div>
+          <div class="block-venue">Casa Del Mar — Sakin Deniz & Hafif Öğle</div>
+          <div class="block-desc">Başka beach club yok. Güneş, tuz, saç, makyaj ve transfer stresi yaratmayalım. Hafif öğle: salata, grilled fish, meze tarzı. Şişkinlik yapmayacak seçimler.</div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-time">15:00 – 17:30</div>
+        <div class="block-content">
+          <div class="block-label">Hazırlık</div>
+          <div class="block-venue">Saç · Makyaj · Dinlenme</div>
+          <div class="block-desc">Transfer Casa Del Mar → Santa Marina için özel araç. En az 30–40 dk buffer. Mykonos trafiği ve dar yollar stres yaratabilir.</div>
+          <span class="tag">Transfer Rezervasyonu Gerekli</span>
+        </div>
+      </div>
+      <div class="block wedding">
+        <div class="block-time">Akşam</div>
+        <div class="block-content">
+          <div class="block-label">★ Düğün</div>
+          <div class="block-venue">Santa Marina Hotel</div>
+
+          <!-- DRESS CODE MOODBOARD -->
+          <div style="margin:12px 0;padding:14px 16px;background:rgba(255,255,255,0.07);border-left:2px solid #C4A882;">
+            <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#C4A882;margin-bottom:8px;">Dress Code — Pantone 17-1319 TCX</div>
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+              <!-- Amphora color swatch -->
+              <div style="width:40px;height:40px;background:#B09080;border-radius:2px;flex-shrink:0;"></div>
+              <div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#F0E8E0;letter-spacing:1px;">Amphora</div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:2px;">Blush · Nude Rose · Warm Champagne · Soft Mauve</div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.7;">
+              Satin / silk / flowing fabric · Minimal altın takı · Rahat ama elegant ayakkabı
+            </div>
+          </div>
+
+          <!-- SARCASTIC NOTE -->
+          <div style="margin-top:10px;padding:10px 14px;background:rgba(255,255,255,0.05);border:1px dashed rgba(196,168,130,0.4);">
+            <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#C4A882;margin-bottom:4px;">Önemli Not</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;">
+              "Evet, biz de beyaz, siyah, kırmızı ya da parlak altın istemiyoruz — ama zaten sen de bunları giymezsin, değil mi? Amphora olsun, hepsi bu. Düğün sahibinin renk seçim zevkine saygı duyarak, tamamen kendi isteğimizle bu tonu tercih ediyoruz. Özgürce."
+            </div>
+          </div>
+
+          <div style="margin-top:10px;"><span class="wedding-badge">Transfer Rezervasyonu Gerekli</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-divider"></div>
+
+  <!-- DAY 4 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">04</div>
+      <div class="day-info">
+        <div class="day-date">27 Haziran Cumartesi</div>
+        <div class="day-title">Recovery & <em>Nammos + Scorpios</em></div>
+        <div class="day-tagline">Brunch ile başla, sunset ile bitir</div>
+      </div>
+    </div>
+    <div class="blocks">
+      <div class="block">
+        <div class="block-time">10:30 – 12:00</div>
+        <div class="block-content">
+          <div class="block-label">Kahvaltı</div>
+          <div class="block-venue">Miramar Restaurant — Casa Del Mar</div>
+          <div class="block-desc">Düğün gecesi sonrası yavaş ve sakin bir başlangıç. Terasa servis, kahve, deniz manzarası. Greek scramble ve taze meyve ikilisi için ideal sabah.</div>
+          <span class="tag">Recovery Kahvaltısı</span>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-time">15:00 – 17:30</div>
+        <div class="block-content">
+          <div class="block-label">Happy Hour Brunch</div>
+          <div class="block-venue">Nammos — Psarou Beach</div>
+          <div class="block-desc">Happy Hour / öğle yemeği. Beach kıyafetli geliniyor, denize girmek serbest. Mykonos'un en ikonik beach club & restaurantlarından biri. Rezervasyon tamamlandı.</div>
+          <div class="block-note">Rezervasyon tamamlandı ✓ · Beach kıyafeti</div>
+        </div>
+      </div>
+      <div class="block evening">
+        <div class="block-time">19:00 – 22:00</div>
+        <div class="block-content">
+          <div class="block-label">Sunset — İsteğe Bağlı</div>
+          <div class="block-venue">Scorpios Mykonos</div>
+          <div class="block-desc">Nammos sonrası enerji varsa Scorpios sunset rituals için ideal. Bohemian-chic atmosfer, müzik, deniz manzarası. Erken giriş önemli.</div>
+          <div class="block-note">After opsiyon: Moni Mykonos — sadece enerji çok yüksekse.</div>
+        </div>
+      </div>
+    </div>
+    <div class="style-note">
+      <div class="style-note-inner">
+        <span class="style-note-label">Stil</span>
+        <span class="style-note-text">Bohemian elegant — toprak tonları, bronz/nude, büyük kaliteli aksesuar, düz sandalet</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-divider"></div>
+
+  <!-- DAY 5 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">05</div>
+      <div class="day-info">
+        <div class="day-date">28 Haziran Pazar</div>
+        <div class="day-title"><em>Alemagou</em> & Scorpios Kapanış</div>
+        <div class="day-tagline">Son tam gün — ruhlu ve güzel</div>
+      </div>
+    </div>
+    <div class="blocks">
+      <div class="block">
+        <div class="block-time">09:30 – 11:00</div>
+        <div class="block-content">
+          <div class="block-label">Kahvaltı</div>
+          <div class="block-venue">Miramar Restaurant — Casa Del Mar</div>
+          <div class="block-desc">Son sabah kahvaltısı. Denize bakarak, yavaş tempoda. Terasta kahve, Greek scramble, ballı yoğurt ile güne güzel bir kapanış başlangıcı.</div>
+          <span class="tag">Son Sabah</span>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-time">12:30 – 17:30</div>
+        <div class="block-content">
+          <div class="block-label">Beach Club ★ Ana Seçim</div>
+          <div class="block-venue">Alemagou — Ftelia Beach</div>
+          <div class="block-desc">Bohem, rüzgarlı, "wild but stylish" Mykonos hissi. Mistik enerji, kültür ve beach deneyimi. Aegean-fusion cuisine, günlük taze ürünler, refined simplicity. Principote kadar polished değil — daha ruhlu, daha doğal, tasarım gözü olanların sevdiği yer.</div>
+          <span class="tag">Alternatif: Kalua Mykonos</span>
+        </div>
+      </div>
+      <div class="block evening">
+        <div class="block-time">19:00 – 23:00</div>
+        <div class="block-content">
+          <div class="block-label">Final Sunset + Dinner ★</div>
+          <div class="block-venue">Scorpios Mykonos</div>
+          <div class="block-desc">Son akşam için Scorpios: sunset rituals, kaliteli yemek, bohemian-chic atmosfer ve Mykonos'un en iyi müziği. Tatilin kapanışına layık bir deneyim.</div>
+          <span class="tag">Rezervasyon Gerekli</span>
+        </div>
+      </div>
+    </div>
+    <div class="style-note">
+      <div class="style-note-inner">
+        <span class="style-note-label">Final Akşamı</span>
+        <span class="style-note-text">Siyah, champagne veya soft gold — şehirli, elegant</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-divider"></div>
+
+  <!-- DAY 6 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">06</div>
+      <div class="day-info">
+        <div class="day-date">29 Haziran Pazartesi</div>
+        <div class="day-title">Dönüş</div>
+        <div class="day-tagline">07:00 uyanış · 08:00 check-out</div>
+      </div>
+    </div>
+    <div class="blocks">
+      <div class="block">
+        <div class="block-time">10:15 – 11:35</div>
+        <div class="block-content">
+          <div class="block-label">Uçuş</div>
+          <div class="block-venue">Mykonos → İstanbul</div>
+          <div class="block-desc">Aegean Airlines, direkt. Mykonos Havalimanı yaz sezonunda yoğun — erken gitmek iyi olur.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-section">
+    <div class="section-title">Özet Program</div>
+    <div class="summary-grid">
+      <div class="summary-row">
+        <div class="summary-day-col"><span>24 Haz Çarşamba</span>Varış</div>
+        <div class="summary-plan-col">Casa Del Mar private cove / dinlenme → <strong>Branco Mykonos</strong></div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-day-col"><span>25 Haz Perşembe</span>Elegant Beach</div>
+        <div class="summary-plan-col"><strong>Principote</strong> beach + lunch → <strong>Apaggio</strong> akşam yemeği ✓</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-day-col"><span>26 Haz Cuma</span>Düğün Günü</div>
+        <div class="summary-plan-col">Otelde sakin gün → <strong>Santa Marina Düğün ★</strong></div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-day-col"><span>27 Haz Cumartesi</span>Brunch + Sunset</div>
+        <div class="summary-plan-col">Kahvaltı → <strong>Nammos</strong> brunch ✓ → Scorpios (isteğe bağlı)</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-day-col"><span>28 Haz Pazar</span>Son Gün</div>
+        <div class="summary-plan-col"><strong>Alemagou</strong> beach + lunch → <strong>Scorpios</strong> sunset + final dinner</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-day-col"><span>29 Haz Pazartesi</span>Dönüş</div>
+        <div class="summary-plan-col">07:00 uyanış · 10:15 uçuş İstanbul</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESERVATIONS -->
+  <div class="summary-section">
+    <div class="section-title">Yapılacaklar — Rezervasyon Listesi</div>
+    <div class="reservations">
+      <div class="res-card">
+        <div class="res-priority" style="color:#4A9CC8;">✓</div>
+        <div>
+          <div class="res-name">Apaggio</div>
+          <div class="res-note">25 Haziran Perşembe akşamı — tamamlandı</div>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="res-priority" style="color:#4A9CC8;">✓</div>
+        <div>
+          <div class="res-name">Nammos</div>
+          <div class="res-note">27 Haziran Cumartesi saat 15:00 — tamamlandı</div>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="res-priority">1</div>
+        <div>
+          <div class="res-name">Santa Marina — Transfer</div>
+          <div class="res-note">Casa Del Mar → Santa Marina, özel araç, 30–40 dk buffer, 26 Cuma</div>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="res-priority">2</div>
+        <div>
+          <div class="res-name">Principote</div>
+          <div class="res-note">Beach bed + lunch, 14:00 öğle — 25 Perşembe</div>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="res-priority">3</div>
+        <div>
+          <div class="res-name">Scorpios — Final Dinner</div>
+          <div class="res-note">Sunset + dinner — 28 Pazar akşamı</div>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="res-priority">4</div>
+        <div>
+          <div class="res-name">Alemagou</div>
+          <div class="res-note">Beach bed + lunch — 28 Pazar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAP -->
+  <div class="summary-section">
+    <div class="section-title">Harita — Gidilecek Yerler</div>
+    <div id="map" style="width:100%;height:420px;border:1px solid var(--divider);border-radius:2px;"></div>
+    <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;">
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);letter-spacing:1px;"><span style="width:10px;height:10px;border-radius:50%;background:#1C6FA8;display:inline-block;"></span>Konaklama</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);letter-spacing:1px;"><span style="width:10px;height:10px;border-radius:50%;background:#C4855A;display:inline-block;"></span>Düğün</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);letter-spacing:1px;"><span style="width:10px;height:10px;border-radius:50%;background:#4A9CC8;display:inline-block;"></span>Beach Club</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);letter-spacing:1px;"><span style="width:10px;height:10px;border-radius:50%;background:#7AAF7A;display:inline-block;"></span>Restoran / Bar</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);letter-spacing:1px;"><span style="width:10px;height:10px;border-radius:50%;background:#8B7BA8;display:inline-block;"></span>Şehir</span>
+    </div>
+  </div>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([37.438, 25.348], 13);
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap © CARTO',
+        maxZoom: 18
+      }).addTo(map);
+
+      function makeIcon(color, emoji) {
+        return L.divIcon({
+          className: '',
+          html: '<div style="width:32px;height:32px;background:' + color + ';border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);font-size:13px;display:block;text-align:center;line-height:28px;">' + emoji + '</span></div>',
+          iconSize: [32, 32],
+          iconAnchor: [16, 32],
+          popupAnchor: [0, -34]
+        });
+      }
+
+      var places = [
+        { lat: 37.4078, lng: 25.3116, name: 'Casa Del Mar', sub: 'Konaklama · Tüm Gece', color: '#1C6FA8', emoji: '🏠', day: 'Her gün' },
+        { lat: 37.4140, lng: 25.3452, name: 'Branco Mykonos', sub: 'Akşam yemeği · Platis Gialos', color: '#7AAF7A', emoji: '🌊', day: '24 Haz Çarşamba' },
+        { lat: 37.4767, lng: 25.3599, name: 'Principote', sub: 'Beach + Lunch · Panormos', color: '#4A9CC8', emoji: '🌿', day: '25 Haz Perşembe' },
+        { lat: 37.4203, lng: 25.3265, name: 'Apaggio', sub: 'Akşam yemeği · Rezervasyon ✓', color: '#7AAF7A', emoji: '🍽', day: '25 Haz Perşembe' },
+        { lat: 37.4183, lng: 25.3262, name: 'Santa Marina', sub: 'Düğün ★', color: '#C4855A', emoji: '💍', day: '26 Haz Cuma' },
+        { lat: 37.4156, lng: 25.3371, name: 'Nammos', sub: 'Happy Hour Brunch · Rezervasyon ✓', color: '#4A9CC8', emoji: '🥂', day: '27 Haz Cumartesi' },
+        { lat: 37.4069, lng: 25.3476, name: 'Scorpios', sub: 'Sunset + Final Dinner', color: '#4A9CC8', emoji: '🌅', day: '27–28 Haz' },
+        { lat: 37.4647, lng: 25.3809, name: 'Alemagou', sub: 'Beach + Lunch · Ftelia', color: '#4A9CC8', emoji: '🌬', day: '28 Haz Pazar' },
+        { lat: 37.4471, lng: 25.3268, name: 'Mykonos Town', sub: 'Little Venice · Yürüyüş', color: '#8B7BA8', emoji: '🚶', day: '24 Haz Çarşamba' }
+      ];
+
+      places.forEach(function(p) {
+        var marker = L.marker([p.lat, p.lng], { icon: makeIcon(p.color, p.emoji) }).addTo(map);
+        marker.bindPopup(
+          '<div style="font-family:Jost,sans-serif;min-width:160px;">' +
+          '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#1C6FA8;margin-bottom:3px;">' + p.day + '</div>' +
+          '<div style="font-size:15px;font-weight:500;color:#0B1F2E;margin-bottom:2px;">' + p.name + '</div>' +
+          '<div style="font-size:11px;color:#4A7A96;">' + p.sub + '</div>' +
+          '</div>',
+          { maxWidth: 200 }
+        );
+      });
+    });
+  </script>
+
+  <!-- SPOTIFY -->
+  <div class="summary-section">
+    <div class="section-title">Playlist</div>
+    <div class="spotify-card" style="display:flex; align-items:center; gap:20px; background:var(--warm-white); border:1px solid var(--divider); padding:20px 24px;">
+      <div style="flex-shrink:0;">
+        <img src="https://i.scdn.co/image/ab67706f0000000226b83dd5ef5fb79bec458ba0" alt="Mykonos Calling" style="width:72px;height:72px;display:block;border:none;">
+      </div>
+      <div style="flex:1;">
+        <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--terracotta);font-weight:400;margin-bottom:4px;">Spotify Playlist</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);margin-bottom:4px;">Mykonos Calling</div>
+        <div style="font-size:11px;color:var(--muted);">100 parça · 198K saves · Spotify Editorial</div>
+      </div>
+      <a href="https://open.spotify.com/playlist/37i9dQZF1DWW5Jdaphc81Z" target="_blank" style="flex-shrink:0;display:inline-flex;align-items:center;gap:8px;background:#1DB954;color:white;text-decoration:none;padding:10px 18px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:400;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        Dinle
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">Principote → Apaggio → Düğün → Nammos → Alemagou → Scorpios</div>
+    <div class="footer-right">Mykonos 2026</div>
+  </div>
+
+</div>
+</body>
+</html>
