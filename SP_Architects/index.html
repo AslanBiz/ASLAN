@@ -3,198 +3,76 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SP Architects — Tools & Deliverables · ASLAN</title>
-<meta name="description" content="Tools and deliverables prepared by ASLAN for SP Architects — the SP BD Control Center and the platforms being built alongside it.">
+<title>Client Login · ASLAN</title>
+<meta name="description" content="ASLAN client login.">
 <meta name="theme-color" content="#0e2a47">
 <meta name="robots" content="noindex">
 <style>
-:root{
-  --ink:#13171d;--navy:#0e2a47;--navy2:#16405f;--gold:#b98a3e;--gold2:#c8a35b;
-  --paper:#fbfaf7;--soft:#f4f1ea;--soft2:#f8f6f1;--line:#e8e2d6;--muted:#6b7280;--green:#2f5d4f;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-}
+:root{--gold:#b98a3e;--gold2:#c8a35b;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
-a{color:#0b5cad;text-decoration:none}
-img{display:block;max-width:100%}
+body{margin:0;font-family:var(--sans);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:linear-gradient(125deg,#0b2238 0%,#123a59 55%,#1d4f4a 100%);color:#fff;padding:24px}
 .t-tr{display:none}
 body.show-tr .t-en{display:none}
 body.show-tr .t-tr{display:inline}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-
-/* topbar */
-.topbar{position:sticky;top:0;z-index:30;background:rgba(14,42,71,.97);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.08)}
-.topbar-in{max-width:1080px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:14px}
-.brand{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;letter-spacing:.16em;font-size:15px}
-.brand img{height:28px;width:auto;filter:brightness(0) invert(1)}
-.brand small{font-weight:500;letter-spacing:.14em;color:#cdb888;font-size:10px;display:block;margin-top:1px}
-.nav{margin-left:auto;display:flex;align-items:center;gap:10px}
-.nav a.lnk{color:#cfd8e6;font-size:12.5px;letter-spacing:.04em;padding:6px 10px;border-radius:8px}
-.nav a.lnk:hover{color:#fff;background:rgba(255,255,255,.08)}
+.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:38px 32px;max-width:400px;width:100%;backdrop-filter:blur(6px)}
+.card img{height:32px;margin:0 auto 20px;display:block;filter:brightness(0) invert(1)}
+.card h1{font-size:21px;text-align:center;margin:0 0 4px;font-weight:800;letter-spacing:.02em}
+.card p.sub{text-align:center;color:#cfe0d8;font-size:13px;margin:0 0 22px}
+label{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#cdb888;font-weight:700;margin:0 0 6px}
+input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);
+  color:#fff;font-size:15px;font-family:inherit;margin-bottom:16px}
+input:focus{outline:2px solid var(--gold2);border-color:transparent}
+button{width:100%;background:var(--gold);color:#1a1208;font-weight:800;border:0;padding:13px;border-radius:10px;
+  font-size:14px;letter-spacing:.04em;cursor:pointer;font-family:inherit}
+button:hover{background:var(--gold2)}
+.err{color:#ffb4a8;font-size:12.5px;margin-top:14px;min-height:16px;text-align:center}
+.below{margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12.5px}
+.below a{color:#cfd8e6;text-decoration:none}
+.below a:hover{color:#fff}
 .langtog{display:inline-flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden}
-.langtog button{background:transparent;border:0;color:#cdb888;font-size:12px;font-weight:700;letter-spacing:.06em;padding:6px 12px;cursor:pointer;font-family:inherit}
+.langtog button{width:auto;background:transparent;border:0;color:#cdb888;font-size:12px;font-weight:700;padding:6px 12px;border-radius:0}
 .langtog button.active{background:var(--gold);color:#1a1208}
-
-/* hero */
-.hero{position:relative;overflow:hidden;color:#fff;border-radius:22px;margin:24px 0 8px;
-  background:linear-gradient(125deg,#0b2238 0%,#123a59 55%,#1d4f4a 100%);padding:42px 38px}
-.hero .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:11.5px;color:#d8bd8c;font-weight:700}
-.hero h1{font-size:34px;line-height:1.1;margin:12px 0 12px;font-weight:800;letter-spacing:-.01em}
-.hero p{font-size:16.5px;max-width:760px;color:#e9eff4;margin:0}
-.hero .conf{margin-top:18px;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:#cfe0d8;
-  border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:5px 13px}
-.hero .conf b{color:#fff}
-
-.section{margin:34px 0}
-.kick{letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:var(--gold);font-weight:800;margin-bottom:6px}
-.section h2{font-size:22px;color:var(--navy);margin:0 0 6px;font-weight:800;letter-spacing:-.01em}
-.rule{height:3px;width:56px;background:var(--gold);border-radius:3px;margin:8px 0 18px}
-
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.tool{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:#fff;
-  box-shadow:0 2px 12px rgba(19,23,29,.05);overflow:hidden;transition:transform .15s ease,box-shadow .15s ease}
-a.tool:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(19,23,29,.12)}
-.tool .top{padding:18px 20px 8px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.tool .ic{width:38px;height:38px;border-radius:10px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--navy)}
-.tool .ic svg{width:20px;height:20px}
-.tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;border-radius:999px;padding:3px 9px}
-.tag.ready{background:#eef3f0;color:var(--green);border:1px solid #d8e6df}
-.tag.prev{background:#fbf4e7;color:#7b5a24;border:1px solid #ecd9b6}
-.tag.soon{background:#eef4f8;color:#1a4f72;border:1px solid #cfe0ec}
-.tool .body{padding:4px 20px 18px;display:flex;flex-direction:column;flex:1}
-.tool h3{font-size:17px;color:var(--navy);margin:6px 0 4px}
-.tool p{font-size:13.5px;color:#475260;margin:0 0 14px;flex:1}
-.tool .go{font-weight:800;color:var(--gold);font-size:13px;letter-spacing:.03em}
-.tool.disabled{opacity:.66}
-.tool.disabled .go{color:var(--muted)}
-
-.footer{margin-top:42px;border-top:1px solid var(--line);padding:18px 0 50px;color:var(--muted);font-size:12.5px;
-  display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
-.footer .powered b{color:#0b5cad}
-.footer .loc{color:#9a8e76;letter-spacing:.06em;font-size:11.5px}
-
-@media(max-width:760px){.grid{grid-template-columns:1fr}.hero{padding:30px 22px}.hero h1{font-size:26px}}
-
-/* --- access gate (soft lock) --- */
-.gate{position:fixed;inset:0;z-index:200;background:linear-gradient(125deg,#0b2238,#123a59 60%,#1d4f4a);display:flex;align-items:center;justify-content:center;padding:24px}
-body:not(.locked) .gate{display:none}
-body.locked .topbar,body.locked .wrap{display:none}
-.gate-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:34px 30px;max-width:380px;width:100%;text-align:center;color:#fff;backdrop-filter:blur(6px)}
-.gate-card img{height:30px;margin:0 auto 18px;filter:brightness(0) invert(1)}
-.gate-card h2{font-size:19px;margin:0 0 6px;font-weight:800;letter-spacing:.02em}
-.gate-card p{font-size:13px;color:#cfe0d8;margin:0 0 18px}
-.gate-card input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:15px;font-family:inherit;text-align:center;letter-spacing:.08em}
-.gate-card input:focus{outline:2px solid var(--gold2);border-color:transparent}
-.gate-card button{margin-top:12px;width:100%;background:var(--gold);color:#1a1208;font-weight:800;border:0;padding:12px;border-radius:10px;font-size:14px;letter-spacing:.04em;cursor:pointer;font-family:inherit}
-.gate-card button:hover{background:var(--gold2)}
-.gate-err{color:#ffb4a8;font-size:12.5px;margin-top:12px;min-height:16px}
 </style>
 </head>
-<body class="show-en locked">
-
-<div class="gate" id="gate">
-  <form class="gate-card" onsubmit="return checkPass(event)">
-    <img src="https://www.aslanbusiness.com/aslan-logo.png" alt="ASLAN">
-    <h2><span class="t-en">Restricted area</span><span class="t-tr">Kısıtlı alan</span></h2>
-    <p><span class="t-en">Enter the passcode to view this workspace.</span><span class="t-tr">Bu çalışma alanını görmek için şifreyi girin.</span></p>
-    <input id="pass" type="password" autocomplete="off" autofocus placeholder="••••••">
-    <button type="submit"><span class="t-en">Enter</span><span class="t-tr">Giriş</span></button>
-    <div class="gate-err" id="gerr"></div>
-  </form>
-</div>
-
-<div class="topbar"><div class="topbar-in">
-  <a class="brand" href="https://www.aslanbusiness.com"><img src="https://www.aslanbusiness.com/aslan-logo.png" alt="ASLAN"><span>ASLAN<small>CLIENT WORKSPACE</small></span></a>
-  <div class="nav">
-    <a class="lnk" href="https://www.aslanbusiness.com">aslanbusiness.com</a>
-    <div class="langtog">
-      <button data-l="en" class="active" onclick="setLang('en')">EN</button>
-      <button data-l="tr" onclick="setLang('tr')">TR</button>
-    </div>
+<body class="show-en">
+<form class="card" onsubmit="return signin(event)">
+  <img src="https://www.aslanbusiness.com/aslan-logo.png" alt="ASLAN">
+  <h1><span class="t-en">Client Login</span><span class="t-tr">Müşteri Girişi</span></h1>
+  <p class="sub"><span class="t-en">Sign in to access your workspace.</span><span class="t-tr">Çalışma alanınıza erişmek için giriş yapın.</span></p>
+  <label><span class="t-en">Username</span><span class="t-tr">Kullanıcı adı</span></label>
+  <input id="u" autocapitalize="characters" autocomplete="username" placeholder="SP_ARCHITECTS">
+  <label><span class="t-en">Password</span><span class="t-tr">Şifre</span></label>
+  <input id="p" type="password" autocomplete="current-password" placeholder="••••••">
+  <button type="submit"><span class="t-en">Sign in</span><span class="t-tr">Giriş yap</span></button>
+  <div class="err" id="err"></div>
+  <div class="below">
+    <a href="https://www.aslanbusiness.com">← aslanbusiness.com</a>
+    <span class="langtog"><button type="button" data-l="en" class="active" onclick="setLang('en')">EN</button><button type="button" data-l="tr" onclick="setLang('tr')">TR</button></span>
   </div>
-</div></div>
-
-<div class="wrap">
-  <div class="hero">
-    <div class="kicker"><span class="t-en">Prepared by ASLAN · for SP Architects</span><span class="t-tr">ASLAN tarafından · SP Architects için hazırlandı</span></div>
-    <h1><span class="t-en">Tools &amp; Deliverables</span><span class="t-tr">Araçlar ve Teslimler</span></h1>
-    <p><span class="t-en">A single place for the platforms and files ASLAN prepares for SP Architects — starting with the SP BD Control Center, with HR, library and tender tools being built alongside it.</span><span class="t-tr">ASLAN'ın SP Architects için hazırladığı platform ve dosyaların tek bir yerde toplandığı alan — SP BD Control Center ile başlıyor; HR, kütüphane ve ihale araçları onun yanında geliştiriliyor.</span></p>
-    <div class="conf"><span>🔒</span> <b><span class="t-en">Confidential</span><span class="t-tr">Gizli</span></b> · <span class="t-en">for SP Architects only</span><span class="t-tr">yalnızca SP Architects için</span></div>
-  </div>
-
-  <div class="section">
-    <div class="kick"><span class="t-en">Available now</span><span class="t-tr">Şu an hazır</span></div>
-    <h2><span class="t-en">SP BD Control Center</span><span class="t-tr">SP BD Control Center</span></h2><div class="rule"></div>
-    <div class="grid">
-      <a class="tool" href="https://www.aslanbusiness.com/Business_Development.html" target="_blank" rel="noopener">
-        <div class="top">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></div>
-          <span class="tag prev"><span class="t-en">Preview</span><span class="t-tr">Önizleme</span></span>
-        </div>
-        <div class="body">
-          <h3><span class="t-en">Control Center — Dashboard</span><span class="t-tr">Control Center — Panel</span></h3>
-          <p><span class="t-en">The BD command center: pipeline, contacts, companies, country desks, opportunities, events, tenders and tasks — in one view.</span><span class="t-tr">İş geliştirmenin komuta merkezi: pipeline, kişiler, firmalar, ülke masaları, fırsatlar, etkinlikler, ihaleler ve görevler — tek ekranda.</span></p>
-          <span class="go"><span class="t-en">Open dashboard →</span><span class="t-tr">Paneli aç →</span></span>
-        </div>
-      </a>
-      <a class="tool" href="https://www.aslanbusiness.com/BD_Forms.html" target="_blank" rel="noopener">
-        <div class="top">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
-          <span class="tag prev"><span class="t-en">Preview</span><span class="t-tr">Önizleme</span></span>
-        </div>
-        <div class="body">
-          <h3><span class="t-en">Data Entry Forms</span><span class="t-tr">Veri Giriş Formları</span></h3>
-          <p><span class="t-en">Structured forms for adding contacts, companies, country desks, opportunities, events, tender platforms and tasks — with the rules built in.</span><span class="t-tr">Kişi, firma, ülke masası, fırsat, etkinlik, ihale platformu ve görev eklemek için kurallı, yapılandırılmış formlar.</span></p>
-          <span class="go"><span class="t-en">Open forms →</span><span class="t-tr">Formları aç →</span></span>
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="kick"><span class="t-en">In preparation</span><span class="t-tr">Hazırlanıyor</span></div>
-    <h2><span class="t-en">Coming alongside the platform</span><span class="t-tr">Platformun yanında gelenler</span></h2><div class="rule"></div>
-    <div class="grid">
-      <div class="tool disabled">
-        <div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M17 4a3 3 0 0 1 0 6M21 20c0-2.5-1.3-4.6-3.3-5.5"/></svg></div><span class="tag soon"><span class="t-en">Soon</span><span class="t-tr">Yakında</span></span></div>
-        <div class="body"><h3><span class="t-en">HR Application</span><span class="t-tr">HR Uygulaması</span></h3><p><span class="t-en">Team, roles, leave and HR records in one simple, structured place.</span><span class="t-tr">Ekip, roller, izinler ve İK kayıtları tek bir basit, yapılandırılmış yerde.</span></p><span class="go"><span class="t-en">In preparation</span><span class="t-tr">Hazırlanıyor</span></span></div>
-      </div>
-      <div class="tool disabled">
-        <div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></div><span class="tag soon"><span class="t-en">Soon</span><span class="t-tr">Yakında</span></span></div>
-        <div class="body"><h3><span class="t-en">Supplier Library</span><span class="t-tr">Tedarikçi Kütüphanesi</span></h3><p><span class="t-en">Vetted suppliers and subcontractors — organised, searchable and ready when a project starts.</span><span class="t-tr">Doğrulanmış tedarikçiler ve taşeronlar — düzenli, aranabilir ve proje başlayınca hazır.</span></p><span class="go"><span class="t-en">In preparation</span><span class="t-tr">Hazırlanıyor</span></span></div>
-      </div>
-      <div class="tool disabled">
-        <div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="9" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-3 2.7-5.5 6-5.5s6 2.5 6 5.5M15 20c0-2.3 1.6-4 4-4"/></svg></div><span class="tag soon"><span class="t-en">Soon</span><span class="t-tr">Yakında</span></span></div>
-        <div class="body"><h3><span class="t-en">Partner Library</span><span class="t-tr">Ortak Kütüphanesi</span></h3><p><span class="t-en">Strategic partners, consultants and local allies across regions, kept current.</span><span class="t-tr">Bölgeler genelinde stratejik ortaklar, danışmanlar ve yerel iş birlikleri — güncel tutulur.</span></p><span class="go"><span class="t-en">In preparation</span><span class="t-tr">Hazırlanıyor</span></span></div>
-      </div>
-      <div class="tool disabled">
-        <div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h4"/></svg></div><span class="tag soon"><span class="t-en">Soon</span><span class="t-tr">Yakında</span></span></div>
-        <div class="body"><h3><span class="t-en">Tender Platform Template</span><span class="t-tr">İhale Platformu Şablonu</span></h3><p><span class="t-en">A reusable template for tracking tender platforms, deadlines and submissions.</span><span class="t-tr">İhale platformlarını, son tarihleri ve başvuruları takip etmek için tekrar kullanılabilir bir şablon.</span></p><span class="go"><span class="t-en">In preparation</span><span class="t-tr">Hazırlanıyor</span></span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    <span class="powered"><span class="t-en">Prepared by</span><span class="t-tr">Hazırlayan</span> <b>ASLAN</b> · <span class="t-en">for SP Architects</span><span class="t-tr">SP Architects için</span> · © 2026</span>
-    <span class="loc"><span class="t-en">Confidential — internal preview</span><span class="t-tr">Gizli — iç önizleme</span></span>
-  </div>
-</div>
-
+</form>
 <script>
-function setLang(l){
-  document.body.classList.toggle('show-tr', l==='tr');
-  document.body.classList.toggle('show-en', l!=='tr');
-  document.querySelectorAll('.langtog button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-l')===l); });
-}
-document.addEventListener('DOMContentLoaded',function(){ setLang('en'); });
-
-/* --- access gate ---  Change PASS_HASH to the SHA-256 of your own passcode. Passcode set by site owner */
-var PASS_HASH="3875034e17855bac03a3cc9e107b1d28a9b44313d381c3335588525b4e70b55b";
+function setLang(l){document.body.classList.toggle('show-tr',l==='tr');document.body.classList.toggle('show-en',l!=='tr');document.querySelectorAll('.langtog button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-l')===l);});}
+document.addEventListener('DOMContentLoaded',function(){setLang('en');});
 async function sha256(t){var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join('');}
-function unlock(){document.body.classList.remove('locked');try{sessionStorage.setItem('sp_ok','1');}catch(e){}}
-async function checkPass(e){e.preventDefault();var v=document.getElementById('pass').value;try{var h=await sha256(v);if(h===PASS_HASH){unlock();}else{document.getElementById('gerr').textContent=document.body.classList.contains('show-tr')?'Hatalı şifre':'Wrong passcode';}}catch(err){document.getElementById('gerr').textContent='Secure connection (https) required';}return false;}
-(function(){try{if(sessionStorage.getItem('sp_ok')==='1'){document.body.classList.remove('locked');}}catch(e){}})();
+var CLIENTS={
+  "SP_ARCHITECTS":{hash:"3875034e17855bac03a3cc9e107b1d28a9b44313d381c3335588525b4e70b55b",page:"../SP_Architects/index.html",key:"sp_ok"},
+  "ARAM_TOWERS":{hash:"84d3562197f652b1cd17b084e074b9f01c26faae8f10445ec089c668d8169636",page:"../ARAM_TOWERS/index.html",key:"aram_ok"}
+};
+async function signin(e){
+  e.preventDefault();
+  var u=document.getElementById('u').value.trim().toUpperCase().replace(/\s+/g,'_');
+  var p=document.getElementById('p').value;
+  var c=CLIENTS[u];
+  var tr=document.body.classList.contains('show-tr');
+  if(!c){document.getElementById('err').textContent=tr?'Kullanıcı bulunamadı':'Unknown username';return false;}
+  try{
+    var h=await sha256(p);
+    if(h===c.hash){ try{sessionStorage.setItem(c.key,'1');}catch(e){} location.href=c.page; }
+    else { document.getElementById('err').textContent=tr?'Hatalı şifre':'Wrong password'; }
+  }catch(err){ document.getElementById('err').textContent='Secure connection (https) required'; }
+  return false;
+}
 </script>
 </body>
 </html>
