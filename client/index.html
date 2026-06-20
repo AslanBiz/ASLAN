@@ -1,1 +1,78 @@
-
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Login · ASLAN</title>
+<meta name="description" content="ASLAN client login.">
+<meta name="theme-color" content="#0e2a47">
+<meta name="robots" content="noindex">
+<style>
+:root{--gold:#b98a3e;--gold2:#c8a35b;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--sans);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:linear-gradient(125deg,#0b2238 0%,#123a59 55%,#1d4f4a 100%);color:#fff;padding:24px}
+.t-tr{display:none}
+body.show-tr .t-en{display:none}
+body.show-tr .t-tr{display:inline}
+.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:38px 32px;max-width:400px;width:100%;backdrop-filter:blur(6px)}
+.card img{height:32px;margin:0 auto 20px;display:block;filter:brightness(0) invert(1)}
+.card h1{font-size:21px;text-align:center;margin:0 0 4px;font-weight:800;letter-spacing:.02em}
+.card p.sub{text-align:center;color:#cfe0d8;font-size:13px;margin:0 0 22px}
+label{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#cdb888;font-weight:700;margin:0 0 6px}
+input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);
+  color:#fff;font-size:15px;font-family:inherit;margin-bottom:16px}
+input:focus{outline:2px solid var(--gold2);border-color:transparent}
+button{width:100%;background:var(--gold);color:#1a1208;font-weight:800;border:0;padding:13px;border-radius:10px;
+  font-size:14px;letter-spacing:.04em;cursor:pointer;font-family:inherit}
+button:hover{background:var(--gold2)}
+.err{color:#ffb4a8;font-size:12.5px;margin-top:14px;min-height:16px;text-align:center}
+.below{margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12.5px}
+.below a{color:#cfd8e6;text-decoration:none}
+.below a:hover{color:#fff}
+.langtog{display:inline-flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden}
+.langtog button{width:auto;background:transparent;border:0;color:#cdb888;font-size:12px;font-weight:700;padding:6px 12px;border-radius:0}
+.langtog button.active{background:var(--gold);color:#1a1208}
+</style>
+</head>
+<body class="show-en">
+<form class="card" onsubmit="return signin(event)">
+  <img src="https://www.aslanbusiness.com/aslan-logo.png" alt="ASLAN">
+  <h1><span class="t-en">Client Login</span><span class="t-tr">Müşteri Girişi</span></h1>
+  <p class="sub"><span class="t-en">Sign in to access your workspace.</span><span class="t-tr">Çalışma alanınıza erişmek için giriş yapın.</span></p>
+  <label><span class="t-en">Username</span><span class="t-tr">Kullanıcı adı</span></label>
+  <input id="u" autocapitalize="characters" autocomplete="username" placeholder="SP_ARCHITECTS">
+  <label><span class="t-en">Password</span><span class="t-tr">Şifre</span></label>
+  <input id="p" type="password" autocomplete="current-password" placeholder="••••••">
+  <button type="submit"><span class="t-en">Sign in</span><span class="t-tr">Giriş yap</span></button>
+  <div class="err" id="err"></div>
+  <div class="below">
+    <a href="https://www.aslanbusiness.com">← aslanbusiness.com</a>
+    <span class="langtog"><button type="button" data-l="en" class="active" onclick="setLang('en')">EN</button><button type="button" data-l="tr" onclick="setLang('tr')">TR</button></span>
+  </div>
+</form>
+<script>
+function setLang(l){document.body.classList.toggle('show-tr',l==='tr');document.body.classList.toggle('show-en',l!=='tr');document.querySelectorAll('.langtog button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-l')===l);});}
+document.addEventListener('DOMContentLoaded',function(){setLang('en');});
+async function sha256(t){var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join('');}
+var CLIENTS={
+  "SP_ARCHITECTS":{hash:"3875034e17855bac03a3cc9e107b1d28a9b44313d381c3335588525b4e70b55b",page:"../SP_Architects/index.html",key:"sp_ok"},
+  "ARAM_TOWERS":{hash:"84d3562197f652b1cd17b084e074b9f01c26faae8f10445ec089c668d8169636",page:"../ARAM_TOWERS/index.html",key:"aram_ok"}
+};
+async function signin(e){
+  e.preventDefault();
+  var u=document.getElementById('u').value.trim().toUpperCase().replace(/\s+/g,'_');
+  var p=document.getElementById('p').value;
+  var c=CLIENTS[u];
+  var tr=document.body.classList.contains('show-tr');
+  if(!c){document.getElementById('err').textContent=tr?'Kullanıcı bulunamadı':'Unknown username';return false;}
+  try{
+    var h=await sha256(p);
+    if(h===c.hash){ try{sessionStorage.setItem(c.key,'1');}catch(e){} location.href=c.page; }
+    else { document.getElementById('err').textContent=tr?'Hatalı şifre':'Wrong password'; }
+  }catch(err){ document.getElementById('err').textContent='Secure connection (https) required'; }
+  return false;
+}
+</script>
+</body>
+</html>
