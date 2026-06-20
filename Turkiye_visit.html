@@ -206,6 +206,49 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);-webkit
 </style>
 </head>
 <body>
+
+<div id="lock-screen" style="position:fixed;inset:0;background:#0A1628;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;padding:24px">
+  <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:20px">
+    <rect width="48" height="48" rx="8" fill="#0A1628" stroke="#D4AF37" stroke-width="1.5"/>
+    <text x="24" y="33" text-anchor="middle" font-size="26" fill="#D4AF37" font-family="Georgia,serif" font-weight="bold" font-style="italic">A</text>
+    <line x1="10" y1="39" x2="38" y2="39" stroke="#D4AF37" stroke-width="1" opacity="0.5"/>
+  </svg>
+  <div style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(255,255,255,.4);letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px">Aslan Business</div>
+  <div style="font-family:Georgia,serif;font-size:22px;font-style:italic;color:#fff;margin-bottom:32px">Official Visit Programme</div>
+  <div style="width:100%;max-width:320px">
+    <input id="pwd-input" type="password" placeholder="Enter password"
+      style="width:100%;padding:14px 16px;font-size:15px;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(255,255,255,.06);color:#fff;font-family:'Lato',sans-serif;outline:none;box-sizing:border-box;letter-spacing:.08em;margin-bottom:12px"
+      onkeydown="if(event.key==='Enter')checkPwd()">
+    <button onclick="checkPwd()"
+      style="width:100%;padding:14px;background:#D4AF37;color:#0A1628;font-size:14px;font-weight:700;border:none;border-radius:8px;cursor:pointer;font-family:'Lato',sans-serif;letter-spacing:.06em">
+      Enter
+    </button>
+    <div id="pwd-error" style="color:#E05555;font-size:12px;text-align:center;margin-top:10px;display:none">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<script>
+function checkPwd(){
+  var val=document.getElementById('pwd-input').value;
+  if(val==='VisitTR2026'){
+    document.getElementById('lock-screen').style.display='none';
+    sessionStorage.setItem('auth','1');
+  } else {
+    document.getElementById('pwd-error').style.display='block';
+    document.getElementById('pwd-input').value='';
+    document.getElementById('pwd-input').focus();
+  }
+}
+window.addEventListener('DOMContentLoaded',function(){
+  if(sessionStorage.getItem('auth')==='1'){
+    document.getElementById('lock-screen').style.display='none';
+  }
+});
+document.addEventListener('DOMContentLoaded',function(){
+  document.getElementById('pwd-input').focus();
+});
+</script>
+
 <div class="layout">
 <nav class="sidebar">
   <div class="sidebar-logo">
@@ -215,6 +258,7 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);-webkit
   <div class="sidebar-title">Visit Programme</div>
   <button class="nav-item active" onclick="show('schedule',this)"><span class="nav-icon">📅</span>Schedule</button>
   <button class="nav-item" onclick="show('people',this)"><span class="nav-icon">👤</span>People</button>
+  <button class="nav-item" onclick="show('contacts',this)"><span class="nav-icon">📞</span>Calls</button>
   <button class="nav-item" onclick="show('companies',this)"><span class="nav-icon">🏢</span>Companies</button>
   <button class="nav-item" onclick="show('projects',this)"><span class="nav-icon">🏗</span>Projects</button>
   <button class="nav-item" onclick="show('map',this)"><span class="nav-icon">📍</span>Map & Route</button>
@@ -928,6 +972,238 @@ body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);-webkit
 </div>
 
 
+<!-- ══ CONTACTS TABLE ══ -->
+<div id="panel-contacts" class="panel">
+  <div class="top-bar">
+    <div>
+      <div class="page-title">Contact Coordination</div>
+      <div class="page-sub">Who calls whom · Meeting dates · Visit venues</div>
+    </div>
+    <button class="export-btn" onclick="exportContacts()">⬇ Export CSV</button>
+  </div>
+
+  <!-- LEGEND -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+    <span style="font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span>
+    <span style="font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;background:#F0E4F8;color:#6B2A8A">Ayten</span>
+    <span style="font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;background:#DEF2EC;color:#0A5A4A">Badar</span>
+    <span style="font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;background:#FEF0E4;color:#8A3A00">Serhan</span>
+    <span style="font-size:11px;color:var(--ink3);padding:4px 8px">· <span style="color:#2A5A14;font-weight:700">✓</span> = Sabri has direct contact</span>
+  </div>
+
+  <!-- TABLE (scrollable on mobile) -->
+  <div style="overflow-x:auto;border-radius:var(--r);box-shadow:var(--shadow)">
+    <table style="width:100%;border-collapse:collapse;font-size:13px;background:#fff;min-width:700px">
+      <thead>
+        <tr style="background:var(--navy);color:#fff">
+          <th style="padding:10px 12px;text-align:left;font-size:10px;font-weight:600;letter-spacing:.06em;white-space:nowrap">Contact Name</th>
+          <th style="padding:10px 12px;text-align:left;font-size:10px;font-weight:600">Company</th>
+          <th style="padding:10px 12px;text-align:left;font-size:10px;font-weight:600">Position</th>
+          <th style="padding:10px 12px;text-align:left;font-size:10px;font-weight:600">City</th>
+          <th style="padding:10px 12px;text-align:left;font-size:10px;font-weight:600;white-space:nowrap">Meeting Date</th>
+          <th style="padding:10px 12px;text-align:left;font-size:10px;font-weight:600">Venue / Event</th>
+          <th style="padding:10px 12px;text-align:center;font-size:10px;font-weight:600;white-space:nowrap">Who Calls</th>
+          <th style="padding:10px 12px;text-align:center;font-size:10px;font-weight:600">Sabri ✓</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Ramazan Bülbül</td>
+        <td style="padding:10px 12px;color:var(--ink2)">RAMS Group</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Chairman</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#DEF2EC;color:#0A5A4A">Bodrum</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Fri 3 Jul · 20:00</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Yalıkavak Marina Dinner</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#ccc">—</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Erman Ilıcak</td>
+        <td style="padding:10px 12px;color:var(--ink2)">Rönesans Holding</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Chairman</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#DEF2EC;color:#0A5A4A">Bodrum/Istanbul</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Sat 4 Jul or Mon 6 Jul</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Bodrum Edition · Hilltown</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#F0E4F8;color:#6B2A8A">Ayten</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#ccc">—</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Erhan Boysanoğlu</td>
+        <td style="padding:10px 12px;color:var(--ink2)">MESA</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Chairman</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#DEF2EC;color:#0A5A4A">Bodrum</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Fri 3 Jul (TBC) · Sat 4 Jul · 11:00</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Mesa Demirbükü</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#2A5A14;font-size:14px;font-weight:700" title="Sabri can call">✓</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Dr. M. Emre Çamlıbel</td>
+        <td style="padding:10px 12px;color:var(--ink2)">Re Pie Holding</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Chairman</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#DEF2EC;color:#0A5A4A">Bodrum</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Fri 3 Jul or Sat 4 Jul · 12:00</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Aman Ruya Resort</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#2A5A14;font-size:14px;font-weight:700" title="Sabri can call">✓</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Vedat Aşçı</td>
+        <td style="padding:10px 12px;color:var(--ink2)">ASTAŞ Holding</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Chairman</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#DEF2EC;color:#0A5A4A">Bodrum</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Sat 4 Jul · 13:30</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Mandarin Oriental Bodrum</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#2A5A14;font-size:14px;font-weight:700" title="Sabri can call">✓</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Ziya Yılmaz</td>
+        <td style="padding:10px 12px;color:var(--ink2)">DAP Yapı / KONUTDER</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Chairman</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#E4EDF8;color:#163D6A">Istanbul</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Sun 5 Jul · 10:30</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">IstMarina</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#2A5A14;font-size:14px;font-weight:700" title="Sabri can call">✓</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Avni Çelik</td>
+        <td style="padding:10px 12px;color:var(--ink2)">Sinpaş Holding</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Founder</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#E4EDF8;color:#163D6A">Istanbul</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Mon 6 Jul · 13:00</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Istanbul Finance City</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#2A5A14;font-size:14px;font-weight:700" title="Sabri can call">✓</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Özen Kuzu</td>
+        <td style="padding:10px 12px;color:var(--ink2)">Kuzu Group</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Chairman & CEO</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#E4EDF8;color:#163D6A">Istanbul</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Sun 5 Jul · 13:00</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">SeaPearl Ataköy</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#2A5A14;font-size:14px;font-weight:700" title="Sabri can call">✓</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Yasir Yılmaz</td>
+        <td style="padding:10px 12px;color:var(--ink2)">Emlak Konut GYO</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">General Manager</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#E4EDF8;color:#163D6A">Istanbul</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Mon 6 Jul · 14:20</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Metropol Istanbul</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#2A5A14;font-size:14px;font-weight:700" title="Sabri can call">✓</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Süleyman / Serhan Çetinsaya</td>
+        <td style="padding:10px 12px;color:var(--ink2)">Artaş Holding</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Owner</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#E4EDF8;color:#163D6A">Istanbul</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Sun 5 Jul · 20:00</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">ARTAŞ Business Dinner</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#FEF0E4;color:#8A3A00">Serhan</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#2A5A14;font-size:14px;font-weight:700" title="Sabri can call">✓</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Ferit F. Şahenk</td>
+        <td style="padding:10px 12px;color:var(--ink2)">Doğuş Group</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Chairman</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#E4EDF8;color:#163D6A">Istanbul</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Tue 7 Jul · 10:30</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Galataport Istanbul</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#F0E4F8;color:#6B2A8A">Ayten</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#ccc">—</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Ahmet İhsan Erdem</td>
+        <td style="padding:10px 12px;color:var(--ink2)">Istanbul Financial Center</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">CEO</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#E4EDF8;color:#163D6A">Istanbul</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Mon 6 Jul · 10:00</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Istanbul Financial Center</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#2A5A14;font-size:14px;font-weight:700" title="Sabri can call">✓</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Hüseyin / Cüneyt Arslan</td>
+        <td style="padding:10px 12px;color:var(--ink2)">YDA Group</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Chairman</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#FEF0E4;color:#8A3A00">Ankara</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Wed 1 Jul (TBC)</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Site Visit only</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#F0E4F8;color:#6B2A8A">Ayten</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#ccc">—</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Levent Sungur</td>
+        <td style="padding:10px 12px;color:var(--ink2)">TOKİ</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">President</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#FEF0E4;color:#8A3A00">Ankara</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Thu 2 Jul · 11:00</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Ministry Meeting</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#2A5A14;font-size:14px;font-weight:700" title="Sabri can call">✓</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Fatih Erdoğan</td>
+        <td style="padding:10px 12px;color:var(--ink2)">Pasifik Holding</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Chairman</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#E4EDF8;color:#163D6A">Istanbul</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Wed 1 Jul · 13:00</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Next Level Project</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#DEF2EC;color:#0A5A4A">Badar</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#ccc">—</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Aziz Torun</td>
+        <td style="padding:10px 12px;color:var(--ink2)">Torunlar GYO</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Chairman</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#E4EDF8;color:#163D6A">Istanbul</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Mon 6 Jul · 19:00</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">KONUTDER Dinner</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#2A5A14;font-size:14px;font-weight:700" title="Sabri can call">✓</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Mesut Toprak</td>
+        <td style="padding:10px 12px;color:var(--ink2)">Astay</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Chairman</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#E4EDF8;color:#163D6A">Istanbul</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Mon 6 Jul (TBC)</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Meeting TBC</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#2A5A14;font-size:14px;font-weight:700" title="Sabri can call">✓</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">Mahmut / Zeki Akbal</td>
+        <td style="padding:10px 12px;color:var(--ink2)">Fuzul GYO</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Chairman / Deputy</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#E4EDF8;color:#163D6A">Istanbul</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Mon 6 Jul · 19:00</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">KONUTDER Dinner</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#E4EDF8;color:#163D6A">Sabri</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#2A5A14;font-size:14px;font-weight:700" title="Sabri can call">✓</span></td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;font-weight:600;color:var(--ink);white-space:nowrap">H.E. Murat Kurum</td>
+        <td style="padding:10px 12px;color:var(--ink2)">Ministry of Environment</td>
+        <td style="padding:10px 12px;color:var(--ink3);font-size:11px">Minister</td>
+        <td style="padding:10px 12px"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#FEF0E4;color:#8A3A00">Ankara</span></td>
+        <td style="padding:10px 12px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">Thu 2 Jul · 11:00</td>
+        <td style="padding:10px 12px;font-size:11px;color:var(--ink2)">Ministry — CONFIRMED</td>
+        <td style="padding:10px 12px;text-align:center"><span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#DEF2EC;color:#0A5A4A">Badar</span></td>
+        <td style="padding:10px 12px;text-align:center"><span style="color:#ccc">—</span></td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
 <!-- ══ COMPANIES ══ -->
 <div id="panel-companies" class="panel">
   <div class="top-bar">
@@ -1527,6 +1803,29 @@ function csv(rows,fn){
 }
 function exportSchedule(){csv([['Date','Day','From','To','Duration','Activity','Type'],['30 Jun','Travel','13:00','17:50','5h 50m','Muscat→Istanbul Oman Air','Flight TBC'],['30 Jun','Travel','22:00','23:10','1h 10m','Istanbul→Ankara Qatar','Flight'],['1 Jul','Ankara','11:00','12:30','1.5h','Sinpaş Altınoran','Site Visit'],['1 Jul','Ankara','13:00','14:30','1.5h','Pasifik Holding Next Level','Site Visit'],['1 Jul','Ankara','20:00','21:00','1h','Dinner Minister Housing','Dinner TBC'],['2 Jul','Ankara','11:00','13:00','2h','Ministry+Emlak Konut+TOKİ','Key Meeting'],['2 Jul','Ankara','13:00','','','MoU Signing','Ceremony'],['2 Jul','Bodrum','17:00','18:30','1.5h','Flight Ankara→Bodrum AJET','Flight'],['2 Jul','Bodrum','20:30','21:30','1h','Dinner Sait Restaurant','Dinner'],['3 Jul','Bodrum','10:00','16:00','6h','Boat Tour+Six Senses','Site Visit/Boat'],['3 Jul','Bodrum','19:30','21:30','2h','Yalıkavak Marina+RAMS Dinner','Site Visit+Dinner'],['4 Jul','Bodrum','09:30','10:30','1h','Rönesans Bodrum Edition','Site Visit'],['4 Jul','Bodrum','11:00','12:00','1h','Mesa Demirbükü MESA','Site Visit'],['4 Jul','Bodrum','12:15','13:00','1h','Aman Ruya Re Pie','Site Visit'],['4 Jul','Bodrum','13:30','14:30','1h','ASTAŞ Lunch MO Bodrum','Business Lunch'],['4 Jul','Istanbul','18:25','','','Flight Bodrum→Istanbul','Flight'],['4 Jul','Istanbul','21:30','22:30','1h','Dinner Seraf','Dinner'],['5 Jul','Istanbul','10:30','12:00','1.5h','IstMarina DAP','Site Visit'],['5 Jul','Istanbul','13:00','14:30','1.5h','SeaPearl Ataköy Kuzu','Site Visit'],['5 Jul','Istanbul','20:00','21:00','1h','ARTAŞ Dinner','Business Dinner'],['6 Jul','Istanbul','10:00','12:00','2h','Istanbul Financial Center','Site Visit'],['6 Jul','Istanbul','13:00','14:00','1h','Istanbul Finance City Sinpaş','Site Visit'],['6 Jul','Istanbul','14:20','15:30','1h 10m','Metropol Istanbul Emlak Konut','Site Visit'],['6 Jul','Istanbul','15:50','17:00','1h 10m','Hilltown Küçükyalı Rönesans','Site Visit'],['6 Jul','Istanbul','19:00','21:00','2h','KONUTDER Dinner at Radisson','Association Dinner'],['7 Jul','Istanbul','10:30','12:00','1.5h','Galataport Doğuş Group','Site Visit'],['7 Jul','Muscat','18:15','00:45','6h','Istanbul→Muscat','Flight TBC']],'turkey-schedule-2026.csv');}
 function exportPeople(){csv([['Name','Position','Company','City','Project Visit','Website'],['Ramazan Bülbül','Chairman','RAMS','Bodrum','RAMS Resort Bodrum','ramsgroup.com.tr'],['Erman Ilıcak','Chairman','Rönesans','Bodrum/Istanbul','Bodrum Edition+Hilltown','ronesans.com'],['Erhan Boysanoğlu','Chairman','MESA','Bodrum','Mesa Demirbükü','mesa.com.tr'],['Dr. M. Emre Çamlıbel','Chairman','Re Pie Holding','Bodrum','Amanruya Bodrum','repie.com.tr'],['Vedat Aşçı','Chairman','ASTAŞ Holding','Bodrum','Mandarin Oriental','astas-holding.com'],['Ziya Yılmaz','Chairman+KONUTDER','DAP Yapı','Istanbul','IstMarina','dapholding.com'],['Avni Çelik','Founder','Sinpaş Holding','Istanbul','Sinpaş Finance City','sinpas.com.tr'],['Özen Kuzu','Chairman CEO','Kuzu Group','Istanbul','SeaPearl Ataköy','kuzugroup.com'],['Yasir Yılmaz','GM','Emlak Konut GYO','Istanbul','Metropol Istanbul','emlakkonut.com.tr'],['Süleyman/Serhan Çetinsaya','Owner','Artaş Holding','Istanbul','','artas.com.tr'],['Ferit F. Şahenk','Chairman','Doğuş Group','Istanbul','Galataport','dogusgroup.com.tr'],['Ahmet İhsan Erdem','CEO','Istanbul Financial Center','Istanbul','IFC','ifc.com.tr'],['Levent Sungur','President','TOKİ','Ankara','','toki.gov.tr'],['Fatih Erdoğan','Chairman','Pasifik Holding','Ankara','Next Level','pasifik.com'],['Aziz Torun','Chairman','Torunlar GYO','Istanbul','','torunlargyo.com.tr'],['Mesut Toprak','Chairman','Astay','Istanbul','Four Seasons Istanbul',''],['Mahmut/Zeki Akbal','Chairman/Deputy','Fuzul GYO','Istanbul','Fuzul Barbaros 48','fuzulgroup.com'],['H.E. Murat Kurum','Minister','Ministry of Environment','Ankara','','csb.gov.tr']],'turkey-people-2026.csv');}
+
+function exportContacts(){csv([
+  ['Name','Company','Position','City','Meeting Date','Venue','Who Calls','Sabri Direct'],
+  ['Ramazan Bülbül','RAMS Group','Chairman','Bodrum','Fri 3 Jul · 20:00','Yalıkavak Marina Dinner','Sabri','No'],
+  ['Erman Ilıcak','Rönesans Holding','Chairman','Bodrum/Istanbul','Sat 4 Jul or Mon 6 Jul','Bodrum Edition · Hilltown','Ayten','No'],
+  ['Erhan Boysanoğlu','MESA','Chairman','Bodrum','Fri 3 Jul (TBC) · Sat 4 Jul · 11:00','Mesa Demirbükü','Sabri','Yes'],
+  ['Dr. M. Emre Çamlıbel','Re Pie Holding','Chairman','Bodrum','Fri 3 Jul or Sat 4 Jul · 12:00','Aman Ruya Resort','Sabri','Yes'],
+  ['Vedat Aşçı','ASTAŞ Holding','Chairman','Bodrum','Sat 4 Jul · 13:30','Mandarin Oriental Bodrum','Sabri','Yes'],
+  ['Ziya Yılmaz','DAP Yapı / KONUTDER','Chairman','Istanbul','Sun 5 Jul · 10:30','IstMarina','Sabri','Yes'],
+  ['Avni Çelik','Sinpaş Holding','Founder','Istanbul','Mon 6 Jul · 13:00','Istanbul Finance City','Sabri','Yes'],
+  ['Özen Kuzu','Kuzu Group','Chairman & CEO','Istanbul','Sun 5 Jul · 13:00','SeaPearl Ataköy','Sabri','Yes'],
+  ['Yasir Yılmaz','Emlak Konut GYO','General Manager','Istanbul','Mon 6 Jul · 14:20','Metropol Istanbul','Sabri','Yes'],
+  ['Süleyman / Serhan Çetinsaya','Artaş Holding','Owner','Istanbul','Sun 5 Jul · 20:00','ARTAŞ Business Dinner','Serhan','Yes'],
+  ['Ferit F. Şahenk','Doğuş Group','Chairman','Istanbul','Tue 7 Jul · 10:30','Galataport Istanbul','Ayten','No'],
+  ['Ahmet İhsan Erdem','Istanbul Financial Center','CEO','Istanbul','Mon 6 Jul · 10:00','Istanbul Financial Center','Sabri','Yes'],
+  ['Hüseyin / Cüneyt Arslan','YDA Group','Chairman','Ankara','Wed 1 Jul (TBC)','Site Visit only','Ayten','No'],
+  ['Levent Sungur','TOKİ','President','Ankara','Thu 2 Jul · 11:00','Ministry Meeting','Sabri','Yes'],
+  ['Fatih Erdoğan','Pasifik Holding','Chairman','Istanbul','Wed 1 Jul · 13:00','Next Level Project','Badar','No'],
+  ['Aziz Torun','Torunlar GYO','Chairman','Istanbul','Mon 6 Jul · 19:00','KONUTDER Dinner','Sabri','Yes'],
+  ['Mesut Toprak','Astay','Chairman','Istanbul','Mon 6 Jul (TBC)','Meeting TBC','Sabri','Yes'],
+  ['Mahmut / Zeki Akbal','Fuzul GYO','Chairman / Deputy','Istanbul','Mon 6 Jul · 19:00','KONUTDER Dinner','Sabri','Yes'],
+  ['H.E. Murat Kurum','Ministry of Environment','Minister','Ankara','Thu 2 Jul · 11:00','Ministry — CONFIRMED','Badar','No']
+],'contact-coordination-2026.csv');}
 function exportCompanies(){csv([['Company','Sector','Contact','City','Assets','Website'],['ASTAŞ Holding','Ultra-Luxury RE','Vedat Aşçı','Bodrum','Multi-billion $','astas-holding.com'],['Rönesans Holding','Construction/Healthcare/RE','Erman Ilıcak','Bodrum/Istanbul','~205B TL','ronesans.com'],['MESA','Residential','Erhan Boysanoğlu','Bodrum','~25-30B TL','mesa.com.tr'],['Re Pie Holding','Investment/RE','Dr. M. Emre Çamlıbel','Bodrum','TBC','repie.com.tr'],['DAP Holding','Premium Residential','Ziya Yılmaz','Istanbul','~30.4B TL','dapholding.com'],['Sinpaş GYO','Lifestyle Residential','Avni Çelik','Istanbul','~74.8B TL','sinpas.com.tr'],['Kuzu Group','Mixed-Use','Özen Kuzu','Istanbul','~15.4B TL','kuzugroup.com'],['Emlak Konut GYO','Public RE','Yasir Yılmaz','Istanbul','Largest public RE TR','emlakkonut.com.tr'],['Artaş Holding','Luxury RE/Hospitality','Süleyman Çetinsaya','Istanbul','TBC','artas.com.tr'],['Doğuş Group','Tourism/Hospitality/RE','Ferit F. Şahenk','Istanbul','~17.4B TL','dogusgroup.com.tr'],['IFC','Financial District','Ahmet İhsan Erdem','Istanbul','State-backed','ifc.com.tr'],['TOKİ','Public Housing','Levent Sungur','Ankara','National','toki.gov.tr'],['Pasifik Holding','Mixed-Use','Fatih Erdoğan','Ankara','TBC','pasifik.com'],['Torunlar GYO','Retail/Commercial','Aziz Torun','Istanbul','~136.5B TL','torunlargyo.com.tr'],['Fuzul GYO','Residential','Mahmut/Zeki Akbal','Istanbul','~11.9B TL','fuzulgroup.com'],['RAMS Group','Construction/RE','Ramazan Bülbül','Bodrum','TBC','ramsgroup.com.tr'],['KONUTDER','Association','Ziya Yılmaz','Istanbul','Industry-wide','konutder.org.tr']],'turkey-companies-2026.csv');}
 function exportProjects(){csv([['Project','Company','City','Type','Website'],['Sinpaş Altınoran','Sinpaş GYO','Ankara','Residential Community','sinpasaltinoran.com.tr'],['Next Level Project','Pasifik Holding','Ankara','Mixed-Use/Mall','pasifik.com'],['Bodrum Edition Hotel','Rönesans','Bodrum','Luxury Hotel','marriott.com'],['Mesa Demirbükü','MESA','Bodrum','Residential','mesa.com.tr'],['Aman Ruya Resort','Re Pie Holding','Bodrum','Ultra-Luxury Resort','aman.com'],['Mandarin Oriental Bodrum','ASTAŞ','Bodrum','Luxury Coastal Resort','mandarinoriental.com'],['Six Senses Kaplankaya','Six Senses','Bodrum','Wellness Resort','sixsenses.com'],['IstMarina','DAP Yapı','Istanbul','Waterfront Mixed-Use','dapyapi.com.tr'],['SeaPearl Ataköy','Kuzu Group','Istanbul','Seafront Mixed-Use','seapearlatakoy.com'],['Istanbul Financial Center','IFC','Istanbul','Financial District','ifc.com.tr'],['Istanbul Finance City','Sinpaş GYO','Istanbul','Financial/Mixed-Use','sinpasfinanssehir.com'],['Metropol Istanbul','Emlak Konut GYO','Istanbul','Urban Transformation','emlakkonut.com.tr'],['Hilltown Küçükyalı','Rönesans','Istanbul','Commercial/Mixed-Use','ronesans.com'],['Galataport Istanbul','Doğuş Group','Istanbul','Waterfront Regeneration','galataport.com.tr']],'turkey-projects-2026.csv');}
 
