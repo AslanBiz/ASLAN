@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Coordination · Türkiye July 2026 · Internal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#F6F4F0;color:#1C1C1C;font-size:14px;padding:24px}
+h1{font-size:20px;font-weight:600;color:#0A1628;margin-bottom:4px}
+.sub{font-size:12px;color:#888;margin-bottom:20px}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.badge{font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;cursor:default}
+.actions{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.btn{font-size:12px;font-weight:500;padding:6px 14px;border:0.5px solid #ddd;border-radius:6px;cursor:pointer;background:#fff;font-family:inherit}
+.btn:hover{background:#f0f0f0}
+.wrap{overflow-x:auto;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+table{width:100%;border-collapse:collapse;background:#fff;min-width:900px}
+thead tr{background:#0A1628;color:#fff}
+th{padding:11px 14px;text-align:left;font-size:10px;font-weight:600;letter-spacing:.08em;white-space:nowrap}
+td{padding:11px 14px;border-bottom:0.5px solid #EEE;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#FAFAF8}
+.name{font-weight:600;color:#1C1C1C}
+.company{color:#4A4540;font-size:12px}
+.pos{color:#8A8278;font-size:11px}
+.city-ank{background:#FEF0E4;color:#8A3A00;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.city-bod{background:#DEF2EC;color:#0A5A4A;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.city-ist{background:#E4EDF8;color:#163D6A;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.city-mix{background:#F5F0F8;color:#4A1A7A;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.date{font-weight:600;font-size:12px;white-space:nowrap}
+.time{font-size:11px;color:#888;margin-top:2px}
+.venue{font-size:12px;color:#4A4540}
+.note{font-size:11px;color:#E07A00;margin-top:4px;font-style:italic}
+.caller-Sabri{background:#E4EDF8;color:#163D6A;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.caller-Badar{background:#DEF2EC;color:#0A5A4A;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.caller-Serhan{background:#FEF0E4;color:#8A3A00;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.caller-Ayten{background:#F0E4F8;color:#6B2A8A;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.caller-BADAR{background:#DEF2EC;color:#0A5A4A;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.status-confirmed{background:#E8F4E0;color:#2A5A14;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.status-pending{background:#FFF8E0;color:#7A5A00;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.status-tbc{background:#F2F2F2;color:#666;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.filter-btn{font-size:11px;font-weight:600;padding:4px 12px;border:0.5px solid #ddd;border-radius:20px;cursor:pointer;background:#fff;font-family:inherit;transition:all .15s}
+.filter-btn:hover,.filter-btn.active{background:#0A1628;color:#fff;border-color:#0A1628}
+@media(max-width:600px){body{padding:12px}h1{font-size:17px}}
+@media print{.actions,.filter-row{display:none}body{padding:0}table{min-width:0}}
+</style>
+</head>
+<body>
+
+<h1>Contact Coordination — Türkiye Visit · July 2026</h1>
+<p class="sub">Internal use only · Aslan Business · Not for distribution</p>
+
+<div class="filter-row">
+  <button class="filter-btn active" onclick="filterRows('all',this)">All (18)</button>
+  <button class="filter-btn" onclick="filterRows('Sabri',this)">Sabri (10)</button>
+  <button class="filter-btn" onclick="filterRows('Badar',this)">Badar (5)</button>
+  <button class="filter-btn" onclick="filterRows('Serhan',this)">Serhan (2)</button>
+  <button class="filter-btn" onclick="filterRows('Ayten',this)">Ayten (1)</button>
+  <button class="filter-btn" onclick="filterRows('Ankara',this)">Ankara</button>
+  <button class="filter-btn" onclick="filterRows('Bodrum',this)">Bodrum</button>
+  <button class="filter-btn" onclick="filterRows('Istanbul',this)">Istanbul</button>
+</div>
+
+<div class="legend">
+  <span class="badge" style="background:#E4EDF8;color:#163D6A">Sabri</span>
+  <span class="badge" style="background:#DEF2EC;color:#0A5A4A">Badar</span>
+  <span class="badge" style="background:#FEF0E4;color:#8A3A00">Serhan</span>
+  <span class="badge" style="background:#F0E4F8;color:#6B2A8A">Ayten</span>
+</div>
+
+<div class="actions">
+  <button class="btn" onclick="window.print()">🖨 Print</button>
+  <button class="btn" onclick="exportCSV()">⬇ Export CSV</button>
+</div>
+
+<div class="wrap">
+<table id="main-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Company</th>
+      <th>Position</th>
+      <th>City</th>
+      <th>Meeting Date</th>
+      <th>Venue / Event</th>
+      <th>Who Calls</th>
+      <th>Status / Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-caller="BADAR" data-city="Bodrum">
+      <td style="color:#aaa;font-size:11px;font-weight:600">1</td>
+      <td><div class="name">Ramazan Bülbül</div></td>
+      <td><div class="company">RAMS Group</div></td>
+      <td class="pos">Chairman</td>
+      <td><span class="city-bod">Bodrum</span></td>
+      <td><div class="date">Fri 3 Jul</div><div class="time">20:00</div></td>
+      <td><div class="venue">Yalıkavak Marina Dinner</div></td>
+      <td><span class="caller-BADAR">BADAR</span></td>
+      <td></td>
+    </tr>
+    <tr data-caller="BADAR" data-city="Bodrum/Istanbul">
+      <td style="color:#aaa;font-size:11px;font-weight:600">2</td>
+      <td><div class="name">Erman Ilıcak</div></td>
+      <td><div class="company">Rönesans Holding</div></td>
+      <td class="pos">Chairman</td>
+      <td><span class="city-mix">Bodrum/Istanbul</span></td>
+      <td><div class="date">Sat 4 Jul or Mon 6 Jul</div><div class="time"></div></td>
+      <td><div class="venue">Bodrum Edition or Hilltown</div></td>
+      <td><span class="caller-BADAR">BADAR</span></td>
+      <td></td>
+    </tr>
+    <tr data-caller="Sabri" data-city="Bodrum">
+      <td style="color:#aaa;font-size:11px;font-weight:600">3</td>
+      <td><div class="name">Erhan Boysanoğlu</div></td>
+      <td><div class="company">MESA</div></td>
+      <td class="pos">Chairman</td>
+      <td><span class="city-bod">Bodrum</span></td>
+      <td><div class="date">Fri 3 Jul (TBC) or Sat 4 Jul</div><div class="time">11:00</div></td>
+      <td><div class="venue">Mesa Demirbükü</div></td>
+      <td><span class="caller-Sabri">Sabri</span></td>
+      <td><span class="status-confirmed">✓ Confirmed</span></td>
+    </tr>
+    <tr data-caller="Sabri" data-city="Bodrum">
+      <td style="color:#aaa;font-size:11px;font-weight:600">4</td>
+      <td><div class="name">Dr. M. Emre Çamlıbel</div></td>
+      <td><div class="company">Re Pie Holding</div></td>
+      <td class="pos">Chairman</td>
+      <td><span class="city-bod">Bodrum</span></td>
+      <td><div class="date">Fri 3 Jul or Sat 4 Jul</div><div class="time">12:00</div></td>
+      <td><div class="venue">Aman Ruya Resort</div></td>
+      <td><span class="caller-Sabri">Sabri</span></td>
+      <td></td>
+    </tr>
+    <tr data-caller="Sabri" data-city="Bodrum">
+      <td style="color:#aaa;font-size:11px;font-weight:600">5</td>
+      <td><div class="name">Vedat Aşçı</div></td>
+      <td><div class="company">ASTAŞ Holding</div></td>
+      <td class="pos">Chairman</td>
+      <td><span class="city-bod">Bodrum</span></td>
+      <td><div class="date">Sat 4 Jul</div><div class="time">13:30</div></td>
+      <td><div class="venue">Mandarin Oriental Bodrum</div></td>
+      <td><span class="caller-Sabri">Sabri</span></td>
+      <td><div class="note">Depends on Bodrum Hotel status</div></td>
+    </tr>
+    <tr data-caller="Sabri" data-city="Istanbul">
+      <td style="color:#aaa;font-size:11px;font-weight:600">6</td>
+      <td><div class="name">Ziya Yılmaz</div></td>
+      <td><div class="company">DAP Yapı / KONUTDER</div></td>
+      <td class="pos">Chairman</td>
+      <td><span class="city-ist">Istanbul</span></td>
+      <td><div class="date">Sun 5 Jul</div><div class="time">10:30</div></td>
+      <td><div class="venue">IstMarina</div></td>
+      <td><span class="caller-Sabri">Sabri</span></td>
+      <td></td>
+    </tr>
+    <tr data-caller="Sabri" data-city="Istanbul">
+      <td style="color:#aaa;font-size:11px;font-weight:600">7</td>
+      <td><div class="name">Avni Çelik</div></td>
+      <td><div class="company">Sinpaş Holding</div></td>
+      <td class="pos">Founder</td>
+      <td><span class="city-ist">Istanbul</span></td>
+      <td><div class="date">Mon 6 Jul</div><div class="time">13:00</div></td>
+      <td><div class="venue">Istanbul Finance City</div></td>
+      <td><span class="caller-Sabri">Sabri</span></td>
+      <td></td>
+    </tr>
+    <tr data-caller="Sabri" data-city="Istanbul">
+      <td style="color:#aaa;font-size:11px;font-weight:600">8</td>
+      <td><div class="name">Özen Kuzu</div></td>
+      <td><div class="company">Kuzu Group</div></td>
+      <td class="pos">Chairman & CEO</td>
+      <td><span class="city-ist">Istanbul</span></td>
+      <td><div class="date">Sun 5 Jul</div><div class="time">13:00</div></td>
+      <td><div class="venue">SeaPearl Ataköy</div></td>
+      <td><span class="caller-Sabri">Sabri</span></td>
+      <td></td>
+    </tr>
+    <tr data-caller="Sabri" data-city="Istanbul">
+      <td style="color:#aaa;font-size:11px;font-weight:600">9</td>
+      <td><div class="name">Yasir Yılmaz</div></td>
+      <td><div class="company">Emlak Konut GYO</div></td>
+      <td class="pos">General Manager</td>
+      <td><span class="city-ist">Istanbul</span></td>
+      <td><div class="date">Mon 6 Jul</div><div class="time">14:20</div></td>
+      <td><div class="venue">Metropol Istanbul</div></td>
+      <td><span class="caller-Sabri">Sabri</span></td>
+      <td></td>
+    </tr>
+    <tr data-caller="Serhan" data-city="Istanbul">
+      <td style="color:#aaa;font-size:11px;font-weight:600">10</td>
+      <td><div class="name">Süleyman / Serhan Çetinsaya</div></td>
+      <td><div class="company">Artaş Holding</div></td>
+      <td class="pos">Owner</td>
+      <td><span class="city-ist">Istanbul</span></td>
+      <td><div class="date">Sun 5 Jul</div><div class="time">20:00</div></td>
+      <td><div class="venue">ARTAŞ Business Dinner</div></td>
+      <td><span class="caller-Serhan">Serhan</span></td>
+      <td><div class="note">Süleyman not available</div></td>
+    </tr>
+    <tr data-caller="BADAR" data-city="Istanbul">
+      <td style="color:#aaa;font-size:11px;font-weight:600">11</td>
+      <td><div class="name">Ferit F. Şahenk</div></td>
+      <td><div class="company">Doğuş Group</div></td>
+      <td class="pos">Chairman</td>
+      <td><span class="city-ist">Istanbul</span></td>
+      <td><div class="date">Tue 7 Jul</div><div class="time">10:30</div></td>
+      <td><div class="venue">Galataport Istanbul</div></td>
+      <td><span class="caller-BADAR">BADAR</span></td>
+      <td><div class="note">Ayten trying for customs contact</div></td>
+    </tr>
+    <tr data-caller="Sabri" data-city="Istanbul">
+      <td style="color:#aaa;font-size:11px;font-weight:600">12</td>
+      <td><div class="name">Ahmet İhsan Erdem</div></td>
+      <td><div class="company">Istanbul Financial Center</div></td>
+      <td class="pos">CEO</td>
+      <td><span class="city-ist">Istanbul</span></td>
+      <td><div class="date">Mon 6 Jul</div><div class="time">10:00</div></td>
+      <td><div class="venue">Istanbul Financial Center</div></td>
+      <td><span class="caller-Sabri">Sabri</span></td>
+      <td></td>
+    </tr>
+    <tr data-caller="Serhan" data-city="Ankara">
+      <td style="color:#aaa;font-size:11px;font-weight:600">13</td>
+      <td><div class="name">Hüseyin / Cüneyt Arslan</div></td>
+      <td><div class="company">YDA Group</div></td>
+      <td class="pos">Chairman</td>
+      <td><span class="city-ank">Ankara</span></td>
+      <td><div class="date">Wed 1 Jul (TBC)</div><div class="time"></div></td>
+      <td><div class="venue">—</div></td>
+      <td><span class="caller-Serhan">Serhan</span></td>
+      <td><span class="status-tbc">TBC</span></td>
+    </tr>
+    <tr data-caller="Badar" data-city="Ankara">
+      <td style="color:#aaa;font-size:11px;font-weight:600">14</td>
+      <td><div class="name">Levent Sungur</div></td>
+      <td><div class="company">TOKİ</div></td>
+      <td class="pos">President</td>
+      <td><span class="city-ank">Ankara</span></td>
+      <td><div class="date">Thu 2 Jul</div><div class="time">11:00</div></td>
+      <td><div class="venue">Ministry Meeting</div></td>
+      <td><span class="caller-Badar">Badar</span></td>
+      <td></td>
+    </tr>
+    <tr data-caller="Badar" data-city="Istanbul">
+      <td style="color:#aaa;font-size:11px;font-weight:600">15</td>
+      <td><div class="name">Fatih Erdoğan</div></td>
+      <td><div class="company">Pasifik Holding</div></td>
+      <td class="pos">Chairman</td>
+      <td><span class="city-ist">Istanbul</span></td>
+      <td><div class="date">Wed 1 Jul</div><div class="time">13:00</div></td>
+      <td><div class="venue">Next Level Project</div></td>
+      <td><span class="caller-Badar">Badar</span></td>
+      <td></td>
+    </tr>
+    <tr data-caller="Sabri" data-city="Istanbul">
+      <td style="color:#aaa;font-size:11px;font-weight:600">16</td>
+      <td><div class="name">Aziz Torun</div></td>
+      <td><div class="company">Torunlar GYO</div></td>
+      <td class="pos">Chairman</td>
+      <td><span class="city-ist">Istanbul</span></td>
+      <td><div class="date">Mon 6 Jul</div><div class="time">19:00</div></td>
+      <td><div class="venue">KONUTDER Dinner</div></td>
+      <td><span class="caller-Sabri">Sabri</span></td>
+      <td></td>
+    </tr>
+    <tr data-caller="Sabri" data-city="Istanbul">
+      <td style="color:#aaa;font-size:11px;font-weight:600">17</td>
+      <td><div class="name">Mesut Toprak</div></td>
+      <td><div class="company">Astay</div></td>
+      <td class="pos">Chairman</td>
+      <td><span class="city-ist">Istanbul</span></td>
+      <td><div class="date">Mon 6 Jul (TBC)</div><div class="time"></div></td>
+      <td><div class="venue">Meeting TBC</div></td>
+      <td><span class="caller-Sabri">Sabri</span></td>
+      <td><span class="status-tbc">TBC</span></td>
+    </tr>
+    <tr data-caller="Ayten" data-city="Istanbul">
+      <td style="color:#aaa;font-size:11px;font-weight:600">18</td>
+      <td><div class="name">Mahmut / Zeki Akbal</div></td>
+      <td><div class="company">Fuzul GYO</div></td>
+      <td class="pos">Chairman / Deputy</td>
+      <td><span class="city-ist">Istanbul</span></td>
+      <td><div class="date">Mon 6 Jul</div><div class="time">19:00</div></td>
+      <td><div class="venue">KONUTDER Dinner</div></td>
+      <td><span class="caller-Ayten">Ayten</span></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<script>
+function filterRows(val, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#main-table tbody tr').forEach(tr => {
+    const caller = tr.dataset.caller || '';
+    const city = tr.dataset.city || '';
+    if (val === 'all') {
+      tr.style.display = '';
+    } else if (['Sabri','Badar','Serhan','Ayten','BADAR'].includes(val)) {
+      tr.style.display = (caller === val || (val === 'Badar' && caller === 'BADAR')) ? '' : 'none';
+    } else {
+      tr.style.display = city.includes(val) ? '' : 'none';
+    }
+  });
+}
+
+function exportCSV() {
+  const rows = [['#','Name','Company','Position','City','Meeting Date','Time','Venue','Who Calls','Notes']];
+  document.querySelectorAll('#main-table tbody tr').forEach((tr, i) => {
+    const cells = tr.querySelectorAll('td');
+    rows.push([
+      i+1,
+      cells[1].querySelector('.name').textContent,
+      cells[2].querySelector('.company').textContent,
+      cells[3].textContent.trim(),
+      tr.dataset.city,
+      cells[4].querySelector('.date') ? cells[4].querySelector('.date').textContent : '',
+      cells[4].querySelector('.time') ? cells[4].querySelector('.time').textContent : '',
+      cells[5].querySelector('.venue') ? cells[5].querySelector('.venue').textContent : '',
+      cells[6].textContent.trim(),
+      cells[7].textContent.trim()
+    ]);
+  });
+  const csv = rows.map(r => r.map(c => '"' + String(c).replace(/"/g,'""') + '"').join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'contact-coordination-turkey-2026.csv';
+  a.click();
+}
+</script>
+</body>
+</html>
