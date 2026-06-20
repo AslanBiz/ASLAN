@@ -1,1 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARAM Towers — Tools &amp; Deliverables · ASLAN</title>
+<meta name="description" content="Client workspace prepared by ASLAN for ARAM Towers.">
+<meta name="theme-color" content="#0e2a47">
+<meta name="robots" content="noindex">
+<style>
+:root{
+  --ink:#13171d;--navy:#0e2a47;--navy2:#16405f;--gold:#b98a3e;--gold2:#c8a35b;
+  --paper:#fbfaf7;--soft:#f4f1ea;--soft2:#f8f6f1;--line:#e8e2d6;--muted:#6b7280;--green:#2f5d4f;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:#0b5cad;text-decoration:none}
+img{display:block;max-width:100%}
+.t-tr{display:none}
+body.show-tr .t-en{display:none}
+body.show-tr .t-tr{display:inline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
+/* topbar */
+.topbar{position:sticky;top:0;z-index:30;background:rgba(14,42,71,.97);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.08)}
+.topbar-in{max-width:1080px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;letter-spacing:.16em;font-size:15px}
+.brand img{height:28px;width:auto;filter:brightness(0) invert(1)}
+.brand small{font-weight:500;letter-spacing:.14em;color:#cdb888;font-size:10px;display:block;margin-top:1px}
+.nav{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav a.lnk{color:#cfd8e6;font-size:12.5px;letter-spacing:.04em;padding:6px 10px;border-radius:8px}
+.nav a.lnk:hover{color:#fff;background:rgba(255,255,255,.08)}
+.langtog{display:inline-flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden}
+.langtog button{background:transparent;border:0;color:#cdb888;font-size:12px;font-weight:700;letter-spacing:.06em;padding:6px 12px;cursor:pointer;font-family:inherit}
+.langtog button.active{background:var(--gold);color:#1a1208}
+
+/* hero */
+.hero{position:relative;overflow:hidden;color:#fff;border-radius:22px;margin:24px 0 8px;
+  background:linear-gradient(125deg,#0b2238 0%,#123a59 55%,#1d4f4a 100%);padding:42px 38px}
+.hero .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:11.5px;color:#d8bd8c;font-weight:700}
+.hero h1{font-size:34px;line-height:1.1;margin:12px 0 12px;font-weight:800;letter-spacing:-.01em}
+.hero p{font-size:16.5px;max-width:760px;color:#e9eff4;margin:0}
+.hero .conf{margin-top:18px;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:#cfe0d8;
+  border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:5px 13px}
+.hero .conf b{color:#fff}
+
+.section{margin:34px 0}
+.kick{letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:var(--gold);font-weight:800;margin-bottom:6px}
+.section h2{font-size:22px;color:var(--navy);margin:0 0 6px;font-weight:800;letter-spacing:-.01em}
+.rule{height:3px;width:56px;background:var(--gold);border-radius:3px;margin:8px 0 18px}
+
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tool{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:#fff;
+  box-shadow:0 2px 12px rgba(19,23,29,.05);overflow:hidden;transition:transform .15s ease,box-shadow .15s ease}
+a.tool:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(19,23,29,.12)}
+.tool .top{padding:18px 20px 8px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tool .ic{width:38px;height:38px;border-radius:10px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--navy)}
+.tool .ic svg{width:20px;height:20px}
+.tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;border-radius:999px;padding:3px 9px}
+.tag.ready{background:#eef3f0;color:var(--green);border:1px solid #d8e6df}
+.tag.prev{background:#fbf4e7;color:#7b5a24;border:1px solid #ecd9b6}
+.tag.soon{background:#eef4f8;color:#1a4f72;border:1px solid #cfe0ec}
+.tool .body{padding:4px 20px 18px;display:flex;flex-direction:column;flex:1}
+.tool h3{font-size:17px;color:var(--navy);margin:6px 0 4px}
+.tool p{font-size:13.5px;color:#475260;margin:0 0 14px;flex:1}
+.tool .go{font-weight:800;color:var(--gold);font-size:13px;letter-spacing:.03em}
+.tool.disabled{opacity:.66}
+.tool.disabled .go{color:var(--muted)}
+
+.footer{margin-top:42px;border-top:1px solid var(--line);padding:18px 0 50px;color:var(--muted);font-size:12.5px;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.footer .powered b{color:#0b5cad}
+.footer .loc{color:#9a8e76;letter-spacing:.06em;font-size:11.5px}
+
+@media(max-width:760px){.grid{grid-template-columns:1fr}.hero{padding:30px 22px}.hero h1{font-size:26px}}
+
+/* --- access gate (soft lock) --- */
+.gate{position:fixed;inset:0;z-index:200;background:linear-gradient(125deg,#0b2238,#123a59 60%,#1d4f4a);display:flex;align-items:center;justify-content:center;padding:24px}
+body:not(.locked) .gate{display:none}
+body.locked .topbar,body.locked .wrap{display:none}
+.gate-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:34px 30px;max-width:380px;width:100%;text-align:center;color:#fff;backdrop-filter:blur(6px)}
+.gate-card img{height:30px;margin:0 auto 18px;filter:brightness(0) invert(1)}
+.gate-card h2{font-size:19px;margin:0 0 6px;font-weight:800;letter-spacing:.02em}
+.gate-card p{font-size:13px;color:#cfe0d8;margin:0 0 18px}
+.gate-card input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:15px;font-family:inherit;text-align:center;letter-spacing:.08em}
+.gate-card input:focus{outline:2px solid var(--gold2);border-color:transparent}
+.gate-card button{margin-top:12px;width:100%;background:var(--gold);color:#1a1208;font-weight:800;border:0;padding:12px;border-radius:10px;font-size:14px;letter-spacing:.04em;cursor:pointer;font-family:inherit}
+.gate-card button:hover{background:var(--gold2)}
+.gate-err{color:#ffb4a8;font-size:12.5px;margin-top:12px;min-height:16px}
+</style>
+</head>
+<body class="show-en locked">
+<div class="gate" id="gate">
+  <form class="gate-card" onsubmit="return checkPass(event)">
+    <img src="https://www.aslanbusiness.com/aslan-logo.png" alt="ASLAN">
+    <h2><span class="t-en">Restricted area</span><span class="t-tr">Kısıtlı alan</span></h2>
+    <p><span class="t-en">Enter the passcode to view this workspace.</span><span class="t-tr">Bu çalışma alanını görmek için şifreyi girin.</span></p>
+    <input id="pass" type="password" autocomplete="off" autofocus placeholder="••••••">
+    <button type="submit"><span class="t-en">Enter</span><span class="t-tr">Giriş</span></button>
+    <div class="gate-err" id="gerr"></div>
+  </form>
+</div>
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="https://www.aslanbusiness.com"><img src="https://www.aslanbusiness.com/aslan-logo.png" alt="ASLAN"><span>ASLAN<small>CLIENT WORKSPACE</small></span></a>
+  <div class="nav">
+    <a class="lnk" href="https://www.aslanbusiness.com/client/index.html"><span class="t-en">Client Login</span><span class="t-tr">Müşteri Girişi</span></a>
+    <div class="langtog"><button data-l="en" class="active" onclick="setLang('en')">EN</button><button data-l="tr" onclick="setLang('tr')">TR</button></div>
+  </div>
+</div></div>
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker"><span class="t-en">Prepared by ASLAN · for ARAM Towers</span><span class="t-tr">ASLAN tarafından · ARAM Towers için</span></div>
+    <h1><span class="t-en">Tools &amp;amp; Deliverables</span><span class="t-tr">Araçlar ve Teslimler</span></h1>
+    <p><span class="t-en">Welcome to your ARAM Towers workspace. Your reports, market intelligence, materials and documents will appear here as ASLAN prepares them.</span><span class="t-tr">ARAM Towers çalışma alanınıza hoş geldiniz. Raporlarınız, pazar verileriniz, materyalleriniz ve belgeleriniz ASLAN hazırladıkça burada görünecek.</span></p>
+    <div class="conf"><span>🔒</span> <b><span class="t-en">Confidential</span><span class="t-tr">Gizli</span></b> · <span class="t-en">for ARAM Towers only</span><span class="t-tr">yalnızca ARAM Towers için</span></div>
+  </div>
+  <div class="section">
+    <div class="kick"><span class="t-en">Your tools</span><span class="t-tr">Araçlarınız</span></div>
+    <h2><span class="t-en">Being prepared for you</span><span class="t-tr">Sizin için hazırlanıyor</span></h2><div class="rule"></div>
+    <div class="grid">
+      <div class="tool disabled">
+  <div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19V5M4 19h16M8 16v-4M12 16V8M16 16v-6"/></svg></div><span class="tag soon"><span class="t-en">Soon</span><span class="t-tr">Yakında</span></span></div>
+  <div class="body"><h3><span class="t-en">Market &amp;amp; Sales Intelligence</span><span class="t-tr">Pazar &amp;amp; Satış Verileri</span></h3><p><span class="t-en">Market, pricing and demand intelligence for the project and its region.</span><span class="t-tr">Proje ve bölgesi için pazar, fiyat ve talep verileri.</span></p><span class="go"><span class="t-en">In preparation</span><span class="t-tr">Hazırlanıyor</span></span></div>
+</div>
+      <div class="tool disabled">
+  <div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><span class="tag soon"><span class="t-en">Soon</span><span class="t-tr">Yakında</span></span></div>
+  <div class="body"><h3><span class="t-en">Project Reports</span><span class="t-tr">Proje Raporları</span></h3><p><span class="t-en">Periodic reports on progress, sales position and market context.</span><span class="t-tr">İlerleme, satış durumu ve pazar bağlamı üzerine dönemsel raporlar.</span></p><span class="go"><span class="t-en">In preparation</span><span class="t-tr">Hazırlanıyor</span></span></div>
+</div>
+      <div class="tool disabled">
+  <div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M16 9a3 3 0 0 1 0 6"/></svg></div><span class="tag soon"><span class="t-en">Soon</span><span class="t-tr">Yakında</span></span></div>
+  <div class="body"><h3><span class="t-en">Marketing Materials</span><span class="t-tr">Pazarlama Materyalleri</span></h3><p><span class="t-en">Brochures, presentations and investor-facing materials.</span><span class="t-tr">Broşürler, sunumlar ve yatırımcıya yönelik materyaller.</span></p><span class="go"><span class="t-en">In preparation</span><span class="t-tr">Hazırlanıyor</span></span></div>
+</div>
+      <div class="tool disabled">
+  <div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><span class="tag soon"><span class="t-en">Soon</span><span class="t-tr">Yakında</span></span></div>
+  <div class="body"><h3><span class="t-en">Documents</span><span class="t-tr">Belgeler</span></h3><p><span class="t-en">Shared documents, references and key files in one place.</span><span class="t-tr">Paylaşılan belgeler, referanslar ve önemli dosyalar tek yerde.</span></p><span class="go"><span class="t-en">In preparation</span><span class="t-tr">Hazırlanıyor</span></span></div>
+</div>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="powered"><span class="t-en">Prepared by</span><span class="t-tr">Hazırlayan</span> <b>ASLAN</b> · <span class="t-en">for ARAM Towers</span><span class="t-tr">ARAM Towers için</span> · © 2026</span>
+    <span class="loc"><span class="t-en">Confidential — client workspace</span><span class="t-tr">Gizli — müşteri alanı</span></span>
+  </div>
+</div>
+<script>
+function setLang(l){document.body.classList.toggle('show-tr',l==='tr');document.body.classList.toggle('show-en',l!=='tr');document.querySelectorAll('.langtog button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-l')===l);});}
+document.addEventListener('DOMContentLoaded',function(){setLang('en');});
+/* --- access gate --- Change PASS_HASH to the SHA-256 of your own passcode. */
+var PASS_HASH="84d3562197f652b1cd17b084e074b9f01c26faae8f10445ec089c668d8169636";
+async function sha256(t){var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join('');}
+function unlock(){document.body.classList.remove('locked');try{sessionStorage.setItem('aram_ok','1');}catch(e){}}
+async function checkPass(e){e.preventDefault();var v=document.getElementById('pass').value;try{var h=await sha256(v);if(h===PASS_HASH){unlock();}else{document.getElementById('gerr').textContent=document.body.classList.contains('show-tr')?'Hatalı şifre':'Wrong passcode';}}catch(err){document.getElementById('gerr').textContent='Secure connection (https) required';}return false;}
+(function(){try{if(sessionStorage.getItem('aram_ok')==='1'){document.body.classList.remove('locked');}}catch(e){}})();
+</script>
+</body>
+</html>
