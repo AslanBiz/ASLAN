@@ -8,10 +8,10 @@
 <meta name="theme-color" content="#0e2a47">
 <meta name="robots" content="noindex">
 <style>
-:root{--gold:#b98a3e;--gold2:#c8a35b;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+:root{--gold:#103890;--gold2:#3f6fd1;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--sans);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:linear-gradient(125deg,#0b2238 0%,#123a59 55%,#1d4f4a 100%);color:#fff;padding:24px}
+  background:linear-gradient(125deg,#103890 0%,#2a52ad 55%,#3f6fd1 100%);color:#fff;padding:24px}
 .t-tr{display:none}
 body.show-tr .t-en{display:none}
 body.show-tr .t-tr{display:inline}
@@ -19,7 +19,7 @@ body.show-tr .t-tr{display:inline}
 .card img{height:32px;margin:0 auto 20px;display:block;filter:brightness(0) invert(1)}
 .card h1{font-size:21px;text-align:center;margin:0 0 4px;font-weight:800;letter-spacing:.02em}
 .card p.sub{text-align:center;color:#cfe0d8;font-size:13px;margin:0 0 22px}
-label{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#cdb888;font-weight:700;margin:0 0 6px}
+label{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#cfe0ff;font-weight:700;margin:0 0 6px}
 input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);
   color:#fff;font-size:15px;font-family:inherit;margin-bottom:16px}
 input:focus{outline:2px solid var(--gold2);border-color:transparent}
@@ -31,7 +31,7 @@ button:hover{background:var(--gold2)}
 .below a{color:#cfd8e6;text-decoration:none}
 .below a:hover{color:#fff}
 .langtog{display:inline-flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden}
-.langtog button{width:auto;background:transparent;border:0;color:#cdb888;font-size:12px;font-weight:700;padding:6px 12px;border-radius:0}
+.langtog button{width:auto;background:transparent;border:0;color:#cfe0ff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:0}
 .langtog button.active{background:var(--gold);color:#1a1208}
 </style>
 </head>
@@ -56,8 +56,8 @@ function setLang(l){document.body.classList.toggle('show-tr',l==='tr');document.
 document.addEventListener('DOMContentLoaded',function(){setLang('en');});
 async function sha256(t){var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join('');}
 var CLIENTS={
-  "SP_ARCHITECTS":{hash:"3875034e17855bac03a3cc9e107b1d28a9b44313d381c3335588525b4e70b55b",page:"../SP_Architects/index.html",key:"sp_ok"},
-  "ARAM_TOWERS":{hash:"84d3562197f652b1cd17b084e074b9f01c26faae8f10445ec089c668d8169636",page:"../ARAM_TOWERS/index.html",key:"aram_ok"}
+  "SP_ARCHITECTS":{hash:"3696ad59777e09d5f2daacb544022d435e7cd053d87c5781241fabd8fdf2a90d",page:"../SP_Architects/index.html",key:"sp_ok"},
+  "ARAM_TOWERS":{hash:"16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648",page:"../ARAM_TOWERS/index.html",key:"aram_ok"}
 };
 async function signin(e){
   e.preventDefault();
