@@ -9,8 +9,8 @@
 <meta name="robots" content="noindex">
 <style>
 :root{
-  --ink:#13171d;--navy:#0e2a47;--navy2:#16405f;--gold:#b98a3e;--gold2:#c8a35b;
-  --paper:#fbfaf7;--soft:#f4f1ea;--soft2:#f8f6f1;--line:#e8e2d6;--muted:#6b7280;--green:#2f5d4f;
+  --ink:#15203a;--navy:#103890;--navy2:#2a52ad;--gold:#103890;--gold2:#2a52ad;
+  --paper:#ffffff;--soft:#f5f7fb;--soft2:#f8f9fc;--line:#e8eaf1;--muted:#828aa0;--green:#15203a;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
 *{box-sizing:border-box}
@@ -24,21 +24,21 @@ body.show-tr .t-tr{display:inline}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
 /* topbar */
-.topbar{position:sticky;top:0;z-index:30;background:rgba(14,42,71,.97);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.08)}
+.topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
 .topbar-in{max-width:1080px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:14px}
-.brand{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;letter-spacing:.16em;font-size:15px}
+.brand{display:flex;align-items:center;gap:11px;color:#15203a;font-weight:700;letter-spacing:.16em;font-size:15px}
 .brand img{height:28px;width:auto;filter:brightness(0) invert(1)}
-.brand small{font-weight:500;letter-spacing:.14em;color:#cdb888;font-size:10px;display:block;margin-top:1px}
+.brand small{font-weight:500;letter-spacing:.14em;color:#103890;font-size:10px;display:block;margin-top:1px}
 .nav{margin-left:auto;display:flex;align-items:center;gap:10px}
-.nav a.lnk{color:#cfd8e6;font-size:12.5px;letter-spacing:.04em;padding:6px 10px;border-radius:8px}
-.nav a.lnk:hover{color:#fff;background:rgba(255,255,255,.08)}
-.langtog{display:inline-flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden}
-.langtog button{background:transparent;border:0;color:#cdb888;font-size:12px;font-weight:700;letter-spacing:.06em;padding:6px 12px;cursor:pointer;font-family:inherit}
-.langtog button.active{background:var(--gold);color:#1a1208}
+.nav a.lnk{color:#828aa0;font-size:12.5px;letter-spacing:.04em;padding:6px 10px;border-radius:8px}
+.nav a.lnk:hover{color:#15203a;background:#f5f7fb}
+.langtog{display:inline-flex;border:1px solid #e8eaf1;border-radius:999px;overflow:hidden}
+.langtog button{background:transparent;border:0;color:#828aa0;font-size:12px;font-weight:700;letter-spacing:.06em;padding:6px 12px;cursor:pointer;font-family:inherit}
+.langtog button.active{background:var(--gold);color:#fff}
 
 /* hero */
 .hero{position:relative;overflow:hidden;color:#fff;border-radius:22px;margin:24px 0 8px;
-  background:linear-gradient(125deg,#0b2238 0%,#123a59 55%,#1d4f4a 100%);padding:42px 38px}
+  background:linear-gradient(125deg,#103890 0%,#2a52ad 60%,#3f6fd1 100%);padding:42px 38px}
 .hero .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:11.5px;color:#d8bd8c;font-weight:700}
 .hero h1{font-size:34px;line-height:1.1;margin:12px 0 12px;font-weight:800;letter-spacing:-.01em}
 .hero p{font-size:16.5px;max-width:760px;color:#e9eff4;margin:0}
@@ -77,7 +77,7 @@ a.tool:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(19,23,29,.12
 @media(max-width:760px){.grid{grid-template-columns:1fr}.hero{padding:30px 22px}.hero h1{font-size:26px}}
 
 /* --- access gate (soft lock) --- */
-.gate{position:fixed;inset:0;z-index:200;background:linear-gradient(125deg,#0b2238,#123a59 60%,#1d4f4a);display:flex;align-items:center;justify-content:center;padding:24px}
+.gate{position:fixed;inset:0;z-index:200;background:linear-gradient(125deg,#103890,#2a52ad 60%,#3f6fd1);display:flex;align-items:center;justify-content:center;padding:24px}
 body:not(.locked) .gate{display:none}
 body.locked .topbar,body.locked .wrap{display:none}
 .gate-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:34px 30px;max-width:380px;width:100%;text-align:center;color:#fff;backdrop-filter:blur(6px)}
@@ -86,7 +86,7 @@ body.locked .topbar,body.locked .wrap{display:none}
 .gate-card p{font-size:13px;color:#cfe0d8;margin:0 0 18px}
 .gate-card input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:15px;font-family:inherit;text-align:center;letter-spacing:.08em}
 .gate-card input:focus{outline:2px solid var(--gold2);border-color:transparent}
-.gate-card button{margin-top:12px;width:100%;background:var(--gold);color:#1a1208;font-weight:800;border:0;padding:12px;border-radius:10px;font-size:14px;letter-spacing:.04em;cursor:pointer;font-family:inherit}
+.gate-card button{margin-top:12px;width:100%;background:var(--gold);color:#fff;font-weight:800;border:0;padding:12px;border-radius:10px;font-size:14px;letter-spacing:.04em;cursor:pointer;font-family:inherit}
 .gate-card button:hover{background:var(--gold2)}
 .gate-err{color:#ffb4a8;font-size:12.5px;margin-top:12px;min-height:16px}
 </style>
@@ -94,7 +94,7 @@ body.locked .topbar,body.locked .wrap{display:none}
 <body class="show-en locked">
 <div class="gate" id="gate">
   <form class="gate-card" onsubmit="return checkPass(event)">
-    <img src="https://www.aslanbusiness.com/aslan-logo.png" alt="ASLAN">
+    <img src="/aslan-lion.png" alt="ASLAN">
     <h2><span class="t-en">Restricted area</span><span class="t-tr">Kısıtlı alan</span></h2>
     <p><span class="t-en">Enter the passcode to view this workspace.</span><span class="t-tr">Bu çalışma alanını görmek için şifreyi girin.</span></p>
     <input id="pass" type="password" autocomplete="off" autofocus placeholder="••••••">
@@ -103,7 +103,7 @@ body.locked .topbar,body.locked .wrap{display:none}
   </form>
 </div>
 <div class="topbar"><div class="topbar-in">
-  <a class="brand" href="https://www.aslanbusiness.com"><img src="https://www.aslanbusiness.com/aslan-logo.png" alt="ASLAN"><span>ASLAN<small>CLIENT WORKSPACE</small></span></a>
+  <a class="brand" href="https://www.aslanbusiness.com"><img src="/aslan-lion.png" alt="ASLAN"><span>ASLAN<small>CLIENT WORKSPACE</small></span></a>
   <div class="nav">
     <a class="lnk" href="https://www.aslanbusiness.com/client/index.html"><span class="t-en">Client Login</span><span class="t-tr">Müşteri Girişi</span></a>
     <div class="langtog"><button data-l="en" class="active" onclick="setLang('en')">EN</button><button data-l="tr" onclick="setLang('tr')">TR</button></div>
@@ -147,7 +147,7 @@ body.locked .topbar,body.locked .wrap{display:none}
 function setLang(l){document.body.classList.toggle('show-tr',l==='tr');document.body.classList.toggle('show-en',l!=='tr');document.querySelectorAll('.langtog button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-l')===l);});}
 document.addEventListener('DOMContentLoaded',function(){setLang('en');});
 /* --- access gate --- Change PASS_HASH to the SHA-256 of your own passcode. */
-var PASS_HASH="84d3562197f652b1cd17b084e074b9f01c26faae8f10445ec089c668d8169636";
+var PASS_HASH="16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648";
 async function sha256(t){var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join('');}
 function unlock(){document.body.classList.remove('locked');try{sessionStorage.setItem('aram_ok','1');}catch(e){}}
 async function checkPass(e){e.preventDefault();var v=document.getElementById('pass').value;try{var h=await sha256(v);if(h===PASS_HASH){unlock();}else{document.getElementById('gerr').textContent=document.body.classList.contains('show-tr')?'Hatalı şifre':'Wrong passcode';}}catch(err){document.getElementById('gerr').textContent='Secure connection (https) required';}return false;}
