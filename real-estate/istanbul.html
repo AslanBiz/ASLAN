@@ -7,9 +7,9 @@
 <meta name="description" content="ASLAN Real Estate Intelligence — bilingual investor route & site-visit guide. Powered by SP Architects.">
 <style>
 :root{
-  --ink:#13171d; --navy:#0e2a47; --navy2:#16405f; --gold:#b98a3e; --gold2:#c8a35b;
-  --paper:#fbfaf7; --soft:#f4f1ea; --soft2:#f8f6f1; --line:#e8e2d6; --muted:#6b7280;
-  --green:#2f5d4f; --blue:#1877f2; --white:#fff; --chip:#efe7d6;
+  --ink:#15203a; --navy:#103890; --navy2:#2a52ad; --gold:#103890; --gold2:#2a52ad;
+  --paper:#ffffff; --soft:#f5f7fb; --soft2:#f8f9fc; --line:#e8eaf1; --muted:#828aa0;
+  --green:#15203a; --blue:#103890; --white:#fff; --chip:#eef1f8;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -21,30 +21,30 @@ body.show-tr .t-en{display:none}
 body.show-tr .t-tr{display:inline}
 
 /* top bar */
-.topbar{position:sticky;top:0;z-index:50;background:rgba(14,42,71,.97);backdrop-filter:blur(6px);
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(255,255,255,.08)}
 .topbar-in{max-width:1180px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:14px}
-.brand{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;letter-spacing:.16em;font-size:15px}
-.brand img{height:30px;width:auto;filter:brightness(0) invert(1)}
-.brand small{font-weight:500;letter-spacing:.14em;color:#cdb888;font-size:10px;display:block;margin-top:1px}
+.brand{display:flex;align-items:center;gap:11px;color:#15203a;font-weight:700;letter-spacing:.16em;font-size:15px}
+.brand img{height:30px;width:auto}
+.brand small{font-weight:500;letter-spacing:.14em;color:#103890;font-size:10px;display:block;margin-top:1px}
 .nav{margin-left:auto;display:flex;align-items:center;gap:8px}
-.nav a.lnk{color:#cfd8e6;font-size:12.5px;letter-spacing:.04em;padding:6px 10px;border-radius:8px}
-.nav a.lnk:hover{color:#fff;background:rgba(255,255,255,.08)}
-.langtog{display:inline-flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden}
-.langtog button{background:transparent;border:0;color:#cdb888;font-size:12px;font-weight:700;letter-spacing:.06em;
+.nav a.lnk{color:#828aa0;font-size:12.5px;letter-spacing:.04em;padding:6px 10px;border-radius:8px}
+.nav a.lnk:hover{color:#15203a;background:#f5f7fb}
+.langtog{display:inline-flex;border:1px solid #e8eaf1;border-radius:999px;overflow:hidden}
+.langtog button{background:transparent;border:0;color:#828aa0;font-size:12px;font-weight:700;letter-spacing:.06em;
   padding:6px 12px;cursor:pointer;font-family:inherit}
-.langtog button.active{background:var(--gold);color:#1a1208}
+.langtog button.active{background:var(--gold);color:#fff}
 
 /* layout */
 .wrap{max-width:1180px;margin:0 auto;padding:28px 24px 60px}
 .hero{position:relative;overflow:hidden;color:#fff;border-radius:22px;margin:22px 0 26px;
-  background:linear-gradient(125deg,#0b2238 0%,#123a59 55%,#1d4f4a 100%);padding:48px 40px}
+  background:linear-gradient(125deg,#103890 0%,#2a52ad 60%,#3f6fd1 100%);padding:48px 40px}
 .hero .kicker{letter-spacing:.20em;text-transform:uppercase;font-size:11.5px;color:#d8bd8c;font-weight:700}
 .hero h1{font-size:40px;line-height:1.08;margin:14px 0 14px;font-weight:800;letter-spacing:-.01em}
 .hero p.sub{font-size:17.5px;max-width:880px;color:#e9eff4;margin:0}
 .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
 .pill{border:1px solid rgba(255,255,255,.34);border-radius:999px;padding:6px 13px;font-size:12.5px;color:#fff}
-.pill.solid{background:var(--gold);border-color:var(--gold);color:#1a1208;font-weight:700}
+.pill.solid{background:var(--gold);border-color:var(--gold);color:#fff;font-weight:700}
 
 .section{margin:34px 0}
 .kick{letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:var(--gold);font-weight:800;margin-bottom:6px}
@@ -90,7 +90,7 @@ body.show-tr .t-tr{display:inline}
 .cta{background:linear-gradient(125deg,#0b2238,#1d4f4a);color:#fff;border-radius:18px;padding:30px 30px;margin:30px 0}
 .cta h2{color:#fff;font-size:23px;margin:0 0 8px}
 .cta p{color:#e6eef3;font-size:15px;margin:0 0 16px;max-width:760px}
-.btn{display:inline-block;background:var(--gold);color:#1a1208;font-weight:800;padding:12px 22px;border-radius:999px;
+.btn{display:inline-block;background:var(--gold);color:#fff;font-weight:800;padding:12px 22px;border-radius:999px;
   letter-spacing:.03em;font-size:14px}
 .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.45);color:#fff;margin-left:8px}
 .checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px 26px;margin-top:14px}
@@ -113,7 +113,7 @@ body.show-tr .t-tr{display:inline}
 
 .howrow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
 .how{border:1px solid var(--line);border-radius:16px;padding:18px;background:#fff}
-.how .hn{width:30px;height:30px;border-radius:50%;background:var(--gold);color:#1a1208;font-weight:800;
+.how .hn{width:30px;height:30px;border-radius:50%;background:var(--gold);color:#fff;font-weight:800;
   display:flex;align-items:center;justify-content:center;margin-bottom:10px}
 .how h4{margin:0 0 4px;font-size:15.5px;color:var(--navy)}
 .how p{margin:0;font-size:13.5px;color:#475260}
@@ -145,7 +145,7 @@ body.show-tr .t-tr{display:inline}
 
 /* --- site-wide additions (kept minimal) --- */
 .nav{flex-wrap:wrap;row-gap:6px}
-.nav a.lnk.active{color:#fff;background:rgba(255,255,255,.12)}
+.nav a.lnk.active{color:#15203a;background:#f5f7fb}
 .btnrow{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
 .btnrow .btn{margin:0}
 .lead2{font-size:15px;color:#475260;max-width:780px;margin:0 0 6px}
@@ -155,15 +155,17 @@ body.show-tr .t-tr{display:inline}
 .card .go{display:inline-block;margin-top:10px;font-weight:800;color:var(--gold);font-size:13.5px;letter-spacing:.03em}
 .card.dark .go{color:var(--gold2)}
 .muted-card{opacity:.7}
+.nav a.lnk.client{background:#103890;color:#fff;border-radius:999px;padding:5px 13px}
+.nav a.lnk.client:hover{background:#2a52ad;color:#fff}
 @media(max-width:920px){.nav a.lnk{font-size:11.5px;padding:5px 7px}}
 </style>
 </head>
 <body class="show-en">
 
 <div class="topbar"><div class="topbar-in">
-  <a class="brand" href="../index.html"><img src="https://www.aslanbusiness.com/aslan-logo.png" alt="ASLAN"><span>ASLAN<small>Real Estate Intelligence</small></span></a>
+  <a class="brand" href="../index.html"><img src="/aslan-lion.png" alt="ASLAN"><span>ASLAN<small>Real Estate Intelligence</small></span></a>
   <div class="nav">
-    <a class="lnk" href="../index.html"><span class="t-en">Home</span><span class="t-tr">Anasayfa</span></a><a class="lnk" href="../intelligence/index.html"><span class="t-en">Intelligence</span><span class="t-tr">Intelligence</span></a><a class="lnk active" href="../real-estate/index.html"><span class="t-en">Real Estate</span><span class="t-tr">Gayrimenkul</span></a><a class="lnk" href="../advisory/index.html"><span class="t-en">Advisory</span><span class="t-tr">Danışmanlık</span></a><a class="lnk" href="../connect/index.html"><span class="t-en">Connect</span><span class="t-tr">Connect</span></a><a class="lnk" href="../products/index.html"><span class="t-en">Products</span><span class="t-tr">Ürünler</span></a><a class="lnk" href="../about.html"><span class="t-en">About</span><span class="t-tr">Hakkımızda</span></a><a class="lnk" href="../contact.html"><span class="t-en">Contact</span><span class="t-tr">İletişim</span></a>
+    <a class="lnk" href="../index.html"><span class="t-en">Home</span><span class="t-tr">Anasayfa</span></a><a class="lnk" href="../intelligence/index.html"><span class="t-en">Intelligence</span><span class="t-tr">Intelligence</span></a><a class="lnk active" href="../real-estate/index.html"><span class="t-en">Real Estate</span><span class="t-tr">Gayrimenkul</span></a><a class="lnk" href="../advisory/index.html"><span class="t-en">Advisory</span><span class="t-tr">Danışmanlık</span></a><a class="lnk" href="../connect/index.html"><span class="t-en">Connect</span><span class="t-tr">Connect</span></a><a class="lnk" href="../products/index.html"><span class="t-en">Products</span><span class="t-tr">Ürünler</span></a><a class="lnk" href="../about.html"><span class="t-en">About</span><span class="t-tr">Hakkımızda</span></a><a class="lnk" href="../contact.html"><span class="t-en">Contact</span><span class="t-tr">İletişim</span></a><a class="lnk client" href="../client/index.html"><span class="t-en">Client Login</span><span class="t-tr">Müşteri Girişi</span></a>
     <div class="langtog">
       <button data-l="en" class="active" onclick="setLang('en')">EN</button>
       <button data-l="tr" onclick="setLang('tr')">TR</button>
@@ -202,7 +204,7 @@ body.show-tr .t-tr{display:inline}
 
 <div class="footer">
   <span class="powered"><span class="t-en">Powered by</span><span class="t-tr">Hazırlayan</span> <b>SP Architects</b> · <span class="t-en">for</span><span class="t-tr">×</span> ASLAN Advisory Platform</span>
-  <span class="loc">DUBAI · ISTANBUL · GLOBAL</span>
+  <span class="loc">DUBAI · ISTANBUL · GLOBAL</span><span class="loc" style="flex-basis:100%;margin-top:6px;color:#aeb4c4;font-weight:400">ASLAN L.L.C-FZ · Licence 2200845.01 · The Meydan Hotel, Grandstand, 6th floor, Meydan Road, Nad Al Sheba, Dubai, U.A.E</span>
 </div>
 <p class="small" style="margin-top:10px;font-size:11px;color:#9a8e76">
   <span class="t-en">© ASLAN Business — Content package for investor education and site-visit planning. Not investment, legal or tax advice. Verify all figures, ownership, permits and availability before acting.</span><span class="t-tr">© ASLAN Business — Yatırımcı bilgilendirme ve saha ziyareti planlaması için içerik paketidir. Yatırım, hukuk veya vergi tavsiyesi değildir. Hareket etmeden önce tüm rakamları, mülkiyeti, izinleri ve müsaitliği teyit ediniz.</span>
