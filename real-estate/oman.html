@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASLAN · Umman / Oman — Gayrimenkul Zekâsı</title>
+<meta name="description" content="ASLAN Gayrimenkul Zekâsı — Türkiye&#39;den Umman&#39;a gayrimenkul yatırımı için üst düzey karar dosyası. Yalnızca doğrulanmış, kaynaklı veriler.">
+<style>
+:root{
+  --navy:#103890; --navy-2:#2a52ad; --gold:#103890; --gold-soft:#2a52ad;
+  --paper:#ffffff; --ink:#15203a; --muted:#828aa0; --line:#e8eaf1;
+  --green:#15203a; --green-soft:#eef1f8; --gold-bg:#eef1f8; --mut-bg:#f5f7fb;
+  --sp:#103890; --maxw:1140px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.62; -webkit-font-smoothing:antialiased; font-size:16px;
+}
+.t-en,.t-tr{} 
+body.show-tr .t-en{display:none}
+body.show-en .t-tr{display:none}
+a{color:var(--navy); text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px}
+h1,h2,h3,h4{line-height:1.2; margin:0; font-weight:700; color:var(--navy)}
+p{margin:0 0 14px}
+
+/* ---------- top bar ---------- */
+.topbar{position:sticky; top:0; z-index:60; background:rgba(255,255,255,.92); color:#15203a; backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.08)}
+.topbar .wrap{display:flex; align-items:center; gap:18px; height:62px}
+.brand{display:flex; align-items:center; gap:10px; color:#15203a}
+.brand:hover{text-decoration:none}
+.brand img{height:30px; width:auto; display:block}
+.brand .bt{font-weight:700; letter-spacing:.22em; font-size:15px}
+.nav{display:flex; gap:20px; margin-left:auto; align-items:center; flex-wrap:wrap}
+.nav a{color:#828aa0; font-size:13.5px; letter-spacing:.02em}
+.nav a:hover{color:#15203a; text-decoration:none}
+.nav a.active{color:var(--gold-soft)}
+.langtog{display:flex; border:1px solid #e8eaf1; border-radius:999px; overflow:hidden}
+.langtog button{background:transparent; color:#828aa0; border:0; padding:6px 12px; cursor:pointer;
+  font-size:12.5px; font-weight:700; letter-spacing:.06em}
+.langtog button.on{background:var(--gold); color:#15120a}
+
+/* ---------- hero ---------- */
+.hero{background:linear-gradient(180deg,var(--navy) 0%,#0a2160 100%); color:#eef2f7; padding:54px 0 46px}
+.eyebrow{display:inline-flex; align-items:center; gap:10px; color:var(--gold-soft);
+  letter-spacing:.26em; font-size:12px; font-weight:700; text-transform:uppercase}
+.eyebrow .dot{width:6px;height:6px;background:var(--gold);border-radius:50%}
+.hero h1{color:#fff; font-size:clamp(34px,5vw,52px); margin:16px 0 6px; letter-spacing:.01em}
+.hero .sub{color:#cdd8e4; font-size:clamp(16px,2vw,19px); max-width:760px}
+.hero .lede{color:#aebccb; max-width:780px; margin-top:14px; font-size:15.5px}
+.hero-meta{display:flex; gap:10px 26px; flex-wrap:wrap; margin-top:24px; align-items:center}
+.badge-facts{display:inline-flex; align-items:center; gap:8px; background:rgba(185,138,62,.16);
+  border:1px solid rgba(202,160,93,.5); color:var(--gold-soft); padding:7px 14px; border-radius:999px;
+  font-size:12.5px; font-weight:700; letter-spacing:.04em}
+.hero-meta .mi{color:#9fb0c1; font-size:12.5px; letter-spacing:.02em}
+.hero-meta .mi b{color:#dde6ef; font-weight:600}
+
+/* ---------- report subnav ---------- */
+.subnav{position:sticky; top:62px; z-index:55; background:rgba(251,250,247,.96);
+  backdrop-filter:blur(6px); border-bottom:1px solid var(--line)}
+.subnav .wrap{display:flex; gap:6px; overflow-x:auto; padding:9px 22px}
+.subnav a{white-space:nowrap; color:var(--muted); font-size:13px; font-weight:600;
+  padding:6px 11px; border-radius:8px}
+.subnav a:hover{color:var(--navy); background:#fff; text-decoration:none}
+
+/* ---------- sections ---------- */
+.sec{padding:46px 0; border-bottom:1px solid var(--line)}
+.sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:22px}
+.sec-num{font-size:14px; font-weight:800; color:var(--gold); letter-spacing:.14em;
+  border:1px solid var(--gold); border-radius:6px; padding:3px 8px; line-height:1}
+.sec h2{font-size:clamp(22px,3vw,30px)}
+.sec .kicker{color:var(--muted); font-size:13px; letter-spacing:.16em; text-transform:uppercase;
+  font-weight:700; margin-bottom:6px}
+.lead{font-size:17px; color:#33414f; max-width:840px}
+.cols2{display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:8px}
+@media(max-width:760px){.cols2{grid-template-columns:1fr}}
+
+/* ---------- stat grid ---------- */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:8px}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:#fff; border:1px solid var(--line); border-top:3px solid var(--gold);
+  border-radius:10px; padding:16px 16px 14px}
+.stat .v{font-size:23px; font-weight:800; color:var(--navy); line-height:1.1}
+.stat .l{color:var(--muted); font-size:12.5px; margin-top:6px; line-height:1.4}
+.stat .s{color:#93a1b0; font-size:11px; margin-top:6px}
+
+/* ---------- callout / cards ---------- */
+.card{background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px 22px}
+.card h3{font-size:17px; margin-bottom:8px}
+.card h3 .ic{color:var(--gold); margin-right:8px}
+.card p{font-size:14.5px; color:#3a4754; margin-bottom:0}
+.card + .card{margin-top:0}
+.card ul{margin:8px 0 0; padding-left:18px}
+.card li{font-size:14.5px; color:#3a4754; margin-bottom:6px}
+
+.panel{background:#fff; border:1px solid var(--line); border-left:4px solid var(--navy);
+  border-radius:10px; padding:18px 22px; margin-top:16px}
+.panel.gold{border-left-color:var(--gold)}
+.panel.green{border-left-color:var(--green)}
+.panel h3{font-size:16px; margin-bottom:6px}
+.panel p{font-size:14.5px; margin-bottom:0; color:#3a4754}
+
+/* definition grid (ownership) */
+.defs{display:grid; grid-template-columns:200px 1fr; gap:0; margin-top:10px;
+  border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#fff}
+.defs .dt{background:#f7f4ee; border-bottom:1px solid var(--line); border-right:1px solid var(--line);
+  padding:13px 16px; font-weight:700; color:var(--navy); font-size:14px}
+.defs .dd{border-bottom:1px solid var(--line); padding:13px 16px; font-size:14.5px; color:#3a4754}
+.defs .dt:last-of-type,.defs .dd:last-of-type{border-bottom:0}
+@media(max-width:680px){.defs{grid-template-columns:1fr}
+  .defs .dt{border-right:0}}
+
+/* process steps */
+.steps{counter-reset:st; margin-top:10px}
+.step{position:relative; padding:0 0 22px 52px; border-left:2px solid var(--line); margin-left:16px}
+.step:last-child{border-left-color:transparent; padding-bottom:0}
+.step::before{counter-increment:st; content:counter(st); position:absolute; left:-17px; top:-2px;
+  width:32px; height:32px; background:var(--navy); color:#fff; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px}
+.step h4{font-size:15.5px; margin-bottom:4px}
+.step p{font-size:14px; color:#3a4754; margin-bottom:0}
+
+/* table / radar */
+.tablewrap{overflow-x:auto; margin-top:8px; border:1px solid var(--line); border-radius:12px}
+table.radar{border-collapse:collapse; width:100%; min-width:760px; background:#fff; font-size:13.5px}
+table.radar th{background:var(--navy); color:#fff; text-align:left; padding:11px 13px; font-weight:600;
+  font-size:12.5px; letter-spacing:.03em}
+table.radar td{padding:11px 13px; border-top:1px solid var(--line); vertical-align:top; color:#33414f}
+table.radar tr:nth-child(even) td{background:#fcfaf6}
+table.radar .nm{font-weight:700; color:var(--navy)}
+table.radar .nm small{display:block; color:var(--muted); font-weight:500; font-size:11.5px; margin-top:2px}
+.pill{display:inline-block; padding:3px 9px; border-radius:999px; font-size:11.5px; font-weight:700;
+  white-space:nowrap}
+.pill.green{background:var(--green-soft); color:var(--green)}
+.pill.gold{background:var(--gold-bg); color:#8a6418}
+.pill.mut{background:var(--mut-bg); color:#5b6b7b}
+
+/* risk list */
+.risks{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px}
+@media(max-width:760px){.risks{grid-template-columns:1fr}}
+.risk{background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px 18px;
+  border-top:3px solid #c8542e}
+.risk h4{font-size:15px; margin-bottom:6px; color:var(--navy)}
+.risk p{font-size:13.5px; color:#3a4754; margin-bottom:0}
+
+/* cta */
+.cta{background:var(--navy); color:#eef2f7; border-radius:16px; padding:30px 30px}
+.cta h2{color:#fff; font-size:24px; margin-bottom:8px}
+.cta p{color:#cdd8e4; font-size:15px; max-width:680px}
+.cta .btn{display:inline-block; margin-top:14px; background:var(--gold); color:#15120a;
+  font-weight:800; padding:12px 22px; border-radius:10px; letter-spacing:.02em}
+.cta .btn:hover{background:var(--gold-soft); text-decoration:none}
+.checklist{margin-top:18px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14);
+  border-radius:12px; padding:16px 20px}
+.checklist h4{color:var(--gold-soft); font-size:13px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:8px}
+.checklist ul{margin:0; padding-left:18px}
+.checklist li{color:#dbe3ec; font-size:14px; margin-bottom:6px}
+
+/* sources */
+.sources{margin-top:6px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#fff}
+table.src{border-collapse:collapse; width:100%; font-size:10.8px; line-height:1.45}
+table.src th{background:#f3efe7; text-align:left; padding:8px 12px; color:var(--navy); font-size:10.8px;
+  letter-spacing:.04em; font-weight:700}
+table.src td{padding:8px 12px; border-top:1px solid var(--line); color:#46535f; vertical-align:top}
+table.src td a{color:var(--navy); word-break:break-all}
+.note{font-size:11.5px; color:#8694a2; margin-top:12px; max-width:880px}
+
+/* footer */
+footer{background:#fff; border-top:1px solid #e8eaf1; color:#828aa0; padding:30px 0; font-size:13px}
+footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:center}
+footer .sp{color:#828aa0}
+footer .sp b{color:var(--sp)}
+footer a{color:#103890}
+</style>
+</head>
+<body class="show-tr">
+
+<!-- TOP BAR -->
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">
+    <img src="/aslan-lion.png" alt="ASLAN"
+         onerror="this.style.display='none'">
+    <span class="bt">ASLAN</span>
+  </a>
+  <nav class="nav">
+    <a href="../intelligence/index.html">Intelligence</a>
+    <a href="../advisory/index.html">Advisory</a>
+    <a href="index.html" class="active">Real&nbsp;Estate</a>
+    <a href="../connect/index.html">Connect</a>
+    <a href="../products/index.html">Products</a>
+    <div class="langtog" role="group" aria-label="Language">
+      <button id="btn-tr" class="on" onclick="setLang('tr')">TR</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </nav>
+</div></div>
+
+<!-- HERO -->
+<header class="hero"><div class="wrap">
+  <span class="eyebrow"><span class="dot"></span><span class="t-en">Real Estate Intelligence</span><span class="t-tr">Gayrimenkul Zekâsı</span></span>
+  <h1><span class="t-en">Sultanate of Oman</span><span class="t-tr">Umman Sultanlığı</span></h1>
+  <div class="sub"><span class="t-en">Investing from Türkiye into Omani real estate — an executive decision brief, anchored on Muscat and covering the national programme.</span><span class="t-tr">Türkiye&#39;den Umman gayrimenkulüne yatırım — Muscat merkezli, ulusal programı kapsayan üst düzey karar dosyası.</span></div>
+  <div class="lede"><span class="t-en">Oman is a deliberately sequenced, USD-pegged, investment-grade market. This brief sets out what a Turkish investor needs before a high-level meeting: ownership rights, residency, the buying process, the city pipeline, and the real risks — drawn from the Ministry of Housing &amp; Urban Planning and independently verified.</span><span class="t-tr">Umman; bilinçli sıralanmış, dolara sabit, yatırım yapılabilir notlu bir pazardır. Bu dosya, üst düzey bir görüşme öncesi Türk yatırımcının ihtiyaç duyduğu her şeyi ortaya koyar: mülkiyet hakları, ikamet, satın alma süreci, şehir hattı ve gerçek riskler — Konut ve Şehircilik Bakanlığı verilerinden ve bağımsız doğrulamayla.</span></div>
+  <div class="hero-meta">
+    <span class="badge-facts">★ <span class="t-en">Facts only — verified &amp; sourced</span><span class="t-tr">Yalnızca gerçekler — doğrulanmış ve kaynaklı</span></span>
+    <span class="mi"><span class="t-en">Updated</span><span class="t-tr">Güncelleme</span>: <b><span class="t-en">20 June 2026</span><span class="t-tr">20 Haziran 2026</span></b></span>
+    <span class="mi"><span class="t-en">Primary source</span><span class="t-tr">Birincil kaynak</span>: <b>Ministry of Housing &amp; Urban Planning (Oman)</b></span>
+  </div>
+</div></header>
+
+<!-- SUBNAV -->
+<nav class="subnav"><div class="wrap">
+  <a href="#ozet"><span class="t-en">Summary</span><span class="t-tr">Özet</span></a>
+  <a href="#neden"><span class="t-en">Why Oman</span><span class="t-tr">Neden Umman</span></a>
+  <a href="#mulkiyet"><span class="t-en">Ownership &amp; tax</span><span class="t-tr">Mülkiyet &amp; vergi</span></a>
+  <a href="#ikamet"><span class="t-en">Golden Residency</span><span class="t-tr">Altın İkamet</span></a>
+  <a href="#surec"><span class="t-en">Buying process</span><span class="t-tr">Satın alma</span></a>
+  <a href="#pazar"><span class="t-en">Market</span><span class="t-tr">Pazar</span></a>
+  <a href="#sehirler"><span class="t-en">Cities &amp; projects</span><span class="t-tr">Şehirler &amp; projeler</span></a>
+  <a href="#riskler"><span class="t-en">Risks</span><span class="t-tr">Riskler</span></a>
+  <a href="#kaynaklar"><span class="t-en">Sources</span><span class="t-tr">Kaynaklar</span></a>
+</div></nav>
+
+<main>
+
+<!-- 00 SUMMARY -->
+<section class="sec" id="ozet"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">00</span>
+    <div><div class="kicker"><span class="t-en">Executive summary</span><span class="t-tr">Yönetici özeti</span></div>
+    <h2><span class="t-en">Why Oman, in one read</span><span class="t-tr">Tek bakışta Umman</span></h2></div></div>
+  <p class="lead"><span class="t-en">Oman regained investment-grade status from all three major agencies by December 2025, runs inflation below 1%, and pegs its rial to the US dollar. For a Turkish investor this means a hard-currency-linked asset in a low-volatility jurisdiction, with full freehold ownership available, zero personal/capital-gains/inheritance tax, and a 10-year renewable residency from a 200,000 OMR commitment. Crucially, growth is state-sequenced — Vision 2040 → National Spatial Strategy → Future Cities — so opportunities sit on secured land and funded infrastructure rather than speculation.</span><span class="t-tr">Umman, Aralık 2025 itibarıyla üç büyük kuruluştan da yatırım yapılabilir notunu geri kazandı, enflasyonu %1&#39;in altında ve riyali ABD dolarına sabit. Türk yatırımcı için bu; düşük oynaklıklı bir ülkede sert-paraya bağlı bir varlık, tam freehold mülkiyeti, sıfır kişisel/sermaye kazancı/veraset vergisi ve 200.000 OMR taahhütle 10 yıllık yenilenebilir ikamet anlamına gelir. Kritik nokta: büyüme devlet eliyle sıralanır — Vizyon 2040 → Ulusal Mekânsal Strateji → Future Cities — böylece fırsatlar spekülasyon değil, güvence altındaki arazi ve fonlanmış altyapı üzerinde durur.</span></p>
+  <div class="stats"><div class="stat"><div class="v">BBB- / Baa3</div><div class="l"><span class="t-en">Investment grade — S&amp;P &amp; Fitch BBB-, Moody&#39;s Baa3</span><span class="t-tr">Yatırım yapılabilir not — S&amp;P ve Fitch BBB-, Moody&#39;s Baa3</span></div><div class="s"><span class="t-en">All three agencies, by Dec 2025</span><span class="t-tr">Üç kuruluş da, Aralık 2025 itibarıyla</span></div></div><div class="stat"><div class="v">1 OMR = 2.6008 USD</div><div class="l"><span class="t-en">Rial pegged to the US dollar (since 1986)</span><span class="t-tr">Riyal ABD dolarına sabit (1986&#39;dan beri)</span></div><div class="s"><span class="t-en">≈ 121 TRY · indicative, 19 Jun 2026</span><span class="t-tr">≈ 121 TL · gösterge, 19 Haz 2026</span></div></div><div class="stat"><div class="v">0% / 0% / 0%</div><div class="l"><span class="t-en">Personal income, capital-gains &amp; inheritance tax</span><span class="t-tr">Kişisel gelir, sermaye kazancı ve veraset vergisi</span></div><div class="s"><span class="t-en">VAT 5% · corporate 15%</span><span class="t-tr">KDV %5 · kurumlar %15</span></div></div><div class="stat"><div class="v">Freehold</div><div class="l"><span class="t-en">Full foreign ownership in ITCs &amp; Future Cities</span><span class="t-tr">ITC ve Future Cities&#39;te tam yabancı mülkiyeti</span></div><div class="s"><span class="t-en">Plus 50-yr renewable usufruct</span><span class="t-tr">Ayrıca 50 yıl yenilenebilir intifa</span></div></div><div class="stat"><div class="v">&gt;100 bn USD</div><div class="l"><span class="t-en">GDP, with inflation below 1% (2025)</span><span class="t-tr">GSYİH, enflasyon %1&#39;in altında (2025)</span></div><div class="s"><span class="t-en">GDP/capita ≈ 18–19k USD</span><span class="t-tr">Kişi başı ≈ 18–19 bin USD</span></div></div><div class="stat"><div class="v">~78.8 bn USD</div><div class="l"><span class="t-en">FDI stock (mid-2025), +12.8% YoY</span><span class="t-tr">DYY stoku (2025 ortası), yıllık +%12.8</span></div><div class="s"><span class="t-en">FDI ≈ 11.1% of GDP</span><span class="t-tr">DYY ≈ GSYİH&#39;nin %11.1&#39;i</span></div></div><div class="stat"><div class="v">36% of GDP</div><div class="l"><span class="t-en">Government debt (2025) — down from 68% in 2020</span><span class="t-tr">Kamu borcu (2025) — 2020&#39;de %68&#39;den düştü</span></div><div class="s"><span class="t-en">Budget deficit ≈ 1% (2026–27 f.)</span><span class="t-tr">Bütçe açığı ≈ %1 (2026–27 t.)</span></div></div><div class="stat"><div class="v">85.2%</div><div class="l"><span class="t-en">Residential occupancy — up to ~520k more homes by 2040</span><span class="t-tr">Konut doluluğu — 2040&#39;a dek ~520 bin ek konut</span></div><div class="s"><span class="t-en">Pop. 5.35m · median age 29.7</span><span class="t-tr">Nüfus 5,35m · medyan yaş 29,7</span></div></div></div>
+  <p class="note"><span class="t-en">Figures: Ministry of Housing &amp; Urban Planning, Oman (Investment Roadmap, March 2026) and NCSI, except ratings, government debt and FX, which are independently verified (S&amp;P/Moody&#39;s/Fitch; June 2026). 1 OMR = 2.6008 USD (fixed). TRY conversions are indicative at USD/TRY ≈ 46.4 on 19 June 2026 and move with the market.</span><span class="t-tr">Veriler: Konut ve Şehircilik Bakanlığı, Umman (Yatırım Yol Haritası, Mart 2026) ve NCSI; notlar, kamu borcu ve döviz kuru bağımsız doğrulanmıştır (S&amp;P/Moody&#39;s/Fitch; Haziran 2026). 1 OMR = 2,6008 USD (sabit). TL çevrimleri 19 Haziran 2026&#39;da USD/TL ≈ 46,4 ile göstergedir ve piyasayla değişir.</span></p>
+</div></section>
+
+<!-- 01 WHY -->
+<section class="sec" id="neden"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">01</span>
+    <div><div class="kicker"><span class="t-en">The case</span><span class="t-tr">Gerekçe</span></div>
+    <h2><span class="t-en">Why Oman — for a Turkish investor</span><span class="t-tr">Neden Umman — Türk yatırımcı için</span></h2></div></div>
+  <div class="cols2">
+    <div class="card"><h3><span class="ic">◇</span><span class="t-en">Stability by design</span><span class="t-tr">Tasarımla istikrar</span></h3>
+      <p><span class="t-en">Policy continuity runs through Vision 2040 and the National Spatial Strategy, with a single accountable authority (MoHUP). Mandatory escrow, a dedicated investment court and digital registration make the rules enforceable. Oman ranks among the top safest countries and 4th globally for quality of life (2026).</span><span class="t-tr">Politika sürekliliği Vizyon 2040 ve Ulusal Mekânsal Strateji üzerinden yürür; tek ve hesap verebilir bir otorite (MoHUP) vardır. Zorunlu emanet, özel bir yatırım mahkemesi ve dijital tescil, kuralları uygulanabilir kılar. Umman en güvenli ülkeler arasında ve yaşam kalitesinde dünyada 4. (2026).</span></p></div>
+    <div class="card"><h3><span class="ic">◇</span><span class="t-en">A hard-currency hedge</span><span class="t-tr">Sert-para koruması</span></h3>
+      <p><span class="t-en">The rial&#39;s peg to the US dollar (1 OMR = 2.6008 USD) means an Omani property is, in effect, a USD-denominated asset. Against a lira that has depreciated ~17% over the past year, that currency structure is itself part of the investment logic — not a promise of returns, a structural fact.</span><span class="t-tr">Riyalin dolara sabitliği (1 OMR = 2,6008 USD), Umman gayrimenkulünü fiilen USD cinsi bir varlık yapar. Son bir yılda ~%17 değer kaybeden liraya karşı bu kur yapısı, başlı başına yatırım mantığının parçasıdır — getiri vaadi değil, yapısal bir gerçek.</span></p></div>
+    <div class="card"><h3><span class="ic">◇</span><span class="t-en">Tax &amp; capital freedom</span><span class="t-tr">Vergi ve sermaye serbestisi</span></h3>
+      <p><span class="t-en">Zero personal income, capital-gains and inheritance tax nationwide; VAT just 5%. No restrictions on transferring capital or profits, or on currency conversion. Company set-up takes 4–5 days with 100% foreign ownership in priority sectors.</span><span class="t-tr">Ülke genelinde sıfır kişisel gelir, sermaye kazancı ve veraset vergisi; KDV yalnızca %5. Sermaye/kâr transferinde ve döviz çevriminde kısıtlama yok. Şirket kuruluşu 4–5 gün; öncelikli sektörlerde %100 yabancı mülkiyeti.</span></p></div>
+    <div class="card"><h3><span class="ic">◇</span><span class="t-en">Position &amp; connectivity</span><span class="t-tr">Konum ve bağlantı</span></h3>
+      <p><span class="t-en">From Muscat, ~2.5 billion consumers are within a seven-hour flight. The deep-water ports of Salalah, Sohar and Duqm reach 90+ destinations across 40+ countries and offer routing alternatives to the Strait of Hormuz; a UAE–Muscat rail link is planned.</span><span class="t-tr">Muscat&#39;tan ~2,5 milyar tüketici yedi saatlik uçuş mesafesinde. Salalah, Sohar ve Duqm derin su limanları 40&#39;tan fazla ülkede 90&#39;dan fazla noktaya ulaşır ve Hürmüz Boğazı&#39;na alternatif güzergâh sunar; BAE–Muscat demiryolu planlanıyor.</span></p></div>
+  </div>
+  <div class="panel gold"><h3><span class="t-en">The differentiator: delivery, not speculation</span><span class="t-tr">Farklılaştırıcı: spekülasyon değil, teslimat</span></h3>
+    <p><span class="t-en">Oman converts national strategy into execution-ready opportunities on state-controlled land aligned to funded infrastructure, with phasing set against long-term demand. This sequencing — national vision to localised delivery — is what separates Oman from peer markets and is designed to reduce delivery and timing risk.</span><span class="t-tr">Umman, ulusal stratejiyi; devlet kontrolündeki arazide, fonlanmış altyapıya hizalı ve uzun vadeli talebe göre fazlanmış, uygulamaya hazır fırsatlara dönüştürür. Bu sıralama — ulusal vizyondan yerel teslimata — Umman&#39;ı emsallerinden ayırır ve teslim/zamanlama riskini azaltmak için tasarlanmıştır.</span></p></div>
+</div></section>
+
+<!-- 02 OWNERSHIP & TAX -->
+<section class="sec" id="mulkiyet"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">02</span>
+    <div><div class="kicker"><span class="t-en">Legal framework</span><span class="t-tr">Hukuki çerçeve</span></div>
+    <h2><span class="t-en">Ownership, tax &amp; investor protection</span><span class="t-tr">Mülkiyet, vergi ve yatırımcı koruması</span></h2></div></div>
+  <p class="lead"><span class="t-en">Oman permits 100% foreign ownership across most sectors. In real estate, foreigners may hold freehold within ITCs, designated tourism zones and eligible Future Cities projects; usufruct and leasehold cover the rest. This is the core of any serious decision — read it before price.</span><span class="t-tr">Umman çoğu sektörde %100 yabancı mülkiyetine izin verir. Gayrimenkulde yabancılar; ITC, tahsisli turizm bölgeleri ve uygun Future Cities projelerinde freehold tutabilir; gerisini intifa ve kiralama kapsar. Bu, her ciddi kararın özüdür — fiyattan önce okuyun.</span></p>
+  <div class="defs"><div class="dt"><span class="t-en">Freehold ownership</span><span class="t-tr">Tam mülkiyet (freehold)</span></div><div class="dd"><span class="t-en">Available to <b>all nationalities</b> within Integrated Tourism Complexes (ITCs), designated tourism zones, and eligible Future Cities projects. Registered in the investor&#39;s name; inheritable and resellable within the eligible scheme.</span><span class="t-tr"><b>Tüm uyruklara</b> açık; Entegre Turizm Kompleksleri (ITC), tahsis edilmiş turizm bölgeleri ve uygun Future Cities projelerinde. Yatırımcı adına tescil edilir; uygun proje içinde miras ve devre konu olur.</span></div><div class="dt"><span class="t-en">Usufruct</span><span class="t-tr">İntifa hakkı</span></div><div class="dd"><span class="t-en"><b>50 years, renewable</b> for similar periods; used for many commercial and tourism assets. A long-horizon right of use rather than title.</span><span class="t-tr"><b>50 yıl, benzer sürelerle yenilenebilir</b>; birçok ticari ve turizm varlığında kullanılır. Mülkiyet değil, uzun vadeli kullanım hakkıdır.</span></div><div class="dt"><span class="t-en">Leasehold</span><span class="t-tr">Kiralama (leasehold)</span></div><div class="dd"><span class="t-en">Available for other commercial and residential developments outside freehold zones, subject to applicable approvals.</span><span class="t-tr">Freehold dışı diğer ticari ve konut geliştirmelerinde, ilgili onaylara tâbi olarak mevcuttur.</span></div><div class="dt"><span class="t-en">Taxation</span><span class="t-tr">Vergilendirme</span></div><div class="dd"><span class="t-en"><b>0%</b> personal income tax, <b>0%</b> capital-gains tax, <b>0%</b> inheritance tax (nationwide). VAT is <b>5%</b>; general corporate tax <b>15%</b>; SEZ/free zones offer up to <b>25 years</b> corporate-tax exemption.</span><span class="t-tr"><b>%0</b> kişisel gelir, <b>%0</b> sermaye kazancı, <b>%0</b> veraset vergisi (ülke geneli). KDV <b>%5</b>; genel kurumlar vergisi <b>%15</b>; SEZ/serbest bölgelerde <b>25 yıla</b> kadar kurumlar vergisi muafiyeti.</span></div><div class="dt"><span class="t-en">Capital movement</span><span class="t-tr">Sermaye hareketi</span></div><div class="dd"><span class="t-en"><b>No restrictions</b> on transfer of capital or profits, or on currency conversion.</span><span class="t-tr">Sermaye ve kâr transferinde ya da döviz çevriminde <b>kısıtlama yoktur</b>.</span></div><div class="dt"><span class="t-en">Investor protection</span><span class="t-tr">Yatırımcı koruması</span></div><div class="dd"><span class="t-en"><b>Escrow accounts mandatory</b> for off-plan sales, a dedicated <b>Investment &amp; Commerce Court</b> for disputes, and digital registration. State land and funded infrastructure underpin Future Cities delivery.</span><span class="t-tr">Proje (off-plan) satışlarında <b>emanet (escrow) hesabı zorunlu</b>, anlaşmazlıklar için özel <b>Yatırım ve Ticaret Mahkemesi</b> ve dijital tescil. Future Cities teslimi, devlet arazisi ve fonlanmış altyapıyla desteklenir.</span></div></div>
+</div></section>
+
+<!-- 03 GOLDEN RESIDENCY -->
+<section class="sec" id="ikamet"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">03</span>
+    <div><div class="kicker"><span class="t-en">Residency</span><span class="t-tr">İkamet</span></div>
+    <h2><span class="t-en">Golden Residency</span><span class="t-tr">Altın İkamet</span></h2></div></div>
+  <div class="cols2">
+    <div>
+      <p class="lead"><span class="t-en">A 10-year, renewable residency for qualifying foreign investors, from a minimum 200,000 OMR commitment. It extends to first-degree family members with no limit on number or age, and holders may also own one property outside ITCs (subject to applicable rules).</span><span class="t-tr">Uygun yabancı yatırımcılar için 10 yıllık, yenilenebilir ikamet; asgari 200.000 OMR taahhütle. Sayı veya yaş sınırı olmaksızın birinci derece aile üyelerini kapsar ve sahipleri ITC dışında bir mülke de sahip olabilir (ilgili kurallara tâbi).</span></p>
+      <div class="stats" style="grid-template-columns:repeat(2,1fr)">
+        <div class="stat"><div class="v">10 + 10…</div><div class="l"><span class="t-en">Years, renewable</span><span class="t-tr">Yıl, yenilenebilir</span></div></div>
+        <div class="stat"><div class="v">200,000 OMR</div><div class="l"><span class="t-en">Minimum qualifying investment ≈ 520k USD</span><span class="t-tr">Asgari nitelikli yatırım ≈ 520b USD</span></div></div>
+      </div>
+    </div>
+    <div class="card"><h3><span class="ic">◇</span><span class="t-en">Qualifying pathways</span><span class="t-tr">Uygun yollar</span></h3>
+      <ul><li><span class="t-en">Real estate in an ITC — completed residential, commercial or tourism units registered in your name</span><span class="t-tr">ITC&#39;de gayrimenkul — adınıza tescilli tamamlanmış konut, ticari veya turizm birimleri</span></li><li><span class="t-en">Company establishment — Omani-registered company, ≥ 200,000 OMR, operating ≥ 1 year</span><span class="t-tr">Şirket kuruluşu — Umman&#39;da tescilli şirket, ≥ 200.000 OMR, ≥ 1 yıl faaliyet</span></li><li><span class="t-en">Fixed-term bank deposit — ≥ 200,000 OMR held for ≥ 5 years (renewable)</span><span class="t-tr">Vadeli banka mevduatı — ≥ 200.000 OMR, ≥ 5 yıl (yenilenebilir)</span></li><li><span class="t-en">Listed shares / securities — market value ≥ 200,000 OMR, held directly</span><span class="t-tr">Borsada işlem gören hisse/menkul kıymet — piyasa değeri ≥ 200.000 OMR, doğrudan</span></li><li><span class="t-en">Government development bonds — remaining maturity ≥ 2 years, in your name</span><span class="t-tr">Devlet kalkınma tahvilleri — kalan vade ≥ 2 yıl, adınıza</span></li><li><span class="t-en">Employment-generating enterprise — company employing ≥ 50 Omani nationals (cap. ≥ 200,000 OMR)</span><span class="t-tr">İstihdam yaratan işletme — ≥ 50 Umman vatandaşı istihdam eden şirket (serm. ≥ 200.000 OMR)</span></li></ul></div>
+  </div>
+  <p class="note"><span class="t-en">Thresholds and approved instruments are set by the competent Omani authorities and updated periodically; confirm the current rules at the time of application.</span><span class="t-tr">Eşikler ve onaylı araçlar yetkili Umman makamlarınca belirlenir ve dönemsel güncellenir; başvuru anında geçerli kuralları teyit edin.</span></p>
+</div></section>
+
+<!-- 04 PROCESS -->
+<section class="sec" id="surec"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">04</span>
+    <div><div class="kicker"><span class="t-en">How it works</span><span class="t-tr">Nasıl işler</span></div>
+    <h2><span class="t-en">The buying process</span><span class="t-tr">Satın alma süreci</span></h2></div></div>
+  <div class="steps"><div class="step"><h4><span class="t-en">Define eligibility &amp; structure</span><span class="t-tr">Uygunluk ve yapıyı belirleyin</span></h4><p><span class="t-en">Decide freehold (ITC / Future City) vs leasehold, and whether to hold personally or through a company. This also sets your Golden Residency route.</span><span class="t-tr">Freehold (ITC / Future City) ile leasehold arasında ve mülkü kişisel mi yoksa şirket üzerinden mi tutacağınıza karar verin. Bu, Altın İkamet rotanızı da belirler.</span></p></div><div class="step"><h4><span class="t-en">Select project &amp; verify the developer</span><span class="t-tr">Projeyi seçin ve geliştiriciyi doğrulayın</span></h4><p><span class="t-en">Confirm the scheme is freehold-eligible and the developer/master-developer is credible — MoHUP-led Future City or an established ITC operator — and that an escrow account is in place.</span><span class="t-tr">Projenin freehold&#39;a uygun olduğunu ve geliştiricinin/ana geliştiricinin güvenilirliğini doğrulayın — MoHUP yönetimindeki Future City ya da köklü bir ITC operatörü — ve emanet hesabının mevcut olduğunu teyit edin.</span></p></div><div class="step"><h4><span class="t-en">Reservation &amp; sale–purchase agreement</span><span class="t-tr">Rezervasyon ve satış–alım sözleşmesi</span></h4><p><span class="t-en">Sign the SPA. For off-plan, payments flow through the regulated escrow account against construction milestones — your funds are protected by law.</span><span class="t-tr">Satış–alım sözleşmesini (SPA) imzalayın. Proje (off-plan) alımlarında ödemeler, inşaat aşamalarına bağlı olarak düzenlenmiş emanet hesabı üzerinden ilerler — fonlarınız yasayla korunur.</span></p></div><div class="step"><h4><span class="t-en">Payment plan &amp; currency</span><span class="t-tr">Ödeme planı ve para birimi</span></h4><p><span class="t-en">Prices are in OMR (USD-pegged). If funding from Türkiye, plan the FX conversion deliberately, as the lira leg carries timing risk against the rial/dollar.</span><span class="t-tr">Fiyatlar OMR cinsindendir (dolara sabit). Türkiye&#39;den finanse ediyorsanız döviz çevrimini bilinçli planlayın; lira ayağı, riyal/dolara karşı zamanlama riski taşır.</span></p></div><div class="step"><h4><span class="t-en">Registration &amp; title</span><span class="t-tr">Tescil ve tapu</span></h4><p><span class="t-en">The unit is registered in the investor&#39;s name through the official registration process. Confirm registration and any project fees with the developer and the relevant authority.</span><span class="t-tr">Birim, resmî tescil süreciyle yatırımcı adına kaydedilir. Tescil ve olası proje masraflarını geliştirici ve ilgili kurumla teyit edin.</span></p></div><div class="step"><h4><span class="t-en">Golden Residency (if ≥ 200,000 OMR)</span><span class="t-tr">Altın İkamet (≥ 200.000 OMR ise)</span></h4><p><span class="t-en">Apply for the 10-year renewable residency, which extends to first-degree family with no limit on number or age.</span><span class="t-tr">10 yıllık yenilenebilir ikamet için başvurun; bu, sayı veya yaş sınırı olmaksızın birinci derece aileyi kapsar.</span></p></div><div class="step"><h4><span class="t-en">Handover, management &amp; rental</span><span class="t-tr">Teslim, yönetim ve kiralama</span></h4><p><span class="t-en">On completion, take handover and arrange property/rental management. High occupancy and structural undersupply support long-horizon rental demand.</span><span class="t-tr">Tamamlandığında teslimi alın ve mülk/kiralama yönetimini düzenleyin. Yüksek doluluk ve yapısal arz açığı, uzun vadeli kira talebini destekler.</span></p></div></div>
+  <div class="panel"><h3><span class="t-en">On costs</span><span class="t-tr">Masraflar hakkında</span></h3>
+    <p><span class="t-en">Verified, nationwide: VAT is 5% and off-plan payments are escrow-protected. Registration and any agency/service fees vary by project and authority and are not fixed in the official roadmap — confirm them in writing with the developer and the relevant authority before committing. We do not quote an unverified fee schedule.</span><span class="t-tr">Doğrulanmış, ülke geneli: KDV %5 ve off-plan ödemeleri emanetle korunur. Tescil ve olası aracılık/hizmet masrafları projeye ve kuruma göre değişir; resmî yol haritasında sabitlenmemiştir — taahhütten önce geliştirici ve ilgili kurumdan yazılı teyit alın. Doğrulanmamış bir masraf tarifesi vermiyoruz.</span></p></div>
+</div></section>
+
+<!-- 05 MARKET -->
+<section class="sec" id="pazar"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">05</span>
+    <div><div class="kicker"><span class="t-en">Supply &amp; demand</span><span class="t-tr">Arz ve talep</span></div>
+    <h2><span class="t-en">Market overview</span><span class="t-tr">Pazar görünümü</span></h2></div></div>
+  <div class="cols2">
+    <div class="card"><h3><span class="ic">◇</span><span class="t-en">Where supply stands</span><span class="t-tr">Arzın durumu</span></h3>
+      <p><span class="t-en">Oman had roughly 1.1 million residential units in 2024 — about 66% villas and 34% apartments — with average occupancy of 85.2% (villas 87.5%, apartments 80.8%). High occupancy points to undersupply in key segments.</span><span class="t-tr">Umman&#39;da 2024&#39;te yaklaşık 1,1 milyon konut vardı — yaklaşık %66 villa ve %34 daire — ortalama doluluk %85,2 (villalar %87,5, daireler %80,8). Yüksek doluluk, kilit segmentlerde arz açığına işaret eder.</span></p></div>
+    <div class="card"><h3><span class="ic">◇</span><span class="t-en">Where demand is going</span><span class="t-tr">Talebin yönü</span></h3>
+      <p><span class="t-en">Demand is projected to reach ~1.7 million units by 2040; against announced supply, an estimated ~520,000 additional homes are still required. New demand concentrates in Muscat, North Batinah and Dhofar, shifting toward integrated communities on transit corridors and industrial hubs.</span><span class="t-tr">Talebin 2040&#39;a dek ~1,7 milyon birime ulaşması bekleniyor; açıklanan arza karşı tahminen ~520.000 ek konut hâlâ gerekli. Yeni talep Muscat, Kuzey Batinah ve Dhofar&#39;da yoğunlaşıyor ve ulaşım koridorları ile sanayi merkezlerindeki entegre topluluklara kayıyor.</span></p></div>
+  </div>
+  <div class="panel green"><h3><span class="t-en">Where foreign capital is enabled</span><span class="t-tr">Yabancı sermayenin açık olduğu yerler</span></h3>
+    <p><span class="t-en">For non-Omani buyers, the freehold opportunity sits in three places: the ITC portfolio (private developers), the MoHUP-led Future Cities, and the Special Economic / Free Zones (Duqm, Sohar, Salalah — with up to 25 years of corporate-tax exemption for businesses). The next section maps these city by city.</span><span class="t-tr">Umman&#39;lı olmayan alıcılar için freehold fırsatı üç yerdedir: ITC portföyü (özel geliştiriciler), MoHUP yönetimindeki Future Cities ve Özel Ekonomik / Serbest Bölgeler (Duqm, Sohar, Salalah — işletmeler için 25 yıla kadar kurumlar vergisi muafiyetiyle). Sonraki bölüm bunları şehir şehir haritalar.</span></p></div>
+</div></section>
+
+<!-- 06 CITIES & PROJECTS -->
+<section class="sec" id="sehirler"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">06</span>
+    <div><div class="kicker"><span class="t-en">National pipeline</span><span class="t-tr">Ulusal hat</span></div>
+    <h2><span class="t-en">City &amp; project radar</span><span class="t-tr">Şehir ve proje radarı</span></h2></div></div>
+  <p class="lead"><span class="t-en">Muscat is the anchor market; around it sits a national Future Cities programme reaching the coast (Salalah), the north (Sohar), the mountains (Al Jabal Al A&#39;ali) and the interior (Nizwa). Values and scale below are from the official roadmap; status reflects delivery stage — the single most important variable for off-plan risk.</span><span class="t-tr">Muscat çapa pazardır; etrafında kıyıya (Salalah), kuzeye (Sohar), dağlara (Al Jabal Al A&#39;ali) ve iç bölgeye (Nizwa) uzanan ulusal bir Future Cities programı yer alır. Aşağıdaki değerler ve ölçek resmî yol haritasındandır; durum, teslim aşamasını yansıtır — off-plan riskinin en önemli tek değişkeni.</span></p>
+  <div class="tablewrap"><table class="radar">
+    <thead><tr>
+      <th><span class="t-en">City / Project</span><span class="t-tr">Şehir / Proje</span></th>
+      <th><span class="t-en">Type</span><span class="t-tr">Tip</span></th>
+      <th><span class="t-en">Scale</span><span class="t-tr">Ölçek</span></th>
+      <th><span class="t-en">Value (OMR / USD)</span><span class="t-tr">Değer (OMR / USD)</span></th>
+      <th><span class="t-en">Status</span><span class="t-tr">Durum</span></th>
+      <th><span class="t-en">Master plan / lead</span><span class="t-tr">Ana plan / lider</span></th>
+    </tr></thead>
+    <tbody><tr><td class="nm">Greater Muscat<small><span class="t-en">Capital region · primary market</span><span class="t-tr">Başkent bölgesi · ana pazar</span></small></td><td><span class="t-en">ITC freehold portfolio + 3 Future Cities</span><span class="t-tr">ITC freehold portföyü + 3 Future City</span></td><td><span class="t-en">Yiti, Aida, Muscat Bay, Four Seasons, Madinat Al Irfan, Muttrah Heights, Opera District…</span><span class="t-tr">Yiti, Aida, Muscat Bay, Four Seasons, Madinat Al Irfan, Muttrah Heights, Opera District…</span></td><td>—</td><td><span class="pill gold"><span class="t-en">Active / off-plan</span><span class="t-tr">Aktif / off-plan</span></span></td><td>OMRAN &amp; private developers</td></tr><tr><td class="nm">Sultan Haitham City<small><span class="t-en">Greater Muscat (west of airport)</span><span class="t-tr">Greater Muscat (havalimanı batısı)</span></small></td><td><span class="t-en">New city · ~20,000 homes, ~100k pop.</span><span class="t-tr">Yeni şehir · ~20.000 konut, ~100b nüfus</span></td><td><span class="t-en">14.8 km² · 18 neighbourhoods</span><span class="t-tr">14,8 km² · 18 mahalle</span></td><td>3.0 bn OMR / 7.8 bn USD</td><td><span class="pill green"><span class="t-en">Under construction</span><span class="t-tr">İnşa halinde</span></span></td><td>SOM (master plan)</td></tr><tr><td class="nm">Al Khuwair Downtown<small><span class="t-en">Greater Muscat (central waterfront)</span><span class="t-tr">Greater Muscat (merkez kıyı)</span></small></td><td><span class="t-en">Downtown regeneration · +7,500 homes, 6 hotels</span><span class="t-tr">Merkez dönüşümü · +7.500 konut, 6 otel</span></td><td><span class="t-en">1.6M m² · towers to 180m</span><span class="t-tr">1,6M m² · 180m&#39;ye kadar kuleler</span></td><td>2.5 bn OMR / 6.6 bn USD</td><td><span class="pill gold"><span class="t-en">Early works</span><span class="t-tr">Erken işler</span></span></td><td>Zaha Hadid Architects</td></tr><tr><td class="nm">A&#39;Thuraya City<small><span class="t-en">Greater Muscat (elevated, 150–200m)</span><span class="t-tr">Greater Muscat (yükseltili, 150–200m)</span></small></td><td><span class="t-en">Hillside city · ~10,000 homes</span><span class="t-tr">Yamaç şehir · ~10.000 konut</span></td><td><span class="t-en">17.4 km² · Phases 1&amp;2 = 6,990 homes</span><span class="t-tr">17,4 km² · Faz 1&amp;2 = 6.990 konut</span></td><td>1.7 bn OMR / 4.4 bn USD</td><td><span class="pill gold"><span class="t-en">Enabling works</span><span class="t-tr">Altyapı işleri</span></span></td><td>BIG — Bjarke Ingels Group</td></tr><tr><td class="nm">Al Jabal Al A&#39;ali<small><span class="t-en">Jabal Akhdar · Al Hajar Mts · 2,400m</span><span class="t-tr">Jabal Akhdar · Al Hajar Dağları · 2.400m</span></small></td><td><span class="t-en">Mountain wellness &amp; eco-resort</span><span class="t-tr">Dağ wellness ve eko-resort</span></td><td><span class="t-en">11.8 km² · 2,000 hotel keys · ~22°C</span><span class="t-tr">11,8 km² · 2.000 otel anahtarı · ~22°C</span></td><td>1.92 bn OMR / 5.0 bn USD</td><td><span class="pill mut"><span class="t-en">Master-planning</span><span class="t-tr">Planlama</span></span></td><td>Atkins Réalis</td></tr><tr><td class="nm">Salalah Future City<small><span class="t-en">Dhofar · southern Oman</span><span class="t-tr">Dhofar · güney Umman</span></small></td><td><span class="t-en">Coastal mixed-use · 13,300 homes</span><span class="t-tr">Kıyı karma kullanım · 13.300 konut</span></td><td><span class="t-en">10 km² · 6 km sea frontage + marina</span><span class="t-tr">10 km² · 6 km sahil + marina</span></td><td>1.9 bn OMR / 5.0 bn USD</td><td><span class="pill gold"><span class="t-en">Master-planned, phasing</span><span class="t-tr">Planlandı, fazlanıyor</span></span></td><td>Sasaki</td></tr><tr><td class="nm">Sohar Future City<small><span class="t-en">North Al Batinah · northern gateway</span><span class="t-tr">Kuzey Al Batinah · kuzey kapısı</span></small></td><td><span class="t-en">Logistics-led downtown · ~70k pop.</span><span class="t-tr">Lojistik odaklı merkez · ~70b nüfus</span></td><td><span class="t-en">Near Sohar Port, Free Zone &amp; UAE rail</span><span class="t-tr">Sohar Limanı, Serbest Bölge ve BAE demiryolu yakını</span></td><td>1.15 bn OMR / 3.0 bn USD</td><td><span class="pill mut"><span class="t-en">Detailed design</span><span class="t-tr">Detaylı tasarım</span></span></td><td>MoHUP master developer</td></tr><tr><td class="nm">New City Nizwa (NCN)<small><span class="t-en">Ad Dakhiliyah · interior heritage</span><span class="t-tr">Ad Dakhiliyah · iç bölge mirası</span></small></td><td><span class="t-en">University-anchored &#39;UniverCity&#39;</span><span class="t-tr">Üniversite eksenli &#39;UniverCity&#39;</span></td><td><span class="t-en">Education / innovation / cultural tourism</span><span class="t-tr">Eğitim / inovasyon / kültür turizmi</span></td><td>—</td><td><span class="pill mut"><span class="t-en">Baseline / early phase</span><span class="t-tr">Temel / erken aşama</span></span></td><td>AS+P (lead)</td></tr></tbody>
+  </table></div>
+  <div class="cols2" style="margin-top:18px">
+    <div class="panel gold"><h3><span class="t-en">Muscat ITC freehold — examples</span><span class="t-tr">Muscat ITC freehold — örnekler</span></h3>
+      <p><span class="t-en">Privately developed, freehold for all nationalities: Yiti Sustainable City (net-zero, OMRAN &amp; Diamond Developers), Aida (Dar Global — hillside &amp; coastal, 18-hole golf), Muscat Bay, Four Seasons Muscat, Port Sultan Qaboos Waterfront, Muttrah Heights, Madinat Al Irfan, Marine/Art &amp; Digital District, Yamal and the Opera District.</span><span class="t-tr">Özel geliştirilmiş, tüm uyruklara freehold: Yiti Sustainable City (net-sıfır, OMRAN ve Diamond Developers), Aida (Dar Global — yamaç ve kıyı, 18 delikli golf), Muscat Bay, Four Seasons Muscat, Port Sultan Qaboos Waterfront, Muttrah Heights, Madinat Al Irfan, Marine/Art &amp; Digital District, Yamal ve Opera District.</span></p></div>
+    <div class="panel green"><h3><span class="t-en">Beyond residential</span><span class="t-tr">Konutun ötesinde</span></h3>
+      <p><span class="t-en">The same framework opens commercial, hospitality, education, healthcare, logistics and industrial assets — notably the Duqp/Duqm, Sohar and Salalah Special Economic / Free Zones, which add long corporate-tax exemptions on top of freehold and usufruct structures.</span><span class="t-tr">Aynı çerçeve; ticari, konaklama, eğitim, sağlık, lojistik ve sanayi varlıklarını da açar — özellikle freehold ve intifa yapılarının üzerine uzun kurumlar vergisi muafiyetleri ekleyen Duqm, Sohar ve Salalah Özel Ekonomik / Serbest Bölgeleri.</span></p></div>
+  </div>
+</div></section>
+
+<!-- 07 RISKS -->
+<section class="sec" id="riskler"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">07</span>
+    <div><div class="kicker"><span class="t-en">Stated openly</span><span class="t-tr">Açıkça</span></div>
+    <h2><span class="t-en">The real risks</span><span class="t-tr">Gerçek riskler</span></h2></div></div>
+  <p class="lead"><span class="t-en">ASLAN&#39;s discipline is facts only. Oman is a genuine opportunity, but it is not Dubai and it is not risk-free. These are the points a senior counterpart will probe — better to raise them first.</span><span class="t-tr">ASLAN&#39;ın disiplini yalnızca gerçeklerdir. Umman gerçek bir fırsattır, ancak Dubai değildir ve risksiz değildir. Üst düzey bir muhatabın sorgulayacağı noktalar bunlardır — önce sizin gündeme getirmeniz daha iyidir.</span></p>
+  <div class="risks"><div class="risk"><h4><span class="t-en">Liquidity &amp; resale depth</span><span class="t-tr">Likidite ve ikinci el derinliği</span></h4><p><span class="t-en">Oman&#39;s market is smaller and less liquid than Dubai. Freehold is confined to ITCs, Future Cities and designated zones; resale outside these is restricted, and the secondary market is thinner — exit can take longer.</span><span class="t-tr">Umman pazarı Dubai&#39;den daha küçük ve daha az likittir. Freehold; ITC, Future Cities ve tahsisli bölgelerle sınırlıdır; bunların dışında devir kısıtlıdır ve ikinci el daha incedir — çıkış daha uzun sürebilir.</span></p></div><div class="risk"><h4><span class="t-en">Off-plan &amp; delivery timing</span><span class="t-tr">Off-plan ve teslim zamanlaması</span></h4><p><span class="t-en">Much of the pipeline is off-plan or early-phase. Escrow and state backing reduce risk, but timelines can slip — phase status matters (Sultan Haitham is advanced; Nizwa and Sohar are early).</span><span class="t-tr">Hattın büyük kısmı off-plan veya erken aşamadır. Emanet ve devlet desteği riski azaltır, ancak takvimler kayabilir — faz durumu önemlidir (Sultan Haitham ileri; Nizwa ve Sohar erken).</span></p></div><div class="risk"><h4><span class="t-en">Oil dependence</span><span class="t-tr">Petrole bağımlılık</span></h4><p><span class="t-en">Hydrocarbons still provide ~73% of government revenue and the fiscal breakeven is ~$67/bbl. Macro stability is real but oil-price sensitive; low debt and sovereign funds ($21bn future-generations fund) cushion this.</span><span class="t-tr">Hidrokarbonlar hâlâ kamu gelirinin ~%73&#39;ünü sağlıyor ve mali başabaş ~67 $/varil. Makro istikrar gerçek ancak petrol fiyatına duyarlı; düşük borç ve egemen fonlar (21 mlr $ gelecek nesil fonu) bunu yumuşatır.</span></p></div><div class="risk"><h4><span class="t-en">Currency &amp; the lira leg</span><span class="t-tr">Para birimi ve lira ayağı</span></h4><p><span class="t-en">The rial&#39;s USD peg makes Omani property effectively a hard-currency asset — a hedge against lira depreciation. But TRY funding carries FX-timing risk, and any (historically very unlikely) peg change is a tail risk.</span><span class="t-tr">Riyalin dolara sabitliği, Umman gayrimenkulünü fiilen sert-para varlığı yapar — lira değer kaybına karşı korunma. Ancak TL ile finansman döviz-zamanlama riski taşır; (tarihsel olarak çok düşük olasılıklı) sabit kur değişimi ise kuyruk riskidir.</span></p></div><div class="risk"><h4><span class="t-en">Long-horizon, not flipping</span><span class="t-tr">Uzun vade, hızlı al-sat değil</span></h4><p><span class="t-en">Oman&#39;s deliberate &#39;no speculation&#39; policy and phased delivery reward patient holders. Short-term capital gains are not the thesis; durable rental income and staged appreciation are.</span><span class="t-tr">Umman&#39;ın bilinçli &#39;spekülasyon yok&#39; politikası ve aşamalı teslimi, sabırlı yatırımcıyı ödüllendirir. Tez kısa vadeli sermaye kazancı değil; kalıcı kira geliri ve kademeli değer artışıdır.</span></p></div><div class="risk"><h4><span class="t-en">Verify at the point of purchase</span><span class="t-tr">Alım anında doğrulayın</span></h4><p><span class="t-en">Rules are clear but evolving, and thresholds/instruments are set by the competent authorities and updated periodically. Confirm freehold eligibility, registration and residency thresholds per project with the Ministry/authority before committing.</span><span class="t-tr">Kurallar net ancak gelişmektedir; eşikler/araçlar yetkili makamlarca belirlenir ve dönemsel güncellenir. Taahhütten önce her proje için freehold uygunluğunu, tescili ve ikamet eşiklerini Bakanlık/yetkili ile teyit edin.</span></p></div></div>
+</div></section>
+
+<!-- 08 NEXT STEP / CTA -->
+<section class="sec" id="iletisim" style="border-bottom:0"><div class="wrap">
+  <div class="cta">
+    <h2><span class="t-en">Take this into the room</span><span class="t-tr">Bunu masaya taşıyın</span></h2>
+    <p><span class="t-en">ASLAN turns market knowledge into trusted opportunities — verified intelligence, project due-diligence and structured introductions to the official programme leads. No inflated promises; sourced facts you can present at the highest level.</span><span class="t-tr">ASLAN, piyasa bilgisini güvenilir fırsatlara dönüştürür — doğrulanmış istihbarat, proje durum tespiti ve resmî program liderlerine yapılandırılmış tanışmalar. Şişirilmiş vaat yok; en üst düzeyde sunabileceğiniz kaynaklı gerçekler.</span></p>
+    <a class="btn" href="mailto:info@aslanbusiness.com?subject=ASLAN%20-%20Oman%20Real%20Estate%20Briefing&amp;body=Hedef%2C%20b%C3%BCt%C3%A7e%20band%C4%B1%20(OMR%2FUSD)%2C%20freehold%2Fleasehold%20tercihi%2C%20ikamet%20hedefi%20ve%20zaman%20ufku.">
+      <span class="t-en">Request a high-level briefing</span><span class="t-tr">Üst düzey brifing talep edin</span></a>
+    <div class="checklist">
+      <h4><span class="t-en">Bring to the meeting</span><span class="t-tr">Görüşmeye hazırlanın</span></h4>
+      <ul>
+        <li><span class="t-en">Your objective: income, capital growth, residency, or relocation</span><span class="t-tr">Hedefiniz: gelir, değer artışı, ikamet veya taşınma</span></li>
+        <li><span class="t-en">Budget band in OMR / USD (and the TRY equivalent at today&#39;s rate)</span><span class="t-tr">OMR / USD bütçe bandı (ve bugünkü kurla TL karşılığı)</span></li>
+        <li><span class="t-en">Freehold (ITC / Future City) vs leasehold preference</span><span class="t-tr">Freehold (ITC / Future City) ile leasehold tercihi</span></li>
+        <li><span class="t-en">Residency goal — whether the 200,000 OMR threshold matters to you</span><span class="t-tr">İkamet hedefi — 200.000 OMR eşiğinin sizin için önemi</span></li>
+        <li><span class="t-en">Time horizon and risk tolerance on off-plan vs completed</span><span class="t-tr">Off-plan ile tamamlanmış arasında zaman ufku ve risk toleransı</span></li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- SOURCES -->
+<section class="sec" id="kaynaklar" style="border-bottom:0; padding-top:30px"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">↗</span>
+    <div><div class="kicker"><span class="t-en">Verify everything</span><span class="t-tr">Her şeyi doğrulayın</span></div>
+    <h2><span class="t-en">Sources &amp; official links</span><span class="t-tr">Kaynaklar ve resmî bağlantılar</span></h2></div></div>
+  <div class="sources"><table class="src">
+    <thead><tr>
+      <th><span class="t-en">Body / source</span><span class="t-tr">Kurum / kaynak</span></th>
+      <th><span class="t-en">Role</span><span class="t-tr">Rol</span></th>
+      <th><span class="t-en">Link</span><span class="t-tr">Bağlantı</span></th>
+    </tr></thead>
+    <tbody><tr><td><span class="t-en">Ministry of Housing &amp; Urban Planning — “Live Oman”</span><span class="t-tr">Konut ve Şehircilik Bakanlığı — “Live Oman”</span></td><td><span class="t-en">Primary source: official real-estate portal &amp; Investment Roadmap (MIPIM 2026)</span><span class="t-tr">Birincil kaynak: resmî gayrimenkul portalı ve Yatırım Yol Haritası (MIPIM 2026)</span></td><td><a href="https://oman.housing.gov.om" target="_blank" rel="noopener">oman.housing.gov.om</a></td></tr><tr><td><span class="t-en">MoHUP — investor contact</span><span class="t-tr">MoHUP — yatırımcı iletişimi</span></td><td><span class="t-en">Direct investment enquiries</span><span class="t-tr">Doğrudan yatırım başvuruları</span></td><td><a href="https://oman.housing.gov.om/mipim2026" target="_blank" rel="noopener">invest@housing.gov.om</a></td></tr><tr><td><span class="t-en">Invest Oman</span><span class="t-tr">Invest Oman</span></td><td><span class="t-en">National single-gateway investment platform</span><span class="t-tr">Ulusal tek-kapı yatırım platformu</span></td><td><a href="https://investoman.om" target="_blank" rel="noopener">investoman.om</a></td></tr><tr><td><span class="t-en">OMRAN Group</span><span class="t-tr">OMRAN Grubu</span></td><td><span class="t-en">State tourism / ITC developer · invest@omran.com · +968 2439 1111</span><span class="t-tr">Devlet turizm / ITC geliştiricisi · invest@omran.com · +968 2439 1111</span></td><td><a href="https://omran.om" target="_blank" rel="noopener">omran.om</a></td></tr><tr><td><span class="t-en">National Centre for Statistics &amp; Information (NCSI)</span><span class="t-tr">Ulusal İstatistik ve Bilgi Merkezi (NCSI)</span></td><td><span class="t-en">Population, housing &amp; economic data</span><span class="t-tr">Nüfus, konut ve ekonomik veriler</span></td><td><a href="https://ncsi.gov.om" target="_blank" rel="noopener">ncsi.gov.om</a></td></tr><tr><td><span class="t-en">Central Bank of Oman</span><span class="t-tr">Umman Merkez Bankası</span></td><td><span class="t-en">Currency peg &amp; monetary data (1 OMR = 2.6008 USD)</span><span class="t-tr">Sabit kur ve para verileri (1 OMR = 2,6008 USD)</span></td><td><a href="https://cbo.gov.om" target="_blank" rel="noopener">cbo.gov.om</a></td></tr><tr><td><span class="t-en">Oman Tax Authority</span><span class="t-tr">Umman Vergi İdaresi</span></td><td><span class="t-en">VAT, corporate tax &amp; exemptions</span><span class="t-tr">KDV, kurumlar vergisi ve muafiyetler</span></td><td><a href="https://taxoman.gov.om" target="_blank" rel="noopener">taxoman.gov.om</a></td></tr><tr><td><span class="t-en">Royal Oman Police</span><span class="t-tr">Umman Kraliyet Polisi</span></td><td><span class="t-en">Residency &amp; visa procedures</span><span class="t-tr">İkamet ve vize işlemleri</span></td><td><a href="https://rop.gov.om" target="_blank" rel="noopener">rop.gov.om</a></td></tr><tr><td><span class="t-en">Oman Investment Authority</span><span class="t-tr">Umman Yatırım Otoritesi</span></td><td><span class="t-en">Sovereign wealth fund</span><span class="t-tr">Egemen varlık fonu</span></td><td><a href="https://oia.gov.om" target="_blank" rel="noopener">oia.gov.om</a></td></tr><tr><td><span class="t-en">S&amp;P · Moody&#39;s · Fitch</span><span class="t-tr">S&amp;P · Moody&#39;s · Fitch</span></td><td><span class="t-en">Sovereign credit ratings — investment grade (2024–2025)</span><span class="t-tr">Egemen kredi notları — yatırım yapılabilir (2024–2025)</span></td><td><a href="https://spglobal.com/ratings" target="_blank" rel="noopener">spglobal.com · moodys.com · fitchratings.com</a></td></tr></tbody>
+  </table></div>
+  <p class="note"><span class="t-en">Primary source for project scale, values, ownership and residency: Ministry of Housing &amp; Urban Planning, Oman — Investment Roadmap (March 2026), via oman.housing.gov.om. Sovereign ratings, government debt and exchange rates independently verified in June 2026. This document is market intelligence, not legal, tax or investment advice; verify project-specific terms with the developer and the relevant Omani authority before any commitment.</span><span class="t-tr">Proje ölçeği, değerleri, mülkiyet ve ikamet için birincil kaynak: Konut ve Şehircilik Bakanlığı, Umman — Yatırım Yol Haritası (Mart 2026), oman.housing.gov.om üzerinden. Egemen notlar, kamu borcu ve döviz kurları Haziran 2026&#39;da bağımsız doğrulanmıştır. Bu belge piyasa istihbaratıdır; hukuki, vergisel veya yatırım tavsiyesi değildir. Herhangi bir taahhütten önce projeye özgü şartları geliştirici ve ilgili Umman makamıyla doğrulayın.</span></p>
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+  <span class="sp"><span class="t-en">Powered by</span><span class="t-tr">Destekleyen</span> <b>SP Architects</b> · DUBAI · İSTANBUL · GLOBAL</span><span style="display:block;font-size:11.5px;color:#828aa0;margin-top:6px">ASLAN L.L.C-FZ · Licence 2200845.01 · The Meydan Hotel, Grandstand, 6th floor, Meydan Road, Nad Al Sheba, Dubai, U.A.E</span>
+  <span>ASLAN · <a href="mailto:info@aslanbusiness.com">info@aslanbusiness.com</a> · <span class="t-en">Real Estate Intelligence</span><span class="t-tr">Gayrimenkul Zekâsı</span></span>
+</div></footer>
+
+<script>
+function setLang(l){
+  document.body.classList.remove('show-en','show-tr');
+  document.body.classList.add('show-'+l);
+  document.getElementById('btn-en').classList.toggle('on', l==='en');
+  document.getElementById('btn-tr').classList.toggle('on', l==='tr');
+  document.documentElement.lang = l;
+  try{ localStorage.setItem('aslan_lang', l); }catch(e){}
+}
+(function(){
+  var saved;
+  try{ saved = localStorage.getItem('aslan_lang'); }catch(e){}
+  if(saved){ setLang(saved); }
+})();
+</script>
+</body>
+</html>
