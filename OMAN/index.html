@@ -1,1 +1,99 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OMAN — Türkiye Visit · ASLAN</title><meta name="robots" content="noindex"><meta name="theme-color" content="#103890">
+<style>
+:root{
+  --ink:#15203a;--navy:#103890;--navy2:#2a52ad;--gold:#103890;--gold2:#2a52ad;
+  --paper:#ffffff;--soft:#f5f7fb;--soft2:#f8f9fc;--line:#e8eaf1;--muted:#828aa0;--green:#15203a;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:#0b5cad;text-decoration:none}
+img{display:block;max-width:100%}
+.t-tr{display:none}
+body.show-tr .t-en{display:none}
+body.show-tr .t-tr{display:inline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
+/* topbar */
+.topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+.topbar-in{max-width:1080px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;color:#15203a;font-weight:700;letter-spacing:.16em;font-size:15px}
+.brand img{height:28px;width:auto;filter:brightness(0) invert(1)}
+.brand small{font-weight:500;letter-spacing:.14em;color:#103890;font-size:10px;display:block;margin-top:1px}
+.nav{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav a.lnk{color:#828aa0;font-size:12.5px;letter-spacing:.04em;padding:6px 10px;border-radius:8px}
+.nav a.lnk:hover{color:#15203a;background:#f5f7fb}
+.langtog{display:inline-flex;border:1px solid #e8eaf1;border-radius:999px;overflow:hidden}
+.langtog button{background:transparent;border:0;color:#828aa0;font-size:12px;font-weight:700;letter-spacing:.06em;padding:6px 12px;cursor:pointer;font-family:inherit}
+.langtog button.active{background:var(--gold);color:#fff}
+
+/* hero */
+.hero{position:relative;overflow:hidden;color:#fff;border-radius:22px;margin:24px 0 8px;
+  background:linear-gradient(125deg,#103890 0%,#2a52ad 60%,#3f6fd1 100%);padding:42px 38px}
+.hero .kicker{letter-spacing:.18em;text-transform:uppercase;font-size:11.5px;color:#d8bd8c;font-weight:700}
+.hero h1{font-size:34px;line-height:1.1;margin:12px 0 12px;font-weight:800;letter-spacing:-.01em}
+.hero p{font-size:16.5px;max-width:760px;color:#e9eff4;margin:0}
+.hero .conf{margin-top:18px;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:#cfe0d8;
+  border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:5px 13px}
+.hero .conf b{color:#fff}
+
+.section{margin:34px 0}
+.kick{letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:var(--gold);font-weight:800;margin-bottom:6px}
+.section h2{font-size:22px;color:var(--navy);margin:0 0 6px;font-weight:800;letter-spacing:-.01em}
+.rule{height:3px;width:56px;background:var(--gold);border-radius:3px;margin:8px 0 18px}
+
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tool{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:#fff;
+  box-shadow:0 2px 12px rgba(19,23,29,.05);overflow:hidden;transition:transform .15s ease,box-shadow .15s ease}
+a.tool:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(19,23,29,.12)}
+.tool .top{padding:18px 20px 8px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tool .ic{width:38px;height:38px;border-radius:10px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--navy)}
+.tool .ic svg{width:20px;height:20px}
+.tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;border-radius:999px;padding:3px 9px}
+.tag.ready{background:#eef3f0;color:var(--green);border:1px solid #d8e6df}
+.tag.prev{background:#fbf4e7;color:#7b5a24;border:1px solid #ecd9b6}
+.tag.soon{background:#eef4f8;color:#1a4f72;border:1px solid #cfe0ec}
+.tool .body{padding:4px 20px 18px;display:flex;flex-direction:column;flex:1}
+.tool h3{font-size:17px;color:var(--navy);margin:6px 0 4px}
+.tool p{font-size:13.5px;color:#475260;margin:0 0 14px;flex:1}
+.tool .go{font-weight:800;color:var(--gold);font-size:13px;letter-spacing:.03em}
+.tool.disabled{opacity:.66}
+.tool.disabled .go{color:var(--muted)}
+
+.footer{margin-top:42px;border-top:1px solid var(--line);padding:18px 0 50px;color:var(--muted);font-size:12.5px;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.footer .powered b{color:#0b5cad}
+.footer .loc{color:#9a8e76;letter-spacing:.06em;font-size:11.5px}
+
+@media(max-width:760px){.grid{grid-template-columns:1fr}.hero{padding:30px 22px}.hero h1{font-size:26px}}
+
+/* --- access gate (soft lock) --- */
+.gate{position:fixed;inset:0;z-index:200;background:linear-gradient(125deg,#103890,#2a52ad 60%,#3f6fd1);display:flex;align-items:center;justify-content:center;padding:24px}
+body:not(.locked) .gate{display:none}
+body.locked .topbar,body.locked .wrap{display:none}
+.gate-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:34px 30px;max-width:380px;width:100%;text-align:center;color:#fff;backdrop-filter:blur(6px)}
+.gate-card img{height:30px;margin:0 auto 18px;filter:brightness(0) invert(1)}
+.gate-card h2{font-size:19px;margin:0 0 6px;font-weight:800;letter-spacing:.02em}
+.gate-card p{font-size:13px;color:#cfe0d8;margin:0 0 18px}
+.gate-card input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:15px;font-family:inherit;text-align:center;letter-spacing:.08em}
+.gate-card input:focus{outline:2px solid var(--gold2);border-color:transparent}
+.gate-card button{margin-top:12px;width:100%;background:var(--gold);color:#fff;font-weight:800;border:0;padding:12px;border-radius:10px;font-size:14px;letter-spacing:.04em;cursor:pointer;font-family:inherit}
+.gate-card button:hover{background:var(--gold2)}
+.gate-err{color:#ffb4a8;font-size:12.5px;margin-top:12px;min-height:16px}
+</style></head>
+<body class="show-en locked">
+<div class="gate" id="gate"><form class="gate-card" onsubmit="return checkPass(event)"><img src="/aslan-lion.png" alt="ASLAN"><h2><span class="t-en">Restricted area</span><span class="t-tr">Kısıtlı alan</span></h2><p><span class="t-en">Enter the passcode to view this workspace.</span><span class="t-tr">Bu çalışma alanını görmek için şifreyi girin.</span></p><input id="pass" type="password" autocomplete="off" autofocus placeholder="••••••"><button type="submit"><span class="t-en">Enter</span><span class="t-tr">Giriş</span></button><div class="gate-err" id="gerr"></div></form></div>
+<div class="topbar"><div class="topbar-in"><a class="brand" href="https://www.aslanbusiness.com"><img src="/aslan-lion.png" alt="ASLAN"><span>ASLAN<small>CLIENT WORKSPACE</small></span></a><div class="nav"><a class="lnk" href="https://www.aslanbusiness.com/client/index.html"><span class="t-en">Client Login</span><span class="t-tr">Müşteri Girişi</span></a><div class="langtog"><button data-l="en" class="active" onclick="setLang('en')">EN</button><button data-l="tr" onclick="setLang('tr')">TR</button></div></div></div></div><div class="wrap"><div class="hero"><div class="kicker"><span class="t-en">Prepared by ASLAN · for OMAN</span><span class="t-tr">ASLAN tarafından · OMAN için</span></div><h1><span class="t-en">Türkiye Visit &amp; Investment</span><span class="t-tr">Türkiye Ziyareti &amp; Yatırım</span></h1><p><span class="t-en">Your briefing for a visit to Türkiye — the investment report, city-by-city real estate reports and site-visit routes, all in one place.</span><span class="t-tr">Türkiye ziyaretiniz için brifing — yatırım raporu, şehir şehir gayrimenkul raporları ve saha ziyareti rotaları tek bir yerde.</span></p><div class="conf"><span>🔒</span> <b><span class="t-en">Confidential</span><span class="t-tr">Gizli</span></b> · <span class="t-en">for OMAN only</span><span class="t-tr">yalnızca OMAN için</span></div></div><div class="section"><div class="kick"><span class="t-en">Turkey visit</span><span class="t-tr">Türkiye ziyareti</span></div><h2><span class="t-en">Everything for your visit</span><span class="t-tr">Ziyaretiniz için her şey</span></h2><div class="rule"></div><div class="grid"><a class="tool" href="../real-estate/turkey.html" target="_blank" rel="noopener"><div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><span class="tag prev"><span class="t-en">Report</span><span class="t-tr">Rapor</span></span></div><div class="body"><h3><span class="t-en">Türkiye Investment Report</span><span class="t-tr">Türkiye Yatırım Raporu</span></h3><p><span class="t-en">The detailed Türkiye investment report — market, cities and what to watch.</span><span class="t-tr">Detaylı Türkiye yatırım raporu — pazar, şehirler ve dikkat edilecekler.</span></p><span class="go"><span class="t-en">Open in new page</span><span class="t-tr">Yeni sayfada aç</span> →</span></div></a><a class="tool" href="../real-estate/index.html" target="_blank" rel="noopener"><div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/></svg></div><span class="tag prev"><span class="t-en">Hub</span><span class="t-tr">Hub</span></span></div><div class="body"><h3><span class="t-en">Real Estate Reports</span><span class="t-tr">Gayrimenkul Raporları</span></h3><p><span class="t-en">City-by-city reports: Bodrum, İstanbul, Ankara, Muscat and more.</span><span class="t-tr">Şehir şehir raporlar: Bodrum, İstanbul, Ankara, Muscat ve daha fazlası.</span></p><span class="go"><span class="t-en">Open in new page</span><span class="t-tr">Yeni sayfada aç</span> →</span></div></a></div><div class="kick" style="margin-top:30px"><span class="t-en">Cities for your route</span><span class="t-tr">Rotanız için şehirler</span></div><h2 style="font-size:20px"><span class="t-en">Open a city report</span><span class="t-tr">Bir şehir raporu açın</span></h2><div class="rule"></div><div class="grid"><a class="tool" href="../real-estate/bodrum.html" target="_blank" rel="noopener"><div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div><span class="tag prev"><span class="t-en">City</span><span class="t-tr">Şehir</span></span></div><div class="body"><h3><span class="t-en">Bodrum</span><span class="t-tr">Bodrum</span></h3><p><span class="t-en">Branded residences and resort-villa communities on the Aegean.</span><span class="t-tr">Ege’de markalı rezidanslar ve resort-villa toplulukları.</span></p><span class="go"><span class="t-en">Open in new page</span><span class="t-tr">Yeni sayfada aç</span> →</span></div></a><a class="tool" href="../real-estate/istanbul.html" target="_blank" rel="noopener"><div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div><span class="tag prev"><span class="t-en">City</span><span class="t-tr">Şehir</span></span></div><div class="body"><h3><span class="t-en">İstanbul</span><span class="t-tr">İstanbul</span></h3><p><span class="t-en">The deepest, most liquid market — Bosphorus to CBD.</span><span class="t-tr">En derin, en likit pazar — Boğaz’dan merkeze.</span></p><span class="go"><span class="t-en">Open in new page</span><span class="t-tr">Yeni sayfada aç</span> →</span></div></a><a class="tool" href="../real-estate/ankara.html" target="_blank" rel="noopener"><div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div><span class="tag prev"><span class="t-en">City</span><span class="t-tr">Şehir</span></span></div><div class="body"><h3><span class="t-en">Ankara</span><span class="t-tr">Ankara</span></h3><p><span class="t-en">A defensive, value-entry capital market.</span><span class="t-tr">Savunmacı, değerli giriş sunan başkent pazarı.</span></p><span class="go"><span class="t-en">Open in new page</span><span class="t-tr">Yeni sayfada aç</span> →</span></div></a></div></div><div class="footer"><span class="powered"><span class="t-en">Prepared by</span><span class="t-tr">Hazırlayan</span> <b>ASLAN</b> · <span class="t-en">for OMAN</span><span class="t-tr">OMAN için</span> · © 2026</span><span class="loc"><span class="t-en">Confidential — client workspace</span><span class="t-tr">Gizli — müşteri alanı</span></span></div></div>
+<script>function setLang(l){document.body.classList.toggle('show-tr',l==='tr');document.body.classList.toggle('show-en',l!=='tr');document.querySelectorAll('.langtog button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-l')===l);});}
+document.addEventListener('DOMContentLoaded',function(){setLang('en');});
+/* access gate */
+var PASS_HASH="5b1f94750d53ab84b5f3fb4bf25b8bf15b162f800f004ae2709b56fdc53a5fb7";
+async function sha256(t){var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join('');}
+function unlock(){document.body.classList.remove('locked');try{sessionStorage.setItem('oman_ok','1');}catch(e){}}
+async function checkPass(e){e.preventDefault();var v=document.getElementById('pass').value;try{var h=await sha256(v);if(h===PASS_HASH){unlock();}else{document.getElementById('gerr').textContent=document.body.classList.contains('show-tr')?'Hatalı şifre':'Wrong passcode';}}catch(err){document.getElementById('gerr').textContent='Secure connection (https) required';}return false;}
+(function(){try{if(sessionStorage.getItem('oman_ok')==='1'){document.body.classList.remove('locked');}}catch(e){}})();
+</script>
+</body></html>
