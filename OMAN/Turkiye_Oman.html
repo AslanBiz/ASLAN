@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="tr" data-lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#103890">
+<title>ASLAN · Türkiye ⇄ Umman · Gayrimenkul İş Birliği Çerçevesi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand:#103890;        /* ASLAN royal blue */
+    --brand-deep:#0B2A6B;
+    --brand-mid:#3358B4;
+    --brand-tint:#E7EDF9;
+    --brass:#9C7A2E;        /* secondary accent */
+    --brass-soft:#C2A25A;
+    --brass-wash:#F1EAD8;
+    --slate:#3C4A63;        /* shared / structure */
+    --slate-wash:#E4E7EF;
+
+    --paper:#F5F6FA;
+    --panel:#FFFFFF;
+    --panel-2:#EDEFF5;
+    --panel-3:#E5E9F1;
+    --ink:#14171E;
+    --ink-soft:#464C59;
+    --ink-faint:#767C8B;
+    --line:#D6DAE3;
+    --line-soft:#E4E7EE;
+
+    --serif:'IBM Plex Serif',Georgia,'Times New Roman',serif;
+    --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --wrap:880px;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.62;
+    font-feature-settings:"kern" 1,"liga" 1;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* language toggle — only ever hides, never forces a display value */
+  [data-lang="tr"] .en{display:none !important;}
+  [data-lang="en"] .tr{display:none !important;}
+
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 26px;}
+
+  /* ---- top bar ---- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(245,246,250,0.9);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{
+    max-width:var(--wrap);margin:0 auto;padding:11px 26px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .brandmark{
+    font-size:12px;font-weight:600;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--ink-soft);
+    display:flex;align-items:center;gap:9px;
+  }
+  .brandmark .dot{width:7px;height:7px;background:var(--brand);border-radius:50%;flex:none;}
+  .brandmark .n{color:var(--brand);font-weight:700;}
+  .toggle{display:flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .toggle button{
+    font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.08em;
+    padding:6px 13px;border:0;background:transparent;color:var(--ink-faint);
+    cursor:pointer;transition:background .18s,color .18s;
+  }
+  .toggle button:hover{color:var(--ink);}
+  .toggle button[aria-pressed="true"]{background:var(--brand);color:#fff;}
+  .toggle button:focus-visible{outline:2px solid var(--brass);outline-offset:-2px;}
+
+  /* ---- hero ---- */
+  header.hero{padding:64px 0 42px;border-bottom:1px solid var(--line);}
+  .eyebrow{
+    font-size:12px;font-weight:600;letter-spacing:0.18em;
+    text-transform:uppercase;color:var(--brand);margin:0 0 20px;
+  }
+  h1{
+    font-family:var(--serif);font-weight:600;
+    font-size:clamp(2.1rem,5.6vw,3.35rem);line-height:1.07;
+    letter-spacing:-0.01em;margin:0 0 20px;max-width:16ch;
+  }
+  h1 .amp{color:var(--brand);font-weight:500;}
+  .lede{
+    font-family:var(--sans);font-weight:400;
+    font-size:clamp(1.08rem,2.2vw,1.28rem);line-height:1.55;
+    color:var(--ink-soft);max-width:56ch;margin:0 0 34px;
+  }
+
+  /* signature — site plan of a relationship */
+  .siteplan{width:100%;height:auto;display:block;margin:6px 0 6px;overflow:visible;}
+  .sp-grid{stroke:var(--line);stroke-width:0.6;}
+  .sp-node{fill:var(--paper);stroke:var(--ink);stroke-width:1.4;}
+  .sp-node-tr{stroke:var(--brand);}
+  .sp-node-om{stroke:var(--brass);}
+  .sp-core-tr{fill:var(--brand);}
+  .sp-core-om{fill:var(--brass);}
+  .sp-line{fill:none;stroke:var(--brand);stroke-width:1.5;stroke-dasharray:6 5;}
+  .sp-tick{stroke:var(--ink-faint);stroke-width:1;}
+  .sp-label{font-family:var(--sans);font-weight:600;font-size:12px;fill:var(--ink);letter-spacing:0.1em;}
+  .sp-coord{font-family:var(--sans);font-size:9.5px;fill:var(--ink-faint);letter-spacing:0.03em;}
+  .sp-mid{font-family:var(--sans);font-weight:600;font-size:9px;fill:var(--brand);letter-spacing:0.12em;}
+
+  .draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.5s .3s ease forwards;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  .fadein-node{opacity:0;animation:pop .5s ease forwards;}
+  .n1{animation-delay:.2s;} .n2{animation-delay:1.5s;}
+  @keyframes pop{to{opacity:1;}}
+
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:26px;margin-top:30px;
+    font-size:12px;font-weight:500;letter-spacing:0.05em;
+    color:var(--ink-faint);text-transform:uppercase;
+  }
+  .meta-row b{color:var(--ink-soft);font-weight:600;}
+
+  /* ---- section scaffold ---- */
+  section{padding:52px 0;border-bottom:1px solid var(--line);}
+  .sec-head{display:flex;gap:16px;align-items:baseline;margin-bottom:8px;}
+  .sec-num{font-family:var(--sans);font-weight:600;font-size:13px;color:var(--brand);letter-spacing:0.06em;flex:none;padding-top:5px;}
+  h2{
+    font-family:var(--serif);font-weight:600;
+    font-size:clamp(1.5rem,3.4vw,2.05rem);line-height:1.15;
+    letter-spacing:-0.005em;margin:0;
+  }
+  .sec-eyebrow{
+    font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;
+    color:var(--ink-faint);margin:0 0 26px 46px;
+  }
+  @media(max-width:640px){.sec-eyebrow{margin-left:0;}}
+  p{margin:0 0 16px;}
+  p.body{max-width:64ch;}
+  .indent{margin-left:46px;}
+  @media(max-width:640px){.indent{margin-left:0;}}
+  strong{font-weight:600;}
+  .om{color:var(--brass);font-weight:600;}
+  .tr-accent{color:var(--brand);font-weight:600;}
+  .sl{color:var(--slate);font-weight:600;}
+
+  /* ---- two-way diagram ---- */
+  .flow{display:grid;grid-template-columns:1fr;gap:14px;margin:8px 0 6px;}
+  .actor{
+    border:1px solid var(--line);border-left:3px solid var(--ink);
+    background:var(--panel);padding:18px 20px;
+  }
+  .actor.tr{border-left-color:var(--brand);}
+  .actor.om-gov{border-left-color:var(--brass);}
+  .actor.om-dev{border-left-color:var(--slate);}
+  .actor h3{
+    font-family:var(--sans);font-weight:700;font-size:0.98rem;
+    letter-spacing:0.005em;margin:0 0 4px;
+  }
+  .actor .role{font-size:10.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 12px;}
+  .actor .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:560px){.actor .cols{grid-template-columns:1fr;gap:10px;}}
+  .actor .cols .k{font-size:10px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:3px;}
+  .actor .cols p{margin:0;font-size:0.93rem;line-height:1.46;}
+  .flow-note{font-size:15px;color:var(--brand);text-align:center;margin:2px 0;}
+
+  /* ---- tiers ---- */
+  .tier{border:1px solid var(--line);margin-bottom:14px;background:var(--panel);}
+  .tier-bar{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    padding:13px 18px;border-bottom:1px solid var(--line-soft);
+    background:var(--panel-2);
+  }
+  .tier-tag{font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--brass);white-space:nowrap;}
+  .tier-name{font-weight:700;font-size:1rem;}
+  .tier-crit{margin-left:auto;font-size:9.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);display:flex;align-items:center;gap:6px;}
+  .crit-dots{display:inline-flex;gap:3px;}
+  .crit-dots i{width:6px;height:6px;border-radius:50%;background:var(--line);display:inline-block;}
+  .crit-4 i:nth-child(-n+4),.crit-3 i:nth-child(-n+3),.crit-2 i:nth-child(-n+2),.crit-1 i:nth-child(-n+1){background:var(--brass);}
+  .tier ul{list-style:none;margin:0;padding:14px 18px;}
+  .tier li{position:relative;padding-left:20px;margin-bottom:9px;font-size:0.96rem;line-height:1.5;}
+  .tier li:last-child{margin-bottom:0;}
+  .tier li::before{content:"";position:absolute;left:0;top:10px;width:8px;height:1.5px;background:var(--brand);}
+  .tier li b{font-weight:600;}
+  .known{font-size:0.86em;font-weight:500;color:var(--slate);}
+
+  /* ---- responsibility map ---- */
+  .map{border-top:1px solid var(--line);margin-top:6px;}
+  .map-row{display:grid;grid-template-columns:1.15fr 1fr;gap:20px;padding:15px 0;border-bottom:1px solid var(--line-soft);}
+  @media(max-width:600px){.map-row{grid-template-columns:1fr;gap:5px;}}
+  .map-need{font-size:0.96rem;line-height:1.45;}
+  .map-need b{font-weight:600;}
+  .map-owner{font-size:0.9rem;font-weight:600;line-height:1.5;color:var(--brand);letter-spacing:0.01em;align-self:center;}
+  .map-owner .tag{color:var(--brass);}
+
+  /* ---- partnership table ---- */
+  .ptable{width:100%;border-collapse:collapse;margin-top:6px;font-size:0.92rem;}
+  .ptable th{
+    font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+    text-align:left;padding:10px 12px;border-bottom:2px solid var(--ink);vertical-align:bottom;
+  }
+  .ptable th.om{color:var(--brass);}
+  .ptable th.tr-h{color:var(--brand);}
+  .ptable td{padding:12px;border-bottom:1px solid var(--line-soft);vertical-align:top;line-height:1.42;}
+  .ptable td.model{font-weight:600;}
+  .ptable td.om-c{background:rgba(156,122,46,0.06);}
+  .ptable td.tr-c{background:rgba(16,56,144,0.05);}
+  .ptable-wrap{overflow-x:auto;}
+  @media(max-width:640px){.ptable{font-size:0.83rem;}.ptable td,.ptable th{padding:9px 8px;}}
+
+  /* ---- readings (market) ---- */
+  .readings{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);margin:6px 0 22px;background:var(--panel);}
+  @media(max-width:620px){.readings{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:400px){.readings{grid-template-columns:1fr;}}
+  .reading{padding:16px 16px 15px;border-right:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+  .reading .num{font-family:var(--sans);font-weight:600;font-size:1.4rem;color:var(--ink);letter-spacing:-0.01em;line-height:1.1;font-feature-settings:"tnum" 1;}
+  .reading .num .u{font-size:0.82rem;color:var(--brand);font-weight:700;}
+  .reading .cap{font-size:0.79rem;line-height:1.35;color:var(--ink-soft);margin-top:5px;}
+  .caveats{border-left:3px solid var(--slate);background:var(--slate-wash);padding:16px 20px;}
+  .caveats h4{font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--slate);margin:0 0 10px;}
+  .caveats ul{margin:0;padding-left:18px;}
+  .caveats li{margin-bottom:7px;font-size:0.94rem;line-height:1.5;}
+  .caveats li:last-child{margin-bottom:0;}
+
+  /* ---- survey block ---- */
+  .survey{border:1px solid var(--brand);background:var(--panel);}
+  .survey-head{padding:16px 20px;border-bottom:1px solid var(--line);background:var(--brand-tint);display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .survey-head .t{font-family:var(--serif);font-weight:600;font-size:1.08rem;color:var(--brand-deep);}
+  .survey-head .n{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand);}
+  .survey ol{margin:0;padding:8px 20px 18px 44px;}
+  .survey li{margin:14px 0;font-size:0.95rem;line-height:1.5;}
+  .survey li .q{font-weight:600;display:block;margin-bottom:4px;}
+  .survey li .opts{font-size:0.84rem;font-weight:500;color:var(--slate);}
+
+  /* ---- 03: MOU / know-how / workshops ---- */
+  .mou{border:1px solid var(--brand);background:var(--panel);margin:6px 0 10px;}
+  .mou-head{padding:16px 20px;border-bottom:1px solid var(--line);background:var(--brand-tint);}
+  .mou-head .k{font-size:10.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--brand);display:block;margin-bottom:8px;}
+  .mou-title{font-family:var(--serif);font-weight:600;font-size:1.12rem;line-height:1.3;color:var(--brand-deep);}
+  .signrow{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line-soft);}
+  @media(max-width:560px){.signrow{grid-template-columns:1fr;}}
+  .sign{padding:15px 20px;}
+  .sign.a{border-right:1px solid var(--line-soft);}
+  @media(max-width:560px){.sign.a{border-right:0;border-bottom:1px solid var(--line-soft);}}
+  .sign .cty{font-size:10px;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:var(--brass);margin-bottom:5px;}
+  .sign .nm{font-weight:600;font-size:1rem;line-height:1.25;}
+  .sign .ttl{font-size:0.86rem;color:var(--ink-soft);line-height:1.4;margin-top:3px;}
+  .mou-body{padding:16px 20px;}
+  .mou-body .lbl{font-size:10px;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 10px;}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
+  .tag-pill{font-size:0.8rem;font-weight:500;padding:5px 11px;border:1px solid var(--line);border-radius:20px;background:var(--paper);color:var(--slate);}
+  .mou-notes{list-style:none;margin:0;padding:0;}
+  .mou-notes li{position:relative;padding-left:20px;margin-bottom:8px;font-size:0.93rem;line-height:1.48;}
+  .mou-notes li:last-child{margin-bottom:0;}
+  .mou-notes li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:1.5px;background:var(--brass);}
+  .subhead{font-family:var(--serif);font-weight:600;font-size:1.15rem;margin:26px 0 4px;line-height:1.2;}
+  .sec-eyebrow.flush{margin-left:0;}
+  .khgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 10px;}
+  @media(max-width:600px){.khgrid{grid-template-columns:1fr;}}
+  .khcard{border:1px solid var(--line);border-top:3px solid var(--brand);background:var(--panel);padding:15px 17px;}
+  .khcard h4{font-family:var(--sans);font-weight:700;font-size:0.98rem;margin:0 0 6px;line-height:1.25;}
+  .khcard p{font-size:0.9rem;line-height:1.46;margin:0 0 9px;color:var(--ink-soft);}
+  .khcard .fit{font-size:0.82rem;line-height:1.42;margin:0;color:var(--brand);}
+  .khcard .fit b{font-weight:600;}
+  .ws-lead{font-size:0.96rem;line-height:1.55;margin:2px 0 14px;max-width:64ch;}
+  .ws-cad{font-weight:700;color:var(--brand);}
+
+  /* ---- next steps ---- */
+  .steps{counter-reset:step;list-style:none;margin:6px 0 0;padding:0;}
+  .steps li{position:relative;padding:15px 0 15px 52px;border-bottom:1px solid var(--line-soft);}
+  .steps li::before{
+    counter-increment:step;content:counter(step,decimal-leading-zero);
+    position:absolute;left:0;top:15px;font-family:var(--sans);font-weight:700;font-size:12px;color:var(--brand);letter-spacing:0.04em;
+  }
+  .steps .who{font-size:10px;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:var(--brass);display:block;margin-bottom:3px;}
+  .steps .act{font-size:0.97rem;line-height:1.5;}
+  .steps .act b{font-weight:600;}
+
+  .table-callout{
+    margin-top:26px;border:1.5px solid var(--brand);background:var(--brand-tint);
+    padding:20px 22px;
+  }
+  .table-callout .lab{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--brand);margin:0 0 12px;}
+  .table-callout p{margin:0 0 9px;font-size:0.96rem;line-height:1.5;}
+  .table-callout p:last-child{margin-bottom:0;}
+  .table-callout .num-inline{font-weight:700;color:var(--brand);}
+
+  /* ---- footer ---- */
+  footer{padding:44px 0 60px;}
+  .foot-grid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-end;}
+  .foot-brand{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--brand);letter-spacing:0.02em;}
+  .foot-brand .sub{display:block;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:0.16em;color:var(--ink-faint);margin-top:5px;}
+  .foot-meta{font-size:11px;font-weight:500;letter-spacing:0.04em;color:var(--ink-faint);line-height:1.7;text-align:right;}
+  @media(max-width:560px){.foot-meta{text-align:left;}}
+  .sources{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:10.5px;font-weight:400;letter-spacing:0.01em;color:var(--ink-faint);line-height:1.7;max-width:72ch;}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    .draw{animation:none;stroke-dashoffset:0;}
+    .fadein-node{animation:none;opacity:1;}
+    .reveal{opacity:1 !important;transform:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brandmark"><span class="dot"></span><span class="n">ASLAN</span> · Türkiye <span style="color:var(--brand)">⇄</span> Umman</div>
+    <div class="toggle" role="group" aria-label="Dil / Language">
+      <button id="btn-tr" aria-pressed="true" onclick="setLang('tr')">TR</button>
+      <button id="btn-en" aria-pressed="false" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <p class="eyebrow">
+      <span class="tr">ASLAN · Gayrimenkul Zekâsı · Stratejik Çerçeve</span>
+      <span class="en">ASLAN · Real Estate Intelligence · Strategic Framework</span>
+    </p>
+    <h1>
+      <span class="tr">Gayrimenkulde Türkiye <span class="amp">⇄</span> Umman Köprüsü</span>
+      <span class="en">The Turkey <span class="amp">⇄</span> Oman Real&nbsp;Estate Bridge</span>
+    </h1>
+    <p class="lede">
+      <span class="tr">Türkiye'nin önde gelen geliştiricilerinin Umman pazarına girerken öğrenmesi gerekenleri, Umman devletinin sağlaması gerekenleri ve sahadaki piyasa gerçeklerini iki yönlü bir çerçevede ortaya koyar.</span>
+      <span class="en">A two-way framework setting out what Turkey's leading developers must learn to enter the Omani market, what the Omani state must provide, and the market realities on the ground.</span>
+    </p>
+
+    <!-- signature: site plan of a relationship -->
+    <svg class="siteplan" viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Türkiye ve Umman'ı birbirine bağlayan mimari eskiz / Architectural sketch linking Turkey and Oman">
+      <g class="sp-grid">
+        <line x1="0" y1="50" x2="800" y2="50"/>
+        <line x1="0" y1="100" x2="800" y2="100"/>
+        <line x1="0" y1="150" x2="800" y2="150"/>
+        <line x1="0" y1="200" x2="800" y2="200"/>
+        <line x1="130" y1="0" x2="130" y2="250"/>
+        <line x1="260" y1="0" x2="260" y2="250"/>
+        <line x1="400" y1="0" x2="400" y2="250"/>
+        <line x1="540" y1="0" x2="540" y2="250"/>
+        <line x1="670" y1="0" x2="670" y2="250"/>
+      </g>
+      <path id="spline" class="sp-line draw" d="M 150 90 Q 400 30 650 160"/>
+      <line class="sp-tick" x1="396" y1="52" x2="404" y2="42"/>
+      <text class="sp-mid" x="378" y="34">MOU / JV</text>
+      <g class="fadein-node n1">
+        <circle class="sp-node sp-node-tr" cx="150" cy="90" r="11"/>
+        <circle class="sp-core-tr" cx="150" cy="90" r="3.5"/>
+        <text class="sp-label" x="150" y="126" text-anchor="middle">TÜRKİYE</text>
+        <text class="sp-coord" x="150" y="141" text-anchor="middle">41.0°N · 29.0°E</text>
+      </g>
+      <g class="fadein-node n2">
+        <circle class="sp-node sp-node-om" cx="650" cy="160" r="11"/>
+        <circle class="sp-core-om" cx="650" cy="160" r="3.5"/>
+        <text class="sp-label" x="650" y="196" text-anchor="middle">UMMAN · OMAN</text>
+        <text class="sp-coord" x="650" y="211" text-anchor="middle">23.6°N · 58.5°E</text>
+      </g>
+    </svg>
+
+    <div class="meta-row">
+      <span><b>Kapsam / Scope</b> · <span class="tr">Gayrimenkul geliştirme</span><span class="en">Real-estate development</span></span>
+      <span><b>Tarih / Date</b> · 2026</span>
+      <span><b>Durum / Status</b> · <span class="tr">Taslak v1</span><span class="en">Draft v1</span></span>
+    </div>
+  </header>
+
+  <!-- ================= 01 PURPOSE ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§01</span>
+      <h2>
+        <span class="tr">Amaç ve Yaklaşım</span>
+        <span class="en">Purpose &amp; Approach</span>
+      </h2>
+    </div>
+    <p class="sec-eyebrow">
+      <span class="tr">Dört ayak, iki yön</span>
+      <span class="en">Four pillars, two directions</span>
+    </p>
+    <div class="indent">
+      <div class="tr">
+        <p class="body">Bu rapor, Türkiye'nin önde gelen konut ve gayrimenkul geliştiricilerinin Umman pazarına girişini gerçekçi bir zeminde değerlendirir. Sürdürülebilir bir iş hattı dört ayağın aynı anda kurulmasını gerektirir: Türk geliştiricilerin <strong>girmeden önce netleştirmesi gerekenler</strong>, Umman devletinin <strong>aktif olarak sağlaması ve kolaylaştırması gerekenler</strong>, Umman'lı geliştiricilerin <strong>aradığı ortaklık biçimleri</strong> ve her iki tarafın paylaştığı <strong>piyasa gerçekçiliği</strong>.</p>
+        <p class="body">Belge bu dört başlığı güncel Umman mevzuatı ve piyasa verileriyle zemine oturtur ve masaya somut bir hareket planı koyar. Rakamlar kamuya açık 2025–26 kaynaklarından derlenmiştir; nihai kararlar Umman resmi mercileriyle teyit edilmelidir.</p>
+      </div>
+      <div class="en">
+        <p class="body">This report assesses, on realistic terms, the entry of Turkey's leading housing and real-estate developers into the Omani market. A durable pipeline requires four pillars set at once: what Turkish developers <strong>must clarify before entering</strong>, what the Omani state <strong>must actively provide and facilitate</strong>, what partnership forms Omani developers <strong>are seeking</strong>, and the <strong>market realism</strong> both sides share.</p>
+        <p class="body">The document grounds those four headings in current Omani law and market data, and puts a concrete action plan on the table. Figures are drawn from public 2025–26 sources; final decisions should be confirmed with Omani authorities.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 02 TWO-WAY LOGIC ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§02</span>
+      <h2>
+        <span class="tr">İki Yönlü Mantık</span>
+        <span class="en">The Two-Way Logic</span>
+      </h2>
+    </div>
+    <p class="sec-eyebrow">
+      <span class="tr">Üç aktör · ne getiriyor, ne bekliyor</span>
+      <span class="en">Three actors · what each brings, what each needs</span>
+    </p>
+
+    <div class="flow indent">
+      <div class="actor tr">
+        <h3><span class="tr">Türk Geliştiriciler</span><span class="en">Turkish Developers</span></h3>
+        <p class="role"><span class="tr">müteahhit &amp; geliştirici</span><span class="en">contractors &amp; developers</span></p>
+        <div class="cols">
+          <div>
+            <span class="k"><span class="tr">Getirdiği</span><span class="en">Brings</span></span>
+            <p><span class="tr">Sermaye, hızlı teslimat, maketten satış kabiliyeti, tasarım, arsa-karşılığı-gelir-paylaşımı deneyimi.</span><span class="en">Capital, fast delivery, off-plan sales machine, design, land-for-revenue-share experience.</span></p>
+          </div>
+          <div>
+            <span class="k"><span class="tr">Beklediği</span><span class="en">Needs</span></span>
+            <p><span class="tr">Arsaya erişim, ödeme güvencesi, mülkiyet &amp; sermaye çıkışında netlik.</span><span class="en">Land access, payment security, clarity on ownership &amp; capital repatriation.</span></p>
+          </div>
+        </div>
+      </div>
+
+      <p class="flow-note">↕</p>
+
+      <div class="actor om-gov">
+        <h3><span class="tr">Umman Devleti / Bakanlık</span><span class="en">Omani State / Ministry</span></h3>
+        <p class="role"><span class="tr">yatırımı kolaylaştıran taraf</span><span class="en">the investment facilitator</span></p>
+        <div class="cols">
+          <div>
+            <span class="k"><span class="tr">Getirdiği</span><span class="en">Brings</span></span>
+            <p><span class="tr">Arsa bankası, izin &amp; mevzuat, teşvikler, kamu projesi hattı, tek irtibat noktası.</span><span class="en">Land bank, permits &amp; regulation, incentives, public-project pipeline, single point of contact.</span></p>
+          </div>
+          <div>
+            <span class="k"><span class="tr">Beklediği</span><span class="en">Needs</span></span>
+            <p><span class="tr">Vision 2040 hedeflerini hızlandıracak nitelikli, güvenilir geliştirici sermayesi.</span><span class="en">Quality, reliable developer capital that accelerates Vision 2040 targets.</span></p>
+          </div>
+        </div>
+      </div>
+
+      <p class="flow-note">↕</p>
+
+      <div class="actor om-dev">
+        <h3><span class="tr">Umman'lı Geliştiriciler</span><span class="en">Omani Developers</span></h3>
+        <p class="role"><span class="tr">yerel ortaklar &amp; ana geliştiriciler</span><span class="en">local partners &amp; master developers</span></p>
+        <div class="cols">
+          <div>
+            <span class="k"><span class="tr">Getirdiği</span><span class="en">Brings</span></span>
+            <p><span class="tr">Arsa/parsel, yerel erişim, izin bilgisi, bayrak projelerde ortaklık payı.</span><span class="en">Land/plots, local access, permitting know-how, a stake in flagship projects.</span></p>
+          </div>
+          <div>
+            <span class="k"><span class="tr">Aradığı</span><span class="en">Seeks</span></span>
+            <p><span class="tr">Eş-yatırım, teknik &amp; tasarım gücü, marka ve satış uzmanlığı, teslim hızı.</span><span class="en">Co-investment, technical &amp; design strength, brand and sales expertise, delivery speed.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 03 MOU &amp; WORKSHOPS ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§03</span>
+      <h2>
+        <span class="tr">İmzalanan Mutabakat ve Atölye Programı</span>
+        <span class="en">The Signed MOU &amp; Workshop Programme</span>
+      </h2>
+    </div>
+    <p class="sec-eyebrow">
+      <span class="tr">Zemin zaten kuruldu — sıra yürüyen mekanizmada</span>
+      <span class="en">The foundation is already in place — now, the live mechanism</span>
+    </p>
+
+    <div class="indent">
+      <div class="tr"><p class="body">Bu iş birliği varsayımsal değil. Ziyaretler boyunca somut know-how paylaşıldı ve iki ülke arasında hükümetler-arası bir mutabakat zaptı imzalandı. Aşağıda önce bu resmi zemin, sonra sahada öne çıkan know-how başlıkları ve bunları canlı tutacak bir atölye programı yer alıyor.</p></div>
+      <div class="en"><p class="body">This cooperation is not hypothetical. Concrete know-how was shared during the visits, and a government-to-government memorandum of understanding was signed between the two countries. Below: first the formal foundation, then the know-how themes that stood out on the ground, and a workshop programme to keep them alive.</p></div>
+
+      <!-- MOU CARD -->
+      <div class="mou">
+        <div class="mou-head">
+          <span class="k"><span class="tr">İmzalandı · 2 Temmuz 2026 · Ankara</span><span class="en">Signed · 2 July 2026 · Ankara</span></span>
+          <div class="mou-title"><span class="tr">Konut ve Kentsel Planlama Alanında İş Birliğine İlişkin Mutabakat Zaptı</span><span class="en">Memorandum of Understanding on Cooperation in Housing &amp; Urban Planning</span></div>
+        </div>
+        <div class="signrow">
+          <div class="sign a">
+            <div class="cty">Türkiye</div>
+            <div class="nm">Murat Kurum</div>
+            <div class="ttl"><span class="tr">Çevre, Şehircilik ve İklim Değişikliği Bakanı</span><span class="en">Minister of Environment, Urbanisation &amp; Climate Change</span></div>
+          </div>
+          <div class="sign">
+            <div class="cty">Umman · Oman</div>
+            <div class="nm">Dr. Khalfan bin Saeed Al Shuaili</div>
+            <div class="ttl"><span class="tr">İskan ve Şehircilik Bakanı</span><span class="en">Minister of Housing &amp; Urban Planning</span></div>
+          </div>
+        </div>
+        <div class="mou-body">
+          <p class="lbl"><span class="tr">Kapsam alanları</span><span class="en">Areas of cooperation</span></p>
+          <div class="tags">
+            <span class="tag-pill"><span class="tr">Sürdürülebilir kentsel planlama</span><span class="en">Sustainable urban planning</span></span>
+            <span class="tag-pill"><span class="tr">Akıllı şehirler</span><span class="en">Smart cities</span></span>
+            <span class="tag-pill"><span class="tr">Yeşil binalar &amp; enerji verimliliği</span><span class="en">Green buildings &amp; energy efficiency</span></span>
+            <span class="tag-pill"><span class="tr">Mekansal planlama</span><span class="en">Spatial planning</span></span>
+            <span class="tag-pill"><span class="tr">Kıyı bölge yönetimi</span><span class="en">Coastal zone management</span></span>
+            <span class="tag-pill"><span class="tr">Altyapı geliştirme</span><span class="en">Infrastructure development</span></span>
+            <span class="tag-pill"><span class="tr">Gayrimenkul finansmanı &amp; arazi kaydı</span><span class="en">Real-estate finance &amp; land registry</span></span>
+            <span class="tag-pill"><span class="tr">Araştırma, eğitim &amp; kapasite</span><span class="en">Research, training &amp; capacity</span></span>
+            <span class="tag-pill"><span class="tr">İleri teknoloji: AI, IoT, dijital ikiz</span><span class="en">Advanced tech: AI, IoT, digital twins</span></span>
+          </div>
+          <ul class="mou-notes">
+            <li><span class="tr">Türk ve Ummanlı geliştiriciler ile inşaat firmaları arasında <b>özel sektör ortaklıklarını</b> teşvik eder.</span><span class="en">Encourages <b>private-sector partnerships</b> between Turkish and Omani developers and construction firms.</span></li>
+            <li><span class="tr">Ortak <b>konferans, fuar ve iş forumları</b> düzenlenmesini öngörür.</span><span class="en">Foresees joint <b>conferences, expos and business forums</b>.</span></li>
+            <li><span class="tr">Bilgi ve tecrübe paylaşımı — Türkiye'nin deprem sonrası <b>"asrın inşası"</b> tecrübesi Umman tarafından yakından takip ediliyor.</span><span class="en">Knowledge and experience sharing — Turkey's post-earthquake <b>"construction of the century"</b> is closely followed by the Omani side.</span></li>
+            <li><span class="tr">Umman Bakanı, Bakan Kurum'u <b>Ekim'deki Urbanisation Conference &amp; Exhibition'a</b> davet etti.</span><span class="en">The Omani minister invited Minister Kurum to <b>October's Urbanisation Conference &amp; Exhibition</b>.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="body"><span class="tr">Bu mutabakat, aşağıdaki özel sektör iş birliğinin <strong>hükümetler-arası şemsiyesidir</strong>; SP Architects gibi firmalar için resmi bir zemin sağlar.</span><span class="en">This MOU is the <strong>government-to-government umbrella</strong> for the private-sector cooperation below; it provides a formal footing for firms such as SP Architects.</span></p>
+
+      <!-- KNOW-HOW -->
+      <h3 class="subhead"><span class="tr">Sahada öne çıkan know-how</span><span class="en">Know-how that stood out</span></h3>
+      <p class="sec-eyebrow flush"><span class="tr">Türk tarafının gösterdiği, Umman'ın ilgi duyduğu</span><span class="en">Shown by the Turkish side, of interest to Oman</span></p>
+
+      <div class="khgrid">
+        <div class="khcard">
+          <h4><span class="tr">Tasarruf finansmanı — faizsiz konut edinimi</span><span class="en">Savings-finance — interest-free home ownership</span></h4>
+          <p><span class="tr">Fuzul Ev, Sinpaş YTS gibi BDDK denetimindeki şirketler; katılımcılar ortak havuzda birikim yapıp faiz yerine tek seferlik organizasyon ücretiyle konut/taşıt tahsisatı alır (6361 sayılı Kanun).</span><span class="en">BDDK-regulated firms such as Fuzul Ev and Sinpaş YTS; participants save into a common pool and receive a home/vehicle allocation for a one-time organisation fee instead of interest (Law 6361).</span></p>
+          <p class="fit"><span class="tr"><b>Umman'a uygunluğu:</b> Şeriat-uyumlu, faizsiz bir konut finansman modeli — MOU'nun "gayrimenkul finansmanı" başlığıyla doğrudan örtüşür.</span><span class="en"><b>Fit for Oman:</b> a Sharia-compatible, interest-free housing-finance model — directly aligned with the MOU's "real-estate finance" theme.</span></p>
+        </div>
+        <div class="khcard">
+          <h4><span class="tr">Kentsel dönüşüm</span><span class="en">Urban regeneration</span></h4>
+          <p><span class="tr">Türkiye'nin yaşlanan yapı stokunu yenilemek için kullandığı hukuki ve mali dönüşüm araçları; büyük ölçekli, hızlı yeniden yapılanma deneyimi.</span><span class="en">Turkey's legal and financial tools for renewing an ageing building stock; large-scale, fast rebuilding experience.</span></p>
+          <p class="fit"><span class="tr"><b>Umman'a uygunluğu:</b> Greater Muscat Master Planı ve ulusal kentsel strateji için doğrudan referans.</span><span class="en"><b>Fit for Oman:</b> a direct reference for the Greater Muscat Master Plan and the national urban strategy.</span></p>
+        </div>
+        <div class="khcard">
+          <h4><span class="tr">Deprem-dirençli, hızlı konut üretimi</span><span class="en">Resilient, rapid housing delivery</span></h4>
+          <p><span class="tr">11 ilde yürütülen deprem sonrası "asrın inşası" — kısa sürede yüksek hacimli, dirençli konut teslimi. Umman Bakanı'nın açıkça takdir ettiği başlık.</span><span class="en">The post-earthquake "construction of the century" across 11 provinces — high-volume, resilient housing delivered fast. Explicitly praised by the Omani minister.</span></p>
+          <p class="fit"><span class="tr"><b>Umman'a uygunluğu:</b> Sultan Haitham City ölçeğindeki kamu konut hedefleri için üretim disiplini modeli.</span><span class="en"><b>Fit for Oman:</b> a delivery-discipline model for public-housing targets at Sultan Haitham City scale.</span></p>
+        </div>
+        <div class="khcard">
+          <h4><span class="tr">Devremülk — paylaşımlı/dönemsel mülkiyet</span><span class="en">Timeshare — fractional ownership</span></h4>
+          <p><span class="tr">Türkiye'nin olgun devremülk ürünü; tatil ve turizm gayrimenkulünde dönemsel kullanım hakkına dayalı satış modeli.</span><span class="en">Turkey's mature timeshare product; a sales model based on periodic usage rights in holiday and tourism property.</span></p>
+          <p class="fit"><span class="tr"><b>Umman'a uygunluğu:</b> Turizm-karma ITC projeleri (Jebel Sifah, Muscat Bay) için hazır bir ürün formatı.</span><span class="en"><b>Fit for Oman:</b> a ready product format for tourism-mixed ITC projects (Jebel Sifah, Muscat Bay).</span></p>
+        </div>
+      </div>
+
+      <!-- WORKSHOPS -->
+      <h3 class="subhead"><span class="tr">Karşılıklı atölye programı</span><span class="en">A reciprocal workshop programme</span></h3>
+      <p class="sec-eyebrow flush"><span class="tr">İki haftada bir · dönüşümlü ev sahipliği</span><span class="en">Every two weeks · alternating host</span></p>
+
+      <p class="ws-lead tr">Bakan ziyaretine katılan tarafların tümü destek sözü verdi. Bu momentumu somuta çevirmek için <span class="ws-cad">iki haftada bir</span> yapılacak, dönüşümlü ev sahipli (Türkiye / Umman / çevrimiçi) ve 60–90 dakikalık karşılıklı atölyeler öneriyoruz. Her oturum §05'teki sorumlu kurumla eşleştirilir ve Türk tarafında bir firma temsilcisiyle yürütülür.</p>
+      <p class="ws-lead en">Everyone who attended the minister's visit pledged support. To turn that momentum concrete, we propose reciprocal workshops <span class="ws-cad">every two weeks</span>, alternating host (Türkiye / Oman / online), 60–90 minutes each. Each session is paired with the responsible body from §05 and led by a firm champion on the Turkish side.</p>
+
+      <div class="ptable-wrap">
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th><span class="tr">Oturum</span><span class="en">Session</span></th>
+            <th><span class="tr">Konu</span><span class="en">Topic</span></th>
+            <th class="tr-h"><span class="tr">Eşleşen kurum</span><span class="en">Paired body</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="model">S1</td>
+            <td><span class="tr">Tasarruf finansmanı &amp; konut finansman modelleri (Fuzul, Sinpaş YTS)</span><span class="en">Savings-finance &amp; housing-finance models (Fuzul, Sinpaş YTS)</span></td>
+            <td>MOHUP + Ministry of Finance</td>
+          </tr>
+          <tr>
+            <td class="model">S2</td>
+            <td><span class="tr">Kentsel dönüşüm &amp; imar/ruhsat süreçleri</span><span class="en">Urban regeneration &amp; zoning/permit processes</span></td>
+            <td>MOHUP</td>
+          </tr>
+          <tr>
+            <td class="model">S3</td>
+            <td><span class="tr">Deprem-dirençli &amp; hızlı konut üretimi</span><span class="en">Resilient &amp; rapid housing delivery</span></td>
+            <td>MOHUP</td>
+          </tr>
+          <tr>
+            <td class="model">S4</td>
+            <td><span class="tr">Devremülk &amp; turizm-karma geliştirme</span><span class="en">Timeshare &amp; tourism-mixed development</span></td>
+            <td>Ministry of Heritage &amp; Tourism</td>
+          </tr>
+          <tr>
+            <td class="model">S5</td>
+            <td><span class="tr">Escrow, maketten satış &amp; arazi kaydı (RD 79/2025)</span><span class="en">Escrow, off-plan sales &amp; land registry (RD 79/2025)</span></td>
+            <td>MOHUP</td>
+          </tr>
+          <tr>
+            <td class="model">S6</td>
+            <td><span class="tr">Akıllı şehirler, dijital ikizler &amp; yeşil binalar</span><span class="en">Smart cities, digital twins &amp; green buildings</span></td>
+            <td>Invest Oman / OMRAN</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <ul class="mou-notes" style="margin-top:16px;">
+        <li><span class="tr">Her oturum için <b>tek sayfalık brifing</b> hazırlanır; çıktılar §09'daki Çalışma Grubu'na aktarılır.</span><span class="en">Prepare a <b>one-page brief</b> per session; feed outcomes into the Working Group in §09.</span></li>
+        <li><span class="tr">Altı oturumluk ilk tur ~3 ayda tamamlanır, ardından yeni ihtiyaç başlıklarıyla yenilenir.</span><span class="en">The first six-session round completes in ~3 months, then renews around emerging needs.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= 04 WHAT TURKISH DEVELOPERS NEED ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§04</span>
+      <h2>
+        <span class="tr">Türk Geliştiricilerin Öğrenmesi Gerekenler</span>
+        <span class="en">What Turkish Developers Need to Learn</span>
+      </h2>
+    </div>
+    <p class="sec-eyebrow">
+      <span class="tr">Önceliğe göre dört kademe · <span class="known">bildiğimiz</span> / teyit edilecek</span>
+      <span class="en">Four tiers by priority · <span class="known">what we know</span> / to confirm</span>
+    </p>
+
+    <div class="indent">
+      <!-- TIER 1 -->
+      <div class="tier">
+        <div class="tier-bar">
+          <span class="tier-tag">KADEME 01</span>
+          <span class="tier-name"><span class="tr">Girmeden önce — anlaşma-kırıcılar</span><span class="en">Before entering — deal-breakers</span></span>
+          <span class="tier-crit"><span class="tr">kritiklik</span><span class="en">criticality</span> <span class="crit-dots crit-4"><i></i><i></i><i></i><i></i></span></span>
+        </div>
+        <ul>
+          <li class="tr"><b>Arsa tahsis modeli.</b> Devlet arazileri satış mı, 99 yıla varan intifa (usufruct) mu, kira mı ile veriliyor? Türkiye'deki arsa-karşılığı-gelir-paylaşımına eşdeğer bir model kurulabilir mi? <span class="known">// Bilgi: ITC ve Özel Ekonomik Bölge'de serbest mülkiyet; dışında intifa.</span></li>
+          <li class="en"><b>Land allocation model.</b> Are state lands granted by sale, usufruct (up to 99 years), or lease? Can a model equivalent to Turkey's land-for-revenue-share be built? <span class="known">// Known: freehold inside ITCs &amp; Special Economic Zones; usufruct outside.</span></li>
+
+          <li class="tr"><b>Yabancı mülkiyet &amp; şirket yapısı.</b> Yabancı sermaye yasası (FCIL) ile %100 yabancı sahiplik mümkün; yasak faaliyet listesi ve gerçek uygulama netleşmeli. Yerel ortak zorunlu mu, tercih mi?</li>
+          <li class="en"><b>Foreign ownership &amp; company structure.</b> The Foreign Capital Investment Law allows 100% foreign ownership; the banned-activity list and real practice must be confirmed. Is a local partner mandatory or preferred?</li>
+
+          <li class="tr"><b>Kâr ve sermaye çıkışı.</b> Kâr transferinde kısıt var mı? Umman Riyali ABD dolarına sabit — kur riski düşük; teyit edilmeli.</li>
+          <li class="en"><b>Profit &amp; capital repatriation.</b> Any restriction on profit transfer? The Omani Rial is pegged to the US dollar — low FX risk; to be confirmed.</li>
+
+          <li class="tr"><b>Maketten satış &amp; escrow rejimi.</b> Yeni birleşik Gayrimenkul Düzenleme Yasası (RD 79/2025, 2026) her proje için escrow, aşamalı ödeme ve tamamlama teminatı zorunlu kılıyor. Nakit akışı planlaması için kritik.</li>
+          <li class="en"><b>Off-plan sales &amp; escrow regime.</b> The new unified Real Estate Regulation Law (RD 79/2025, 2026) mandates a per-project escrow, milestone releases and completion guarantees. Critical for cash-flow planning.</li>
+
+          <li class="tr"><b>Kamu projelerinde ödeme güvencesi.</b> Kamu / yarı-kamu işveren projelerinde ödeme mekanizması ve teminat nedir?</li>
+          <li class="en"><b>Payment security on public projects.</b> What is the payment mechanism and guarantee on public / quasi-public employer projects?</li>
+        </ul>
+      </div>
+
+      <!-- TIER 2 -->
+      <div class="tier">
+        <div class="tier-bar">
+          <span class="tier-tag">KADEME 02</span>
+          <span class="tier-name"><span class="tr">Ticari yapı — fizibilite</span><span class="en">Commercial viability</span></span>
+          <span class="tier-crit"><span class="tr">kritiklik</span><span class="en">criticality</span> <span class="crit-dots crit-3"><i></i><i></i><i></i><i></i></span></span>
+        </div>
+        <ul>
+          <li class="tr"><b>Talep temelleri.</b> ~5M nüfus, ~1,8M yabancı; kiracıdan mülk sahibine geçiş hikâyesi. Net kira getirisi olgun bölgelerde %3–5.</li>
+          <li class="en"><b>Demand fundamentals.</b> ~5M population, ~1.8M expats; a renter-to-owner conversion story. Net rental yields 3–5% in mature areas.</li>
+
+          <li class="tr"><b>Finansman &amp; mortgage.</b> Mortgage pazarının olgunluğu, yerel banka iştahı, yabancıya kredi (oranlar ~%5–7,5; kredi/değer oranı %60–70).</li>
+          <li class="en"><b>Financing &amp; mortgage.</b> Maturity of the mortgage market, local bank appetite, lending to foreigners (rates ~5–7.5%; LTV 60–70%).</li>
+
+          <li class="tr"><b>Gelir paylaşımı fizibilitesi.</b> Devletin arsa koyup geliştiricinin inşa ettiği model — Türk konut geliştiricilerinin en iyi bildiği format — Umman'da uygulanabilir mi?</li>
+          <li class="en"><b>Revenue-share feasibility.</b> The state-provides-land, developer-builds model — the format Turkish housing developers know best — can it work in Oman?</li>
+
+          <li class="tr"><b>Hedef segment.</b> Lüks, orta gelir, sosyal konut, turizm-karma; hangisinde arz açığı ve devlet önceliği var?</li>
+          <li class="en"><b>Target segment.</b> Luxury, mid-income, social housing, tourism-mixed; where is the supply gap and government priority?</li>
+        </ul>
+      </div>
+
+      <!-- TIER 3 -->
+      <div class="tier">
+        <div class="tier-bar">
+          <span class="tier-tag">KADEME 03</span>
+          <span class="tier-name"><span class="tr">Operasyonel koşullar</span><span class="en">Operational conditions</span></span>
+          <span class="tier-crit"><span class="tr">kritiklik</span><span class="en">criticality</span> <span class="crit-dots crit-2"><i></i><i></i><i></i><i></i></span></span>
+        </div>
+        <ul>
+          <li class="tr"><b>Omanizasyon.</b> İnşaat sektöründe yerli istihdam oranları; Türk mühendis, tekniker ve işçiler için çalışma izni süreçleri.</li>
+          <li class="en"><b>Omanisation.</b> National-employment quotas in construction; work-permit processes for Turkish engineers, technicians and workers.</li>
+
+          <li class="tr"><b>Yerli içerik (ICV).</b> In-Country Value gereklilikleri; Türkiye menşeli inşaat malzemesinde gümrük ve standart onay süreçleri.</li>
+          <li class="en"><b>In-Country Value (ICV).</b> ICV requirements; customs and standards approval for Turkish-origin construction materials.</li>
+
+          <li class="tr"><b>Müteahhit ön yeterliliği.</b> Sınıflandırma/derecelendirme sistemi; Türk firmalarının kaydı ne kadar sürüyor?</li>
+          <li class="en"><b>Contractor prequalification.</b> The classification/grading system; how long does registering a Turkish firm take?</li>
+        </ul>
+      </div>
+
+      <!-- TIER 4 -->
+      <div class="tier">
+        <div class="tier-bar">
+          <span class="tier-tag">KADEME 04</span>
+          <span class="tier-name"><span class="tr">Mali &amp; hukuki güvence</span><span class="en">Financial &amp; legal safety</span></span>
+          <span class="tier-crit"><span class="tr">kritiklik</span><span class="en">criticality</span> <span class="crit-dots crit-2"><i></i><i></i><i></i><i></i></span></span>
+        </div>
+        <ul>
+          <li class="tr"><b>Vergi rejimi.</b> Kurumlar vergisi %15, KDV %5 — <b>konut satış/kirası KDV'den muaf</b>, yıllık emlak vergisi yok. Serbest bölgelerde (Duqm, Salalah, Sohar) vergi tatilleri. <span class="known">// Bireysel gelir vergisi şu an yok; planlanan bir düzenlemenin durumu teyit edilmeli.</span></li>
+          <li class="en"><b>Tax regime.</b> Corporate tax 15%, VAT 5% — <b>residential sales/rentals are VAT-exempt</b>, no annual property tax. Free zones (Duqm, Salalah, Sohar) offer tax holidays. <span class="known">// No personal income tax currently; confirm status of any planned measure.</span></li>
+
+          <li class="tr"><b>Çifte vergilendirme.</b> Türkiye–Umman çifte vergilendirmeyi önleme anlaşmasının gayrimenkul gelirlerine uygulaması netleştirilmeli.</li>
+          <li class="en"><b>Double taxation.</b> Application of the Türkiye–Oman double-tax treaty to real-estate income needs clarifying.</li>
+
+          <li class="tr"><b>Uyuşmazlık çözümü.</b> Kamu işveren projelerinde tahkim tercihi ve ödeme teminatı mekanizmaları.</li>
+          <li class="en"><b>Dispute resolution.</b> Arbitration preference and payment-guarantee mechanisms on public-employer projects.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 05 WHAT OMAN MUST PROVIDE ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§05</span>
+      <h2>
+        <span class="tr">Umman Tarafının Sağlaması Gerekenler</span>
+        <span class="en">What the Omani Side Must Provide</span>
+      </h2>
+    </div>
+    <p class="sec-eyebrow">
+      <span class="tr">Her bilgi ihtiyacının bir sahibi var</span>
+      <span class="en">Every information need has an owner</span>
+    </p>
+
+    <div class="indent">
+      <div class="tr">
+        <p class="body">Yatırımı kolaylaştırmak, Bakanlığın rolüdür. Türk tarafının cevap aradığı her başlığın Umman'da bir sorumlu kurumu vardır; "kolaylaştırma", bu cevapların tek bir kapıdan, hızla ve yazılı olarak verilmesi demektir.</p>
+      </div>
+      <div class="en">
+        <p class="body">Facilitating investment is the Ministry's role. Every heading the Turkish side asks about has a responsible body in Oman; "facilitation" means those answers arriving through a single door, quickly and in writing.</p>
+      </div>
+
+      <div class="map">
+        <div class="map-row">
+          <div class="map-need">
+            <span class="tr"><b>Arsa &amp; tahsis, imar, tapu, geliştirici lisansı, escrow</b> — bayrak şehirlerde parsel süreci</span>
+            <span class="en"><b>Land &amp; allocation, zoning, title, developer licence, escrow</b> — plot process in flagship cities</span>
+          </div>
+          <div class="map-owner"><span class="tag">→</span> Ministry of Housing &amp; Urban Planning (MOHUP)</div>
+        </div>
+        <div class="map-row">
+          <div class="map-need">
+            <span class="tr"><b>Yatırım kolaylaştırma, tek irtibat, teşvik &amp; ruhsat hızlandırma</b></span>
+            <span class="en"><b>Investment facilitation, single contact, incentives &amp; fast-track licensing</b></span>
+          </div>
+          <div class="map-owner"><span class="tag">→</span> Invest Oman / Ithraa</div>
+        </div>
+        <div class="map-row">
+          <div class="map-need">
+            <span class="tr"><b>Ana-geliştirici ortaklıkları, bayrak proje parselleri, ITC arsası</b></span>
+            <span class="en"><b>Master-developer partnerships, flagship plots, ITC land</b></span>
+          </div>
+          <div class="map-owner"><span class="tag">→</span> OMRAN Group / Oman Investment Authority</div>
+        </div>
+        <div class="map-row">
+          <div class="map-need">
+            <span class="tr"><b>Kurumlar vergisi, KDV, çifte vergilendirme, serbest bölge teşvikleri</b></span>
+            <span class="en"><b>Corporate tax, VAT, double taxation, free-zone incentives</b></span>
+          </div>
+          <div class="map-owner"><span class="tag">→</span> Ministry of Finance / Tax Authority</div>
+        </div>
+        <div class="map-row">
+          <div class="map-need">
+            <span class="tr"><b>Turizm-karma ITC projeleri, otel &amp; marka geliştirme</b></span>
+            <span class="en"><b>Tourism-mixed ITC projects, hotel &amp; brand development</b></span>
+          </div>
+          <div class="map-owner"><span class="tag">→</span> Ministry of Heritage &amp; Tourism</div>
+        </div>
+        <div class="map-row">
+          <div class="map-need">
+            <span class="tr"><b>Duqm &amp; serbest bölgeler — sanayi, lojistik, liman çevresi geliştirme</b></span>
+            <span class="en"><b>Duqm &amp; free zones — industrial, logistics, port-adjacent development</b></span>
+          </div>
+          <div class="map-owner"><span class="tag">→</span> OPAZ / SEZAD</div>
+        </div>
+        <div class="map-row">
+          <div class="map-need">
+            <span class="tr"><b>Gayrimenkul yatırım fonları (REIF/REIT), kolektif sermaye araçları</b></span>
+            <span class="en"><b>Real-estate investment funds (REIF/REIT), collective vehicles</b></span>
+          </div>
+          <div class="map-owner"><span class="tag">→</span> Capital Market Authority (CMA)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 06 PARTNERSHIP MODELS ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§06</span>
+      <h2>
+        <span class="tr">Aranan Ortaklık Modelleri</span>
+        <span class="en">Partnership Models Sought</span>
+      </h2>
+    </div>
+    <p class="sec-eyebrow">
+      <span class="tr">Umman'lı taraf ne getiriyor · Türk taraf ne getiriyor</span>
+      <span class="en">What the Omani side brings · what the Turkish side brings</span>
+    </p>
+
+    <div class="indent">
+      <div class="tr">
+        <p class="body">Umman'da baskın model, devlet ana-geliştiricisinin (OMRAN / Oman Investment Authority) uluslararası ortaklar açmasıdır: Yiti'de Diamond Developers, ana planlarda SOM ve Zaha Hadid, otellerde Four Seasons ve Club Med. Türk tarafının doğal giriş noktaları aşağıdadır — <span class="om">SP Architects</span> için tasarım-ana plan ortaklığı özellikle uygundur.</p>
+      </div>
+      <div class="en">
+        <p class="body">The dominant model in Oman is the state master-developer (OMRAN / Oman Investment Authority) opening international partnerships: Diamond Developers at Yiti, SOM and Zaha Hadid on master plans, Four Seasons and Club Med on hotels. The Turkish side's natural entry points are below — a design/master-plan partnership is an especially good fit for <span class="om">SP Architects</span>.</p>
+      </div>
+
+      <div class="ptable-wrap">
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th><span class="tr">Model</span><span class="en">Model</span></th>
+            <th class="om"><span class="tr">Umman getirir</span><span class="en">Oman brings</span></th>
+            <th class="tr-h"><span class="tr">Türkiye getirir</span><span class="en">Turkey brings</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="model"><span class="tr">Ortak yatırım (JV)</span><span class="en">Joint venture</span></td>
+            <td class="om-c"><span class="tr">Bayrak şehirde parsel, izinler, yerel erişim, talep</span><span class="en">Plot in a flagship city, permits, local access, demand</span></td>
+            <td class="tr-c"><span class="tr">Öz sermaye, risk paylaşımı, teslim disiplini</span><span class="en">Equity, risk-sharing, delivery discipline</span></td>
+          </tr>
+          <tr>
+            <td class="model"><span class="tr">Tasarım &amp; ana plan</span><span class="en">Design &amp; master plan</span></td>
+            <td class="om-c"><span class="tr">Kentsel vizyon, arsa programı, kamu onayı</span><span class="en">Urban vision, land brief, public sign-off</span></td>
+            <td class="tr-c"><span class="tr">Mimari &amp; şehircilik gücü, uluslararası kalite</span><span class="en">Architecture &amp; urbanism strength, global quality</span></td>
+          </tr>
+          <tr>
+            <td class="model"><span class="tr">Müteahhitlik (EPC)</span><span class="en">Contracting (EPC)</span></td>
+            <td class="om-c"><span class="tr">Proje, finansman, saha</span><span class="en">Project, finance, site</span></td>
+            <td class="tr-c"><span class="tr">Maliyet-rekabetçi, hızlı inşaat kabiliyeti</span><span class="en">Cost-competitive, fast build capability</span></td>
+          </tr>
+          <tr>
+            <td class="model"><span class="tr">Satış &amp; marka</span><span class="en">Sales &amp; brand</span></td>
+            <td class="om-c"><span class="tr">Ürün, escrow altyapısı, yerel pazar</span><span class="en">Product, escrow infrastructure, local market</span></td>
+            <td class="tr-c"><span class="tr">Maketten satış motoru, marka &amp; pazarlama</span><span class="en">Off-plan sales machine, branding &amp; marketing</span></td>
+          </tr>
+          <tr>
+            <td class="model"><span class="tr">Sosyal konut · gelir paylaşımı</span><span class="en">Social housing · revenue share</span></td>
+            <td class="om-c"><span class="tr">Kamu arsası, Vision 2040 hedefi, alıcı programı</span><span class="en">Public land, Vision 2040 target, buyer programme</span></td>
+            <td class="tr-c"><span class="tr">Emlak Konut / TOKİ tipi paylaşım deneyimi, ölçek</span><span class="en">Emlak Konut / TOKİ-style share experience, scale</span></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 07 MARKET REALITIES ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§07</span>
+      <h2>
+        <span class="tr">Piyasa Gerçekleri</span>
+        <span class="en">Market Realities</span>
+      </h2>
+    </div>
+    <p class="sec-eyebrow">
+      <span class="tr">Okumalar (2025–26, gösterge) ve dürüst uyarılar</span>
+      <span class="en">Readings (2025–26, indicative) and honest caveats</span>
+    </p>
+
+    <div class="indent">
+      <div class="readings">
+        <div class="reading"><div class="num">~<span class="u">$</span>5,0<span class="u">B</span></div><div class="cap"><span class="tr">Konut piyasası, 2025</span><span class="en">Residential market, 2025</span></div></div>
+        <div class="reading"><div class="num">~<span class="u">$</span>6,7<span class="u">B</span></div><div class="cap"><span class="tr">2030 projeksiyonu (~%7 YBBO)</span><span class="en">2030 projection (~7% CAGR)</span></div></div>
+        <div class="reading"><div class="num">~<span class="u">$</span>7<span class="u">B</span></div><div class="cap"><span class="tr">Toplam işlem hacmi, 2025</span><span class="en">Total transaction volume, 2025</span></div></div>
+        <div class="reading"><div class="num">~1,8<span class="u">M</span></div><div class="cap"><span class="tr">Yabancı nüfus (potansiyel alıcı)</span><span class="en">Expat population (potential buyers)</span></div></div>
+        <div class="reading"><div class="num">%3–5</div><div class="cap"><span class="tr">Net kira getirisi, olgun bölgeler</span><span class="en">Net rental yield, mature areas</span></div></div>
+        <div class="reading"><div class="num">20<span class="u">K</span></div><div class="cap"><span class="tr">Sultan Haitham City konut birimi</span><span class="en">Sultan Haitham City housing units</span></div></div>
+      </div>
+
+      <div class="tr">
+        <p class="body"><strong>Arz devlet öncülüğünde.</strong> Boru hattının kalbi bayrak şehirlerdir: <span class="sl">Sultan Haitham City</span> (Al-Seeb; 14,8 km², 100.000 kişi, ana plan SOM), <span class="sl">Madinat Al Irfan</span> (Muscat'ın yeni merkezi, OMRAN), <span class="sl">Sürdürülebilir Şehir – Yiti</span> (net-sıfır, OMRAN + Diamond Developers) ve <span class="sl">Al Khuwair Downtown</span> (Zaha Hadid, ~$1,3B). Özel geliştiriciler çoğunlukla bu projelere eklemlenir.</p>
+        <p class="body"><strong>Mülkiyet coğrafyası kısıtlı.</strong> Yabancılar serbest mülkiyeti yalnızca ITC'lerde (Al Mouj, Muscat Bay, Muscat Hills, Jebel Sifah) ve özel ekonomik bölgelerde (Duqm, Salalah) edinebilir; bunun dışında 99 yıla kadar intifa. Musandam, Buraimi, Dhahirah ve tarım arazisi yabancıya kapalı. RD 38/2025 belirli bölgelerde serbest mülkiyeti genişletti; altın oturum eşiği ~200.000 OMR.</p>
+      </div>
+      <div class="en">
+        <p class="body"><strong>Supply is state-led.</strong> The heart of the pipeline is the flagship cities: <span class="sl">Sultan Haitham City</span> (Al-Seeb; 14.8 km², 100,000 residents, master plan by SOM), <span class="sl">Madinat Al Irfan</span> (Muscat's new downtown, OMRAN), <span class="sl">The Sustainable City – Yiti</span> (net-zero, OMRAN + Diamond Developers) and <span class="sl">Al Khuwair Downtown</span> (Zaha Hadid, ~$1.3B). Private developers mostly plug into these.</p>
+        <p class="body"><strong>Ownership geography is constrained.</strong> Foreigners can obtain freehold only in ITCs (Al Mouj, Muscat Bay, Muscat Hills, Jebel Sifah) and special economic zones (Duqm, Salalah); elsewhere, usufruct up to 99 years. Musandam, Buraimi, Dhahirah and agricultural land are closed to foreigners. RD 38/2025 widened freehold in designated zones; the golden-residency threshold is ~OMR 200,000.</p>
+      </div>
+
+      <div class="caveats">
+        <h4><span class="tr">Dürüst uyarılar</span><span class="en">Honest caveats</span></h4>
+        <ul>
+          <li class="tr">Umman, BAE ve Suudi Arabistan'dan <b>daha küçük ve daha yavaş</b> bir pazardır — daha az doygunluk ve daha çok potansiyel, ama <b>daha ince likidite</b> ve daha yavaş çıkış.</li>
+          <li class="en">Oman is a <b>smaller, slower</b> market than the UAE and Saudi Arabia — less saturation and more upside, but <b>thinner liquidity</b> and slower exit.</li>
+
+          <li class="tr">Talep büyük ölçüde <b>Muscat ve Salalah</b>'ta yoğunlaşır; Dubai tipi spekülatif kitlesel talep yoktur.</li>
+          <li class="en">Demand concentrates heavily in <b>Muscat and Salalah</b>; there is no Dubai-style speculative mass demand.</li>
+
+          <li class="tr">Ekonomi hâlâ <b>petrole bağlı</b>; Vision 2040 çeşitlendirme hedefidir. Sanayi/lojistik (Duqm) "kara at" olarak öne çıkıyor (~%7 YBBO).</li>
+          <li class="en">The economy is still <b>oil-linked</b>; Vision 2040 is the diversification bet. Industrial/logistics (Duqm) is the "dark horse" (~7% CAGR).</li>
+
+          <li class="tr">Başarı, açık-piyasa spekülasyonundan çok <b>devlet boru hattına ve doğru yerel ortağa</b> bağlıdır. Yeni RD 79/2025 güven verir ama <b>henüz oturuyor</b>.</li>
+          <li class="en">Success depends less on open-market speculation and more on the <b>government pipeline and the right local partner</b>. The new RD 79/2025 adds credibility but is <b>still bedding in</b>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 08 SURVEY ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§08</span>
+      <h2>
+        <span class="tr">Firma Anketi — "Soru Zinciri"</span>
+        <span class="en">The Firm Survey — a "Question Chain"</span>
+      </h2>
+    </div>
+    <p class="sec-eyebrow">
+      <span class="tr">Öneri: evet, ama kısa ve yapılandırılmış</span>
+      <span class="en">Recommendation: yes, but short and structured</span>
+    </p>
+
+    <div class="indent">
+      <div class="tr">
+        <p class="body">Ziyaret edilen firmalara bir anket göndermek doğru fikir — <strong>ama açık uçlu bir soru yağmuru değil.</strong> 7–8 net soru, karşılaştırılabilir ve karar-verilebilir veri üretir; böylece rapor varsayıma değil sektör kanıtına dayanır. Aşağıdaki taslak olduğu gibi gönderilebilir.</p>
+      </div>
+      <div class="en">
+        <p class="body">Sending a survey to the visited firms is the right instinct — <strong>but not an open-ended shower of questions.</strong> Seven or eight crisp questions yield comparable, decision-useful data, so the report rests on sector evidence rather than assumption. The draft below can be sent as-is.</p>
+      </div>
+
+      <div class="survey">
+        <div class="survey-head">
+          <span class="t"><span class="tr">Umman Pazarı — Firma İlgi Anketi</span><span class="en">Oman Market — Firm Interest Survey</span></span>
+          <span class="n"><span class="tr">~4 dk · 8 soru</span><span class="en">~4 min · 8 questions</span></span>
+        </div>
+        <ol>
+          <li>
+            <span class="q tr">Umman pazarına giriş önceliğiniz nedir?</span>
+            <span class="q en">What is your priority for entering the Oman market?</span>
+            <span class="opts"><span class="tr">◦ Aktif değerlendiriyoruz ◦ İlgiliyiz ama erken ◦ Şu an değil</span><span class="en">◦ Actively exploring ◦ Interested but early ◦ Not now</span></span>
+          </li>
+          <li>
+            <span class="q tr">Tercih ettiğiniz giriş modeli?</span>
+            <span class="q en">Preferred entry model?</span>
+            <span class="opts"><span class="tr">◦ Ortak yatırım (JV) ◦ Doğrudan geliştirme ◦ Müteahhitlik (EPC) ◦ Tasarım/danışmanlık ◦ Gelir paylaşımı</span><span class="en">◦ JV ◦ Direct development ◦ Contracting (EPC) ◦ Design/consulting ◦ Revenue share</span></span>
+          </li>
+          <li>
+            <span class="q tr">Hedef segment?</span>
+            <span class="q en">Target segment?</span>
+            <span class="opts"><span class="tr">◦ Lüks konut ◦ Orta gelir ◦ Sosyal konut ◦ Turizm-karma ◦ Lojistik/endüstriyel</span><span class="en">◦ Luxury ◦ Mid-income ◦ Social housing ◦ Tourism-mixed ◦ Logistics/industrial</span></span>
+          </li>
+          <li>
+            <span class="q tr">Sizi en çok kaygılandıran 3 bilinmez nedir? (serbest)</span>
+            <span class="q en">What are your top 3 unknowns / concerns? (open)</span>
+          </li>
+          <li>
+            <span class="q tr">Ayırabileceğiniz sermaye / proje ölçeği aralığı?</span>
+            <span class="q en">Capital / project-scale range you could deploy?</span>
+          </li>
+          <li>
+            <span class="q tr">Bağlanmak için Umman tarafından ihtiyaç duyduğunuz 1–2 şey?</span>
+            <span class="q en">The 1–2 things you'd need from the Omani side to commit?</span>
+            <span class="opts"><span class="tr">◦ Arsa tahsisi ◦ Ödeme güvencesi ◦ Vergi netliği ◦ Yerel ortak ◦ Hızlı ön yeterlilik</span><span class="en">◦ Land allocation ◦ Payment security ◦ Tax clarity ◦ Local partner ◦ Fast prequalification</span></span>
+          </li>
+          <li>
+            <span class="q tr">Yurtdışı geliştirme deneyiminiz — Körfez'de projeniz var mı?</span>
+            <span class="q en">International development experience — any Gulf projects?</span>
+          </li>
+          <li>
+            <span class="q tr">Zaman ufkunuz?</span>
+            <span class="q en">Your time horizon?</span>
+            <span class="opts"><span class="tr">◦ 6 ay ◦ 12 ay ◦ 24 ay+</span><span class="en">◦ 6 months ◦ 12 months ◦ 24 months+</span></span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 09 NEXT STEPS ================= -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§09</span>
+      <h2>
+        <span class="tr">Önerilen Sonraki Adımlar</span>
+        <span class="en">Recommended Next Steps</span>
+      </h2>
+    </div>
+    <p class="sec-eyebrow">
+      <span class="tr">Kim, neyi, ne zaman</span>
+      <span class="en">Who does what, and when</span>
+    </p>
+
+    <ol class="steps indent">
+      <li>
+        <span class="who"><span class="tr">Türkiye tarafı</span><span class="en">Turkish side</span></span>
+        <span class="act tr">Anketi (§08) Türk konut geliştiricilerine ve ziyaret edilen firmalara gönderin; niyeti net olanları <b>kısa listeye</b> alın.</span>
+        <span class="act en">Send the survey (§08) to Turkish housing developers and visited firms; <b>shortlist</b> those with clear intent.</span>
+      </li>
+      <li>
+        <span class="who"><span class="tr">Umman tarafı / Bakanlık</span><span class="en">Omani side / Ministry</span></span>
+        <span class="act tr">Türk firmaları için <b>tek irtibat noktası</b> atayın; <b>arsa bankası + teşvik + model sözleşme</b> paketini paylaşın; kamu projelerinde ödeme güvencesini netleştirin.</span>
+        <span class="act en">Nominate a <b>single point of contact</b> for Turkish firms; share the <b>land-bank + incentives + model-contract</b> pack; clarify payment security on public projects.</span>
+      </li>
+      <li>
+        <span class="who"><span class="tr">Ortak</span><span class="en">Joint</span></span>
+        <span class="act tr">Bir bayrak şehirde (örn. Sultan Haitham City sosyal konut ya da bir ITC parseli) <b>arsa-karşılığı-gelir-paylaşımı pilotu</b> tasarlayın — kanıt projesi.</span>
+        <span class="act en">Design a <b>land-for-revenue-share pilot</b> in a flagship city (e.g. Sultan Haitham City social housing or an ITC plot) — a proof-of-concept project.</span>
+      </li>
+      <li>
+        <span class="who"><span class="tr">Kurumsal</span><span class="en">Institutional</span></span>
+        <span class="act tr"><b>Türkiye–Umman Gayrimenkul Çalışma Grubu</b> kurun; çeyreklik ritimle ilerleyin.</span>
+        <span class="act en">Establish a <b>Türkiye–Oman Real Estate Working Group</b>; run on a quarterly cadence.</span>
+      </li>
+    </ol>
+
+    <div class="table-callout">
+      <p class="lab"><span class="tr">Öncelikli görüşme gündemi</span><span class="en">Priority discussion agenda</span></p>
+      <div class="tr">
+        <p><span class="num-inline">01</span> &nbsp;İmar &amp; ruhsat süreçleri ne kadar sürüyor, nerede tıkanıyor?</p>
+        <p><span class="num-inline">02</span> &nbsp;Arsa-karşılığı-gelir-paylaşımı modeli Umman'da uygulanabilir mi?</p>
+        <p><span class="num-inline">03</span> &nbsp;Ve tek somut teklif: bir bayrak şehirde <b>pilot parsel</b>.</p>
+      </div>
+      <div class="en">
+        <p><span class="num-inline">01</span> &nbsp;How long do zoning &amp; permits take, and where do they stall?</p>
+        <p><span class="num-inline">02</span> &nbsp;Can the land-for-revenue-share model work in Oman?</p>
+        <p><span class="num-inline">03</span> &nbsp;And one concrete offer: a <b>pilot plot</b> in a flagship city.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">ASLAN<span class="sub">DUBAI · ISTANBUL · GLOBAL</span></div>
+      <div class="foot-meta">
+        <div><span class="tr">Hazırlayan · düzenlenebilir</span><span class="en">Prepared by · editable</span></div>
+        <div>Türkiye ⇄ Umman · 2026 · <span class="tr">Taslak v1</span><span class="en">Draft v1</span></div>
+      </div>
+    </div>
+    <p class="sources">
+      <span class="tr">Kaynaklar (gösterge, kamuya açık): Al Tamimi &amp; Co. ve Trowers &amp; Hamlins hukuk analizleri; Umman Vergi İdaresi; OMRAN Group; ekonomi/piyasa raporları (2025–26). Rakamlar göstergedir ve nihai kararlardan önce Umman resmi mercileriyle teyit edilmelidir.</span>
+      <span class="en">Sources (indicative, public): Al Tamimi &amp; Co. and Trowers &amp; Hamlins legal analyses; Oman Tax Authority; OMRAN Group; economy/market reports (2025–26). Figures are indicative and should be confirmed with Omani authorities before any final decision.</span>
+    </p>
+  </footer>
+
+</div>
+
+<script>
+  function setLang(l){
+    document.documentElement.setAttribute('data-lang', l);
+    document.documentElement.setAttribute('lang', l);
+    document.getElementById('btn-tr').setAttribute('aria-pressed', l==='tr');
+    document.getElementById('btn-en').setAttribute('aria-pressed', l==='en');
+  }
+
+  (function(){
+    var p = document.getElementById('spline');
+    if(p && p.getTotalLength){
+      var len = p.getTotalLength();
+      p.style.setProperty('--len', len);
+    }
+  })();
+
+  (function(){
+    var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var secs = document.querySelectorAll('section');
+    if(mq.matches || !('IntersectionObserver' in window)){ return; }
+    secs.forEach(function(s){ s.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.08});
+    secs.forEach(function(s){ io.observe(s); });
+  })();
+</script>
+</body>
+</html>
