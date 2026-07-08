@@ -147,6 +147,11 @@
     text-transform:uppercase;color:var(--biz);display:flex;align-items:center;gap:12px;margin-bottom:13px}
   .firm__idrow .mono{width:38px;height:38px;border:1.5px solid var(--biz);border-radius:50%;
     display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:600;color:var(--biz-deep)}
+  /* --- profile photo avatars (fall back to initials until a JPG is added) --- */
+  .entry__mono,.firm__idrow .mono{position:relative;overflow:hidden}
+  .pfp{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 26%;z-index:2;background:var(--surface-2)}
+  .pfp--off{display:none}
+  .entry__mono .ini,.firm__idrow .mono .ini{position:relative;z-index:1}
   .firm__name{font-family:"Newsreader",serif;font-weight:500;font-size:clamp(1.35rem,2.6vw,1.85rem);
     line-height:1.1;letter-spacing:-.01em}
   .firm__lead{margin-top:8px;font-size:.94rem;color:var(--ink)}
@@ -312,7 +317,7 @@
 
       <!-- 01 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">KS</div><div class="entry__id">GOV · 01</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/01-al-shueili.jpg" alt="H.E. Dr. Khalfan Al Shueili" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">KS</span></div><div class="entry__id">GOV · 01</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Liderlik / Leadership</div>
           <h3 class="entry__name">H.E. Dr. Khalfan Said Mubarak Al Shueili</h3>
@@ -328,7 +333,7 @@
 
       <!-- 02 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">SR</div><div class="entry__id">GOV · 02</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/02-al-jahwari.jpg" alt="H.E. Saif Aljahwari" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">SR</span></div><div class="entry__id">GOV · 02</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Diplomasi / Diplomacy</div>
           <h3 class="entry__name">H.E. Saif Rashid Saif Aljahwari</h3>
@@ -344,7 +349,7 @@
 
       <!-- 03 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">NM</div><div class="entry__id">GOV · 03</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/03-al-shibani.jpg" alt="Nasser Al Shibani" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">NM</span></div><div class="entry__id">GOV · 03</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Yatırım / Investment</div>
           <h3 class="entry__name">Mr. Nasser Masoud Nasser Al Shibani</h3>
@@ -360,7 +365,7 @@
 
       <!-- 04 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">JN</div><div class="entry__id">GOV · 04</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/04-al-hadi.jpg" alt="Jamal Al Hadi" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">JN</span></div><div class="entry__id">GOV · 04</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Medya / Media</div>
           <h3 class="entry__name">Mr. Jamal Nasser Habib Al Hadi</h3>
@@ -376,7 +381,7 @@
 
       <!-- 05 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">NS</div><div class="entry__id">GOV · 05</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/05-al-hadhrami.jpg" alt="Nasser Al Hadhrami" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">NS</span></div><div class="entry__id">GOV · 05</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Geleceğin Şehirleri / Future Cities</div>
           <h3 class="entry__name">Mr. Nasser Sulaiman Nasser Al Hadhrami</h3>
@@ -392,7 +397,7 @@
 
       <!-- 06 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">HN</div><div class="entry__id">GOV · 06</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/06-al-zubaidi.jpg" alt="Hisham Al Zubaidi" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">HN</span></div><div class="entry__id">GOV · 06</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Gayrimenkul / Real Estate</div>
           <h3 class="entry__name">Mr. Hisham Najeeb Omar Al Zubaidi</h3>
@@ -408,7 +413,7 @@
 
       <!-- 07 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">AS</div><div class="entry__id">GOV · 07</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/07-al-isaei.jpg" alt="Ali Alisaei" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">AS</span></div><div class="entry__id">GOV · 07</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Tapu · Hukuk / Registry · Legal</div>
           <h3 class="entry__name">Mr. Ali Salim Adim Alisaei</h3>
@@ -424,7 +429,7 @@
 
       <!-- 08 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">NK</div><div class="entry__id">GOV · 08</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/08-al-siyabi-nasser.jpg" alt="Nasser Al Siyabi" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">NK</span></div><div class="entry__id">GOV · 08</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Gayrimenkul / Real Estate</div>
           <h3 class="entry__name">Mr. Nasser Khamis Khalfan Al Siyabi</h3>
@@ -440,7 +445,7 @@
 
       <!-- 09 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">BH</div><div class="entry__id">GOV · 09</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/09-al-shukaili.jpg" alt="Badar Al Shukaili" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">BH</span></div><div class="entry__id">GOV · 09</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Ortaklıklar / Partnerships</div>
           <h3 class="entry__name">Mr. Badar Hamed Saif Al Shukaili</h3>
@@ -456,7 +461,7 @@
 
       <!-- 10 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">SA</div><div class="entry__id">GOV · 10</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/10-al-rawahi.jpg" alt="Shuaib Al Rawahi" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">SA</span></div><div class="entry__id">GOV · 10</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Geleceğin Şehirleri / Future Cities</div>
           <h3 class="entry__name">Mr. Shuaib Abdulrahim Hamed Al Rawahi</h3>
@@ -472,7 +477,7 @@
 
       <!-- 11 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">RH</div><div class="entry__id">GOV · 11</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/11-al-hinai.jpg" alt="Rayyan Al Hinai" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">RH</span></div><div class="entry__id">GOV · 11</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Tasarım · Proje / Design · Project</div>
           <h3 class="entry__name">Mr. Rayyan Hamed Nasser Al Hinai</h3>
@@ -488,7 +493,7 @@
 
       <!-- 12 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">SM</div><div class="entry__id">GOV · 12</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/12-al-zadjali.jpg" alt="Shabib Al Zadjali" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">SM</span></div><div class="entry__id">GOV · 12</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Protokol / Protocol</div>
           <h3 class="entry__name">Mr. Shabib Mohamed Sabil Al Zadjali</h3>
@@ -504,7 +509,7 @@
 
       <!-- 13 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">AK</div><div class="entry__id">GOV · 13</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/13-al-musalhi.jpg" alt="Areej Al Musalhi" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">AK</span></div><div class="entry__id">GOV · 13</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Tasarım / Design</div>
           <h3 class="entry__name">Ms. Areej Khalid Hashil Al Musalhi</h3>
@@ -520,7 +525,7 @@
 
       <!-- 14 -->
       <article class="entry">
-        <div class="entry__rail"><div class="entry__mono">AM</div><div class="entry__id">GOV · 14</div></div>
+        <div class="entry__rail"><div class="entry__mono"><img class="pfp" src="photos/14-al-musafir.jpg" alt="Aisha Al Musafir" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">AM</span></div><div class="entry__id">GOV · 14</div></div>
         <div class="entry__main">
           <div class="entry__cluster">Tasarım / Design</div>
           <h3 class="entry__name">Ms. Aisha Mohammed Ali Al Musafir</h3>
@@ -552,7 +557,7 @@
       <article class="firm">
         <div class="firm__top">
           <div>
-            <div class="firm__idrow"><span class="mono">AS</span><span>PVT · 15 · Real estate &amp; development</span></div>
+            <div class="firm__idrow"><span class="mono"><img class="pfp" src="photos/15-al-siyabi-salim.jpg" alt="Salim Al Siyabi" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">AS</span></span><span>PVT · 15 · Real estate &amp; development</span></div>
             <h3 class="firm__name">Al Siyabi International Group</h3>
             <p class="firm__lead"><b>Salim Ali Nasser Al Siyabi</b> — Chairman <span style="color:var(--muted)">(Al Abrar Real Estate)</span></p>
             <p class="firm__field">Gayrimenkul · inşaat · misafirperverlik · sağlık / Real estate · construction · hospitality · healthcare</p>
@@ -602,7 +607,7 @@
       <article class="firm">
         <div class="firm__top">
           <div>
-            <div class="firm__idrow"><span class="mono">MB</span><span>PVT · 16 · Energy · resources · engineering</span></div>
+            <div class="firm__idrow"><span class="mono"><img class="pfp" src="photos/16-al-jabri.jpg" alt="Saeed Al Jabri" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">MB</span></span><span>PVT · 16 · Energy · resources · engineering</span></div>
             <h3 class="firm__name">Mohammed Al Barwani LLC — MB Holding</h3>
             <p class="firm__lead"><b>Saeed Saleh Al Jabri</b> — CEO, Al Barwani Group</p>
             <p class="firm__field">Enerji · doğal kaynaklar · mühendislik · madencilik · yatırım / Energy · natural resources · engineering · mining · investment</p>
@@ -631,7 +636,7 @@
       <article class="firm">
         <div class="firm__top">
           <div>
-            <div class="firm__idrow"><span class="mono">MD</span><span>PVT · 17 · Sustainable development · consultancy</span></div>
+            <div class="firm__idrow"><span class="mono"><img class="pfp" src="photos/17-al-hadhaili.jpg" alt="Dr. Salim Al Hadhaili" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">MD</span></span><span>PVT · 17 · Sustainable development · consultancy</span></div>
             <h3 class="firm__name">Modon Sustainable Development Company</h3>
             <p class="firm__lead"><b>Dr. Salim Saif Sulaiman Al Hadhaili</b> — CEO</p>
             <p class="firm__field">Sürdürülebilir gelişim · mühendislik danışmanlığı / Sustainable development · engineering consultancy</p>
@@ -659,7 +664,7 @@
       <article class="firm">
         <div class="firm__top">
           <div>
-            <div class="firm__idrow"><span class="mono">OI</span><span>PVT · 18 · Investment banking</span></div>
+            <div class="firm__idrow"><span class="mono"><img class="pfp" src="photos/18-al-habsi.jpg" alt="Mohamed Al Habsi" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">OI</span></span><span>PVT · 18 · Investment banking</span></div>
             <h3 class="firm__name">Oman Investment Bank (OIB)</h3>
             <p class="firm__lead"><b>Mohamed Sultan Salim Al Habsi</b> — CEO</p>
             <p class="firm__field">Yatırım bankacılığı · sınır ötesi finans / Investment banking · cross-border finance</p>
@@ -688,7 +693,7 @@
       <article class="firm">
         <div class="firm__top">
           <div>
-            <div class="firm__idrow"><span class="mono">TP</span><span>PVT · 19 · Real estate development</span></div>
+            <div class="firm__idrow"><span class="mono"><img class="pfp" src="photos/19-al-kharusi.jpg" alt="Abdul Rahim Al Kharusi" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">TP</span></span><span>PVT · 19 · Real estate development</span></div>
             <h3 class="firm__name">Tathmeer Properties</h3>
             <p class="firm__lead"><b>Abdul Rahim Mohammed Abdul Rahim Al Kharusi</b> — CEO</p>
             <p class="firm__field">Gayrimenkul geliştirme / Real estate development</p>
@@ -716,7 +721,7 @@
       <article class="firm">
         <div class="firm__top">
           <div>
-            <div class="firm__idrow"><span class="mono">OC</span><span>PVT · 20 · Sector representation</span></div>
+            <div class="firm__idrow"><span class="mono"><img class="pfp" src="photos/20-al-lawati.jpg" alt="Ali Al Lawati" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">OC</span></span><span>PVT · 20 · Sector representation</span></div>
             <h3 class="firm__name">OCCI — Real Estate Development Committee</h3>
             <p class="firm__lead"><b>Ali Mohamed Juma Al Lawati</b> — Chairman, RE Development Committee</p>
             <p class="firm__field">Sektör temsili · politika diyaloğu / Sector representation · policy dialogue</p>
@@ -743,7 +748,7 @@
       <article class="firm">
         <div class="firm__top">
           <div>
-            <div class="firm__idrow"><span class="mono">AD</span><span>PVT · 21 · Real estate development</span></div>
+            <div class="firm__idrow"><span class="mono"><img class="pfp" src="photos/21-ba-omar.jpg" alt="Ali Ba Omar" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">AD</span></span><span>PVT · 21 · Real estate development</span></div>
             <h3 class="firm__name">Al Dhahab Real Estate</h3>
             <p class="firm__lead"><b>Ali Mohamed Saleh Ba Omar</b> — CEO</p>
             <p class="firm__field">Gayrimenkul geliştirme / Real estate development</p>
@@ -777,7 +782,7 @@
       <article class="firm">
         <div class="firm__top">
           <div>
-            <div class="firm__idrow"><span class="mono">OR</span><span>PVT · 22 · Sector association</span></div>
+            <div class="firm__idrow"><span class="mono"><img class="pfp" src="photos/22-al-ruqeishi.jpg" alt="Hassan Al Ruqeishi" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">OR</span></span><span>PVT · 22 · Sector association</span></div>
             <h3 class="firm__name">Oman Real Estate Association</h3>
             <p class="firm__lead"><b>Hassan Khamis Mohammed Al Ruqeishi</b> — Chairman</p>
             <p class="firm__field">Sektör derneği / Sector association</p>
@@ -805,7 +810,7 @@
       <article class="firm">
         <div class="firm__top">
           <div>
-            <div class="firm__idrow"><span class="mono">DE</span><span>PVT · 23 · Real estate development</span></div>
+            <div class="firm__idrow"><span class="mono"><img class="pfp" src="photos/23-al-hammadi.jpg" alt="Mundhir Al Hammadi" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">DE</span></span><span>PVT · 23 · Real estate development</span></div>
             <h3 class="firm__name">Al Deham Real Estate</h3>
             <p class="firm__lead"><b>Mundhir Abdullah Ali Al Hammadi</b> — CEO</p>
             <p class="firm__field">Gayrimenkul geliştirme / Real estate development</p>
@@ -839,7 +844,7 @@
       <article class="firm">
         <div class="firm__top">
           <div>
-            <div class="firm__idrow"><span class="mono">MA</span><span>PVT · 24 · Real estate development</span></div>
+            <div class="firm__idrow"><span class="mono"><img class="pfp" src="photos/24-al-sabhi.jpg" alt="Ahmed Al Sabhi" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">MA</span></span><span>PVT · 24 · Real estate development</span></div>
             <h3 class="firm__name">Al Masa Real Estate Group</h3>
             <p class="firm__lead"><b>Ahmed Hamed Said Al Sabhi</b> — Chairman</p>
             <p class="firm__field">Gayrimenkul geliştirme / Real estate development</p>
@@ -873,7 +878,7 @@
       <article class="firm">
         <div class="firm__top">
           <div>
-            <div class="firm__idrow"><span class="mono">MJ</span><span>PVT · 25 · Real estate development</span></div>
+            <div class="firm__idrow"><span class="mono"><img class="pfp" src="photos/25-al-mandhari.jpg" alt="Mahmood Al Mandhari" loading="lazy" onerror="this.classList.add('pfp--off')"><span class="ini">MJ</span></span><span>PVT · 25 · Real estate development</span></div>
             <h3 class="firm__name">Sohar Real Estate Development Co. — Majd Oman</h3>
             <p class="firm__lead"><b>Mahmood Mohammed Nasser Al Mandhari</b> — Chairman</p>
             <p class="firm__field">Gayrimenkul geliştirme / Real estate development</p>
