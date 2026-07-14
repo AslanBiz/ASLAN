@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medya Yans&#305;malar&#305; Raporu &middot; Umman &#8644; T&uuml;rkiye &middot; Temmuz 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1A1A2E;--soft:#4A4A63;--mute:#8A8A9E;--gold:#D4AF37;--sand:#E4D9C3;
+        --sandpale:#F3EDE1;--paper:#FAFAFA;--tr:#A6273B;--om:#1F5C4A;--warn:#B4531F;
+        --rule:rgba(26,26,46,.12);--mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:'Lato',-apple-system,sans-serif;line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 90px}
+
+  .tr-txt{display:none}
+  body.lang-tr .en-txt{display:none}
+  body.lang-tr .tr-txt{display:initial}
+  .langbar{position:sticky;top:0;z-index:60;background:rgba(250,250,250,.95);backdrop-filter:blur(8px);
+           border-bottom:1px solid var(--rule);display:flex;justify-content:flex-end;gap:6px;padding:9px 20px;margin:0 -20px}
+  .langbar button{font-family:var(--mono);font-size:10px;letter-spacing:.14em;background:none;border:1px solid var(--rule);
+                  color:var(--mute);padding:5px 11px;cursor:pointer;border-radius:2px}
+  .langbar button.on{background:var(--ink);border-color:var(--ink);color:var(--gold)}
+
+  header.mast{padding:54px 0 32px;border-bottom:2px solid var(--ink)}
+  .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+  h1{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(30px,6vw,48px);line-height:1.08;margin-bottom:14px}
+  h1 .amp{color:var(--gold);font-weight:500}
+  .standfirst{font-size:clamp(15px,2.2vw,17px);color:var(--soft);max-width:62ch;font-weight:300}
+  .meta-line{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:24px;font-family:var(--mono);font-size:10.5px;
+             letter-spacing:.09em;color:var(--mute);text-transform:uppercase}
+
+  section{padding:44px 0;border-bottom:1px solid var(--rule)}
+  .sec-label{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-bottom:12px}
+  h2{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(21px,3.6vw,29px);line-height:1.2;margin-bottom:16px}
+  p{margin-bottom:14px;max-width:68ch}
+  p.lede{font-size:16.5px;font-weight:300;color:var(--soft)}
+
+  .tally{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:24px 0 10px}
+  .tally div{background:var(--paper);padding:19px 15px}
+  .tally .n{font-family:'Playfair Display',serif;font-size:33px;font-weight:700;line-height:1}
+  .tally .n em{font-style:normal;color:var(--gold);font-size:19px}
+  .tally .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);margin-top:9px;line-height:1.45}
+
+  /* ---------- CLIPPINGS GALLERY ---------- */
+  .grp-h{display:flex;align-items:baseline;gap:12px;margin:32px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--ink)}
+  .grp-h h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;flex:1}
+  .grp-h span{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.1em}
+
+  .gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
+  .clip{border:1px solid var(--rule);background:#fff;border-radius:2px;overflow:hidden;display:flex;flex-direction:column}
+  .shot{position:relative;aspect-ratio:3/4;background:var(--sandpale);display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:2}
+  .shot .ph{font-family:'Playfair Display',serif;font-size:16px;color:#B9A87C;text-align:center;padding:0 14px;line-height:1.3;z-index:1}
+  .shot .ph small{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:#CBBFA3;margin-top:8px;text-transform:uppercase}
+  .clip.wide .shot{aspect-ratio:4/3}
+  .cap{padding:11px 12px;border-top:1px solid var(--rule)}
+  .cap b{display:block;font-size:13.5px;line-height:1.3}
+  .cap .d{font-family:var(--mono);font-size:9px;letter-spacing:.09em;color:var(--mute);text-transform:uppercase;margin-top:4px}
+  .cap a{font-family:var(--mono);font-size:9px;letter-spacing:.09em;color:var(--gold);text-decoration:none;text-transform:uppercase;
+         display:inline-block;margin-top:6px;border-bottom:1px solid transparent}
+  .cap a:hover{border-bottom-color:var(--gold)}
+
+  /* ---------- two-lane timeline ---------- */
+  .spine{position:relative;padding:4px 0;margin-top:24px}
+  .spine:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--rule);transform:translateX(-.5px)}
+  .lane-head{display:grid;grid-template-columns:1fr 88px 1fr;margin-bottom:16px}
+  .lane-head span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+  .lane-head .l{text-align:right;color:var(--tr)}
+  .lane-head .r{text-align:left;color:var(--om)}
+  .lane-head .c{text-align:center;color:var(--mute);font-size:9px}
+  .ev{display:grid;grid-template-columns:1fr 88px 1fr;align-items:start;margin-bottom:20px}
+  .ev .date{grid-column:2;text-align:center;font-family:var(--mono);font-size:9.5px;color:var(--mute);padding-top:3px;z-index:2}
+  .ev .date b{display:block;color:var(--ink);font-size:11px}
+  .ev .dot{position:absolute;left:50%;width:7px;height:7px;border-radius:50%;transform:translateX(-3.5px);
+           margin-top:26px;background:var(--mute);box-shadow:0 0 0 4px var(--paper)}
+  .card{padding:12px 14px;border:1px solid var(--rule);background:#fff;border-radius:2px}
+  .card h4{font-size:13.5px;font-weight:700;margin-bottom:4px;line-height:1.3}
+  .card p{font-size:12.5px;color:var(--soft);margin:0;font-weight:300;line-height:1.5}
+  .ev.tr .card{grid-column:1;border-left:3px solid var(--tr)} .ev.tr .dot{background:var(--tr)}
+  .ev.om .card{grid-column:3;border-left:3px solid var(--om)} .ev.om .dot{background:var(--om)}
+  .ev.both .card{grid-column:1/-1;grid-row:2;border:1px solid var(--gold);border-left:3px solid var(--gold);background:var(--sandpale);margin-top:32px}
+  .ev.both .dot{background:var(--gold);width:11px;height:11px;transform:translateX(-5.5px);margin-top:24px}
+  .lane-note{margin-top:22px;padding:15px 17px;border-left:3px solid var(--gold);background:var(--sandpale);font-size:14px;color:var(--soft)}
+  .lane-note b{color:var(--ink)}
+
+  blockquote{margin:26px 0;padding:20px 0 20px 24px;border-left:3px solid var(--gold)}
+  blockquote q{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:clamp(19px,3vw,25px);
+               line-height:1.32;display:block;margin-bottom:10px;quotes:none}
+  blockquote cite{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+
+  .themes{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px;margin-top:22px}
+  .th{border-top:2px solid var(--gold);padding-top:12px}
+  .th h4{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:6px;line-height:1.25}
+  .th p{font-size:13.5px;color:var(--soft);font-weight:300;margin:0}
+
+  .rec{border:1px solid var(--rule);border-top:3px solid var(--ink);padding:20px 22px;margin-top:20px;background:#fff}
+  .rec ol{margin:0;padding-left:0;list-style:none;counter-reset:r}
+  .rec li{counter-increment:r;padding:13px 0 13px 40px;position:relative;border-bottom:1px solid var(--rule);font-size:14.5px;color:var(--soft)}
+  .rec li:last-child{border-bottom:none;padding-bottom:0}
+  .rec li:before{content:counter(r,decimal-leading-zero);position:absolute;left:0;top:13px;font-family:var(--mono);font-size:11px;color:var(--gold);font-weight:700}
+  .rec li b{color:var(--ink)}
+
+  .next{background:var(--ink);color:var(--paper);padding:32px 28px;margin-top:34px;border-radius:2px}
+  .next .sec-label{color:var(--gold)}
+  .next h2{color:var(--paper);margin-bottom:10px}
+  .next p{color:rgba(250,250,250,.72);font-weight:300;margin-bottom:0}
+  .next .when{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+              margin-top:16px;padding-top:14px;border-top:1px solid rgba(212,175,55,.3)}
+
+  .howto{border:1px solid var(--rule);border-left:3px solid var(--warn);background:#FFF6EE;padding:15px 18px;margin-top:22px;font-size:13.5px;color:var(--soft)}
+  .howto b{color:var(--warn)}
+  .howto code{font-family:var(--mono);font-size:12px;background:#fff;padding:1px 5px;border:1px solid var(--rule);border-radius:2px}
+
+  footer{padding:32px 0 0;font-size:12.5px;color:var(--mute);font-weight:300}
+  footer .by{font-weight:700;color:var(--ink);font-size:14px;margin-bottom:5px}
+
+  @media(max-width:680px){
+    .lane-head{display:none}
+    .spine:before{left:9px}
+    .ev,.ev.both{grid-template-columns:1fr}
+    .ev .date{grid-column:1;text-align:left;padding:0 0 6px 30px;display:flex;gap:8px}
+    .ev .date b{display:inline}
+    .ev .dot{left:9px;margin-top:2px}
+    .ev.both .dot{margin-top:0}
+    .ev .card,.ev.tr .card,.ev.om .card,.ev.both .card{grid-column:1;margin-left:30px;margin-top:0}
+    .gal{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+  }
+  @media print{.langbar,.howto{display:none}body{background:#fff}section{break-inside:avoid}.clip{break-inside:avoid}}
+</style>
+</head>
+<body class="lang-tr">
+
+<div class="langbar">
+  <button id="b-tr" class="on" onclick="L('tr')">TR</button>
+  <button id="b-en" onclick="L('en')">EN</button>
+</div>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="eyebrow"><span class="tr-txt">Medya Yans&#305;malar&#305; Raporu</span><span class="en-txt">Media Coverage Report</span></div>
+  <h1><span class="tr-txt">Umman <span class="amp">&#8644;</span> T&uuml;rkiye</span><span class="en-txt">Oman <span class="amp">&#8644;</span> T&uuml;rkiye</span></h1>
+  <p class="standfirst">
+    <span class="tr-txt">Umman Sultanl&#305;&#287;&#305; &#304;skan ve &#350;ehircilik Bakan&#305; Say&#305;n Dr. Khalfan bin Saeed Al Shuaili ve 25 ki&#351;ilik heyetinin resmi T&uuml;rkiye ziyaretinin bas&#305;ndaki yans&#305;malar&#305; &mdash; ve hikayenin iki &uuml;lke aras&#305;nda nas&#305;l dola&#351;t&#305;&#287;&#305;.</span>
+    <span class="en-txt">Press coverage of the official visit of H.E. Dr Khalfan bin Saeed Al Shuaili, Minister of Housing and Urban Planning, and the 25-member Omani delegation &mdash; and how the story travelled between the two countries.</span>
+  </p>
+  <div class="meta-line">
+    <span>30.06 &ndash; 07.07.2026</span>
+    <span>Ankara &middot; Bodrum &middot; &#304;stanbul</span>
+    <span>SP Architects &middot; Aslan Business</span>
+  </div>
+</header>
+
+<!-- ===== TALLY ===== -->
+<section>
+  <div class="sec-label"><span class="tr-txt">&Ouml;zet</span><span class="en-txt">At a glance</span></div>
+  <h2><span class="tr-txt">Ziyaret iki &uuml;lkede, &uuml;&ccedil; dilde yay&#305;nland&#305;.</span><span class="en-txt">The visit was carried in two countries and three languages.</span></h2>
+  <div class="tally">
+    <div><div class="n">7</div><div class="k"><span class="tr-txt">Ulusal gazete<br>&mdash; bas&#305;l&#305;</span><span class="en-txt">National dailies<br>&mdash; in print</span></div></div>
+    <div><div class="n">1</div><div class="k"><span class="tr-txt">Haber ajans&#305;<br>Anadolu Ajans&#305;</span><span class="en-txt">Wire service<br>Anadolu Agency</span></div></div>
+    <div><div class="n">13<em>+</em></div><div class="k"><span class="tr-txt">Dijital ve<br>sekt&ouml;rel mecra</span><span class="en-txt">Digital &amp; trade<br>titles</span></div></div>
+    <div><div class="n">6</div><div class="k"><span class="tr-txt">K&ouml;rfez ve<br>uluslararas&#305;</span><span class="en-txt">Gulf &amp;<br>international</span></div></div>
+  </div>
+</section>
+
+<!-- ===== CLIPPINGS ===== -->
+<section>
+  <div class="sec-label"><span class="tr-txt">Kup&uuml;rler</span><span class="en-txt">Clippings</span></div>
+  <h2><span class="tr-txt">Yay&#305;nlanan haberler</span><span class="en-txt">Published coverage</span></h2>
+
+  <!-- PRINT -->
+  <div class="grp-h">
+    <h3><span class="tr-txt">Ulusal gazeteler &mdash; bas&#305;l&#305;</span><span class="en-txt">National dailies &mdash; print</span></h3>
+    <span>07&ndash;08.07.2026</span>
+  </div>
+  <div class="gal">
+    <div class="clip"><div class="shot"><img src="clippings/01-aksam.jpg" alt="Ak&#351;am" onerror="this.remove()"><span class="ph">Ak&#351;am<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Ak&#351;am</b><div class="d"><span class="tr-txt">Ulusal g&uuml;nl&uuml;k &middot; Bas&#305;l&#305;</span><span class="en-txt">National daily &middot; Print</span></div></div></div>
+    <div class="clip"><div class="shot"><img src="clippings/02-dunya.jpg" alt="D&uuml;nya" onerror="this.remove()"><span class="ph">D&uuml;nya<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>D&uuml;nya</b><div class="d"><span class="tr-txt">Ekonomi g&uuml;nl&uuml;&#287;&uuml; &middot; Bas&#305;l&#305;</span><span class="en-txt">Business daily &middot; Print</span></div></div></div>
+    <div class="clip"><div class="shot"><img src="clippings/03-takvim.jpg" alt="Takvim" onerror="this.remove()"><span class="ph">Takvim<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Takvim</b><div class="d"><span class="tr-txt">Ulusal g&uuml;nl&uuml;k &middot; Bas&#305;l&#305;</span><span class="en-txt">National daily &middot; Print</span></div></div></div>
+    <div class="clip"><div class="shot"><img src="clippings/04-yeni-safak.jpg" alt="Yeni &#350;afak" onerror="this.remove()"><span class="ph">Yeni &#350;afak<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Yeni &#350;afak</b><div class="d"><span class="tr-txt">Ulusal g&uuml;nl&uuml;k &middot; Bas&#305;l&#305;</span><span class="en-txt">National daily &middot; Print</span></div></div></div>
+    <div class="clip"><div class="shot"><img src="clippings/05-yeni-akit.jpg" alt="Yeni Akit" onerror="this.remove()"><span class="ph">Yeni Akit<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Yeni Akit</b><div class="d"><span class="tr-txt">Ulusal g&uuml;nl&uuml;k &middot; Bas&#305;l&#305;</span><span class="en-txt">National daily &middot; Print</span></div></div></div>
+    <div class="clip"><div class="shot"><img src="clippings/06-milat.jpg" alt="Milat" onerror="this.remove()"><span class="ph">Milat<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Milat</b><div class="d"><span class="tr-txt">Ulusal g&uuml;nl&uuml;k &middot; Bas&#305;l&#305;</span><span class="en-txt">National daily &middot; Print</span></div></div></div>
+    <div class="clip"><div class="shot"><img src="clippings/07-iste-ege.jpg" alt="&#304;&#351;&rsquo;te Ege" onerror="this.remove()"><span class="ph">&#304;&#351;&rsquo;te Ege<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>&#304;&#351;&rsquo;te Ege</b><div class="d"><span class="tr-txt">B&ouml;lgesel ekonomi &middot; Bas&#305;l&#305;</span><span class="en-txt">Regional business &middot; Print</span></div></div></div>
+  </div>
+
+  <!-- WIRE + NATIONAL DIGITAL -->
+  <div class="grp-h">
+    <h3><span class="tr-txt">Ajans ve ulusal dijital</span><span class="en-txt">Wire &amp; national digital</span></h3>
+    <span>08.07.2026</span>
+  </div>
+  <div class="gal">
+    <div class="clip wide"><div class="shot"><img src="clippings/08-anadolu-ajansi.jpg" alt="Anadolu Ajans&#305;" onerror="this.remove()"><span class="ph">Anadolu Ajans&#305;<small>Kaynak servis</small></span></div>
+      <div class="cap"><b>Anadolu Ajans&#305;</b><div class="d"><span class="tr-txt">Kaynak servis &middot; 08.07</span><span class="en-txt">Originating wire &middot; 08.07</span></div>
+      <a href="https://www.aa.com.tr/tr/ekonomi/turk-konut-ureticileri-ile-ummanli-heyet-ortak-yatirim-firsatlarini-gorustu/3990844" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/09-hurriyet.jpg" alt="H&uuml;rriyet" onerror="this.remove()"><span class="ph">H&uuml;rriyet<small>Bigpara</small></span></div>
+      <div class="cap"><b>H&uuml;rriyet &middot; Bigpara</b><div class="d"><span class="tr-txt">Ulusal dijital</span><span class="en-txt">National digital</span></div>
+      <a href="https://bigpara.hurriyet.com.tr/haberler/konut-haberleri/konut-ureticileri-ummanli-bakan-ile-gorustu_ID102204119/" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/10-haberturk.jpg" alt="Habert&uuml;rk" onerror="this.remove()"><span class="ph">Habert&uuml;rk<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Habert&uuml;rk</b><div class="d"><span class="tr-txt">Ulusal dijital</span><span class="en-txt">National digital</span></div></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/11-milliyet.jpg" alt="Milliyet" onerror="this.remove()"><span class="ph">Milliyet<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Milliyet</b><div class="d"><span class="tr-txt">Ulusal dijital</span><span class="en-txt">National digital</span></div></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/12-haberler.jpg" alt="Haberler.com" onerror="this.remove()"><span class="ph">Haberler.com<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Haberler.com</b><div class="d"><span class="tr-txt">Ulusal dijital</span><span class="en-txt">National digital</span></div>
+      <a href="https://www.haberler.com/ekonomi/turkiye-ve-umman-dan-gayrimenkulde-isbirligi-adimi-20031136-haberi/" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/13-ensondakika.jpg" alt="Ensondakika" onerror="this.remove()"><span class="ph">Ensondakika<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Ensondakika</b><div class="d"><span class="tr-txt">Ulusal dijital</span><span class="en-txt">National digital</span></div>
+      <a href="https://www.ensondakika.com.tr/turk-konut-ureticileri-ile-ummanli-heyet-ortak-yatirim-firsatlarini-gorustu/670108/" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/14-yeni-birlik.jpg" alt="Yeni Birlik" onerror="this.remove()"><span class="ph">Yeni Birlik<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Yeni Birlik</b><div class="d"><span class="tr-txt">Daveti man&#351;ete ta&#351;&#305;d&#305;</span><span class="en-txt">Led on the invitation</span></div>
+      <a href="https://www.gazetebirlik.com/ekonomi/umman-bakanindan-turk-sirketlerine-acik-cek-tecrubenizi-ulkemize-tasiyin/1035014" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+  </div>
+
+  <!-- TRADE -->
+  <div class="grp-h">
+    <h3><span class="tr-txt">Gayrimenkul ve in&#351;aat sekt&ouml;r bas&#305;n&#305;</span><span class="en-txt">Real estate &amp; construction trade</span></h3>
+    <span>08&ndash;09.07.2026</span>
+  </div>
+  <div class="gal">
+    <div class="clip wide"><div class="shot"><img src="clippings/15-yapi.jpg" alt="Yap&#305;.com.tr" onerror="this.remove()"><span class="ph">Yap&#305;.com.tr<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Yap&#305;.com.tr</b><div class="d"><span class="tr-txt">Sekt&ouml;r referans mecras&#305;</span><span class="en-txt">Sector reference title</span></div>
+      <a href="https://www.yapi.com.tr/haberler/konutder-ile-umman-heyeti-istanbulda-bir-araya-geldi_219923.html" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/16-emlak-kulisi.jpg" alt="Emlak Kulisi" onerror="this.remove()"><span class="ph">Emlak Kulisi<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Emlak Kulisi</b><div class="d"><span class="tr-txt">&ldquo;Konut sekt&ouml;r&uuml; i&ccedil;in dev ad&#305;m&rdquo;</span><span class="en-txt">Framed as a major step</span></div>
+      <a href="https://emlakkulisi.com/konut-sektoru-icin-dev-adim-konutder-ile-umman-heyeti-bir-araya-geldi/827947" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/17-emlak-dream.jpg" alt="Emlak Dream" onerror="this.remove()"><span class="ph">Emlak Dream<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Emlak Dream</b><div class="d"><span class="tr-txt">Sekt&ouml;rel dijital</span><span class="en-txt">Trade digital</span></div>
+      <a href="https://www.emlakdream.com/turk-konut-ureticileri-ummanli-heyet-ile-ortak-yatirim-firsatlarini-gorustu/" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/18-baret-dergisi.jpg" alt="Baret Dergisi" onerror="this.remove()"><span class="ph">Baret Dergisi<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Baret Dergisi</b><div class="d"><span class="tr-txt">Sekt&ouml;rel dijital</span><span class="en-txt">Trade digital</span></div>
+      <a href="https://www.baretdergisi.com/konutder-ile-umman-heyeti-istanbul-da-bir-araya-geldi/26564/" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/19-emlak-manset.jpg" alt="Emlak Man&#351;et" onerror="this.remove()"><span class="ph">Emlak Man&#351;et<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Emlak Man&#351;et</b><div class="d"><span class="tr-txt">Sekt&ouml;rel dijital</span><span class="en-txt">Trade digital</span></div>
+      <a href="https://www.emlakmanset.com/konutder-ile-umman-heyeti-istanbulda-bir-araya-geldi.html" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/20-emlak-haberi.jpg" alt="Emlak Haberi" onerror="this.remove()"><span class="ph">Emlak Haberi<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Emlak Haberi</b><div class="d"><span class="tr-txt">Sekt&ouml;rel dijital</span><span class="en-txt">Trade digital</span></div>
+      <a href="https://www.emlakhaberi.com/konutder-ile-umman-heyeti-istanbulda-bir-araya-geldi" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/21-insaat-yatirim.jpg" alt="&#304;n&#351;aat Yat&#305;r&#305;m" onerror="this.remove()"><span class="ph">&#304;n&#351;aat Yat&#305;r&#305;m<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>&#304;n&#351;aat Yat&#305;r&#305;m</b><div class="d"><span class="tr-txt">Sekt&ouml;rel dijital</span><span class="en-txt">Trade digital</span></div></div></div>
+  </div>
+
+  <!-- GULF -->
+  <div class="grp-h">
+    <h3><span class="tr-txt">K&ouml;rfez ve uluslararas&#305;</span><span class="en-txt">Gulf &amp; international</span></h3>
+    <span>04&ndash;12.07.2026</span>
+  </div>
+  <div class="gal">
+    <div class="clip wide"><div class="shot"><img src="clippings/22-oman-observer.jpg" alt="Oman Observer" onerror="this.remove()"><span class="ph">Oman Observer<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Oman Observer</b><div class="d"><span class="tr-txt">Haftan&#305;n tam &ouml;zeti &middot; 11.07</span><span class="en-txt">The full-week account &middot; 11.07</span></div>
+      <a href="https://www.omanobserver.om/article/1192663/oman/oman-turkiye-review-investment-in-housing-and-urban-planning" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/23-times-of-oman.jpg" alt="Times of Oman" onerror="this.remove()"><span class="ph">Times of Oman<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Times of Oman</b><div class="d"><span class="tr-txt">Umman ulusal</span><span class="en-txt">Oman national</span></div>
+      <a href="https://timesofoman.com/article/174221-oman-turkey-explore-investment-opportunities-in-urban-projects" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/24-muscat-daily.jpg" alt="Muscat Daily" onerror="this.remove()"><span class="ph">Muscat Daily<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Muscat Daily</b><div class="d"><span class="tr-txt">Ankara mutabakat&#305; &middot; 04.07</span><span class="en-txt">The Ankara MoU &middot; 04.07</span></div>
+      <a href="https://www.muscatdaily.com/2026/07/04/oman-turkiye-sign-mou-to-boost-urban-development/" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/25-zawya.jpg" alt="Zawya" onerror="this.remove()"><span class="ph">Zawya<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Zawya</b><div class="d"><span class="tr-txt">K&ouml;rfez finans</span><span class="en-txt">Gulf financial</span></div>
+      <a href="https://www.zawya.com/en/economy/gcc/oman-turkiye-sign-deal-to-boost-urban-development-real-estate-investment-rmbshzm6" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/26-fast-company-me.jpg" alt="Fast Company ME" onerror="this.remove()"><span class="ph">Fast Company ME<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>Fast Company Middle East</b><div class="d"><span class="tr-txt">B&ouml;lgesel i&#351; medyas&#305;</span><span class="en-txt">Regional business media</span></div>
+      <a href="https://fastcompanyme.com/news/oman-turkiye-sign-mou-to-boost-housing-and-urban-development-cooperation/" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+    <div class="clip wide"><div class="shot"><img src="clippings/27-arabian-stories.jpg" alt="The Arabian Stories" onerror="this.remove()"><span class="ph">The Arabian Stories<small>Kup&uuml;r bekleniyor</small></span></div>
+      <div class="cap"><b>The Arabian Stories</b><div class="d"><span class="tr-txt">&ldquo;Umman ak&#305;ll&#305; &#351;ehirler i&ccedil;in T&uuml;rk ortakl&#305;klar&#305; ar&#305;yor&rdquo;</span><span class="en-txt">&ldquo;Oman seeks Turkish partnerships for smart cities&rdquo;</span></div>
+      <a href="https://www.thearabianstories.com/2026/07/11/oman-seeks-turkish-partnerships-for-future-smart-cities/" target="_blank" rel="noopener">Habere git &rarr;</a></div></div>
+  </div>
+
+  <div class="howto">
+    <b>Kup&uuml;rleri nas&#305;l ekleyeceksin:</b> JPG dosyalar&#305;n&#305; bu HTML&rsquo;in yan&#305;na a&ccedil;aca&#287;&#305;n <code>clippings/</code> klas&ouml;r&uuml;ne, yandaki dosyada verilen adlarla kaydet. Otomatik y&uuml;klenir. Eksik olanlar bozuk g&ouml;r&uuml;nmez &mdash; gazete ad&#305;n&#305; ta&#351;&#305;yan sade bir yer tutucu &ccedil;&#305;kar, rapor yine d&uuml;zg&uuml;n durur.
+  </div>
+</section>
+
+<!-- ===== TIMELINE ===== -->
+<section>
+  <div class="sec-label"><span class="tr-txt">Hikaye nas&#305;l yay&#305;ld&#305;</span><span class="en-txt">How the story travelled</span></div>
+  <h2><span class="tr-txt">&#304;ki &uuml;lke, iki haber d&ouml;ng&uuml;s&uuml;</span><span class="en-txt">Two countries, two news cycles</span></h2>
+  <p class="lede"><span class="tr-txt">Solda T&uuml;rkiye, sa&#287;da Umman. Alt&#305;n renkli olanlar iki taraf&#305;n birlikte duyurdu&#287;u anlar.</span><span class="en-txt">Left: T&uuml;rkiye. Right: Oman. Gold marks the moments both sides reported together.</span></p>
+
+  <div class="lane-head"><span class="l">T&uuml;rkiye</span><span class="c">&mdash;</span><span class="r">Oman</span></div>
+  <div class="spine">
+    <div class="ev both"><div class="dot"></div><div class="date">02.07<b>Per</b></div><div class="card">
+      <h4><span class="tr-txt">Ankara &mdash; mutabakat imzaland&#305;</span><span class="en-txt">Ankara &mdash; the MoU is signed</span></h4>
+      <p><span class="tr-txt">D&ouml;rt sekt&ouml;r toplant&#305;s&#305;n&#305;n ard&#305;ndan, Dr. Al Shuaili ile Bakan Murat Kurum aras&#305;nda imza.</span><span class="en-txt">Following four sector meetings, H.E. Dr Al Shuaili and Minister Murat Kurum sign.</span></p></div></div>
+
+    <div class="ev om"><div class="dot"></div><div class="date">03.07<b>Cum</b></div><div class="card">
+      <h4><span class="tr-txt">Bakanl&#305;k duyurdu &mdash; Arap&ccedil;a</span><span class="en-txt">The Ministry publishes &mdash; in Arabic</span></h4>
+      <p><span class="tr-txt">Bakanl&#305;&#287;&#305;n LinkedIn hesab&#305; Ankara imzas&#305;n&#305; ta&#351;&#305;d&#305;.</span><span class="en-txt">The Ministry&rsquo;s LinkedIn carries the Ankara signing.</span></p></div></div>
+
+    <div class="ev om"><div class="dot"></div><div class="date">04.07<b>Cmt</b></div><div class="card">
+      <h4><span class="tr-txt">K&ouml;rfez bas&#305;n&#305; devrald&#305;</span><span class="en-txt">The Gulf press picks it up</span></h4>
+      <p><span class="tr-txt">Muscat Daily, Zawya, Fast Company ME. Sultan Haitham City ve B&uuml;y&uuml;k Maskat Master Plan&#305; isimle an&#305;ld&#305;.</span><span class="en-txt">Muscat Daily, Zawya, Fast Company ME. Sultan Haitham City and the Greater Muscat Master Plan are named.</span></p></div></div>
+
+    <div class="ev both"><div class="dot"></div><div class="date">07.07<b>Sal</b></div><div class="card">
+      <h4><span class="tr-txt">&#304;stanbul &mdash; KONUTDER masas&#305;</span><span class="en-txt">Istanbul &mdash; the KONUTDER table</span></h4>
+      <p><span class="tr-txt">Bakan, T&uuml;rkiye&rsquo;nin en b&uuml;y&uuml;k konut geli&#351;tiricilerine hitap etti ve Ekim davetini a&ccedil;&#305;klad&#305;.</span><span class="en-txt">The Minister addresses T&uuml;rkiye&rsquo;s largest housing developers and extends the October invitation.</span></p></div></div>
+
+    <div class="ev tr"><div class="dot"></div><div class="date">08.07<b>&#199;ar</b></div><div class="card">
+      <h4><span class="tr-txt">Anadolu Ajans&#305; &rarr; T&uuml;rk bas&#305;n&#305;</span><span class="en-txt">Anadolu Agency &rarr; the Turkish press</span></h4>
+      <p><span class="tr-txt">Servis ge&ccedil;ti. Saatler i&ccedil;inde 7 ulusal gazete ve 13&rsquo;ten fazla dijital mecra. T&uuml;rk bas&#305;n&#305;n&#305;n en yo&#287;un g&uuml;n&uuml; &mdash; ve tek g&uuml;n&uuml;.</span><span class="en-txt">The wire moves. Within hours: seven national dailies and more than thirteen digital titles. The largest day of Turkish coverage &mdash; and the only one.</span></p></div></div>
+
+    <div class="ev om"><div class="dot"></div><div class="date">11.07<b>Cmt</b></div><div class="card">
+      <h4><span class="tr-txt">Umman t&uuml;m haftay&#305; yay&#305;nlad&#305;</span><span class="en-txt">Oman publishes the full week</span></h4>
+      <p><span class="tr-txt">Oman Observer, Times of Oman, The Arabian Stories: 20+ toplant&#305; ve saha ziyareti, heyetin bile&#351;imi, Ekim daveti.</span><span class="en-txt">Oman Observer, Times of Oman, The Arabian Stories: 20+ meetings and field visits, the delegation&rsquo;s composition, the October invitation.</span></p></div></div>
+
+    <div class="ev om"><div class="dot"></div><div class="date">12.07<b>Paz</b></div><div class="card">
+      <h4><span class="tr-txt">Hala ak&#305;yor</span><span class="en-txt">Still running</span></h4>
+      <p><span class="tr-txt">Yeni bir Umman&ndash;T&uuml;rkiye konut payla&#351;&#305;m&#305; daha. K&ouml;rfez d&ouml;ng&uuml;s&uuml; kapanmad&#305;.</span><span class="en-txt">A further Oman&ndash;T&uuml;rkiye housing post. The Gulf cycle has not closed.</span></p></div></div>
+  </div>
+
+  <div class="lane-note">
+    <span class="tr-txt"><b>&#350;ekil ne s&ouml;yl&uuml;yor.</b> T&uuml;rk bas&#305;n&#305; tek g&uuml;nde yo&#287;unla&#351;t&#305; &mdash; 8 Temmuz, AA servisiyle &mdash; ve &#304;stanbul oturumuna odakland&#305;. Umman d&ouml;ng&uuml;s&uuml; daha erken ba&#351;lad&#305;, daha uzun s&uuml;rd&uuml; ve hala a&ccedil;&#305;k. Ayn&#305; haftan&#305;n iki anlat&#305;m&#305; ayn&#305; b&uuml;y&uuml;kl&uuml;kte de&#287;il.</span>
+    <span class="en-txt"><b>What the shape shows.</b> T&uuml;rkiye&rsquo;s coverage concentrated in a single day &mdash; 8 July, on the AA wire &mdash; and centred on the Istanbul session. Oman&rsquo;s cycle opened earlier, ran longer, and remains open. The two accounts of the same week are not the same size.</span>
+  </div>
+</section>
+
+<!-- ===== QUOTE + THEMES ===== -->
+<section>
+  <blockquote>
+    <q><span class="tr-txt">&ldquo;Sizi Umman&rsquo;da bekliyoruz.&rdquo;</span><span class="en-txt">&ldquo;We are waiting for you in Oman.&rdquo;</span></q>
+    <cite>H.E. Dr Khalfan Al Shuaili &middot; &#304;stanbul &middot; Anadolu Ajans&#305;</cite>
+  </blockquote>
+
+  <div class="sec-label"><span class="tr-txt">Ge&ccedil;en mesaj</span><span class="en-txt">The message that landed</span></div>
+  <h2><span class="tr-txt">Her haberde tekrarlanan d&ouml;rt tema</span><span class="en-txt">Four themes carried in every story</span></h2>
+  <div class="themes">
+    <div class="th"><h4><span class="tr-txt">G&uuml;venilir ortak</span><span class="en-txt">A trusted partner</span></h4>
+      <p><span class="tr-txt">Bakan&rsquo;&#305;n &ldquo;T&uuml;rkiye Umman halk&#305; i&ccedil;in g&uuml;ven duyulan bir &uuml;lke&rdquo; ifadesi neredeyse t&uuml;m mecralarda birebir aktar&#305;ld&#305;.</span><span class="en-txt">The Minister&rsquo;s framing of T&uuml;rkiye as trusted and highly regarded was reproduced almost verbatim everywhere.</span></p></div>
+    <div class="th"><h4><span class="tr-txt">Vizyon 2040</span><span class="en-txt">Vision 2040</span></h4>
+      <p><span class="tr-txt">&#350;ehircilik, turizm ve gayrimenkul&uuml;n ekonomik &ccedil;e&#351;itlenmenin temel unsurlar&#305; olmas&#305;. Edit&ouml;rlere haberin &ldquo;neden &#351;imdi&rdquo;sini verdi.</span><span class="en-txt">Urban development, tourism and real estate as diversification pillars. This gave editors the &ldquo;why now&rdquo;.</span></p></div>
+    <div class="th"><h4><span class="tr-txt">&#199;ift y&ouml;nl&uuml; yat&#305;r&#305;m</span><span class="en-txt">Two-way investment</span></h4>
+      <p><span class="tr-txt">T&uuml;rk firmalar&#305; Umman&rsquo;da <em>ve</em> Umman sermayesi T&uuml;rkiye&rsquo;de. Kar&#351;&#305;l&#305;kl&#305;l&#305;k, haberi rutin olmaktan &ccedil;&#305;kard&#305;.</span><span class="en-txt">Turkish firms in Oman <em>and</em> Omani capital in T&uuml;rkiye. The reciprocity made this newsworthy rather than routine.</span></p></div>
+    <div class="th"><h4><span class="tr-txt">Ekim daveti</span><span class="en-txt">The October invitation</span></h4>
+      <p><span class="tr-txt">Urban October, Maskat, 5&ndash;8 Ekim. &#304;stisnas&#305;z t&uuml;m haberlerde; bir k&#305;sm&#305;nda man&#351;ette.</span><span class="en-txt">Urban October, Muscat, 5&ndash;8 October. In every story; the headline in several.</span></p></div>
+  </div>
+</section>
+
+<!-- ===== GAPS ===== -->
+<section>
+  <div class="sec-label"><span class="tr-txt">Analiz</span><span class="en-txt">Analysis</span></div>
+  <h2><span class="tr-txt">&Uuml;&ccedil; bo&#351;luk ve kapatma yolu</span><span class="en-txt">Three gaps, and what closes them</span></h2>
+  <div class="rec"><ol>
+    <li><b><span class="tr-txt">Ankara mutabakat&#305; T&uuml;rkiye&rsquo;de neredeyse g&ouml;r&uuml;nmedi.</span><span class="en-txt">The Ankara MoU barely surfaced in T&uuml;rkiye.</span></b>
+      <span class="tr-txt"> T&uuml;rk d&ouml;ng&uuml;s&uuml; &#304;stanbul oturumu etraf&#305;nda &#351;ekillendi; as&#305;l a&#287;&#305;rl&#305;kl&#305; olay olan bakanl&#305;k imzas&#305;n&#305; K&ouml;rfez bas&#305;n&#305; ta&#351;&#305;d&#305;. MoU kapsam&#305;ndaki ilk &ccedil;al&#305;&#351;ma toplant&#305;s&#305;na ba&#287;lanm&#305;&#351; k&#305;sa bir iki dilli b&uuml;lten bunu telafi eder.</span>
+      <span class="en-txt"> The Turkish cycle formed around the Istanbul session; the ministerial signing &mdash; the weightier event &mdash; was carried mainly by the Gulf press. A short bilingual release pegged to the first working meeting under the MoU would recover it.</span></li>
+    <li><b><span class="tr-txt">T&uuml;rk yay&#305;nlar&#305;n&#305;n hi&ccedil;biri &#304;ngilizce de&#287;il.</span><span class="en-txt">None of the Turkish coverage exists in English.</span></b>
+      <span class="tr-txt"> Yirmiden fazla yay&#305;n, tamam&#305; T&uuml;rk&ccedil;e. Maskat&rsquo;tan bak&#305;ld&#305;&#287;&#305;nda ziyaret oldu&#287;undan sessiz g&ouml;r&uuml;n&uuml;yor. Bu rapor, ziyaretin ilk &#304;ngilizce kayd&#305;.</span>
+      <span class="en-txt"> Twenty-plus placements, all in Turkish. From Muscat, the visit looks quieter than it was. This report is its first English record.</span></li>
+    <li><b><span class="tr-txt">Ekim fuar&#305;n&#305;n hen&uuml;z T&uuml;rk&ccedil;e bir izi yok.</span><span class="en-txt">The October exhibition has no Turkish-language footprint yet.</span></b>
+      <span class="tr-txt"> T&uuml;m mecralar daveti ta&#351;&#305;d&#305; ama bir geli&#351;tiricinin harekete ge&ccedil;ebilece&#287;i T&uuml;rk&ccedil;e materyal yok. Yap&#305;.com.tr ve Emlak Kulisi bir T&uuml;rk&ccedil;e duyuruyu ta&#351;&#305;r &mdash; ve tam olarak Bakanl&#305;&#287;&#305;n Maskat&rsquo;ta g&ouml;rmek istedi&#287;i firmalara ula&#351;&#305;r.</span>
+      <span class="en-txt"> Every outlet carried the invitation, but there is no Turkish-language material a developer can act on. Yap&#305;.com.tr and Emlak Kulisi will carry a Turkish announcement &mdash; and they reach exactly the firms the Ministry wants in Muscat.</span></li>
+  </ol></div>
+</section>
+
+<div class="next">
+  <div class="sec-label"><span class="tr-txt">Haftan&#305;n kurdu&#287;u &#351;ey</span><span class="en-txt">What the week set up</span></div>
+  <h2><span class="tr-txt">Maskat, Ekim</span><span class="en-txt">Muscat, October</span></h2>
+  <p><span class="tr-txt">Hafta iki bakan&#305;n imzas&#305;yla a&ccedil;&#305;ld&#305;, a&ccedil;&#305;k bir davetle kapand&#305;. T&uuml;rk sekt&ouml;r&uuml; bu daveti yedi ulusal gazetede okudu. S&#305;radaki hamle, u&ccedil;a&#287;a bir heyet bindirene ait.</span>
+     <span class="en-txt">The week opened with two ministers signing and closed with an open invitation. The Turkish sector has now read that invitation in seven national newspapers. The next move belongs to whoever puts a delegation on a plane.</span></p>
+  <div class="when">Urban October &mdash; Urban, Home &amp; Build Expo &middot; 5&ndash;8.10.2026 &middot; Muscat</div>
+</div>
+
+<footer>
+  <div class="by">SP Architects &middot; Aslan Business</div>
+  <div><span class="tr-txt">Haz&#305;rlayan: Ayten Pa&#351;ayi&#287;it &middot; &#304;stanbul &middot; Temmuz 2026</span><span class="en-txt">Compiled by Ayten Pa&#351;ayi&#287;it &middot; Istanbul &middot; July 2026</span></div>
+</footer>
+
+</div>
+
+<script>
+function L(l){
+  document.body.className='lang-'+l;
+  document.documentElement.lang=l;
+  document.getElementById('b-tr').classList.toggle('on',l==='tr');
+  document.getElementById('b-en').classList.toggle('on',l==='en');
+}
+</script>
+</body>
+</html>
