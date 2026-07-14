@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Umman Ziyareti &middot; Ekip Brief &middot; Video &amp; Post Paketi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1A1A2E;--soft:#4A4A63;--mute:#8A8A9E;--gold:#D4AF37;--sand:#E4D9C3;
+        --sandpale:#F5EFE3;--paper:#FAFAFA;--ok:#1F7A5C;--warn:#B4531F;--rule:rgba(26,26,46,.12);
+        --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:'Lato',-apple-system,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 18px 90px}
+
+  .tr-txt{display:none}
+  body.lang-tr .en-txt{display:none}
+  body.lang-tr .tr-txt{display:initial}
+  .langbar{position:sticky;top:0;z-index:60;background:rgba(250,250,250,.95);backdrop-filter:blur(8px);
+           border-bottom:1px solid var(--rule);display:flex;justify-content:flex-end;gap:6px;padding:9px 18px;margin:0 -18px}
+  .langbar button{font-family:var(--mono);font-size:10px;letter-spacing:.14em;background:none;
+                  border:1px solid var(--rule);color:var(--mute);padding:5px 11px;cursor:pointer;border-radius:2px}
+  .langbar button.on{background:var(--ink);border-color:var(--ink);color:var(--gold)}
+
+  header{padding:36px 0 22px;border-bottom:2px solid var(--ink)}
+  .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5.2vw,38px);line-height:1.1;margin-bottom:10px}
+  .sub{color:var(--soft);font-weight:300;font-size:15px;max-width:62ch}
+
+  .arc{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:26px}
+  .arc div{border:1px solid var(--rule);border-top:3px solid var(--gold);background:#fff;padding:14px 15px;border-radius:2px}
+  .arc b{display:block;font-family:'Playfair Display',serif;font-size:18px;margin-bottom:5px}
+  .arc span{font-size:13px;color:var(--soft);font-weight:300;line-height:1.5;display:block}
+
+  h2{font-family:'Playfair Display',serif;font-size:26px;margin:50px 0 4px;padding-top:28px;border-top:1px solid var(--rule)}
+  .h2sub{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+
+  .loc{border:1px solid var(--rule);background:#fff;border-radius:3px;margin-bottom:10px;overflow:hidden}
+  .loc-h{display:flex;align-items:center;gap:9px;padding:12px 15px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+  .loc-h b{font-size:15.5px;flex:1;min-width:130px}
+  .tagd{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+        border:1px solid var(--rule);color:var(--mute);padding:2px 7px;border-radius:2px}
+  .tagd.v{border-color:var(--gold);color:#8a6d14;background:#FBF6E7}
+  .cp{background:var(--sandpale);color:var(--ink);border:1px solid var(--sand);font-family:'Lato',sans-serif;
+      font-weight:700;font-size:10.5px;letter-spacing:.06em;padding:5px 11px;border-radius:2px;cursor:pointer;text-transform:uppercase}
+  .cp:hover{background:var(--sand)}
+  .cp.done{background:var(--ok);color:#fff;border-color:var(--ok)}
+  .cap{padding:14px 15px;font-size:14.5px;line-height:1.62}
+  .why{padding:0 15px 10px;font-size:13px;color:var(--soft);font-weight:300}
+  .why b{color:var(--ink);font-weight:700}
+  .who{padding:9px 15px;background:var(--sandpale);border-top:1px solid var(--rule);font-size:12.5px;color:var(--soft)}
+  .who b{color:var(--ink);font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;display:block;margin-bottom:3px;color:var(--mute)}
+  .blank{display:inline-block;min-width:120px;border-bottom:1.5px dashed #C9A227;color:#B4531F;font-style:italic}
+
+  table{width:100%;border-collapse:collapse;margin-top:14px;background:#fff;border:1px solid var(--rule)}
+  th{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);
+     text-align:left;padding:10px 12px;border-bottom:1px solid var(--ink);font-weight:400}
+  td{padding:9px 12px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+  td.n{font-family:var(--mono);font-size:10px;color:var(--gold);width:30px;font-weight:700}
+  td.nm{font-weight:700;white-space:nowrap}
+  td.ro{color:var(--soft);font-weight:300}
+  tr.key td.nm{color:var(--ink)}
+  tr.key{background:#FBF6E7}
+
+  .post{margin-top:16px;border:1px solid var(--rule);background:#fff;border-radius:3px;overflow:hidden}
+  .post-h{display:flex;align-items:center;gap:12px;padding:13px 15px;background:var(--ink);color:var(--paper);flex-wrap:wrap}
+  .post-h .no{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);line-height:1}
+  .post-h .t{flex:1;min-width:140px}
+  .post-h .t b{display:block;font-size:14.5px}
+  .post-h .t small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:rgba(250,250,250,.6);margin-top:2px}
+  .post-h .cp{background:var(--gold);border-color:var(--gold);font-weight:900}
+  .pbody{padding:18px 16px;white-space:pre-wrap;font-size:14.5px;line-height:1.66}
+
+  .vid{background:var(--ink);color:var(--paper);padding:28px 24px;border-radius:3px;margin-top:20px}
+  .vid .eyebrow{color:var(--gold)}
+  .vid h3{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:14px}
+  .vid ol{margin:0;padding-left:0;list-style:none;counter-reset:v}
+  .vid li{counter-increment:v;padding:11px 0 11px 40px;position:relative;border-bottom:1px solid rgba(250,250,250,.13);
+          font-size:14.5px;color:rgba(250,250,250,.78);font-weight:300}
+  .vid li:last-child{border-bottom:none}
+  .vid li:before{content:counter(v,decimal-leading-zero);position:absolute;left:0;top:11px;font-family:var(--mono);font-size:11px;color:var(--gold);font-weight:700}
+  .vid li b{color:var(--paper);font-weight:700}
+
+  .warnbox{border:1px solid var(--rule);border-left:3px solid var(--warn);background:#FFF6EE;padding:15px 17px;margin-top:20px;font-size:13.5px;color:var(--soft)}
+  .warnbox b{color:var(--warn)}
+  footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--rule);font-size:12px;color:var(--mute);font-weight:300}
+</style>
+</head>
+<body class="lang-tr">
+<div class="wrap">
+
+<div class="langbar">
+  <button id="b-tr" class="on" onclick="L('tr')">TR</button>
+  <button id="b-en" onclick="L('en')">EN</button>
+</div>
+
+<header>
+  <div class="eyebrow">Ekip Brief &middot; Video, Carousel &amp; Post Paketi</div>
+  <h1><span class="tr-txt">Umman Heyeti Ziyareti</span><span class="en-txt">Oman Delegation Visit</span></h1>
+  <p class="sub">
+    <span class="tr-txt">30 Haziran &ndash; 7 Temmuz 2026 &middot; Ankara &middot; Bodrum &middot; &#304;stanbul. Ziyaret notlar&#305;, heyet listesi, g&ouml;r&uuml;&#351;&uuml;len ki&#351;iler ve yay&#305;na haz&#305;r &uuml;&ccedil; post. Her notun form&uuml;l&uuml; ayn&#305;: <b>bu ne</b> + <b>Umman heyetinin neden g&ouml;rmesi gerekiyordu.</b></span>
+    <span class="en-txt">30 June &ndash; 7 July 2026 &middot; Ankara &middot; Bodrum &middot; Istanbul. Site notes, delegation list, people met, and three posts ready to publish.</span>
+  </p>
+
+  <div class="arc">
+    <div><b>Ankara</b><span class="tr-txt">Politika ve planl&#305; toplu yerle&#351;im. Mutabakat burada imzaland&#305;.</span><span class="en-txt">Policy and masterplanned communities. The MoU was signed here.</span></div>
+    <div><b>Bodrum</b><span class="tr-txt">Turizm odakl&#305; k&#305;y&#305; gayrimenkul&uuml;. Vizyon 2040&rsquo;&#305;n turizm aya&#287;&#305;n&#305;n birebir kar&#351;&#305;l&#305;&#287;&#305;.</span><span class="en-txt">Tourism-led coastal real estate &mdash; the analogue of Vision 2040&rsquo;s tourism pillar.</span></div>
+    <div><b>&#304;stanbul</b><span class="tr-txt">Kentsel d&ouml;n&uuml;&#351;&uuml;m, k&#305;y&#305; geri kazan&#305;m&#305; ve hacimli konut &uuml;retimi.</span><span class="en-txt">Urban regeneration, waterfront recovery and volume housing.</span></div>
+  </div>
+</header>
+
+<!-- ============ ANKARA ============ -->
+<h2>Ankara</h2>
+<div class="h2sub"><span class="tr-txt">1&ndash;2 Temmuz &middot; Politika ve &ouml;l&ccedil;ek</span><span class="en-txt">1&ndash;2 July &middot; Policy and scale</span></div>
+
+<div class="loc">
+  <div class="loc-h"><b>Sinpa&#351; Alt&#305;noran</b><span class="tagd v">Anchor</span><button class="cp" data-t="c1">Kopyala</button></div>
+  <div class="cap" id="c1"><span class="tr-txt">B&uuml;y&uuml;k &ouml;l&ccedil;ekli, etaplanm&#305;&#351; bir ya&#351;am b&ouml;lgesi. Tek bir master plan&#305;n on y&#305;llara yay&#305;lan bir teslim program&#305;na nas&#305;l d&ouml;n&uuml;&#351;t&uuml;&#287;&uuml;n&uuml;n &ouml;rne&#287;i.</span><span class="en-txt">A large-scale, phased residential district &mdash; how a single masterplan becomes a delivery programme spanning decades.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Umman&rsquo;&#305;n yeni entegre konut yerle&#351;imleri i&ccedil;in ihtiyac&#305; olan &#351;ey tam olarak bu: etaplama ve uzun vadeli teslim disiplini.</span><span class="en-txt">Precisely what Oman&rsquo;s new integrated residential masterplans require: phasing and long-horizon delivery.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b><span class="blank">Sinpa&#351; yetkilileri &mdash; isim?</span></div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>Pasifik Holding &mdash; NEXT Level</b><button class="cp" data-t="c2">Kopyala</button></div>
+  <div class="cap" id="c2"><span class="tr-txt">Ofis, perakende ve konutun tek bir d&uuml;&#351;ey yap&#305;da bir araya geldi&#287;i karma kullan&#305;m modeli.</span><span class="en-txt">A mixed-use model consolidating office, retail and residential into a single vertical structure.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">B&uuml;y&uuml;k Maskat Master Plan&#305;&rsquo;nda yo&#287;unlu&#287;u arazi t&uuml;ketmeden yaratman&#305;n cevab&#305;.</span><span class="en-txt">Answers the density question in the Greater Muscat Master Plan without consuming more land.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b><span class="blank">isim?</span></div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>YDA</b><span class="tagd">Teyit et</span><button class="cp" data-t="c3">Kopyala</button></div>
+  <div class="cap" id="c3"><span class="tr-txt">Entegre m&uuml;teahhitlik kapasitesi &mdash; tasar&#305;mdan in&#351;aata ve i&#351;letmeye kadar tek elden y&uuml;r&uuml;yen model.</span><span class="en-txt">Integrated contracting capability &mdash; design, build and operate under one roof.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Teslim kapasitesi, bir yat&#305;r&#305;m karar&#305;n&#305;n en somut kriteri.</span><span class="en-txt">Delivery capacity is the most concrete criterion in any investment decision.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b><span class="blank">isim?</span></div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>R&ouml;nesans</b><button class="cp" data-t="c4">Kopyala</button></div>
+  <div class="cap" id="c4"><span class="tr-txt">T&uuml;rk m&uuml;teahhitli&#287;inin uluslararas&#305; &ouml;l&ccedil;ekte ne yapabildi&#287;inin en net g&ouml;stergelerinden biri.</span><span class="en-txt">One of the clearest demonstrations of what Turkish contracting delivers at international scale.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Umman&rsquo;&#305;n arad&#305;&#287;&#305; ortak profili: b&uuml;y&uuml;k, kan&#305;tlanm&#305;&#351;, s&#305;n&#305;r &ouml;tesi &ccedil;al&#305;&#351;maya al&#305;&#351;k&#305;n.</span><span class="en-txt">The partner profile Oman seeks: large, proven, used to working across borders.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b><span class="blank">isim?</span></div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>&#199;evre, &#350;ehircilik ve &#304;klim De&#287;i&#351;ikli&#287;i Bakanl&#305;&#287;&#305;</b><span class="tagd v">MoU</span><button class="cp" data-t="c5">Kopyala</button></div>
+  <div class="cap" id="c5"><span class="tr-txt">D&ouml;rt sekt&ouml;r toplant&#305;s&#305;n&#305;n ard&#305;ndan iki bakan aras&#305;nda mutabakat zapt&#305; imzaland&#305;: kentsel planlama, ak&#305;ll&#305; &#351;ehirler, ye&#351;il bina, gayrimenkul finansman&#305; ve tapu-sicil.</span><span class="en-txt">Following four sector meetings, an MoU was signed between the two ministers: urban planning, smart cities, green building, real estate finance and land administration.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Program&#305;n zirvesi. &Ouml;zel sekt&ouml;r g&ouml;r&uuml;&#351;meleri bu imzan&#305;n zeminini haz&#305;rlad&#305; &mdash; tersi de&#287;il.</span><span class="en-txt">The summit of the programme. The private-sector meetings prepared the ground for this signature &mdash; not the reverse.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b>Bakan <b style="display:inline;font-family:'Lato';font-size:12.5px;letter-spacing:0;text-transform:none;color:var(--ink)">Murat Kurum</b></div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>Ankara Valili&#287;i &middot; Umman B&uuml;y&uuml;kel&ccedil;ili&#287;i</b><span class="tagd">Teyit et</span><button class="cp" data-t="c6">Kopyala</button></div>
+  <div class="cap" id="c6"><span class="tr-txt">Protokol ve yat&#305;r&#305;mc&#305; g&ouml;r&uuml;&#351;meleri &mdash; program&#305;n resmi &ccedil;er&ccedil;evesi.</span><span class="en-txt">Protocol and investor meetings &mdash; the official frame of the programme.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b>B&uuml;y&uuml;kel&ccedil;i Saif Rashid Saif Aljahwari &middot; <span class="blank">Ankara Valisi &mdash; isim?</span></div>
+</div>
+
+<!-- ============ BODRUM ============ -->
+<h2>Bodrum</h2>
+<div class="h2sub"><span class="tr-txt">2&ndash;4 Temmuz &middot; Turizm ve k&#305;y&#305;</span><span class="en-txt">2&ndash;4 July &middot; Tourism and coast</span></div>
+
+<div class="loc">
+  <div class="loc-h"><b>Six Senses Kaplankaya</b><span class="tagd v">Anchor</span><button class="cp" data-t="c7">Kopyala</button></div>
+  <div class="cap" id="c7"><span class="tr-txt">Uluslararas&#305; bir otel markas&#305;n&#305;n bir k&#305;y&#305; arazisini tek ba&#351;&#305;na bir destinasyona d&ouml;n&uuml;&#351;t&uuml;rmesi.</span><span class="en-txt">How an international hospitality brand turns a stretch of coast into a destination in its own right.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Umman&rsquo;&#305;n k&#305;y&#305; &#351;eridi Bodrum&rsquo;un onlarca kat&#305;. Bu, o k&#305;y&#305;n&#305;n nas&#305;l de&#287;er &uuml;retece&#287;inin en do&#287;rudan modeli.</span><span class="en-txt">Oman&rsquo;s coastline is many times Bodrum&rsquo;s. The most direct model for how that coast generates value.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b><span class="blank">isim?</span></div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>Mandarin Oriental &middot; ASTA&#350;</b><button class="cp" data-t="c8">Kopyala</button></div>
+  <div class="cap" id="c8"><span class="tr-txt">Markal&#305; konut modeli: geli&#351;tirici araziyi ve sermayeyi, marka ise itibar&#305; ve i&#351;letmeyi getiriyor.</span><span class="en-txt">The branded-residence model: the developer brings land and capital, the brand brings reputation and operation.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Yabanc&#305; al&#305;c&#305;y&#305; bir pazara &ccedil;eken en h&#305;zl&#305; mekanizma &mdash; ve Umman&rsquo;&#305;n yabanc&#305; m&uuml;lkiyet g&uuml;ndeminin merkezinde.</span><span class="en-txt">The fastest mechanism for drawing foreign buyers &mdash; central to Oman&rsquo;s foreign-ownership agenda.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b><span class="blank">ASTA&#350; yetkilileri &mdash; isim?</span></div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>Aman Ruya</b><button class="cp" data-t="c9">Kopyala</button></div>
+  <div class="cap" id="c9"><span class="tr-txt">&Uuml;st segmentin en u&ccedil; ucu: az say&#305;da &uuml;nite, y&uuml;ksek de&#287;er, m&uuml;kemmel konum.</span><span class="en-txt">The very top of the market: few units, high value, exceptional siting.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Hacim olmadan da de&#287;er &uuml;retilebildi&#287;ini g&ouml;steriyor.</span><span class="en-txt">Demonstrates that value can be created without volume.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b><span class="blank">isim?</span></div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>Yal&#305;kavak Marina</b><button class="cp" data-t="c10">Kopyala</button></div>
+  <div class="cap" id="c10"><span class="tr-txt">Marina odakl&#305; destinasyon geli&#351;tirme: yat liman&#305;, perakende, restoran ve etkinlik ekonomisinin tek bir omurgada bulu&#351;mas&#305;.</span><span class="en-txt">Marina-led destination development: berthing, retail, dining and an events economy on one spine.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Umman&rsquo;&#305;n k&#305;y&#305; turizmi hedefi i&ccedil;in do&#287;rudan aktar&#305;labilir bir model.</span><span class="en-txt">A directly transferable model for Oman&rsquo;s coastal tourism ambitions.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b><span class="blank">isim?</span></div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>MESA &mdash; Demirb&uuml;k&uuml;</b><button class="cp" data-t="c11">Kopyala</button></div>
+  <div class="cap" id="c11"><span class="tr-txt">Topo&#287;rafyaya ve k&#305;y&#305; &ccedil;izgisine sayg&#305;l&#305; d&uuml;&#351;&uuml;k yo&#287;unluklu k&#305;y&#305; yerle&#351;imi.</span><span class="en-txt">Low-density coastal development that respects topography and shoreline.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">K&#305;y&#305; alan&#305; y&ouml;netimi mutabakat zapt&#305;nda ismen yer al&#305;yor. Bu, o maddenin sahadaki kar&#351;&#305;l&#305;&#287;&#305;.</span><span class="en-txt">Coastal zone management is named in the MoU. This is that clause, built.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b><span class="blank">isim?</span></div>
+</div>
+
+<!-- ============ ISTANBUL ============ -->
+<h2>&#304;stanbul</h2>
+<div class="h2sub"><span class="tr-txt">5&ndash;7 Temmuz &middot; D&ouml;n&uuml;&#351;&uuml;m, k&#305;y&#305; ve hacim</span><span class="en-txt">5&ndash;7 July &middot; Regeneration, waterfront, volume</span></div>
+
+<div class="loc">
+  <div class="loc-h"><b>Fikirtepe &middot; Kentsel D&ouml;n&uuml;&#351;&uuml;m</b><span class="tagd v">Anchor</span><span class="tagd">Teyit et</span><button class="cp" data-t="c12">Kopyala</button></div>
+  <div class="cap" id="c12"><span class="tr-txt">Bir mahallenin, m&uuml;lkiyet yap&#305;s&#305; par&ccedil;al&#305;yken yeniden kurulmas&#305;: hak sahipli&#287;i, uzla&#351;ma, etaplama, finansman.</span><span class="en-txt">Rebuilding a neighbourhood where ownership is fragmented: entitlement, consent, phasing, finance.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Bir konut bakanl&#305;&#287;&#305; i&ccedil;in program&#305;n en aktar&#305;labilir dura&#287;&#305;. Zor olan bina de&#287;il, mekanizma.</span><span class="en-txt">For a housing ministry, the most transferable stop. The hard part is not the building &mdash; it is the mechanism.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b><span class="blank">isim?</span></div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>SeaPearl Atak&ouml;y &middot; IstMarina</b><button class="cp" data-t="c13">Kopyala</button></div>
+  <div class="cap" id="c13"><span class="tr-txt">K&#305;y&#305; hatt&#305;nda karma kullan&#305;m: konut, otel, marina ve perakendenin ayn&#305; parselde birbirini finanse etmesi.</span><span class="en-txt">Mixed-use on the waterfront: residential, hotel, marina and retail cross-funding one another on a single site.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Tek fonksiyonlu k&#305;y&#305; projesi riskli; karma kullan&#305;m riski da&#287;&#305;t&#305;yor.</span><span class="en-txt">A single-use waterfront scheme carries risk; mixed use distributes it.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b><span class="blank">isim?</span></div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>R&ouml;nesans Hilltown &middot; &#304;stanbul Finans Merkezi</b><span class="tagd">Teyit et</span><button class="cp" data-t="c14">Kopyala</button></div>
+  <div class="cap" id="c14"><span class="tr-txt">Perakende omurgal&#305; karma kullan&#305;m ve devlet karar&#305;yla kurulan bir finans b&ouml;lgesinin &ccedil;evresinde olu&#351;an gayrimenkul ekonomisi.</span><span class="en-txt">Retail-anchored mixed use, and the real estate economy that forms around a state-created financial district.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Yeni yerle&#351;imlerde &ldquo;merkez&rdquo;in nas&#305;l yarat&#305;laca&#287;&#305; sorusu &mdash; ve ekonomik &ccedil;e&#351;itlendirmenin mekansal kar&#351;&#305;l&#305;&#287;&#305;.</span><span class="en-txt">How a &ldquo;centre&rdquo; is created in a new settlement &mdash; and the spatial form of economic diversification.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b><span class="blank">&#304;FM &mdash; isim?</span></div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>KONUTDER</b><span class="tagd v">Sekt&ouml;r masas&#305;</span><button class="cp" data-t="c15">Kopyala</button></div>
+  <div class="cap" id="c15"><span class="tr-txt">T&uuml;rkiye&rsquo;nin en b&uuml;y&uuml;k konut geli&#351;tiricileri tek masada. Kar&#351;&#305;l&#305;kl&#305; yat&#305;r&#305;m, ortak proje geli&#351;tirme ve gelir payla&#351;&#305;m modelleri ele al&#305;nd&#305;.</span><span class="en-txt">T&uuml;rkiye&rsquo;s largest housing developers around one table. Mutual investment, joint development and revenue-sharing models discussed.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Bakan&rsquo;&#305;n Ekim davetini a&ccedil;&#305;klad&#305;&#287;&#305; oda.</span><span class="en-txt">The room in which the Minister made his October invitation.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b>Ba&#351;kan Ziya Y&#305;lmaz &middot; DAP &middot; ARTA&#350; &middot; S&#304;NPA&#350; &middot; FUZUL &middot; Demir &#199;ukurova &middot; Halk GYO</div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>ARTA&#350; &middot; Sinpa&#351; yetkilileri</b><span class="tagd v">Son g&uuml;n</span><button class="cp" data-t="c16">Kopyala</button></div>
+  <div class="cap" id="c16"><span class="tr-txt">Hacimli konut &uuml;retimi: standartla&#351;t&#305;r&#305;lm&#305;&#351;, tekrarlanabilir, h&#305;zl&#305; teslim edilen b&uuml;y&uuml;k &ouml;l&ccedil;ekli yerle&#351;imler. Program&#305;n son g&uuml;n&uuml;.</span><span class="en-txt">Volume housing delivery: standardised, repeatable, large-scale communities brought to market at pace. The final day of the programme.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Bir <em>konut</em> bakanl&#305;&#287;&#305;n&#305;n as&#305;l meselesi bu. L&uuml;ks de&#287;il, adet.</span><span class="en-txt">This is the actual business of a <em>housing</em> ministry. Not luxury &mdash; numbers.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b>S&uuml;leyman &#199;etinsaya &middot; Serhan &#199;etinsaya (ARTA&#350;) &middot; <span class="blank">Sinpa&#351; &mdash; isim?</span></div>
+</div>
+
+<div class="loc">
+  <div class="loc-h"><b>Galataport</b><span class="tagd v">Kapan&#305;&#351;</span><button class="cp" data-t="c17">Kopyala</button></div>
+  <div class="cap" id="c17"><span class="tr-txt">Y&#305;llarca kapal&#305; kalm&#305;&#351; bir liman alan&#305;n&#305;n &#351;ehre geri verilmesi: kruvaziyer terminali yer alt&#305;na al&#305;nd&#305;, k&#305;y&#305; halka a&ccedil;&#305;ld&#305;, tarihi doku korundu.</span><span class="en-txt">A port district closed to the city for decades, returned to it: the cruise terminal placed underground, the shoreline opened, the historic fabric preserved.</span></div>
+  <div class="why"><b>Neden:</b> <span class="tr-txt">Kamu-&ouml;zel ortakl&#305;&#287;&#305;yla k&#305;y&#305; geri kazan&#305;m&#305;n&#305;n d&uuml;nyadaki en iddial&#305; &ouml;rneklerinden biri. Program&#305;n kapan&#305;&#351;&#305; olmas&#305; tesad&uuml;f de&#287;ildi &mdash; videonun kapan&#305;&#351;&#305; da burada olmal&#305;.</span><span class="en-txt">One of the most ambitious public-private waterfront recoveries anywhere. Closing here was not an accident.</span></div>
+  <div class="who"><b>G&ouml;r&uuml;&#351;&uuml;len</b>Do&#287;u&#351; Group &middot; <span class="blank">Erdem Bey &mdash; soyad&#305;?</span> &middot; Destek: Avi Alka&#351;</div>
+</div>
+
+<!-- ============ DELEGATION ============ -->
+<h2><span class="tr-txt">Heyet &mdash; 25 ki&#351;i</span><span class="en-txt">The Delegation &mdash; 25</span></h2>
+<div class="h2sub"><span class="tr-txt">Bakanl&#305;k &amp; diplomatik (14) + &ouml;zel sekt&ouml;r (11)</span><span class="en-txt">Ministry &amp; diplomatic (14) + private sector (11)</span></div>
+
+<table>
+  <thead><tr><th>#</th><th><span class="tr-txt">&#304;sim</span><span class="en-txt">Name</span></th><th><span class="tr-txt">G&ouml;rev</span><span class="en-txt">Role</span></th></tr></thead>
+  <tbody>
+    <tr class="key"><td class="n">01</td><td class="nm">H.E. Dr. Khalfan Said Mubarak Al Shueili</td><td class="ro">Minister of Housing and Urban Planning</td></tr>
+    <tr class="key"><td class="n">02</td><td class="nm">H.E. Saif Rashid Saif Aljahwari</td><td class="ro">Ambassador of Oman to T&uuml;rkiye</td></tr>
+    <tr><td class="n">03</td><td class="nm">Nasser Masoud Nasser Al Shibani</td><td class="ro">CEO, Al Sarh Investments &amp; Development</td></tr>
+    <tr class="key"><td class="n">04</td><td class="nm">Jamal Nasser Habib Al Hadi</td><td class="ro">Media Advisor to the Minister &middot; Head of Communication &amp; Identity</td></tr>
+    <tr><td class="n">05</td><td class="nm">Nasser Sulaiman Nasser Al Hadhrami</td><td class="ro">Director of Future Cities</td></tr>
+    <tr><td class="n">06</td><td class="nm">Hisham Najeeb Omar Al Zubaidi</td><td class="ro">Minister&rsquo;s Advisor, Real Estate Development</td></tr>
+    <tr><td class="n">07</td><td class="nm">Ali Salim Adim Alisaei</td><td class="ro">Real Estate Registrar</td></tr>
+    <tr><td class="n">08</td><td class="nm">Nasser Khamis Khalfan Al Siyabi</td><td class="ro">General Director of Real Estate Development</td></tr>
+    <tr class="key"><td class="n">09</td><td class="nm">Badar Hamed Saif Al Shukaili</td><td class="ro">Director, Partnership &amp; International Cooperation</td></tr>
+    <tr><td class="n">10</td><td class="nm">Shuaib Abdulrahim Hamed Al Rawahi</td><td class="ro">Technical Coordinator, Future Cities</td></tr>
+    <tr><td class="n">11</td><td class="nm">Rayyan Hamed Nasser Al Hinai</td><td class="ro">Architect / Planner &middot; Al-Thuraya City PM</td></tr>
+    <tr><td class="n">12</td><td class="nm">Shabib Mohamed Sabil Al Zadjali</td><td class="ro">Head of Public Relations</td></tr>
+    <tr><td class="n">13</td><td class="nm">Areej Khalid Hashil Al Musalhi</td><td class="ro">Architect / Urban Planner</td></tr>
+    <tr><td class="n">14</td><td class="nm">Aisha Mohammed Ali Al Musafir</td><td class="ro">Architect</td></tr>
+    <tr><td class="n">15</td><td class="nm">Salim Ali Nasser Al Siyabi</td><td class="ro">Chairman, Al Siyabi International Group</td></tr>
+    <tr><td class="n">16</td><td class="nm">Saeed Saleh Al Jabri</td><td class="ro">CEO, Mohammed Al Barwani LLC (MB Holding)</td></tr>
+    <tr><td class="n">17</td><td class="nm">Dr. Salim Saif Sulaiman Al Hadhaili</td><td class="ro">CEO, Modon Sustainable Development</td></tr>
+    <tr><td class="n">18</td><td class="nm">Mohamed Sultan Salim Al Habsi</td><td class="ro">CEO, Oman Investment Bank</td></tr>
+    <tr><td class="n">19</td><td class="nm">Abdul Rahim Mohammed Al Kharusi</td><td class="ro">CEO, Tathmeer Properties</td></tr>
+    <tr class="key"><td class="n">20</td><td class="nm">Ali Mohamed Juma Al Lawati</td><td class="ro">Chairman, OCCI Real Estate Committee</td></tr>
+    <tr><td class="n">21</td><td class="nm">Ali Mohamed Saleh Ba Omar</td><td class="ro">CEO, Al Dhahab Real Estate</td></tr>
+    <tr><td class="n">22</td><td class="nm">Hassan Khamis Mohammed Al Ruqeishi</td><td class="ro">Chairman, Oman Real Estate Association</td></tr>
+    <tr><td class="n">23</td><td class="nm">Mundhir Abdullah Ali Al Hammadi</td><td class="ro">CEO, Al Deham Real Estate</td></tr>
+    <tr><td class="n">24</td><td class="nm">Ahmed Hamed Said Al Sabhi</td><td class="ro">Chairman, Al Masa Real Estate Group</td></tr>
+    <tr><td class="n">25</td><td class="nm">Mahmood Mohammed Nasser Al Mandhari</td><td class="ro">Chairman, Sohar RED (Majd Oman)</td></tr>
+  </tbody>
+</table>
+
+<div class="warnbox">
+  <b>Ekibe not:</b> Sar&#305; sat&#305;rlar &mdash; videoda ve foto&#287;raflarda &ouml;ncelikli isimler. &Ouml;zellikle <b>Jamal Al Hadi</b> (Bakanl&#305;&#287;&#305;n medyas&#305;n&#305; y&ouml;neten ki&#351;i) ve <b>Badar Al Shukaili</b> (program&#305; Umman taraf&#305;ndan y&uuml;r&uuml;ten ki&#351;i) mutlaka kadrajda olsun. T&uuml;rk taraf&#305;ndaki bo&#351; b&#305;rak&#305;lan isimleri Ayten dolduracak &mdash; <b>uydurulmad&#305;.</b>
+</div>
+
+<!-- ============ POSTS ============ -->
+<h2><span class="tr-txt">Yay&#305;na haz&#305;r &uuml;&ccedil; post</span><span class="en-txt">Three posts, ready to publish</span></h2>
+<div class="h2sub"><span class="tr-txt">K&ouml;&#351;eli parantezleri LinkedIn&rsquo;de <b>@</b> etiketiyle de&#287;i&#351;tir</span><span class="en-txt">Replace bracketed names with real <b>@</b> tags in LinkedIn</span></div>
+
+<div class="post">
+  <div class="post-h"><span class="no">01</span><span class="t"><b>Kurum ve firmalara te&#351;ekk&uuml;r</b><small>T&uuml;rk&ccedil;e</small></span><button class="cp" data-t="p1">Kopyala</button></div>
+  <div class="pbody" id="p1">Umman Sultanl&#305;&#287;&#305; &#304;skan ve &#350;ehircilik Bakan&#305; Say&#305;n Dr. Khalfan bin Saeed Al Shuaili ba&#351;kanl&#305;&#287;&#305;ndaki 25 ki&#351;ilik heyet, 30 Haziran &ndash; 7 Temmuz tarihleri aras&#305;nda T&uuml;rkiye&rsquo;deydi.
+
+Ankara, Bodrum ve &#304;stanbul&rsquo;u kapsayan sekiz g&uuml;nl&uuml;k programda yirmiyi a&#351;k&#305;n toplant&#305; ve saha ziyareti ger&ccedil;ekle&#351;tirildi. Bu kapsam ve i&ccedil;erikte bir ziyaret, iki &uuml;lke aras&#305;nda daha &ouml;nce yap&#305;lmam&#305;&#351;t&#305;.
+
+Ankara aya&#287;&#305;nda ger&ccedil;ekle&#351;tirilen d&ouml;rt sekt&ouml;r toplant&#305;s&#305;n&#305;n ard&#305;ndan, &#199;evre, &#350;ehircilik ve &#304;klim De&#287;i&#351;ikli&#287;i Bakan&#305;m&#305;z Say&#305;n [Murat Kurum] ile Umman &#304;skan ve &#350;ehircilik Bakan&#305; Say&#305;n Al Shuaili aras&#305;nda bir mutabakat zapt&#305; imzaland&#305;. &#304;stanbul&rsquo;da ise T&uuml;rkiye&rsquo;nin &ouml;nde gelen konut geli&#351;tiricileriyle bir araya gelinerek kar&#351;&#305;l&#305;kl&#305; yat&#305;r&#305;m ve ortak proje geli&#351;tirme modelleri ele al&#305;nd&#305;.
+
+Yirmi y&#305;l&#305; a&#351;k&#305;n s&uuml;redir Ortado&#287;u pazarlar&#305;nda &ccedil;al&#305;&#351;&#305;yorum. B&ouml;yle bir program&#305;n kurulabilmesi, o y&#305;llarda biriken b&ouml;lge bilgisinin ve Umman ile kar&#351;&#305;l&#305;kl&#305; olarak in&#351;a edilmi&#351; g&uuml;venin sonucudur. Bu ziyaret, benim i&ccedil;in o g&uuml;venin kar&#351;&#305;l&#305;&#287;&#305; oldu.
+
+Program&#305;n arkas&#305;nda yo&#287;un ve titiz bir &ouml;n haz&#305;rl&#305;k s&uuml;reci var. SP Architects olarak Umman ile y&#305;llard&#305;r s&uuml;rd&uuml;rd&uuml;&#287;&uuml;m&uuml;z ili&#351;kinin bakanl&#305;k d&uuml;zeyine ta&#351;&#305;nmas&#305;na arac&#305;l&#305;k etmi&#351; olmak bizim i&ccedil;in gurur verici oldu.
+
+Heyeti a&#287;&#305;rlayan, kap&#305;lar&#305;n&#305; a&ccedil;an ve sahalar&#305;n&#305; gezdiren t&uuml;m kurum ve firmalara i&ccedil;tenlikle te&#351;ekk&uuml;r ederim.
+
+KURUMLAR
+[&#199;evre, &#350;ehircilik ve &#304;klim De&#287;i&#351;ikli&#287;i Bakanl&#305;&#287;&#305;] &middot; [Emlak Konut GYO] &middot; [Invest T&uuml;rkiye] &middot; [KONUTDER] ve Say&#305;n [Ziya Y&#305;lmaz]
+
+ANKARA
+[Sinpa&#351;] &middot; [Pasifik Holding] &middot; [YDA] &middot; [R&ouml;nesans]
+
+BODRUM
+[MESA] &middot; [Aman Ruya] &middot; [Six Senses Kaplankaya] &middot; [Mandarin Oriental] &middot; [ASTA&#350;] &middot; [Yal&#305;kavak Marina]
+
+&#304;STANBUL
+[Galataport] &amp; [Do&#287;u&#351; Group] &middot; [ARTA&#350;] &middot; [IstMarina] &middot; [SeaPearl] &middot; [R&ouml;nesans Hilltown] &middot; [DAP] &middot; [FUZUL] &middot; [Demir &#199;ukurova] &middot; [Halk GYO]
+
+Ayr&#305;ca Say&#305;n [Avi Alka&#351;]&rsquo;a, program&#305;n en kritik g&ouml;r&uuml;&#351;melerinden birinin &ouml;n&uuml;n&uuml; a&ccedil;an de&#287;erli deste&#287;i i&ccedil;in ayr&#305;ca te&#351;ekk&uuml;r ederim.
+
+Heyet, T&uuml;rkiye&rsquo;den 5&ndash;8 Ekim tarihlerinde Maskat&rsquo;ta d&uuml;zenlenecek Urban October &ndash; Urban, Home &amp; Build Expo&rsquo;ya y&ouml;nelik a&ccedil;&#305;k bir davetle ayr&#305;ld&#305;.
+
+Sonraki ad&#305;mlar&#305; &ccedil;ok yak&#305;nda payla&#351;aca&#287;&#305;m.</div>
+</div>
+
+<div class="post">
+  <div class="post-h"><span class="no">02</span><span class="t"><b>Umman taraf&#305;na te&#351;ekk&uuml;r</b><small>&#304;ngilizce &middot; +3 g&uuml;n</small></span><button class="cp" data-t="p2">Kopyala</button></div>
+  <div class="pbody" id="p2">Between 30 June and 7 July, a 25-member delegation from the Sultanate of Oman, led by H.E. Dr Khalfan bin Saeed Al Shuaili, Minister of Housing and Urban Planning, visited T&uuml;rkiye for an eight-day programme across Ankara, Bodrum and Istanbul.
+
+The programme comprised more than twenty meetings and field visits. A visit of this scope and depth between our two countries had not been undertaken before.
+
+I have worked in Middle Eastern markets for more than twenty years. In that time I have come to know the region closely, and to hold a particular affection and trust for Oman. This visit was, in every sense, the return on that.
+
+What made the week work, however, was the delegation itself.
+
+Every member of the delegation &mdash; from the Ministry, from [Khazaen Economic City], from the [Oman Chamber of Commerce &amp; Industry], and from Oman&rsquo;s leading real estate developers &mdash; engaged with a level of attention, preparation and openness that I have rarely encountered on a programme of this kind. They asked precise technical questions, walked every site, and shared what they saw generously throughout the week. That level of participation is not a given on a ministerial visit, and it is the principal reason the programme achieved what it did.
+
+Following four sector meetings in Ankara, a Memorandum of Understanding was signed between H.E. Dr Al Shuaili and H.E. [Murat Kurum], Minister of Environment, Urbanisation and Climate Change. It establishes a clear framework for cooperation in urban planning, smart cities, green building, real estate finance and land administration. I have no doubt that it will translate into concrete work in a short space of time.
+
+My sincere thanks to:
+
+H.E. Dr Khalfan bin Saeed Al Shuaili and the [Ministry of Housing and Urban Planning]
+Mr [Badar Hamed Saif Al Shukaili], Director of Partnership &amp; International Cooperation, who coordinated the programme from the Omani side with exceptional care
+Mr [Jamal Al Hadi], for communicating the visit with such precision and generosity throughout
+[Khazaen Economic City], the [Oman Chamber of Commerce &amp; Industry], and every Omani developer who travelled with the delegation
+
+SP Architects has been building its relationship with Oman for many years. Seeing that relationship reach ministerial level has been a genuine source of pride for our team.
+
+I will be sharing the next steps very shortly.</div>
+</div>
+
+<div class="post">
+  <div class="post-h"><span class="no">03</span><span class="t"><b>Devaml&#305;l&#305;k + Urban October</b><small>&#304;ngilizce &middot; +1 hafta</small></span><button class="cp" data-t="p3">Kopyala</button></div>
+  <div class="pbody" id="p3">5&ndash;8 October 2026 &middot; Muscat
+Urban October &mdash; Urban, Home &amp; Build Expo
+
+At the close of last week&rsquo;s ministerial visit to T&uuml;rkiye, H.E. Dr Khalfan bin Saeed Al Shuaili, Oman&rsquo;s Minister of Housing and Urban Planning, extended an open invitation to Turkish developers, contractors and design practices: come to Muscat, see the projects on the ground, and take part.
+
+That invitation was carried by Anadolu Agency and by seven Turkish national newspapers. It now deserves an answer.
+
+Oman&rsquo;s urban development programme has moved from strategy into procurement. The Greater Muscat Master Plan, the National Urban Strategy and new integrated residential masterplans across four governorates are all live. Vision 2040 is no longer a document; it is a pipeline.
+
+The Memorandum of Understanding signed in Ankara gives both sides a working framework. What it now needs is projects, partners and delivery.
+
+Oman is where this began. It is not where it ends.
+
+Over the coming months I will be sharing work from other markets across the region. The thread is the same in each: identifying a real opportunity early, and bringing it to the right people at the right moment. That is the work I have been doing for twenty years. From this year, I am doing it more openly.
+
+At SP Architects we are continuing the work this visit began, and we intend to be in Muscat in October.
+
+If Oman &mdash; or the wider region &mdash; is on your agenda, I would be glad to speak.</div>
+</div>
+
+<!-- ============ VIDEO ============ -->
+<div class="vid">
+  <div class="eyebrow">Video &middot; Kurgu &#304;skeleti</div>
+  <h3><span class="tr-txt">Ekip i&ccedil;in</span><span class="en-txt">For the edit team</span></h3>
+  <ol>
+    <li><b>A&ccedil;&#305;l&#305;&#351; &mdash; 5 sn.</b> Tek kart: &ldquo;30 Haziran &ndash; 7 Temmuz 2026. &Uuml;&ccedil; &#351;ehir. Yirmiyi a&#351;k&#305;n toplant&#305;.&rdquo; Ba&#351;ka hi&ccedil;bir &#351;ey.</li>
+    <li><b>&Uuml;&ccedil; perde.</b> Ankara / Bodrum / &#304;stanbul. Her perde bir kartla a&ccedil;&#305;ls&#305;n: <em>politika &mdash; turizm &mdash; d&ouml;n&uuml;&#351;&uuml;m.</em></li>
+    <li><b>Anchor duraklar &ouml;ne &ccedil;&#305;ks&#305;n.</b> Alt&#305;n etiketliler (Alt&#305;noran, Bakanl&#305;k/MoU, Kaplankaya, Fikirtepe, KONUTDER, ARTA&#350;, Galataport) uzun kals&#305;n. Di&#287;erleri 2&ndash;3 saniye.</li>
+    <li><b>Sessiz izlenmeye g&ouml;re kurgula.</b> LinkedIn videoyu susturarak oynat&#305;r. Her not ekranda <em>yaz&#305;l&#305;</em> olmal&#305;.</li>
+    <li><b>Kadrajda olmas&#305; gerekenler.</b> Bakan Al Shueili, Jamal Al Hadi, Badar Al Shukaili, B&uuml;y&uuml;kel&ccedil;i Aljahwari. Ve Ayten &mdash; 1&ndash;2 karede, merkezde de&#287;il ama odada.</li>
+    <li><b>Yemek masas&#305;, kadeh, &#351;i&#351;e yok.</b> Arka planda bile olsa ele. Bu video K&ouml;rfez&rsquo;de ve Bakanl&#305;k&rsquo;ta izlenecek.</li>
+    <li><b>Kapan&#305;&#351;: Galataport &rarr; kart.</b> &ldquo;5&ndash;8 Ekim. Maskat.&rdquo; Ba&#351;ka bir &#351;ey yok.</li>
+    <li><b>S&uuml;re: 60&ndash;90 saniye.</b> 17 dura&#287;&#305; s&#305;&#287;d&#305;rmaya &ccedil;al&#305;&#351;ma &mdash; anchor&rsquo;lar&#305; anlat, gerisini carousel&rsquo;a b&#305;rak.</li>
+  </ol>
+</div>
+
+<div class="warnbox">
+  <b>De&#287;i&#351;iklikler:</b> RAMS &ccedil;&#305;kar&#305;ld&#305; (gidilmedi). ARTA&#350; son g&uuml;ne al&#305;nd&#305; ve Sinpa&#351; yetkilileriyle ayn&#305; g&uuml;n g&ouml;r&uuml;&#351;&uuml;ld&uuml;&#287;&uuml; i&#351;lendi. Maxx Royal, Torun Center ve T&uuml;rk M&uuml;teahhitler Birli&#287;i zaten iptal oldu&#287;u i&ccedil;in listede yok. <b>&ldquo;Teyit et&rdquo;</b> etiketli duraklar&#305; ve bo&#351; isim alanlar&#305;n&#305; gözden ge&ccedil;ir.
+</div>
+
+<footer>SP Architects &middot; Aslan Business &middot; Temmuz 2026 &middot; Dahili kullan&#305;m</footer>
+</div>
+
+<script>
+function L(l){
+  document.body.className='lang-'+l;
+  document.documentElement.lang=l;
+  document.getElementById('b-tr').classList.toggle('on',l==='tr');
+  document.getElementById('b-en').classList.toggle('on',l==='en');
+}
+document.querySelectorAll('.cp').forEach(function(b){
+  b.addEventListener('click',function(){
+    var el=document.getElementById(b.dataset.t);
+    var vis=el.querySelector(document.body.classList.contains('lang-tr')?'.tr-txt':'.en-txt');
+    var txt=(vis?vis.innerText:el.innerText);
+    var done=function(){b.textContent='Kopyaland\u0131 \u2713';b.classList.add('done');
+      setTimeout(function(){b.textContent='Kopyala';b.classList.remove('done');},1500);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done).catch(done);
+    } else {done();}
+  });
+});
+</script>
+</body>
+</html>
