@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FitTrack – PT Yönetim</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+:root{
+  --primary:#2563EB;
+  --primary-light:#EFF6FF;
+  --primary-dark:#1D4ED8;
+  --success:#10B981;
+  --warning:#F59E0B;
+  --danger:#EF4444;
+  --g50:#F9FAFB;
+  --g100:#F3F4F6;
+  --g200:#E5E7EB;
+  --g300:#D1D5DB;
+  --g400:#9CA3AF;
+  --g500:#6B7280;
+  --g600:#4B5563;
+  --g800:#1F2937;
+  --text:#111827;
+  --bg:#F1F5F9;
+  --card:#FFFFFF;
+  --radius:14px;
+  --sh:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.05);
+  --sh-md:0 4px 12px rgba(0,0,0,.08);
+}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  max-width:430px;
+  margin:0 auto;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* ——— LAYOUT ——— */
+#app{min-height:100vh;display:flex;flex-direction:column}
+
+.header{
+  background:#fff;
+  padding:14px 18px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--g200);
+  position:sticky;top:0;z-index:100;
+}
+.header-title{font-size:17px;font-weight:700;color:var(--text)}
+.header-back{
+  display:flex;align-items:center;gap:3px;
+  color:var(--primary);font-size:14px;font-weight:600;cursor:pointer;
+}
+
+.main{flex:1;padding:16px 18px 88px}
+
+.bottom-nav{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:430px;
+  background:#fff;border-top:1px solid var(--g200);
+  display:flex;padding:8px 0 calc(8px + env(safe-area-inset-bottom));
+  z-index:100;
+}
+.nav-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  gap:3px;cursor:pointer;padding:4px 2px;position:relative;
+}
+.nav-icon{font-size:22px;line-height:1}
+.nav-label{font-size:10px;color:var(--g400);font-weight:600;transition:color .15s}
+.nav-item.active .nav-label{color:var(--primary)}
+.nav-badge{
+  position:absolute;top:-1px;right:calc(50% - 22px);
+  background:var(--danger);color:#fff;font-size:9px;font-weight:800;
+  min-width:16px;height:16px;border-radius:8px;padding:0 4px;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid #fff;
+}
+
+/* ——— CARDS ——— */
+.card{
+  background:var(--card);border-radius:var(--radius);
+  padding:16px;box-shadow:var(--sh);margin-bottom:12px;
+}
+.card-title{
+  font-size:11px;color:var(--g400);font-weight:700;
+  text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;
+}
+
+/* ——— BUTTONS ——— */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:6px;padding:13px 20px;border-radius:11px;
+  font-size:15px;font-weight:700;border:none;cursor:pointer;
+  transition:opacity .15s, transform .1s;width:100%;
+}
+.btn:active{opacity:.8;transform:scale(.98)}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-secondary{background:var(--primary-light);color:var(--primary)}
+.btn-danger{background:#FEE2E2;color:var(--danger)}
+.btn-success{background:#D1FAE5;color:#065F46}
+.btn-sm{padding:8px 14px;font-size:13px;border-radius:9px;width:auto;font-weight:600}
+.btn-ghost{background:transparent;color:var(--g600);font-weight:600;padding:8px 12px;font-size:13px;width:auto;border-radius:8px}
+
+/* ——— FORMS ——— */
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:13px;font-weight:700;color:var(--g600);margin-bottom:6px}
+.form-input{
+  width:100%;padding:12px 14px;
+  border:1.5px solid var(--g200);border-radius:10px;
+  font-size:15px;color:var(--text);background:#fff;
+  transition:border-color .15s;-webkit-appearance:none;appearance:none;
+}
+.form-input:focus{outline:none;border-color:var(--primary)}
+select.form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+
+/* ——— LIST ITEMS ——— */
+.list-item{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 0;border-bottom:1px solid var(--g100);cursor:pointer;
+}
+.list-item:last-child{border-bottom:none}
+.avatar{
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:800;flex-shrink:0;
+}
+.list-content{flex:1;min-width:0}
+.list-title{font-size:15px;font-weight:600;color:var(--text)}
+.list-sub{font-size:12px;color:var(--g400);margin-top:2px}
+
+/* ——— CREDIT BADGE ——— */
+.badge{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
+.badge-green{background:#D1FAE5;color:#065F46}
+.badge-yellow{background:#FEF3C7;color:#92400E}
+.badge-red{background:#FEE2E2;color:#991B1B}
+.badge-blue{background:var(--primary-light);color:var(--primary)}
+.badge-gray{background:var(--g100);color:var(--g500)}
+
+/* ——— PROGRESS BAR ——— */
+.prog-bar{height:5px;background:var(--g200);border-radius:3px;overflow:hidden;margin-top:6px}
+.prog-fill{height:100%;border-radius:3px;background:var(--primary);transition:width .3s}
+
+/* ——— STATS ——— */
+.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.stat-card{background:#fff;border-radius:var(--radius);padding:16px;box-shadow:var(--sh)}
+.stat-value{font-size:30px;font-weight:800;color:var(--text)}
+.stat-label{font-size:12px;color:var(--g400);margin-top:2px}
+
+/* ——— WEEK CALENDAR ——— */
+.week-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.week-nav-btn{
+  width:34px;height:34px;border-radius:50%;
+  background:#fff;border:1.5px solid var(--g200);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:17px;color:var(--g600);
+  transition:background .15s;
+}
+.week-nav-btn:active{background:var(--g100)}
+.week-nav-label{font-size:13px;font-weight:700;color:var(--text)}
+
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:10px}
+.wday{text-align:center;cursor:pointer;padding:4px 2px;border-radius:10px;transition:background .15s}
+.wday:active{background:var(--g100)}
+.wday-name{font-size:10px;color:var(--g400);font-weight:700;text-transform:uppercase}
+.wday-num{
+  font-size:16px;font-weight:700;color:var(--g800);
+  width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;margin:3px auto 0;
+}
+.wday.selected .wday-num{background:var(--primary);color:#fff}
+.wday.today:not(.selected) .wday-num{border:2px solid var(--primary);color:var(--primary)}
+.wday-dot{width:4px;height:4px;border-radius:50%;margin:3px auto 0;background:transparent}
+.wday.has-events .wday-dot{background:var(--primary)}
+.wday.selected.has-events .wday-dot{background:rgba(255,255,255,.6)}
+
+/* ——— TIME SLOTS ——— */
+.slot{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 14px;border-radius:11px;margin-bottom:8px;
+  border:1.5px solid var(--g200);cursor:pointer;
+  transition:all .15s;background:#fff;
+}
+.slot:active{opacity:.85}
+.slot.booked{background:#EFF6FF;border-color:#BFDBFE}
+.slot.available{background:#F0FDF4;border-color:#86EFAC}
+.slot-time{font-size:16px;font-weight:800;color:var(--text);width:52px;flex-shrink:0}
+.slot-info{flex:1}
+.slot-name{font-size:14px;font-weight:600}
+.slot-status{font-size:12px;color:var(--g400);margin-top:2px}
+
+/* ——— SECTION HEADING ——— */
+.sh{font-size:18px;font-weight:800;color:var(--text);margin-bottom:14px}
+.sh-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+
+/* ——— LOGIN ——— */
+.login-wrap{
+  min-height:100vh;display:flex;flex-direction:column;
+  padding:48px 24px 32px;
+}
+.login-logo{text-align:center;margin-bottom:36px}
+.login-icon{font-size:60px;margin-bottom:10px}
+.login-brand{font-size:30px;font-weight:900;color:var(--text)}
+.login-tagline{font-size:14px;color:var(--g400);margin-top:4px}
+.login-tabs{
+  display:flex;background:var(--g100);border-radius:11px;
+  padding:4px;margin-bottom:28px;
+}
+.ltab{
+  flex:1;text-align:center;padding:10px;border-radius:9px;
+  font-size:14px;font-weight:700;cursor:pointer;color:var(--g400);
+  transition:all .2s;
+}
+.ltab.active{background:#fff;color:var(--text);box-shadow:var(--sh)}
+
+/* ——— MODAL SHEET ——— */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.45);
+  z-index:200;display:flex;align-items:flex-end;justify-content:center;
+  animation:fadeIn .2s ease;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.sheet{
+  background:#fff;border-radius:22px 22px 0 0;
+  padding:20px 22px 32px;width:100%;max-width:430px;
+  max-height:92vh;overflow-y:auto;
+  animation:slideUp .25s ease;
+}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.sheet-handle{width:36px;height:4px;background:var(--g200);border-radius:2px;margin:0 auto 18px}
+.sheet-title{font-size:18px;font-weight:800;margin-bottom:20px}
+
+/* ——— TOAST ——— */
+.toast{
+  position:fixed;bottom:88px;left:50%;transform:translateX(-50%);
+  background:#1e293b;color:#fff;padding:11px 18px;border-radius:11px;
+  font-size:14px;font-weight:600;z-index:400;white-space:nowrap;
+  animation:toastIn .25s ease;pointer-events:none;
+}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+/* ——— EMPTY STATE ——— */
+.empty{text-align:center;padding:48px 16px;color:var(--g400)}
+.empty-icon{font-size:52px;margin-bottom:12px}
+.empty-text{font-size:15px;font-weight:600}
+.empty-sub{font-size:13px;margin-top:5px}
+
+/* ——— NOTIFICATION ——— */
+.notif-row{
+  display:flex;gap:12px;padding:14px 0;
+  border-bottom:1px solid var(--g100);
+}
+.notif-row:last-child{border-bottom:none}
+.notif-dot{width:9px;height:9px;border-radius:50%;background:var(--primary);margin-top:4px;flex-shrink:0}
+.notif-dot.read{background:var(--g300)}
+.notif-body{flex:1}
+.notif-msg{font-size:14px;color:var(--text);line-height:1.4}
+.notif-time{font-size:11px;color:var(--g400);margin-top:4px}
+
+/* ——— CHECKBOX ——— */
+.chk-row{display:flex;align-items:center;gap:10px;padding:9px 0;cursor:pointer}
+.chk{
+  width:22px;height:22px;border-radius:7px;
+  border:2px solid var(--g200);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .15s;font-size:13px;color:#fff;
+}
+.chk.on{background:var(--primary);border-color:var(--primary)}
+.chk-label{font-size:14px;font-weight:500;color:var(--text)}
+.chk-sub{font-size:12px;color:var(--g400)}
+
+/* ——— MISC ——— */
+.divider{height:1px;background:var(--g100);margin:12px 0}
+.hidden{display:none!important}
+.row{display:flex;align-items:center;gap:8px}
+.flex1{flex:1}
+.highlight-card{
+  background:linear-gradient(135deg,var(--primary),#4f46e5);
+  color:#fff;border-radius:var(--radius);padding:20px;margin-bottom:12px;
+  box-shadow:0 4px 14px rgba(37,99,235,.3);
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+// ═══════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════
+const SK = 'fittrack_v1';
+
+function loadState() {
+  try { const s = localStorage.getItem(SK); if(s) return JSON.parse(s); } catch(e){}
+  return initialState();
+}
+
+function save() {
+  try { localStorage.setItem(SK, JSON.stringify(st)); } catch(e){}
+}
+
+function initialState() {
+  const today = localDate(new Date());
+  return {
+    pt: { name: 'PT', pin: '1234' },
+    members: [
+      { id:'m1', name:'Ayşe Yılmaz',  phone:'0532 111 22 33', email:'ayse@mail.com',  totalCredits:12, usedCredits:5,  joinDate:'2025-11-01', color:'#2563EB' },
+      { id:'m2', name:'Burak Demir',  phone:'0541 444 55 66', email:'burak@mail.com', totalCredits:8,  usedCredits:7,  joinDate:'2025-12-01', color:'#7C3AED' },
+      { id:'m3', name:'Ceren Kaya',   phone:'0543 777 88 99', email:'ceren@mail.com', totalCredits:20, usedCredits:3,  joinDate:'2025-11-15', color:'#059669' }
+    ],
+    sessions: [
+      { id:'s1', memberId:'m1', date: addDays(today,1), time:'10:00', status:'booked' },
+      { id:'s2', memberId:'m2', date: today,             time:'14:00', status:'booked' },
+      { id:'s3', memberId:'m3', date: addDays(today,2),  time:'09:00', status:'booked' }
+    ],
+    slots: [
+      { id:'sl1', date: today,             time:'11:00', booked:false },
+      { id:'sl2', date: addDays(today,1),  time:'16:00', booked:false },
+      { id:'sl3', date: addDays(today,3),  time:'09:00', booked:false }
+    ],
+    notifications: [
+      {
+        id:'n1', slotId:'sl2',
+        targetIds:['m1','m3'],
+        message:`📅 ${fmtTR(addDays(today,1))} - 16:00 saati müsait! Rezerve edebilirsiniz.`,
+        sentAt: new Date().toISOString(), readBy:[]
+      }
+    ]
+  };
+}
+
+let st = loadState();
+
+// ═══════════════════════════════════════════════════════════
+// UI STATE
+// ═══════════════════════════════════════════════════════════
+let ui = {
+  view: 'login',       // login | pt | pt-member | member
+  loginMode: 'pt',
+  ptTab: 'calendar',
+  memberTab: 'home',
+  selectedDate: localDate(new Date()),
+  weekStart: mondayOf(localDate(new Date())),
+  memberId: null,      // logged-in member
+  detailMemberId: null,
+  modal: null,
+  modalData: {},
+  notifSelected: []
+};
+
+// ═══════════════════════════════════════════════════════════
+// DATE UTILS
+// ═══════════════════════════════════════════════════════════
+function localDate(d) {
+  const y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0'), day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+
+function addDays(dateStr, n) {
+  const d = new Date(dateStr + 'T12:00:00');
+  d.setDate(d.getDate() + n);
+  return localDate(d);
+}
+
+function mondayOf(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  const dow = d.getDay(); // 0=Sun
+  const diff = dow === 0 ? -6 : 1 - dow;
+  return addDays(dateStr, diff);
+}
+
+function weekDates(mondayStr) {
+  return Array.from({length:7}, (_,i) => addDays(mondayStr, i));
+}
+
+function isToday(dateStr) { return dateStr === localDate(new Date()); }
+
+function fmtTR(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.toLocaleDateString('tr-TR', {day:'numeric', month:'long'});
+}
+
+function fmtShort(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.toLocaleDateString('tr-TR', {day:'numeric', month:'short'});
+}
+
+function dowNameNarrow(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.toLocaleDateString('tr-TR', {weekday:'narrow'});
+}
+
+function fmtWeekLabel(mondayStr) {
+  const days = weekDates(mondayStr);
+  const from = new Date(days[0]+'T12:00:00');
+  const to   = new Date(days[6]+'T12:00:00');
+  return `${from.getDate()} – ${to.getDate()} ${to.toLocaleDateString('tr-TR',{month:'long'})}`;
+}
+
+function relTime(isoStr) {
+  const diff = (Date.now() - new Date(isoStr)) / 60000;
+  if (diff < 1) return 'az önce';
+  if (diff < 60) return `${Math.floor(diff)} dk önce`;
+  if (diff < 1440) return `${Math.floor(diff/60)} saat önce`;
+  return `${Math.floor(diff/1440)} gün önce`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// HELPER LOOKUPS
+// ═══════════════════════════════════════════════════════════
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+function getMember(id) { return st.members.find(m => m.id === id); }
+function remaining(m) { return m.totalCredits - m.usedCredits; }
+function initials(name) { return name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2); }
+function creditClass(n) { return n <= 0 ? 'badge-red' : n <= 3 ? 'badge-yellow' : 'badge-green'; }
+
+function sessionsOn(date) { return st.sessions.filter(s => s.date === date); }
+function slotsOn(date) { return st.slots.filter(s => s.date === date); }
+
+const COLORS = ['#2563EB','#7C3AED','#059669','#D97706','#DC2626','#0891B2','#BE185D'];
+
+// ═══════════════════════════════════════════════════════════
+// RENDER ENGINE
+// ═══════════════════════════════════════════════════════════
+function render() {
+  document.getElementById('app').innerHTML =
+    ui.view === 'login'     ? renderLogin()   :
+    ui.view === 'pt'        ? renderPT()      :
+    ui.view === 'pt-member' ? renderPTMember():
+    ui.view === 'member'    ? renderMember()  : '';
+  bindInputs();
+}
+
+// ═══════════════════════════════════════════════════════════
+// LOGIN
+// ═══════════════════════════════════════════════════════════
+function renderLogin() {
+  return `<div class="login-wrap">
+    <div class="login-logo">
+      <div class="login-icon">🏋️</div>
+      <div class="login-brand">FitTrack</div>
+      <div class="login-tagline">PT Yönetim Sistemi</div>
+    </div>
+    <div class="login-tabs">
+      <div class="ltab ${ui.loginMode==='pt'?'active':''}" onclick="setLoginMode('pt')">💪 Personal Trainer</div>
+      <div class="ltab ${ui.loginMode==='member'?'active':''}" onclick="setLoginMode('member')">👤 Üye</div>
+    </div>
+    ${ui.loginMode==='pt' ? renderPTLoginForm() : renderMemberLoginForm()}
+  </div>`;
+}
+
+function renderPTLoginForm() {
+  return `<div class="form-group">
+    <label class="form-label">PT PIN Kodu</label>
+    <input type="password" class="form-input" id="pt-pin" placeholder="••••" maxlength="4" inputmode="numeric" autocomplete="off">
+  </div>
+  <button class="btn btn-primary" onclick="loginPT()" style="margin-top:6px">Giriş Yap →</button>
+  <p style="text-align:center;color:var(--g400);font-size:13px;margin-top:18px">Demo PIN: <strong style="color:var(--text)">1234</strong></p>`;
+}
+
+function renderMemberLoginForm() {
+  return `<div class="form-group">
+    <label class="form-label">Adınızı Seçin</label>
+    <select class="form-input" id="member-sel">
+      <option value="">-- Üye Seçin --</option>
+      ${st.members.map(m=>`<option value="${m.id}">${m.name}</option>`).join('')}
+    </select>
+  </div>
+  <button class="btn btn-primary" onclick="loginMember()" style="margin-top:6px">Devam Et →</button>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// PT APP SHELL
+// ═══════════════════════════════════════════════════════════
+function renderPT() {
+  const titles = {calendar:'📅 Takvim', members:'👥 Üyeler', notifications:'🔔 Bildirimler'};
+  const pendingNotifs = recentNotifCount();
+  return `<div>
+    <div class="header">
+      <div class="header-title">${titles[ui.ptTab]}</div>
+      <button class="btn btn-ghost btn-sm" onclick="logout()">Çıkış</button>
+    </div>
+    <div class="main">
+      ${ui.ptTab==='calendar'     ? renderCalendar()    :
+        ui.ptTab==='members'      ? renderMembers()     :
+                                     renderNotifications()}
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item ${ui.ptTab==='calendar'?'active':''}" onclick="setPTTab('calendar')">
+        <div class="nav-icon">📅</div><div class="nav-label">Takvim</div>
+      </div>
+      <div class="nav-item ${ui.ptTab==='members'?'active':''}" onclick="setPTTab('members')">
+        <div class="nav-icon">👥</div><div class="nav-label">Üyeler</div>
+      </div>
+      <div class="nav-item ${ui.ptTab==='notifications'?'active':''}" onclick="setPTTab('notifications')">
+        <div class="nav-icon">🔔</div><div class="nav-label">Bildirimler</div>
+        ${pendingNotifs>0?`<div class="nav-badge">${pendingNotifs}</div>`:''}
+      </div>
+    </div>
+    ${renderModal()}
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// CALENDAR TAB
+// ═══════════════════════════════════════════════════════════
+function renderCalendar() {
+  const days = weekDates(ui.weekStart);
+  const daySessions = sessionsOn(ui.selectedDate);
+  const daySlots = slotsOn(ui.selectedDate);
+
+  // Build unified timeline
+  let items = [];
+  daySessions.forEach(s => {
+    const m = getMember(s.memberId);
+    items.push({time:s.time, type:'session', data:s, member:m});
+  });
+  daySlots.filter(sl => !sl.booked).forEach(sl => {
+    items.push({time:sl.time, type:'slot', data:sl});
+  });
+  items.sort((a,b) => a.time.localeCompare(b.time));
+
+  return `
+  <div class="week-nav">
+    <div class="week-nav-btn" onclick="prevWeek()">‹</div>
+    <div class="week-nav-label">${fmtWeekLabel(ui.weekStart)}</div>
+    <div class="week-nav-btn" onclick="nextWeek()">›</div>
+  </div>
+  <div class="week-grid">
+    ${days.map(d => {
+      const hasSess = sessionsOn(d).length > 0;
+      const hasSlot = slotsOn(d).length > 0;
+      const hasEv = hasSess || hasSlot;
+      const sel = d === ui.selectedDate;
+      const tod = isToday(d);
+      return `<div class="wday ${sel?'selected':''} ${tod?'today':''} ${hasEv?'has-events':''}" onclick="selectDate('${d}')">
+        <div class="wday-name">${dowNameNarrow(d)}</div>
+        <div class="wday-num">${new Date(d+'T12:00:00').getDate()}</div>
+        <div class="wday-dot"></div>
+      </div>`;
+    }).join('')}
+  </div>
+
+  <div class="sh-row" style="margin-top:14px">
+    <div style="font-size:15px;font-weight:700">${fmtTR(ui.selectedDate)}${isToday(ui.selectedDate)?' <span style="color:var(--primary);font-size:12px">• Bugün</span>':''}</div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('add-slot',{date:'${ui.selectedDate}'})">+ Saat Ekle</button>
+  </div>
+
+  ${items.length === 0 ? `<div class="empty" style="padding:32px 0">
+    <div class="empty-icon">📭</div>
+    <div class="empty-text">Bu gün için etkinlik yok</div>
+    <div class="empty-sub">Müsait saat ekleyebilirsiniz</div>
+  </div>` : items.map(it => {
+    if (it.type === 'session') {
+      const m = it.member;
+      return `<div class="slot booked" onclick="openModal('session-detail',{id:'${it.data.id}'})">
+        <div class="slot-time">${it.time}</div>
+        <div class="slot-info">
+          <div class="slot-name" style="color:var(--primary)">${m?m.name:'Bilinmiyor'}</div>
+          <div class="slot-status">📌 Rezervasyon</div>
+        </div>
+        <div style="color:var(--g400);font-size:18px">›</div>
+      </div>`;
+    } else {
+      return `<div class="slot available" onclick="openModal('book-slot',{slotId:'${it.data.id}'})">
+        <div class="slot-time">${it.time}</div>
+        <div class="slot-info">
+          <div class="slot-name" style="color:#059669">Müsait Saat</div>
+          <div class="slot-status">✅ Rezervasyon bekliyor</div>
+        </div>
+        <button class="btn btn-success btn-sm" onclick="event.stopPropagation();openModal('book-slot',{slotId:'${it.data.id}'})">Rezerve Et</button>
+      </div>`;
+    }
+  }).join('')}`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// MEMBERS TAB
+// ═══════════════════════════════════════════════════════════
+function renderMembers() {
+  const upcoming = st.sessions.filter(s => s.date >= localDate(new Date())).length;
+  return `
+  <div class="sh-row">
+    <div class="sh">Üyeler</div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('add-member')">+ Üye Ekle</button>
+  </div>
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-value">${st.members.length}</div>
+      <div class="stat-label">Toplam Üye</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">${upcoming}</div>
+      <div class="stat-label">Yaklaşan Ders</div>
+    </div>
+  </div>
+  <div class="card" style="padding:0 16px">
+    ${st.members.length === 0 ? `<div class="empty" style="padding:32px 0">
+      <div class="empty-icon">👤</div><div class="empty-text">Henüz üye eklenmedi</div>
+    </div>` : st.members.map(m => {
+      const rem = remaining(m);
+      const pct = Math.min(100, m.totalCredits>0 ? (m.usedCredits/m.totalCredits)*100 : 0);
+      return `<div class="list-item" onclick="viewMember('${m.id}')">
+        <div class="avatar" style="background:${m.color}18;color:${m.color}">${initials(m.name)}</div>
+        <div class="list-content">
+          <div class="list-title">${m.name}</div>
+          <div class="list-sub">${m.phone}</div>
+          <div class="prog-bar" style="max-width:100px">
+            <div class="prog-fill" style="width:${pct}%;background:${m.color}"></div>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <span class="badge ${creditClass(rem)}">${rem} hak</span>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// NOTIFICATIONS TAB
+// ═══════════════════════════════════════════════════════════
+function renderNotifications() {
+  const openSlots = st.slots.filter(s => !s.booked && s.date >= localDate(new Date()));
+  const eligible = st.members.filter(m => remaining(m) > 0);
+
+  return `
+  <div class="sh">Bildirim Gönder</div>
+  <div class="card">
+    <div class="form-group">
+      <label class="form-label">Müsait Saat Seç</label>
+      <select class="form-input" id="notif-slot">
+        <option value="">-- Saat Seçin --</option>
+        ${openSlots.map(s=>`<option value="${s.id}">${fmtTR(s.date)} – ${s.time}</option>`).join('')}
+      </select>
+    </div>
+    ${openSlots.length === 0 ? `<div style="color:var(--g400);font-size:13px">Müsait saat bulunmuyor. Takvimden saat ekleyin.</div>` : ''}
+    <div class="form-group" style="margin-bottom:0">
+      <label class="form-label">Bildirim Gönderilecek Üyeler</label>
+      ${eligible.length === 0 ? `<div style="color:var(--g400);font-size:13px">Ders hakkı olan üye bulunmuyor.</div>` :
+        eligible.map(m => {
+          const on = ui.notifSelected.includes(m.id);
+          return `<div class="chk-row" onclick="toggleNotif('${m.id}')">
+            <div class="chk ${on?'on':''}">${on?'✓':''}</div>
+            <div>
+              <div class="chk-label">${m.name}</div>
+              <div class="chk-sub">${remaining(m)} ders hakkı kaldı</div>
+            </div>
+          </div>`;
+        }).join('')}
+    </div>
+  </div>
+  <button class="btn btn-primary" onclick="sendNotif()">🔔 Bildirimi Gönder</button>
+
+  <div style="margin-top:24px">
+    <div class="sh" style="font-size:15px">Geçmiş Bildirimler</div>
+    ${st.notifications.length === 0 ? `<div class="empty" style="padding:20px 0">
+      <div class="empty-icon">🔔</div><div class="empty-text">Henüz bildirim gönderilmedi</div>
+    </div>` : `<div class="card" style="padding:0 16px">
+      ${[...st.notifications].reverse().map(n => {
+        const names = n.targetIds.map(id=>{const m=getMember(id);return m?m.name.split(' ')[0]:'?'}).join(', ');
+        const readNames = (n.readBy||[]).map(id=>{const m=getMember(id);return m?m.name.split(' ')[0]:'?'}).join(', ');
+        return `<div class="notif-row">
+          <div class="notif-dot"></div>
+          <div class="notif-body">
+            <div class="notif-msg">${n.message}</div>
+            <div class="notif-time">
+              Alıcılar: ${names} • ${relTime(n.sentAt)}
+              ${readNames ? ` • 👁 Görüldü: ${readNames}` : ''}
+            </div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`}
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// PT → MEMBER DETAIL
+// ═══════════════════════════════════════════════════════════
+function renderPTMember() {
+  const m = getMember(ui.detailMemberId);
+  if (!m) { ui.view='pt'; return renderPT(); }
+  const rem = remaining(m);
+  const pct = Math.min(100, m.totalCredits>0?(m.usedCredits/m.totalCredits)*100:0);
+  const ms = st.sessions.filter(s=>s.memberId===m.id);
+  const today = localDate(new Date());
+  const upcoming = ms.filter(s=>s.date>=today).sort((a,b)=>a.date.localeCompare(b.date)||a.time.localeCompare(b.time));
+  const past = ms.filter(s=>s.date<today).sort((a,b)=>b.date.localeCompare(a.date));
+
+  return `<div>
+    <div class="header">
+      <div class="header-back" onclick="backToMembers()">‹ Üyeler</div>
+      <button class="btn btn-danger btn-sm" onclick="deleteMember('${m.id}')">Sil</button>
+    </div>
+    <div class="main" style="padding-bottom:24px">
+
+      <div class="card row" style="gap:16px;align-items:flex-start">
+        <div class="avatar" style="width:56px;height:56px;font-size:20px;font-weight:800;background:${m.color}18;color:${m.color};flex-shrink:0">${initials(m.name)}</div>
+        <div>
+          <div style="font-size:19px;font-weight:800">${m.name}</div>
+          <div style="font-size:13px;color:var(--g400);margin-top:3px">${m.phone}</div>
+          ${m.email?`<div style="font-size:13px;color:var(--g400)">${m.email}</div>`:''}
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-value" style="color:${rem<=0?'var(--danger)':rem<=3?'var(--warning)':'var(--text)'}">${rem}</div>
+          <div class="stat-label">Kalan Hak</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${m.usedCredits}</div>
+          <div class="stat-label">Kullanılan</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Ders Hakkı Yönetimi</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+          <span style="font-size:14px;color:var(--g500)">${m.usedCredits} / ${m.totalCredits} kullanıldı</span>
+          <span class="badge ${creditClass(rem)}">${rem} kalan</span>
+        </div>
+        <div class="prog-bar">
+          <div class="prog-fill" style="width:${pct}%;background:${m.color}"></div>
+        </div>
+        <div class="divider"></div>
+        <label class="form-label">Hak Ekle</label>
+        <div class="row">
+          <input type="number" class="form-input" id="credit-input" placeholder="Eklenecek miktar" min="1" style="flex:1">
+          <button class="btn btn-primary btn-sm" onclick="addCredits('${m.id}')">Ekle</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Yaklaşan Dersler (${upcoming.length})</div>
+        ${upcoming.length===0?`<div style="color:var(--g400);font-size:14px;padding:4px 0">Rezervasyon bulunmuyor</div>`:
+          upcoming.map(s=>`<div class="list-item">
+            <div style="font-size:22px">📅</div>
+            <div class="list-content">
+              <div class="list-title">${fmtTR(s.date)}${isToday(s.date)?' 🔴':''}</div>
+              <div class="list-sub">⏰ ${s.time}</div>
+            </div>
+            <button class="btn btn-danger btn-sm" onclick="cancelSession('${s.id}')">İptal</button>
+          </div>`).join('')}
+      </div>
+
+      ${past.length>0?`<div class="card">
+        <div class="card-title">Geçmiş Dersler (${past.length})</div>
+        ${past.slice(0,8).map(s=>`<div class="list-item">
+          <div style="font-size:22px">✅</div>
+          <div class="list-content">
+            <div class="list-title">${fmtTR(s.date)}</div>
+            <div class="list-sub">⏰ ${s.time}</div>
+          </div>
+          <span class="badge badge-green" style="font-size:11px">Tamam</span>
+        </div>`).join('')}
+      </div>`:''}
+
+      <button class="btn btn-primary" onclick="openModal('book-session',{memberId:'${m.id}'})">
+        📅 Yeni Ders Rezervasyonu
+      </button>
+    </div>
+    ${renderModal()}
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// MEMBER APP
+// ═══════════════════════════════════════════════════════════
+function renderMember() {
+  const m = getMember(ui.memberId);
+  if (!m) { logout(); return ''; }
+  const unread = st.notifications.filter(n=>n.targetIds.includes(m.id)&&!(n.readBy||[]).includes(m.id)).length;
+
+  return `<div>
+    <div class="header">
+      <div class="header-title">Merhaba, ${m.name.split(' ')[0]}! 👋</div>
+      <button class="btn btn-ghost btn-sm" onclick="logout()">Çıkış</button>
+    </div>
+    <div class="main">
+      ${ui.memberTab==='home'     ? renderMemberHome(m) :
+        ui.memberTab==='sessions' ? renderMemberSessions(m) :
+                                     renderMemberSlots(m)}
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item ${ui.memberTab==='home'?'active':''}" onclick="setMemberTab('home')">
+        <div class="nav-icon">🏠</div><div class="nav-label">Ana Sayfa</div>
+      </div>
+      <div class="nav-item ${ui.memberTab==='sessions'?'active':''}" onclick="setMemberTab('sessions')">
+        <div class="nav-icon">📋</div><div class="nav-label">Derslerim</div>
+      </div>
+      <div class="nav-item ${ui.memberTab==='slots'?'active':''}" onclick="setMemberTab('slots')">
+        <div class="nav-icon">📅</div><div class="nav-label">Müsait Saatler</div>
+        ${unread>0?`<div class="nav-badge">${unread}</div>`:''}
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderMemberHome(m) {
+  const rem = remaining(m);
+  const pct = Math.min(100, m.totalCredits>0?(m.usedCredits/m.totalCredits)*100:0);
+  const today = localDate(new Date());
+  const upcoming = st.sessions.filter(s=>s.memberId===m.id&&s.date>=today)
+                              .sort((a,b)=>a.date.localeCompare(b.date)||a.time.localeCompare(b.time));
+  const next = upcoming[0];
+  const unreadNotifs = st.notifications.filter(n=>n.targetIds.includes(m.id)&&!(n.readBy||[]).includes(m.id));
+
+  return `
+    ${unreadNotifs.length>0?`<div class="highlight-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="font-size:24px">🔔</span>
+        <span style="font-size:16px;font-weight:800">Yeni Bildirim!</span>
+      </div>
+      ${unreadNotifs.map(n=>`<div style="font-size:14px;opacity:.9;margin-bottom:3px">${n.message}</div>`).join('')}
+      <button class="btn btn-sm" style="background:rgba(255,255,255,.2);color:#fff;border:1.5px solid rgba(255,255,255,.4);margin-top:12px;width:auto" onclick="setMemberTab('slots')">
+        Saat Seçmek İçin →
+      </button>
+    </div>`:''}
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value" style="color:${rem<=0?'var(--danger)':rem<=3?'var(--warning)':'var(--text)'}">${rem}</div>
+        <div class="stat-label">Kalan Ders Hakkı</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">${m.usedCredits}</div>
+        <div class="stat-label">Tamamlanan Ders</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Ders Hakkı</div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+        <span style="font-size:13px;color:var(--g500)">${m.usedCredits} / ${m.totalCredits} kullanıldı</span>
+        <span class="badge ${creditClass(rem)}">${rem} kalan</span>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>
+      ${rem<=3&&rem>0?`<div style="font-size:12px;color:var(--warning);margin-top:8px;font-weight:600">⚠️ Ders hakkınız azalıyor, PT'nize başvurun.</div>`:''}
+      ${rem<=0?`<div style="font-size:12px;color:var(--danger);margin-top:8px;font-weight:600">❌ Ders hakkınız tükendi. PT'nize başvurun.</div>`:''}
+    </div>
+
+    ${next?`<div class="card" style="background:var(--primary-light);border:1.5px solid #BFDBFE">
+      <div class="card-title" style="color:var(--primary)">Bir Sonraki Dersin</div>
+      <div style="font-size:22px;font-weight:900;color:var(--primary)">${fmtTR(next.date)}</div>
+      <div style="font-size:18px;font-weight:700;margin-top:4px">⏰ ${next.time}</div>
+      ${isToday(next.date)?`<div style="font-size:13px;color:var(--danger);font-weight:700;margin-top:6px">🔴 Bugün!</div>`:''}
+    </div>` : `<div class="card" style="text-align:center;padding:28px 16px">
+      <div style="font-size:44px;margin-bottom:8px">📅</div>
+      <div style="font-weight:700;color:var(--g500)">Henüz rezervasyon yok</div>
+      ${rem>0?`<button class="btn btn-primary btn-sm" style="margin-top:14px" onclick="setMemberTab('slots')">Saat Rezerve Et</button>`:''}
+    </div>`}`;
+}
+
+function renderMemberSessions(m) {
+  const today = localDate(new Date());
+  const all = st.sessions.filter(s=>s.memberId===m.id).sort((a,b)=>a.date.localeCompare(b.date));
+  const upcoming = all.filter(s=>s.date>=today);
+  const past = all.filter(s=>s.date<today).reverse();
+
+  return `<div class="sh">Derslerim</div>
+    ${upcoming.length>0?`
+    <div class="card-title">Yaklaşan (${upcoming.length})</div>
+    <div class="card" style="padding:0 16px">
+      ${upcoming.map(s=>`<div class="list-item">
+        <div style="font-size:22px">${isToday(s.date)?'🔴':'📅'}</div>
+        <div class="list-content">
+          <div class="list-title">${fmtTR(s.date)}</div>
+          <div class="list-sub">⏰ ${s.time} ${isToday(s.date)?'• Bugün!':''}</div>
+        </div>
+        <span class="badge badge-blue">Rezerve</span>
+      </div>`).join('')}
+    </div>`:''}
+    ${past.length>0?`
+    <div class="card-title" style="margin-top:16px">Tamamlanan (${past.length})</div>
+    <div class="card" style="padding:0 16px">
+      ${past.map(s=>`<div class="list-item">
+        <div style="font-size:22px">✅</div>
+        <div class="list-content">
+          <div class="list-title">${fmtTR(s.date)}</div>
+          <div class="list-sub">⏰ ${s.time}</div>
+        </div>
+        <span class="badge badge-green" style="font-size:11px">Tamam</span>
+      </div>`).join('')}
+    </div>`:''}
+    ${all.length===0?`<div class="empty">
+      <div class="empty-icon">📭</div><div class="empty-text">Henüz ders kaydınız yok</div>
+    </div>`:''}`;
+}
+
+function renderMemberSlots(m) {
+  // Mark notifications as read
+  let changed = false;
+  st.notifications.forEach(n=>{
+    if(n.targetIds.includes(m.id)&&!(n.readBy||[]).includes(m.id)){
+      if(!n.readBy) n.readBy=[];
+      n.readBy.push(m.id);
+      changed=true;
+    }
+  });
+  if(changed) save();
+
+  const today = localDate(new Date());
+  const open = st.slots
+    .filter(s=>!s.booked && s.date>=today)
+    .sort((a,b)=>a.date.localeCompare(b.date)||a.time.localeCompare(b.time));
+  const rem = remaining(m);
+
+  return `<div class="sh">Müsait Saatler</div>
+    ${rem<=0?`<div class="card" style="background:#FEE2E2;border:1.5px solid #FCA5A5;margin-bottom:14px">
+      <div style="color:var(--danger);font-weight:700">⚠️ Ders hakkınız tükendi</div>
+      <div style="color:var(--danger);font-size:13px;margin-top:4px">PT'nize başvurarak yeni hak ekletebilirsiniz.</div>
+    </div>`:''}
+    ${open.length===0?`<div class="empty">
+      <div class="empty-icon">📭</div>
+      <div class="empty-text">Şu an müsait saat yok</div>
+      <div class="empty-sub">PT'niz saat eklediğinde bildirim alacaksınız</div>
+    </div>` : open.map(sl=>{
+      const already = st.sessions.some(s=>s.memberId===m.id&&s.date===sl.date&&s.time===sl.time);
+      return `<div class="slot available" style="cursor:default">
+        <div>
+          <div style="font-size:14px;font-weight:700">${fmtTR(sl.date)}</div>
+          ${isToday(sl.date)?`<div style="font-size:11px;color:var(--danger);font-weight:700">Bugün</div>`:''}
+        </div>
+        <div style="flex:1;padding-left:8px">
+          <div style="font-size:17px;font-weight:800">⏰ ${sl.time}</div>
+        </div>
+        ${already
+          ? `<span class="badge badge-blue">Rezervesiniz</span>`
+          : rem>0
+          ? `<button class="btn btn-primary btn-sm" onclick="memberBook('${sl.id}','${m.id}')">Rezerve Et</button>`
+          : `<span class="badge badge-gray">Hak Yok</span>`}
+      </div>`;
+    }).join('')}`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// MODALS
+// ═══════════════════════════════════════════════════════════
+function renderModal() {
+  if (!ui.modal) return '';
+  let body = '';
+  switch(ui.modal) {
+    case 'add-member':    body = modalAddMember(); break;
+    case 'add-slot':      body = modalAddSlot(); break;
+    case 'book-slot':     body = modalBookSlot(); break;
+    case 'book-session':  body = modalBookSession(); break;
+    case 'session-detail':body = modalSessionDetail(); break;
+  }
+  return `<div class="overlay" onclick="closeModal(event)">
+    <div class="sheet" onclick="event.stopPropagation()">
+      <div class="sheet-handle"></div>
+      ${body}
+    </div>
+  </div>`;
+}
+
+function modalAddMember() {
+  return `<div class="sheet-title">Yeni Üye Ekle</div>
+    <div class="form-group"><label class="form-label">Ad Soyad *</label>
+      <input class="form-input" id="nm-name" placeholder="Örn: Ali Veli" autocomplete="off"></div>
+    <div class="form-group"><label class="form-label">Telefon</label>
+      <input class="form-input" id="nm-phone" placeholder="0532 000 0000" type="tel"></div>
+    <div class="form-group"><label class="form-label">E-posta</label>
+      <input class="form-input" id="nm-email" placeholder="ornek@mail.com" type="email"></div>
+    <div class="form-group"><label class="form-label">Başlangıç Ders Hakkı</label>
+      <input class="form-input" id="nm-credits" placeholder="Örn: 12" type="number" min="0"></div>
+    <button class="btn btn-primary" onclick="doAddMember()">Üyeyi Ekle</button>`;
+}
+
+function modalAddSlot() {
+  return `<div class="sheet-title">Müsait Saat Ekle</div>
+    <div class="form-group"><label class="form-label">Tarih</label>
+      <input class="form-input" id="sl-date" type="date" value="${ui.modalData.date||localDate(new Date())}"></div>
+    <div class="form-group"><label class="form-label">Saat</label>
+      <select class="form-input" id="sl-time">${timeOptions()}</select></div>
+    <button class="btn btn-primary" onclick="doAddSlot()">Ekle</button>`;
+}
+
+function modalBookSlot() {
+  const slot = st.slots.find(s=>s.id===ui.modalData.slotId);
+  const eligible = st.members.filter(m=>remaining(m)>0);
+  return `<div class="sheet-title">Ders Rezervasyonu</div>
+    ${slot?`<div class="card" style="background:var(--primary-light);margin-bottom:16px">
+      <div style="font-weight:700;color:var(--primary)">${fmtTR(slot.date)} – ${slot.time}</div>
+    </div>`:''}
+    <div class="form-group"><label class="form-label">Üye Seç</label>
+      <select class="form-input" id="bs-member">
+        <option value="">-- Üye Seçin --</option>
+        ${eligible.map(m=>`<option value="${m.id}">${m.name} (${remaining(m)} hak)</option>`).join('')}
+      </select>
+    </div>
+    <button class="btn btn-primary" onclick="doBookSlot('${ui.modalData.slotId||''}')">Rezervasyonu Onayla</button>`;
+}
+
+function modalBookSession() {
+  const eligible = st.members.filter(m=>remaining(m)>0);
+  return `<div class="sheet-title">Manuel Rezervasyon</div>
+    <div class="form-group"><label class="form-label">Tarih</label>
+      <input class="form-input" id="ses-date" type="date" value="${localDate(new Date())}"></div>
+    <div class="form-group"><label class="form-label">Saat</label>
+      <select class="form-input" id="ses-time">${timeOptions()}</select></div>
+    <div class="form-group"><label class="form-label">Üye</label>
+      <select class="form-input" id="ses-member">
+        <option value="">-- Üye Seçin --</option>
+        ${eligible.map(m=>`<option value="${m.id}" ${ui.modalData.memberId===m.id?'selected':''}>${m.name} (${remaining(m)} hak)</option>`).join('')}
+      </select>
+    </div>
+    <button class="btn btn-primary" onclick="doBookSession()">Rezervasyonu Onayla</button>`;
+}
+
+function modalSessionDetail() {
+  const s = st.sessions.find(x=>x.id===ui.modalData.id);
+  if(!s) return '<div>Bulunamadı</div>';
+  const m = getMember(s.memberId);
+  return `<div class="sheet-title">Ders Detayı</div>
+    <div class="card" style="background:var(--primary-light);margin-bottom:16px">
+      <div style="font-weight:800;font-size:16px;color:var(--primary)">${fmtTR(s.date)} – ${s.time}</div>
+      <div style="font-size:14px;color:var(--g600);margin-top:4px">👤 ${m?m.name:'Bilinmiyor'}</div>
+    </div>
+    <button class="btn btn-danger" onclick="cancelSession('${s.id}')">❌ Dersi İptal Et</button>`;
+}
+
+function timeOptions() {
+  let opts = [];
+  for(let h=6;h<=22;h++){
+    opts.push(`<option value="${String(h).padStart(2,'0')}:00">${String(h).padStart(2,'0')}:00</option>`);
+    if(h<22) opts.push(`<option value="${String(h).padStart(2,'0')}:30">${String(h).padStart(2,'0')}:30</option>`);
+  }
+  return opts.join('');
+}
+
+// ═══════════════════════════════════════════════════════════
+// ACTIONS
+// ═══════════════════════════════════════════════════════════
+function bindInputs() {
+  const pin = document.getElementById('pt-pin');
+  if(pin) pin.addEventListener('keydown', e=>{ if(e.key==='Enter') loginPT(); });
+}
+
+function setLoginMode(m) { ui.loginMode=m; render(); }
+
+function loginPT() {
+  const pin = document.getElementById('pt-pin')?.value;
+  if(pin===st.pt.pin){ ui.view='pt'; ui.ptTab='calendar'; render(); }
+  else toast('Yanlış PIN kodu! Demo: 1234');
+}
+
+function loginMember() {
+  const id = document.getElementById('member-sel')?.value;
+  if(!id){ toast('Lütfen üye seçin'); return; }
+  ui.memberId=id; ui.view='member'; ui.memberTab='home'; render();
+}
+
+function logout() { ui.view='login'; ui.memberId=null; ui.detailMemberId=null; render(); }
+
+function setPTTab(t) { ui.ptTab=t; ui.modal=null; render(); }
+function setMemberTab(t) { ui.memberTab=t; render(); }
+
+function selectDate(d) { ui.selectedDate=d; render(); }
+
+function prevWeek() {
+  ui.weekStart = addDays(ui.weekStart,-7);
+  ui.selectedDate = ui.weekStart;
+  render();
+}
+function nextWeek() {
+  ui.weekStart = addDays(ui.weekStart,7);
+  ui.selectedDate = ui.weekStart;
+  render();
+}
+
+function openModal(name, data={}) { ui.modal=name; ui.modalData=data; render(); }
+function closeModal(e) { ui.modal=null; ui.modalData={}; render(); }
+
+function doAddMember() {
+  const name = document.getElementById('nm-name')?.value?.trim();
+  if(!name){ toast('Ad soyad zorunludur'); return; }
+  const credits = parseInt(document.getElementById('nm-credits')?.value)||0;
+  st.members.push({
+    id: uid(), name,
+    phone: document.getElementById('nm-phone')?.value?.trim()||'',
+    email: document.getElementById('nm-email')?.value?.trim()||'',
+    totalCredits: credits, usedCredits: 0,
+    joinDate: localDate(new Date()),
+    color: COLORS[st.members.length % COLORS.length]
+  });
+  save(); ui.modal=null; toast(`${name} eklendi!`); render();
+}
+
+function doAddSlot() {
+  const date = document.getElementById('sl-date')?.value;
+  const time = document.getElementById('sl-time')?.value;
+  if(!date||!time){ toast('Tarih ve saat seçin'); return; }
+  if(st.slots.some(s=>s.date===date&&s.time===time)){ toast('Bu saat zaten var'); return; }
+  const slot = {id:uid(), date, time, booked:false};
+  st.slots.push(slot);
+  save(); ui.modal=null; ui.selectedDate=date; toast('Müsait saat eklendi!'); render();
+}
+
+function doBookSlot(slotId) {
+  const memberId = document.getElementById('bs-member')?.value;
+  if(!memberId){ toast('Üye seçin'); return; }
+  const slot = st.slots.find(s=>s.id===slotId);
+  const m = getMember(memberId);
+  if(!slot||!m){ toast('Hata oluştu'); return; }
+  if(remaining(m)<=0){ toast('Bu üyenin ders hakkı kalmadı'); return; }
+  if(st.sessions.some(s=>s.date===slot.date&&s.time===slot.time)){ toast('Bu saatte zaten ders var'); return; }
+  slot.booked=true;
+  m.usedCredits++;
+  st.sessions.push({id:uid(), memberId, date:slot.date, time:slot.time, status:'booked'});
+  save(); ui.modal=null; toast(`${m.name} için ders rezerve edildi!`); render();
+}
+
+function doBookSession() {
+  const date = document.getElementById('ses-date')?.value;
+  const time = document.getElementById('ses-time')?.value;
+  const memberId = document.getElementById('ses-member')?.value;
+  if(!date||!time||!memberId){ toast('Tüm alanları doldurun'); return; }
+  const m = getMember(memberId);
+  if(remaining(m)<=0){ toast('Bu üyenin ders hakkı kalmadı'); return; }
+  if(st.sessions.some(s=>s.date===date&&s.time===time)){ toast('Bu saatte zaten ders var'); return; }
+  m.usedCredits++;
+  st.sessions.push({id:uid(), memberId, date, time, status:'booked'});
+  // Mark matching open slot as booked if exists
+  const slot = st.slots.find(s=>s.date===date&&s.time===time&&!s.booked);
+  if(slot) slot.booked=true;
+  save(); ui.modal=null; toast(`${m.name} için ders rezerve edildi!`); render();
+}
+
+function cancelSession(sessionId) {
+  const s = st.sessions.find(x=>x.id===sessionId);
+  if(!s) return;
+  const m = getMember(s.memberId);
+  if(m) m.usedCredits = Math.max(0, m.usedCredits-1);
+  const slot = st.slots.find(sl=>sl.date===s.date&&sl.time===s.time);
+  if(slot) slot.booked=false;
+  st.sessions = st.sessions.filter(x=>x.id!==sessionId);
+  save(); ui.modal=null; toast('Ders iptal edildi'); render();
+}
+
+function addCredits(memberId) {
+  const val = parseInt(document.getElementById('credit-input')?.value);
+  if(!val||val<1){ toast('Geçerli miktar girin'); return; }
+  const m = getMember(memberId);
+  if(m){ m.totalCredits+=val; save(); toast(`${val} ders hakkı eklendi!`); render(); }
+}
+
+function deleteMember(memberId) {
+  if(!confirm('Bu üyeyi ve tüm ders kayıtlarını silmek istediğinize emin misiniz?')) return;
+  st.sessions = st.sessions.filter(s=>s.memberId!==memberId);
+  st.members = st.members.filter(m=>m.id!==memberId);
+  st.notifications.forEach(n=>{n.targetIds=n.targetIds.filter(id=>id!==memberId)});
+  save(); ui.view='pt'; ui.ptTab='members'; toast('Üye silindi'); render();
+}
+
+function viewMember(id) { ui.detailMemberId=id; ui.view='pt-member'; render(); }
+function backToMembers() { ui.view='pt'; ui.ptTab='members'; render(); }
+
+function toggleNotif(id) {
+  const idx = ui.notifSelected.indexOf(id);
+  if(idx>=0) ui.notifSelected.splice(idx,1); else ui.notifSelected.push(id);
+  render();
+}
+
+function sendNotif() {
+  const slotId = document.getElementById('notif-slot')?.value;
+  if(!slotId){ toast('Müsait saat seçin'); return; }
+  if(ui.notifSelected.length===0){ toast('En az bir üye seçin'); return; }
+  const slot = st.slots.find(s=>s.id===slotId);
+  if(!slot){ toast('Saat bulunamadı'); return; }
+  st.notifications.push({
+    id: uid(), slotId,
+    targetIds: [...ui.notifSelected],
+    message: `📅 ${fmtTR(slot.date)} – ${slot.time} saati müsait! Hemen rezerve edebilirsiniz.`,
+    sentAt: new Date().toISOString(),
+    readBy: []
+  });
+  save();
+  toast(`Bildirim ${ui.notifSelected.length} üyeye gönderildi!`);
+  ui.notifSelected = [];
+  render();
+}
+
+function recentNotifCount() {
+  return st.notifications.filter(n=>{
+    const mins = (Date.now()-new Date(n.sentAt))/60000;
+    return mins < 120;
+  }).length;
+}
+
+function memberBook(slotId, memberId) {
+  const slot = st.slots.find(s=>s.id===slotId);
+  const m = getMember(memberId);
+  if(!slot||!m){ toast('Hata oluştu'); return; }
+  if(remaining(m)<=0){ toast('Ders hakkınız kalmadı'); return; }
+  if(st.sessions.some(s=>s.memberId===memberId&&s.date===slot.date&&s.time===slot.time)){ toast('Zaten rezervasyonunuz var'); return; }
+  if(slot.booked){ toast('Bu saat dolu'); return; }
+  slot.booked=true;
+  m.usedCredits++;
+  st.sessions.push({id:uid(), memberId, date:slot.date, time:slot.time, status:'booked'});
+  save(); toast('Ders rezervasyonu yapıldı! 🎉'); render();
+}
+
+// ═══════════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════════
+function toast(msg) {
+  document.querySelectorAll('.toast').forEach(t=>t.remove());
+  const el = document.createElement('div');
+  el.className='toast'; el.textContent=msg;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 2800);
+}
+
+// ═══════════════════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════════════════
+render();
+</script>
+</body>
+</html>
