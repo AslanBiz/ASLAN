@@ -1,227 +1,1419 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
 <title>MOVA Coach — PT'nin Dijital Asistanı</title>
 <style>
+/* ─── RESET & TOKENS ─────────────────────────────── */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --orange:#F36B2D;--orange-dark:#C94E1B;--orange-soft:#FFF1E9;
+  --or:#F36B2D;--or-dk:#C94E1B;--or-sf:#FFF1E9;
   --cream:#FFFBF7;--ink:#1F2328;--muted:#69707A;--line:#E7E9EC;
-  --card:#FFFFFF;--green:#3B8F69;--green-soft:#E8F4EE;--red:#C84F4F;
-  --silver:#B8BDC5;--rose:#C98A82;--gold:#C6A13B;--radius:16px;
+  --card:#FFFFFF;--green:#3B8F69;--green-sf:#E8F4EE;
+  --red:#C84F4F;--red-sf:#FBEAEA;
+  --silver:#B8BDC5;--rose:#C98A82;--gold:#C6A13B;
+  --r:14px;
+  --sh:0 1px 4px rgba(31,35,40,.06);
+  --sh-md:0 4px 14px rgba(31,35,40,.09);
 }
-body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--cream);color:var(--ink);max-width:430px;margin:0 auto;min-height:100vh}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-.app{min-height:100vh;padding-bottom:78px}
-.header{position:sticky;top:0;z-index:50;background:rgba(255,251,247,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);height:58px;padding:0 18px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px;font-weight:900}
-.brandmark{width:32px;height:32px;border-radius:10px;background:var(--orange);color:white;display:grid;place-items:center;font-weight:900}
-.header button{border:0;background:transparent;color:var(--muted);font-weight:700}
-.main{padding:18px}
-.login{min-height:100vh;padding:48px 24px;background:var(--cream)}
-.login-logo{text-align:center;margin-bottom:34px}.login-logo .brandmark{width:72px;height:72px;border-radius:22px;font-size:36px;margin:0 auto 14px;box-shadow:0 14px 30px rgba(243,107,45,.22)}
-.login-logo h1{font-size:30px}.login-logo p{color:var(--muted);margin-top:5px}
-.tabs{display:flex;background:#F1F2F3;border-radius:12px;padding:4px;margin-bottom:24px}.tabs button{flex:1;border:0;background:transparent;padding:11px;border-radius:9px;color:var(--muted);font-weight:800}.tabs button.active{background:white;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
-.label{display:block;font-size:12px;font-weight:800;color:var(--muted);margin:0 0 6px}.input{width:100%;border:1.5px solid var(--line);background:white;border-radius:12px;padding:13px 14px;color:var(--ink);outline:none}.input:focus{border-color:var(--orange)}
-.btn{border:0;border-radius:12px;padding:13px 16px;font-weight:900;width:100%}.btn.primary{background:var(--orange);color:white}.btn.soft{background:var(--orange-soft);color:var(--orange-dark)}.btn.green{background:var(--green-soft);color:#246947}.btn.red{background:#FBEAEA;color:var(--red)}.btn.small{width:auto;padding:8px 11px;font-size:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(31,35,40,.035)}
-.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.65px;color:var(--muted);font-weight:900}.title{font-size:24px;font-weight:950;letter-spacing:-.4px}.section-title{font-size:16px;font-weight:900;margin:20px 0 10px}.muted{color:var(--muted)}
-.hero{background:linear-gradient(135deg,var(--orange),var(--orange-dark));color:white;border-radius:20px;padding:19px;margin-bottom:12px}.hero .big{font-size:30px;font-weight:950;margin:4px 0}.hero .sub{opacity:.8;font-size:13px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:white;border:1px solid var(--line);border-radius:14px;padding:15px}.stat .n{font-size:27px;font-weight:950}.stat .l{font-size:12px;color:var(--muted);margin-top:2px}
-.income{background:var(--ink);color:white;border-radius:18px;padding:17px;margin:12px 0}.income .amount{font-size:29px;font-weight:950;margin-top:5px}.income .sub{font-size:12px;opacity:.62;margin-top:3px}
-.row{display:flex;align-items:center;gap:10px}.space{justify-content:space-between}.grow{flex:1;min-width:0}
-.chip{display:inline-flex;align-items:center;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:900;border:1px solid rgba(0,0,0,.06)}.silver{background:#EEF0F2;color:#59606A}.rose{background:#F5E6E3;color:#8E5B54}.gold{background:#F6EECF;color:#7C621B}
-.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}.quick button{background:white;border:1px solid var(--line);border-radius:14px;padding:14px;text-align:left}.quick b{display:block;margin-top:8px}.quick span{font-size:11px;color:var(--muted)}
-.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:white;border-top:1px solid var(--line);display:flex;padding:7px 4px calc(7px + env(safe-area-inset-bottom));z-index:60}.nav button{flex:1;border:0;background:transparent;color:#9A9FA6;font-size:10px;font-weight:800;padding:4px}.nav button i{display:block;font-style:normal;font-size:21px;line-height:22px}.nav button.active{color:var(--orange)}
-.list{background:white;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}.item{padding:13px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:11px}.item:last-child{border-bottom:0}.avatar{width:42px;height:42px;border-radius:50%;background:var(--orange-soft);color:var(--orange-dark);display:grid;place-items:center;font-weight:950}.item h4{font-size:14px}.item p{font-size:12px;color:var(--muted);margin-top:2px}.right{text-align:right;margin-left:auto}
-.week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:12px 0 16px}.day{border:0;background:transparent;border-radius:12px;padding:7px 2px}.day small{display:block;color:var(--muted);font-size:10px;font-weight:900}.day b{display:grid;place-items:center;width:32px;height:32px;margin:3px auto 0;border-radius:50%}.day.active b{background:var(--orange);color:white}
-.slot{display:flex;align-items:center;gap:12px;background:white;border:1px solid var(--line);border-radius:14px;padding:13px;margin-bottom:8px}.slot .time{font-size:16px;font-weight:950;width:50px}.slot.available{background:#F2FAF6;border-color:#CDE7D9}.slot.completed{background:#F6F7F8}.slot small{color:var(--muted)}
-.sheet-wrap{position:fixed;inset:0;background:rgba(0,0,0,.44);z-index:100;display:flex;align-items:flex-end}.sheet{width:100%;max-width:430px;margin:0 auto;background:white;border-radius:22px 22px 0 0;padding:20px 20px 32px;max-height:92vh;overflow:auto}.sheet h3{font-size:19px;margin-bottom:16px}.field{margin-bottom:13px}.handle{width:38px;height:4px;background:#DADDE0;border-radius:4px;margin:0 auto 17px}
-.notice{background:var(--orange-soft);border-left:4px solid var(--orange);padding:12px 13px;border-radius:10px;margin-bottom:12px;font-size:13px}.success{background:var(--green-soft);border-left-color:var(--green)}
-.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:var(--ink);color:white;border-radius:12px;padding:11px 15px;font-size:13px;font-weight:800;z-index:200;white-space:nowrap}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--cream);color:var(--ink);max-width:430px;margin:0 auto;min-height:100vh}
+button,input,select,textarea{font:inherit;border:none;outline:none;cursor:pointer}
 
-.calendar-toggle{display:flex;background:#F1F2F3;padding:4px;border-radius:11px;gap:3px}
-.calendar-toggle button{border:0;background:transparent;color:var(--muted);font-size:12px;font-weight:900;padding:8px 12px;border-radius:8px}
-.calendar-toggle button.active{background:white;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
-.month-head{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:14px}
-.month-head div{text-align:center;font-size:10px;color:var(--muted);font-weight:900;padding:4px}
-.month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:4px}
-.month-cell{min-height:58px;border:1px solid var(--line);background:white;border-radius:11px;padding:6px;text-align:left;position:relative;color:var(--ink)}
-.month-cell.out{opacity:.35}.month-cell.active{border:2px solid var(--orange);padding:5px}.month-cell b{font-size:12px}
-.month-cell .count{font-size:10px;color:var(--muted);margin-top:5px}.month-cell .open-dot{width:6px;height:6px;border-radius:50%;background:var(--green);position:absolute;right:6px;top:7px}
-.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.metric{background:white;border:1px solid var(--line);border-radius:14px;padding:14px}.metric strong{display:block;font-size:24px}.metric span{font-size:11px;color:var(--muted)}
-.progress-line{height:7px;background:#ECEEF0;border-radius:20px;overflow:hidden;margin-top:8px}.progress-line i{display:block;height:100%;background:var(--orange);border-radius:20px}
-.report-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.report-row:last-child{border-bottom:0}
-.premium-card{background:linear-gradient(135deg,#1F2328,#353B42);color:white;border-radius:20px;padding:20px;margin-bottom:12px}.premium-card .price{font-size:28px;font-weight:950;margin:8px 0}.premium-list{margin:14px 0}.premium-list div{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:13px}
-.locked{filter:blur(3px);opacity:.45;pointer-events:none;user-select:none}
+/* ─── LAYOUT ─────────────────────────────────────── */
+.app{min-height:100vh;padding-bottom:76px}
+.header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,251,247,.93);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  height:56px;padding:0 16px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:15px;color:var(--ink)}
+.brandmark{
+  width:30px;height:30px;border-radius:9px;
+  background:var(--or);color:#fff;
+  display:grid;place-items:center;font-weight:900;font-size:15px;
+}
+.header-btn{background:transparent;color:var(--muted);font-weight:700;font-size:13px;padding:6px 10px}
+.main{padding:16px}
 
+/* ─── BOTTOM NAV ─────────────────────────────────── */
+.nav{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:430px;
+  background:#fff;border-top:1px solid var(--line);
+  display:flex;padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+  z-index:60;
+}
+.nav button{
+  flex:1;background:transparent;color:#9A9FA6;
+  font-size:10px;font-weight:800;padding:3px 2px;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+}
+.nav button i{font-style:normal;font-size:20px;line-height:1}
+.nav button.active{color:var(--or)}
+.nav-badge{
+  position:absolute;top:-3px;right:-6px;
+  background:var(--red);color:#fff;
+  font-size:9px;font-weight:900;
+  min-width:15px;height:15px;border-radius:8px;padding:0 3px;
+  display:grid;place-items:center;border:2px solid #fff;
+}
+.nav-rel{position:relative;display:inline-block}
+
+/* ─── LOGIN ──────────────────────────────────────── */
+.login{min-height:100vh;padding:52px 22px 32px;background:var(--cream)}
+.login-logo{text-align:center;margin-bottom:32px}
+.login-bm{
+  width:68px;height:68px;border-radius:20px;
+  background:var(--or);color:#fff;
+  display:grid;place-items:center;font-size:32px;font-weight:900;
+  margin:0 auto 12px;box-shadow:0 12px 28px rgba(243,107,45,.22);
+}
+.login h1{font-size:28px;font-weight:950;letter-spacing:-.5px}
+.login p{color:var(--muted);margin-top:4px;font-size:14px}
+
+/* ─── TABS ───────────────────────────────────────── */
+.tabs{display:flex;background:#F1F2F3;border-radius:11px;padding:4px;margin-bottom:22px}
+.tabs button{
+  flex:1;background:transparent;color:var(--muted);
+  padding:11px;border-radius:8px;font-weight:800;font-size:14px;
+}
+.tabs button.active{background:#fff;color:var(--ink);box-shadow:var(--sh)}
+.cal-toggle{display:flex;background:#F1F2F3;padding:3px;border-radius:9px;gap:2px}
+.cal-toggle button{
+  background:transparent;color:var(--muted);
+  font-size:12px;font-weight:900;padding:7px 11px;border-radius:7px;
+}
+.cal-toggle button.active{background:#fff;color:var(--ink);box-shadow:var(--sh)}
+
+/* ─── FORMS ──────────────────────────────────────── */
+.label{display:block;font-size:12px;font-weight:800;color:var(--muted);margin:0 0 5px}
+.input{
+  width:100%;border:1.5px solid var(--line);background:#fff;
+  border-radius:11px;padding:12px 14px;color:var(--ink);
+}
+.input:focus{border-color:var(--or)}
+select.input{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2369707A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;
+  -webkit-appearance:none;appearance:none;
+}
+.field{margin-bottom:12px}
+
+/* ─── BUTTONS ────────────────────────────────────── */
+.btn{border-radius:11px;padding:13px 16px;font-weight:900;width:100%;transition:opacity .15s}
+.btn:active{opacity:.8}
+.btn.or{background:var(--or);color:#fff}
+.btn.soft{background:var(--or-sf);color:var(--or-dk)}
+.btn.green{background:var(--green-sf);color:#1E6645}
+.btn.red{background:var(--red-sf);color:var(--red)}
+.btn.ghost{background:#F1F2F3;color:var(--ink)}
+.btn.sm{width:auto;padding:8px 12px;font-size:12px;border-radius:9px}
+.btn.xs{width:auto;padding:6px 10px;font-size:11px;font-weight:900;border-radius:8px}
+
+/* ─── CARDS ──────────────────────────────────────── */
+.card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);padding:15px;margin-bottom:10px;
+  box-shadow:var(--sh);
+}
+.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:900}
+.h1{font-size:24px;font-weight:950;letter-spacing:-.4px}
+.h2{font-size:18px;font-weight:900}
+.h3{font-size:15px;font-weight:900}
+.small{font-size:12px;color:var(--muted)}
+
+/* ─── HERO CARD ─────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,var(--or),var(--or-dk));
+  color:#fff;border-radius:18px;padding:18px;margin-bottom:10px;
+}
+.hero .big{font-size:28px;font-weight:950;margin:3px 0}
+.hero .sub{opacity:.8;font-size:13px}
+.hero-gray{
+  background:var(--ink);color:#fff;
+  border-radius:18px;padding:18px;margin-bottom:10px;
+}
+
+/* ─── STAT GRID ──────────────────────────────────── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
+.stat{
+  background:#fff;border:1px solid var(--line);
+  border-radius:13px;padding:14px;
+}
+.stat .n{font-size:26px;font-weight:950;letter-spacing:-.5px}
+.stat .l{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* ─── LIST ───────────────────────────────────────── */
+.list{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:10px}
+.item{
+  padding:12px 14px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:10px;
+}
+.item:last-child{border-bottom:0}
+.item-clickable{cursor:pointer}
+.item-clickable:active{background:#FAFBFB}
+.avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--or-sf);color:var(--or-dk);
+  display:grid;place-items:center;font-weight:950;font-size:14px;
+  flex-shrink:0;
+}
+.item h4{font-size:14px;font-weight:700}
+.item p{font-size:12px;color:var(--muted);margin-top:2px}
+.item-right{text-align:right;margin-left:auto;flex-shrink:0}
+
+/* ─── CHIPS ──────────────────────────────────────── */
+.chip{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 8px;border-radius:20px;
+  font-size:11px;font-weight:900;border:1px solid rgba(0,0,0,.05);
+}
+.chip.silver{background:#EEF0F2;color:#59606A}
+.chip.rose{background:#F5E6E3;color:#7A4C44}
+.chip.gold{background:#F6EECF;color:#7C621B}
+.chip.green{background:var(--green-sf);color:#1E6645}
+.chip.orange{background:var(--or-sf);color:var(--or-dk)}
+.chip.red{background:var(--red-sf);color:var(--red)}
+.chip.gray{background:#F1F2F3;color:var(--muted)}
+
+/* ─── PROGRESS ───────────────────────────────────── */
+.prog{height:6px;background:#ECEEF0;border-radius:20px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--or);border-radius:20px;transition:width .4s}
+.prog .green-fill{background:var(--green)}
+
+/* ─── SLOT / SESSION ROWS ────────────────────────── */
+.slot{
+  display:flex;align-items:center;gap:12px;
+  background:#fff;border:1px solid var(--line);
+  border-radius:13px;padding:13px;margin-bottom:7px;
+}
+.slot.available{background:#F2FAF6;border-color:#B8DEC9}
+.slot.done{background:#F6F7F8;border-color:#E0E2E5}
+.slot.no-show{background:var(--red-sf);border-color:#F0BCBC}
+.slot .time{font-size:16px;font-weight:950;width:48px;flex-shrink:0}
+.slot .grow{flex:1;min-width:0}
+.slot .name{font-size:14px;font-weight:700}
+.slot .status-label{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* ─── WEEK CALENDAR ─────────────────────────────── */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin:12px 0 14px}
+.wday{
+  background:transparent;
+  border-radius:11px;padding:7px 2px;
+  display:flex;flex-direction:column;align-items:center;
+}
+.wday small{font-size:9px;color:var(--muted);font-weight:900;text-transform:uppercase}
+.wday b{
+  width:30px;height:30px;border-radius:50%;
+  display:grid;place-items:center;font-size:14px;font-weight:900;
+  margin-top:3px;color:var(--ink);
+}
+.wday.active b{background:var(--or);color:#fff}
+.wday.today:not(.active) b{border:2px solid var(--or);color:var(--or)}
+.wday-dot{width:4px;height:4px;border-radius:50%;background:transparent;margin-top:3px}
+.wday.has-dot .wday-dot{background:var(--or)}
+.wday.active .wday-dot{background:rgba(255,255,255,.5)}
+
+/* ─── MONTH CALENDAR ─────────────────────────────── */
+.month-head{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:12px}
+.month-head span{text-align:center;font-size:9px;color:var(--muted);font-weight:900;padding:4px}
+.month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:3px}
+.mcell{
+  min-height:54px;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:5px 6px;position:relative;
+}
+.mcell.out{opacity:.3}
+.mcell.active{border:2px solid var(--or);padding:4px 5px}
+.mcell b{font-size:11px;font-weight:900}
+.mcell .mc{font-size:9px;color:var(--muted);margin-top:4px}
+.mcell .open-dot{
+  position:absolute;top:5px;right:5px;
+  width:5px;height:5px;border-radius:50%;background:var(--green);
+}
+
+/* ─── MODAL SHEET ────────────────────────────────── */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.44);
+  z-index:100;display:flex;align-items:flex-end;
+  animation:fadeIn .2s ease;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.sheet{
+  width:100%;max-width:430px;margin:0 auto;
+  background:#fff;border-radius:20px 20px 0 0;
+  padding:18px 18px calc(28px + env(safe-area-inset-bottom));
+  max-height:92vh;overflow-y:auto;
+  animation:slideUp .22s ease;
+}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.handle{width:36px;height:4px;background:#DADDE0;border-radius:4px;margin:0 auto 16px}
+.sheet h3{font-size:18px;font-weight:950;margin-bottom:14px}
+
+/* ─── NOTICE ─────────────────────────────────────── */
+.notice{
+  background:var(--or-sf);border-left:3px solid var(--or);
+  padding:11px 12px;border-radius:9px;margin-bottom:10px;
+  font-size:13px;line-height:1.45;
+}
+.notice.green{background:var(--green-sf);border-left-color:var(--green)}
+.notice.red{background:var(--red-sf);border-left-color:var(--red)}
+.notice.ink{background:#F1F2F3;border-left-color:var(--muted)}
+
+/* ─── QUICK ACTIONS ─────────────────────────────── */
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.quick button{
+  background:#fff;border:1px solid var(--line);
+  border-radius:13px;padding:13px;text-align:left;
+}
+.quick button:active{background:#FAFBFB}
+.quick button i{font-style:normal;font-size:20px;display:block;margin-bottom:6px}
+.quick button b{display:block;font-size:13px}
+.quick button span{font-size:11px;color:var(--muted)}
+
+/* ─── SECTION TITLE ──────────────────────────────── */
+.sec{font-size:14px;font-weight:900;color:var(--ink);margin:16px 0 8px}
+.sec-row{display:flex;align-items:center;justify-content:space-between;margin:14px 0 8px}
+.row{display:flex;align-items:center;gap:8px}
+.space{justify-content:space-between}
+.grow{flex:1;min-width:0}
+
+/* ─── ANALYSIS ───────────────────────────────────── */
+.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.metric{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px}
+.metric strong{display:block;font-size:22px;font-weight:950}
+.metric span{font-size:11px;color:var(--muted)}
+
+/* ─── INCOME CARD ────────────────────────────────── */
+.income-card{
+  background:var(--ink);color:#fff;
+  border-radius:var(--r);padding:16px;margin-bottom:10px;
+}
+.income-card .amount{font-size:28px;font-weight:950;letter-spacing:-.5px;margin:5px 0}
+.income-card .sub{font-size:12px;opacity:.6;margin-top:3px}
+.income-card .toggle{
+  background:#343A40;color:#fff;border:0;
+  border-radius:8px;padding:7px 12px;font-size:12px;font-weight:900;
+}
+
+/* ─── AVAILABILITY ───────────────────────────────── */
+.avail-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.avail-row:last-child{border-bottom:0}
+.avail-check{
+  width:22px;height:22px;border-radius:7px;border:2px solid var(--line);
+  display:grid;place-items:center;font-size:13px;flex-shrink:0;cursor:pointer;
+}
+.avail-check.on{background:var(--or);border-color:var(--or);color:#fff}
+
+/* ─── MOVA+ ──────────────────────────────────────── */
+.plus-card{
+  background:linear-gradient(135deg,#1F2328,#353B42);
+  color:#fff;border-radius:18px;padding:20px;margin-bottom:10px;
+}
+.plus-price{font-size:26px;font-weight:950;margin:7px 0}
+.plus-list{margin:12px 0}
+.plus-list div{
+  padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);
+  font-size:13px;display:flex;align-items:center;gap:8px;
+}
+.plus-list div:last-child{border-bottom:0}
+.locked{filter:blur(3px);opacity:.4;pointer-events:none;user-select:none}
+
+/* ─── TOAST ──────────────────────────────────────── */
+.toast{
+  position:fixed;bottom:86px;left:50%;transform:translateX(-50%);
+  background:var(--ink);color:#fff;border-radius:11px;
+  padding:10px 16px;font-size:13px;font-weight:800;
+  z-index:300;white-space:nowrap;pointer-events:none;
+  animation:toastIn .22s ease;
+}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(6px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 .hidden{display:none!important}
 </style>
 </head>
-<body><div id="root"></div>
+<body>
+<div id="root"></div>
 <script>
-const KEY='mova_coach_v2';
-const iso=d=>{const x=new Date(d);return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`};
-const today=()=>iso(new Date());
-const add=(s,n)=>{const d=new Date(s+'T12:00:00');d.setDate(d.getDate()+n);return iso(d)};
-const fmt=s=>new Date(s+'T12:00:00').toLocaleDateString('tr-TR',{day:'numeric',month:'long',weekday:'short'});
-const money=n=>new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY',maximumFractionDigits:0}).format(n||0);
-const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
-function seed(){const t=today();return{
- pt:{name:'İbrahim',pin:'1234',prices:{silver:700,rose:900,gold:1200}},
- clients:[
-  {id:'c1',name:'Ayşe Yılmaz',rights:12,used:5,tier:'rose',custom:0,phone:'0532 111 22 33',availability:['Pzt Akşam','Çarşamba Akşam'],note:'Pilates + güç. Sol omuz hassas.'},
-  {id:'c2',name:'Burak Demir',rights:8,used:7,tier:'silver',custom:0,phone:'0541 444 55 66',availability:['Hafta içi öğlen'],note:'Son iki ders. Paket yenileme konuşulacak.'},
-  {id:'c3',name:'Ceren Kaya',rights:20,used:3,tier:'gold',custom:1400,phone:'0543 777 88 99',availability:['Salı Sabah','Son dakika gelebilir'],note:'Performans programı.'}
- ],
- sessions:[
-  {id:'s0',clientId:'c1',date:add(t,-3),time:'10:00',status:'completed',chargeable:true,recovered:true},
-  {id:'s00',clientId:'c2',date:add(t,-2),time:'14:00',status:'completed',chargeable:true},
-  {id:'s1',clientId:'c2',date:t,time:'14:00',status:'booked',chargeable:false},
-  {id:'s2',clientId:'c1',date:add(t,1),time:'10:00',status:'booked',chargeable:false},
-  {id:'s3',clientId:'c3',date:add(t,2),time:'09:00',status:'booked',chargeable:false},
-  {id:'s4',clientId:'c2',date:add(t,-7),time:'16:00',status:'cancelled',chargeable:false},
-  {id:'s5',clientId:'c3',date:add(t,-9),time:'18:00',status:'no-show',chargeable:true}
- ],
- slots:[{id:'o1',date:t,time:'11:00',open:true},{id:'o2',date:add(t,1),time:'16:00',open:true}],
- alerts:[{id:'a1',slotId:'o2',targets:['c1','c3'],text:`${fmt(add(t,1))} 16:00 saati müsait.`,at:new Date().toISOString()}],premiumInterest:[]
-}}
-let st=(()=>{try{return JSON.parse(localStorage.getItem(KEY))||seed()}catch(e){return seed()}})();
-let ui={view:'login',login:'pt',tab:'home',clientTab:'home',clientId:null,date:today(),calendarMode:'week',analysisMonth:today().slice(0,7),modal:null,data:{},showIncome:true};
-const save=()=>localStorage.setItem(KEY,JSON.stringify(st));
-const client=id=>st.clients.find(x=>x.id===id);
-const remain=c=>c.rights-c.used;
-const tierName=t=>t==='silver'?'Silver':t==='rose'?'Rose Gold':'Gold';
-const tierClass=t=>t==='silver'?'silver':t==='rose'?'rose':'gold';
-const price=c=>Number(c.custom)>0?Number(c.custom):Number(st.pt.prices[c.tier]||0);
-const month=s=>s.slice(0,7)===today().slice(0,7);
-const monthSessions=status=>st.sessions.filter(s=>month(s.date)&&(!status||s.status===status));
-const income=status=>monthSessions(status).reduce((a,s)=>a+price(client(s.clientId)),0);
-const initials=n=>n.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase();
-const monthKeyFromDate=s=>s.slice(0,7);
-const monthSessionsFor=(key,status)=>st.sessions.filter(s=>monthKeyFromDate(s.date)===key&&(!status||s.status===status));
-const monthIncomeFor=(key,status)=>monthSessionsFor(key,status).reduce((a,s)=>a+((s.status==='completed'||(s.status==='no-show'&&s.chargeable))?price(client(s.clientId)):0),0);
-const monthLabel=key=>new Date(key+'-01T12:00:00').toLocaleDateString('tr-TR',{month:'long',year:'numeric'});
-const moveMonth=(key,n)=>{const d=new Date(key+'-01T12:00:00');d.setMonth(d.getMonth()+n);return iso(d).slice(0,7)};
-function monthCells(){
-  const first=new Date(ui.date.slice(0,7)+'-01T12:00:00');
-  const start=new Date(first);const day=first.getDay()||7;start.setDate(first.getDate()-day+1);
-  return Array.from({length:42},(_,i)=>{const d=new Date(start);d.setDate(start.getDate()+i);return iso(d)});
-}
-function statusLabel(s){return s==='completed'?'Tamamlandı':s==='cancelled'?'İptal':s==='no-show'?'Gelmedi':'Rezerve'}
+// ═══════════════════════════════════════════════════
+// SEED & PERSIST
+// ═══════════════════════════════════════════════════
+const KEY = 'mova_v3';
+const iso = d => { const x = new Date(d); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}` };
+const today = () => iso(new Date());
+const add = (s,n) => { const d = new Date(s+'T12:00:00'); d.setDate(d.getDate()+n); return iso(d) };
+const uid = () => Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+const money = n => new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY',maximumFractionDigits:0}).format(n||0);
+const fmt = s => new Date(s+'T12:00:00').toLocaleDateString('tr-TR',{day:'numeric',month:'long',weekday:'short'});
+const fmtShort = s => new Date(s+'T12:00:00').toLocaleDateString('tr-TR',{day:'numeric',month:'short'});
 
-function render(){document.getElementById('root').innerHTML=ui.view==='login'?loginView():ui.view==='pt'?ptView():clientView()}
-function loginView(){return `<div class="login"><div class="login-logo"><div class="brandmark">M</div><h1>MOVA Coach</h1><p>PT'nin dijital asistanı</p></div><div class="tabs"><button class="${ui.login==='pt'?'active':''}" onclick="ui.login='pt';render()">Personal Trainer</button><button class="${ui.login==='client'?'active':''}" onclick="ui.login='client';render()">Danışan</button></div>${ui.login==='pt'?`<label class="label">PT PIN</label><input id="pin" class="input" type="password" inputmode="numeric" maxlength="4" placeholder="••••"><button class="btn primary" style="margin-top:12px" onclick="loginPT()">Giriş Yap</button><p class="muted" style="font-size:12px;text-align:center;margin-top:14px">Demo PIN: 1234</p>`:`<label class="label">Danışanını seç</label><select id="clientLogin" class="input"><option value="">Seç</option>${st.clients.map(c=>`<option value="${c.id}">${c.name}</option>`).join('')}</select><button class="btn primary" style="margin-top:12px" onclick="loginClient()">Devam Et</button>`}</div>`}
-function loginPT(){if(document.getElementById('pin').value===st.pt.pin){ui.view='pt';ui.tab='home';render()}else toast('PIN hatalı')}
-function loginClient(){const id=document.getElementById('clientLogin').value;if(!id)return toast('Danışan seç');ui.clientId=id;ui.view='client';ui.clientTab='home';render()}
-function logout(){ui={...ui,view:'login',clientId:null,modal:null};render()}
-function shell(content,title,nav){return `<div class="app"><div class="header"><div class="brand"><div class="brandmark">M</div>${title}</div><button onclick="logout()">Çıkış</button></div><main class="main">${content}</main>${nav}${modal()}</div>`}
-function ptView(){const views={home:homePT,calendar:calendarPT,clients:clientsPT,alerts:alertsPT,more:morePT,analysis:analysisPT};return shell((views[ui.tab]||homePT)(),'MOVA Coach',ptNav())}
-function ptNav(){return `<nav class="nav">${[['home','⌂','Bugün'],['calendar','□','Takvim'],['clients','◎','Danışanlar'],['alerts','◌','Bildirimler'],['more','•••','Daha']].map(x=>`<button class="${ui.tab===x[0]?'active':''}" onclick="ui.tab='${x[0]}';render()"><i>${x[1]}</i>${x[2]}</button>`).join('')}</nav>`}
-function homePT(){const todays=st.sessions.filter(s=>s.date===today()&&s.status!=='cancelled').sort((a,b)=>a.time.localeCompare(b.time));const next=todays[0],nc=next?client(next.clientId):null;const open=st.slots.filter(s=>s.open&&s.date>=today()).length;const low=st.clients.filter(c=>remain(c)<=3).length;return `<div class="eyebrow">Merhaba ${st.pt.name}</div><div class="title" style="margin:4px 0 16px">Bugünü birlikte yönetelim.</div>${next?`<div class="hero"><div class="eyebrow" style="color:white;opacity:.7">Sıradaki ders</div><div class="big">${next.time}</div><div>${nc.name}</div></div>`:`<div class="card">Bugün planlanmış ders yok.</div>`}<div class="grid2"><div class="stat"><div class="n">${todays.length}</div><div class="l">Bugünkü ders</div></div><div class="stat"><div class="n" style="color:var(--green)">${open}</div><div class="l">Açık saat</div></div></div><div class="income" onclick="ui.tab='analysis';render()" style="cursor:pointer"><div class="row space"><div><div class="eyebrow" style="color:white;opacity:.6">Bu ay tamamlanan</div><div class="amount">${ui.showIncome?money(income('completed')):'••••••'}</div><div class="sub">${monthSessions('completed').length} dumbbell tamamlandı • ${monthSessions('booked').length} planlandı</div></div><button class="btn small" style="background:#343A40;color:white" onclick="event.stopPropagation();ui.showIncome=!ui.showIncome;render()">${ui.showIncome?'Gizle':'Göster'}</button></div><div class="row" style="margin-top:13px;flex-wrap:wrap"><span class="chip silver">Silver ${tierCount('silver')}</span><span class="chip rose">Rose Gold ${tierCount('rose')}</span><span class="chip gold">Gold ${tierCount('gold')}</span></div></div><div class="section-title">Hızlı işlemler</div><div class="quick"><button onclick="openModal('session')">＋<b>Yeni Ders</b><span>Danışana ders ekle</span></button><button onclick="openModal('slot')">◷<b>Boş Saat</b><span>Müsaitlik yayınla</span></button><button onclick="openModal('client')">◎<b>Danışan Ekle</b><span>Hak ve değer tanımla</span></button><button onclick="ui.tab='alerts';render()">◌<b>Bildirim</b><span>Boş saati duyur</span></button></div>${open||low?`<div class="section-title">Dikkat gerekenler</div><div class="list">${open?`<div class="item" onclick="ui.tab='alerts';render()"><div class="avatar">◷</div><div class="grow"><h4>${open} müsait saat var</h4><p>Uygun danışanlara haber ver</p></div>›</div>`:''}${low?`<div class="item" onclick="ui.tab='clients';render()"><div class="avatar">!</div><div class="grow"><h4>${low} danışanın hakkı azalıyor</h4><p>Paket yenileme için kontrol et</p></div>›</div>`:''}</div>`:''}`}
-function tierCount(t){return monthSessions('completed').filter(s=>client(s.clientId)?.tier===t).length}
-function weekDates(){const d=new Date(ui.date+'T12:00:00');const day=d.getDay()||7;d.setDate(d.getDate()-day+1);return Array.from({length:7},(_,i)=>{const x=new Date(d);x.setDate(d.getDate()+i);return iso(x)})}
-function calendarPT(){
-  const days=weekDates();
-  const sessions=st.sessions.filter(s=>s.date===ui.date&&s.status!=='cancelled');
-  const slots=st.slots.filter(s=>s.date===ui.date&&s.open);
-  const items=[...sessions.map(s=>({type:'session',time:s.time,data:s})),...slots.map(s=>({type:'slot',time:s.time,data:s}))].sort((a,b)=>a.time.localeCompare(b.time));
-  const monthMode=ui.calendarMode==='month';
-  return `<div class="row space">
-    <div><div class="eyebrow">Takvim</div><div class="title">${monthMode?monthLabel(ui.date.slice(0,7)):fmt(ui.date)}</div></div>
-    <div class="calendar-toggle"><button class="${!monthMode?'active':''}" onclick="ui.calendarMode='week';render()">Hafta</button><button class="${monthMode?'active':''}" onclick="ui.calendarMode='month';render()">Ay</button></div>
-  </div>
-  <div class="row space" style="margin-top:12px">
-    <button class="btn small soft" onclick="calendarMove(-1)">‹</button>
-    <button class="btn small soft" onclick="ui.date=today();render()">Bugün</button>
-    <button class="btn small soft" onclick="calendarMove(1)">›</button>
-  </div>
-  ${monthMode?renderMonthCalendar():`
-    <div class="week">${days.map(d=>`<button class="day ${d===ui.date?'active':''}" onclick="ui.date='${d}';render()"><small>${new Date(d+'T12:00:00').toLocaleDateString('tr-TR',{weekday:'narrow'})}</small><b>${new Date(d+'T12:00:00').getDate()}</b></button>`).join('')}</div>
-    <div class="row space" style="margin-bottom:10px"><div class="section-title" style="margin:0">Günün programı</div><button class="btn small soft" onclick="openModal('slot')">+ Saat</button></div>
-    ${items.length?items.map(i=>i.type==='slot'?`<div class="slot available" onclick="openModal('book',{slotId:'${i.data.id}'})"><div class="time">${i.time}</div><div class="grow"><b>Müsait Saat</b><br><small>Rezervasyon bekliyor</small></div><button class="btn small green">Doldur</button></div>`:(()=>{const c=client(i.data.clientId);return `<div class="slot ${i.data.status==='completed'?'completed':''}" onclick="openModal('sessionDetail',{id:'${i.data.id}'})"><div class="time">${i.time}</div><div class="grow"><b>${c?.name||'Danışan'}</b><br><small>${statusLabel(i.data.status)}</small></div><span class="chip ${tierClass(c?.tier)}">${tierName(c?.tier)}</span></div>`})()).join(''):`<div class="card muted">Bu gün için kayıt yok.</div>`}
-  `}`;
+function seed() {
+  const t = today();
+  return {
+    pt: { name: 'İbrahim', pin: '1234', prices: { silver:700, rose:900, gold:1200 }, showIncome: true },
+    clients: [
+      { id:'c1', name:'Ayşe Yılmaz',  phone:'0532 111 22 33', rights:12, used:5, tier:'rose', custom:0, note:'Pilates + güç. Sol omuz hassas.', avail:{days:['Pzt','Çar'], slots:['akşam'], lastMinute:false} },
+      { id:'c2', name:'Burak Demir',  phone:'0541 444 55 66', rights:8,  used:7, tier:'silver',custom:0, note:'Son iki ders. Paket yenileme konuşulacak.', avail:{days:['Pzt','Sal','Çar','Per','Cum'], slots:['öğlen'], lastMinute:true} },
+      { id:'c3', name:'Ceren Kaya',   phone:'0543 777 88 99', rights:20, used:3, tier:'gold',  custom:1400, note:'Performans programı.', avail:{days:['Sal','Per'], slots:['sabah'], lastMinute:true} }
+    ],
+    sessions: [
+      { id:'s1', clientId:'c1', date:add(t,-4), time:'10:00', status:'completed', chargeable:true, recovered:false },
+      { id:'s2', clientId:'c2', date:add(t,-3), time:'14:00', status:'completed', chargeable:true, recovered:false },
+      { id:'s3', clientId:'c3', date:add(t,-2), time:'09:00', status:'no-show',   chargeable:true, recovered:false },
+      { id:'s4', clientId:'c1', date:add(t,-1), time:'11:00', status:'cancelled', chargeable:false, recovered:false },
+      { id:'s5', clientId:'c2', date:add(t,-1), time:'16:00', status:'completed', chargeable:true, recovered:true },
+      { id:'s6', clientId:'c2', date:t,          time:'14:00', status:'booked',    chargeable:false, recovered:false },
+      { id:'s7', clientId:'c1', date:add(t,1),   time:'10:00', status:'booked',    chargeable:false, recovered:false },
+      { id:'s8', clientId:'c3', date:add(t,2),   time:'09:00', status:'booked',    chargeable:false, recovered:false }
+    ],
+    slots: [
+      { id:'sl1', date:t,         time:'11:00', open:true },
+      { id:'sl2', date:add(t,1),  time:'16:00', open:true },
+      { id:'sl3', date:add(t,3),  time:'09:00', open:true }
+    ],
+    alerts: [
+      { id:'al1', slotId:'sl2', targets:['c1','c3'], text:`${fmt(add(t,1))} – 16:00 saati müsait.`, at: new Date().toISOString() }
+    ],
+    premiumInterest: []
+  };
 }
-function calendarMove(n){
-  const d=new Date(ui.date+'T12:00:00');
-  if(ui.calendarMode==='month')d.setMonth(d.getMonth()+n);else d.setDate(d.getDate()+7*n);
-  ui.date=iso(d);render();
+
+let st = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || seed() } catch(e) { return seed() } })();
+const save = () => localStorage.setItem(KEY, JSON.stringify(st));
+
+// ═══════════════════════════════════════════════════
+// UI STATE
+// ═══════════════════════════════════════════════════
+let ui = {
+  view: 'login',       // login | pt | client
+  loginTab: 'pt',
+  ptTab: 'home',       // home | calendar | clients | alerts | more
+  clientTab: 'home',   // home | sessions | slots | avail | plus
+  clientId: null,
+  date: today(),
+  calMode: 'week',     // week | month
+  anaMonth: today().slice(0,7),
+  detailClientId: null,
+  showAna: false,
+  modal: null,
+  mdata: {}
+};
+
+// ═══════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════
+const client = id => st.clients.find(x => x.id === id);
+const remain = c => c.rights - c.used;
+const tname = t => t==='silver'?'Silver':t==='rose'?'Rose Gold':'Gold';
+const tclass = t => t==='silver'?'silver':t==='rose'?'rose':'gold';
+const price = c => Number(c.custom) > 0 ? Number(c.custom) : Number(st.pt.prices[c.tier] || 0);
+const initials = n => n.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase();
+const sLabel = s => s==='completed'?'Tamamlandı':s==='booked'?'Planlandı':s==='cancelled'?'İptal':s==='no-show'?'Gelmedi':'—';
+const sChip = s => s==='completed'?'green':s==='booked'?'orange':s==='cancelled'?'gray':'red';
+
+function monthKey(s) { return s.slice(0,7) }
+function sessionsIn(mo, status) {
+  return st.sessions.filter(s => monthKey(s.date) === mo && (!status || s.status === status));
 }
-function renderMonthCalendar(){
-  const cells=monthCells(),current=ui.date.slice(0,7),names=['P','S','Ç','P','C','C','P'];
-  return `<div class="month-head">${names.map(n=>`<div>${n}</div>`).join('')}</div>
-    <div class="month-grid">${cells.map(d=>{
-      const count=st.sessions.filter(s=>s.date===d&&s.status!=='cancelled').length;
-      const open=st.slots.some(s=>s.date===d&&s.open);
-      return `<button class="month-cell ${d.slice(0,7)!==current?'out':''} ${d===ui.date?'active':''}" onclick="ui.date='${d}';ui.calendarMode='week';render()"><b>${new Date(d+'T12:00:00').getDate()}</b>${open?'<i class="open-dot"></i>':''}<div class="count">${count?count+' ders':''}</div></button>`}).join('')}</div>
-    <button class="btn soft" style="margin-top:12px" onclick="openModal('session')">Bu Aya Ders Ekle</button>`;
+function incomeIn(mo) {
+  return sessionsIn(mo)
+    .filter(s => s.status === 'completed' || (s.status === 'no-show' && s.chargeable))
+    .reduce((a,s) => a + price(client(s.clientId)), 0);
 }
-function analysisPT(){
-  const key=ui.analysisMonth;
-  const completed=monthSessionsFor(key,'completed'),booked=monthSessionsFor(key,'booked'),cancelled=monthSessionsFor(key,'cancelled'),noShow=monthSessionsFor(key,'no-show');
-  const recovered=monthSessionsFor(key).filter(s=>s.recovered).length;
-  const denominator=completed.length+cancelled.length+noShow.length;
-  const fill=denominator?Math.round(completed.length/denominator*100):0;
-  const recovery=cancelled.length?Math.min(100,Math.round(recovered/cancelled.length*100)):0;
-  const low=st.clients.filter(c=>remain(c)<=3);
-  const noFuture=st.clients.filter(c=>!st.sessions.some(s=>s.clientId===c.id&&s.status==='booked'&&s.date>=today()));
-  const silver=completed.filter(s=>client(s.clientId)?.tier==='silver').length,rose=completed.filter(s=>client(s.clientId)?.tier==='rose').length,gold=completed.filter(s=>client(s.clientId)?.tier==='gold').length;
-  return `<div class="row space"><button class="btn small soft" onclick="ui.tab='home';render()">‹ Bugün</button><div class="calendar-toggle"><button onclick="ui.analysisMonth=moveMonth(ui.analysisMonth,-1);render()">‹</button><button class="active">${monthLabel(key)}</button><button onclick="ui.analysisMonth=moveMonth(ui.analysisMonth,1);render()">›</button></div></div>
-  <div class="eyebrow" style="margin-top:18px">Özel PT raporu</div><div class="title" style="margin:4px 0 16px">Ay Sonu Analizi</div>
-  <div class="income"><div class="eyebrow" style="color:white;opacity:.6">Tamamlanan ders değeri</div><div class="amount">${ui.showIncome?money(monthIncomeFor(key,'completed')):'••••••'}</div><div class="sub">${completed.length} dumbbell tamamlandı • ${booked.length} planlandı</div></div>
-  <div class="analysis-grid"><div class="metric"><strong>${completed.length}</strong><span>Tamamlanan ders</span></div><div class="metric"><strong>${booked.length}</strong><span>Planlanan ders</span></div><div class="metric"><strong>${cancelled.length}</strong><span>İptal</span></div><div class="metric"><strong>${noShow.length}</strong><span>Gelmedi</span></div><div class="metric"><strong>${recovered}</strong><span>Kurtarılan ders</span></div><div class="metric"><strong>%${fill}</strong><span>Doluluk oranı</span></div></div>
-  <div class="card" style="margin-top:12px"><div class="row space"><b>Dumbbell dağılımı</b><span class="muted">${completed.length} toplam</span></div><div class="report-row"><span class="chip silver">Silver</span><div class="grow"><div class="progress-line"><i style="width:${completed.length?silver/completed.length*100:0}%"></i></div></div><b>${silver}</b></div><div class="report-row"><span class="chip rose">Rose Gold</span><div class="grow"><div class="progress-line"><i style="width:${completed.length?rose/completed.length*100:0}%"></i></div></div><b>${rose}</b></div><div class="report-row"><span class="chip gold">Gold</span><div class="grow"><div class="progress-line"><i style="width:${completed.length?gold/completed.length*100:0}%"></i></div></div><b>${gold}</b></div></div>
-  <div class="card"><b>Boş saat performansı</b><div class="row space" style="margin-top:10px"><span class="muted">Kurtarma oranı</span><b>%${recovery}</b></div><div class="progress-line"><i style="width:${recovery}%;background:var(--green)"></i></div><p class="muted" style="font-size:12px;margin-top:8px">${cancelled.length} iptalden ${recovered} ders başka danışanla dolduruldu.</p></div>
-  <div class="section-title">Gelecek ay dikkat listesi</div><div class="list"><div class="item" onclick="ui.tab='clients';render()"><div class="avatar">!</div><div class="grow"><h4>${low.length} danışanın hakkı azalıyor</h4><p>Paket yenileme için görüş</p></div>›</div><div class="item" onclick="ui.tab='clients';render()"><div class="avatar">◷</div><div class="grow"><h4>${noFuture.length} danışanın ileri rezervasyonu yok</h4><p>Kişisel takip mesajı gönder</p></div>›</div></div>
-  <div class="notice success" style="margin-top:12px">Bu rapor sadece PT tarafından görülür. Danışan fiyatları ve gelir değerleri hiçbir danışan ekranında gösterilmez.</div>`;
+function incomeBooked(mo) {
+  return sessionsIn(mo, 'booked').reduce((a,s) => a + price(client(s.clientId)), 0);
 }
-function clientsPT(){return `<div class="row space"><div><div class="eyebrow">Danışanlar</div><div class="title">${st.clients.length} kişi</div></div><button class="btn small soft" onclick="openModal('client')">+ Ekle</button></div><div class="list" style="margin-top:16px">${st.clients.map(c=>`<div class="item" onclick="openModal('clientDetail',{id:'${c.id}'})"><div class="avatar">${initials(c.name)}</div><div class="grow"><h4>${c.name}</h4><p>${c.phone} • ${c.availability[0]||'Uygunluk yok'}</p></div><div class="right"><b>${remain(c)} hak</b><br><span class="chip ${tierClass(c.tier)}">${tierName(c.tier)}</span></div></div>`).join('')}</div>`}
-function alertsPT(){const opens=st.slots.filter(s=>s.open&&s.date>=today());return `<div class="eyebrow">Bildirimler</div><div class="title" style="margin:4px 0 16px">Boş saati doğru kişiye ulaştır.</div>${opens.length?opens.map(s=>`<div class="card"><div class="row space"><div><b>${fmt(s.date)} • ${s.time}</b><p class="muted" style="font-size:12px;margin-top:3px">Uygun danışanlara bildirim gönder</p></div><button class="btn small primary" onclick="openModal('alert',{slotId:'${s.id}'})">Gönder</button></div></div>`).join(''):`<div class="card muted">Açık saat bulunmuyor.</div>`}<div class="section-title">Geçmiş</div><div class="list">${st.alerts.slice().reverse().map(a=>`<div class="item"><div class="avatar">◌</div><div class="grow"><h4>${a.text}</h4><p>${a.targets.length} danışana gönderildi</p></div></div>`).join('')||'<div class="item muted">Henüz bildirim yok.</div>'}</div>`}
-function morePT(){return `<div class="eyebrow">Ayarlar</div><div class="title" style="margin:4px 0 16px">Dumbbell değerleri</div><div class="card"><div class="field"><label class="label">Silver</label><input id="ps" class="input" type="number" value="${st.pt.prices.silver}"></div><div class="field"><label class="label">Rose Gold</label><input id="pr" class="input" type="number" value="${st.pt.prices.rose}"></div><div class="field"><label class="label">Gold</label><input id="pg" class="input" type="number" value="${st.pt.prices.gold}"></div><div class="notice">Bu değerleri yalnızca PT görür. Danışan ekranında fiyat veya gelir gösterilmez.</div><button class="btn primary" onclick="savePrices()">Kaydet</button></div><div class="card" onclick="ui.tab='analysis';render()" style="cursor:pointer"><div class="row space"><div><h4>Ay Sonu Analizi</h4><p class="muted" style="font-size:12px;margin-top:4px">Gelir, dumbbell, iptal, doluluk ve kurtarılan dersler</p></div><b>›</b></div></div><div class="card"><h4>Gizlilik ve destek</h4><p class="muted" style="font-size:13px;line-height:1.5;margin-top:8px">Gelir görünümü tek dokunuşla gizlenir. Gerçek sürümde veri dışa aktarma, hesap silme, AI kullanım desteği ve canlı yardım bulunacaktır.</p></div>`}
-function savePrices(){const a=+document.getElementById('ps').value,b=+document.getElementById('pr').value,c=+document.getElementById('pg').value;if(!a||!b||!c)return toast('Üç değeri de gir');st.pt.prices={silver:a,rose:b,gold:c};save();toast('Değerler kaydedildi');render()}
-function clientView(){const c=client(ui.clientId);return shell(clientContent(c),`Merhaba ${c.name.split(' ')[0]}`,clientNav())}
-function clientNav(){return `<nav class="nav">${[['home','⌂','Ana Sayfa'],['sessions','□','Derslerim'],['slots','◷','Müsait'],['plus','＋','MOVA+']].map(x=>`<button class="${ui.clientTab===x[0]?'active':''}" onclick="ui.clientTab='${x[0]}';render()"><i>${x[1]}</i>${x[2]}</button>`).join('')}</nav>`}
-function clientContent(c){
-  if(ui.clientTab==='home'){
-    const next=st.sessions.filter(s=>s.clientId===c.id&&s.status==='booked'&&s.date>=today()).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time))[0];
-    return `<div class="eyebrow">MOVA Client</div><div class="title" style="margin:4px 0 16px">Antrenman düzenin hazır.</div><div class="grid2"><div class="stat"><div class="n">${remain(c)}</div><div class="l">Kalan ders hakkı</div></div><div class="stat"><div class="n">${c.used}</div><div class="l">Tamamlanan ders</div></div></div>${next?`<div class="hero" style="margin-top:12px"><div class="eyebrow" style="color:white;opacity:.7">Sonraki dersin</div><div class="big">${next.time}</div><div>${fmt(next.date)}</div></div>`:`<div class="card" style="margin-top:12px">Henüz rezervasyonun yok.</div>`}<div class="card" onclick="ui.clientTab='plus';render()" style="cursor:pointer"><div class="row space"><div><div class="eyebrow">MOVA+</div><b>Gelişimini daha detaylı gör</b><p class="muted" style="font-size:12px;margin-top:4px">Aylık analiz, ölçüm grafikleri ve ilerleme raporu</p></div><b>›</b></div></div><div class="notice success">Fiyat ve PT'nin gelir bilgileri danışan ekranında görünmez.</div>`;
-  }
-  if(ui.clientTab==='sessions'){
-    const ss=st.sessions.filter(s=>s.clientId===c.id&&s.status!=='cancelled').sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
-    return `<div class="title" style="margin-bottom:16px">Derslerim</div>${ss.map(s=>`<div class="slot ${s.status==='completed'?'completed':''}"><div class="time">${s.time}</div><div class="grow"><b>${fmt(s.date)}</b><br><small>${statusLabel(s.status)}</small></div></div>`).join('')||'<div class="card">Ders kaydı yok.</div>'}`;
-  }
-  if(ui.clientTab==='plus'){
-    const interested=(st.premiumInterest||[]).includes(c.id);
-    return `<div class="premium-card"><div class="eyebrow" style="color:white;opacity:.65">MOVA+</div><div class="title" style="color:white;margin-top:5px">Gelişiminin tamamını gör.</div><div class="price">₺59 <span style="font-size:13px;font-weight:700;opacity:.65">/ ay</span></div><div class="premium-list"><div>✓ Detaylı aylık ilerleme özeti</div><div>✓ Ölçüm geçmişi ve grafikler</div><div>✓ Devamlılık ve antrenman düzeni</div><div>✓ Öncesi / sonrası karşılaştırması</div><div>✓ Gelecekte smart mezura bağlantısı</div></div><button class="btn primary" onclick="registerPremiumInterest('${c.id}')">${interested?'İlgin kaydedildi':'İlgileniyorum'}</button></div><div class="card"><div class="eyebrow">Önizleme</div><div class="locked" style="margin-top:12px"><div class="grid2"><div class="stat"><div class="n">87%</div><div class="l">Devamlılık</div></div><div class="stat"><div class="n">−2 cm</div><div class="l">Bel değişimi</div></div></div><div class="progress-line" style="margin-top:15px"><i style="width:72%"></i></div><p style="margin-top:8px">Bu ay düzenli bir ilerleme gösterdin.</p></div></div><div class="notice">Temel ders, hak ve rezervasyon bilgilerin her zaman ücretsiz kalır. MOVA+ yalnızca ek analiz ve gelişim araçları sunar.</div>`;
-  }
-  const opens=st.slots.filter(s=>s.open&&s.date>=today());
-  return `<div class="title" style="margin-bottom:16px">Müsait Saatler</div>${remain(c)<=0?'<div class="notice">Ders hakkın kalmadı. PT ile iletişime geç.</div>':''}${opens.map(s=>`<div class="slot available"><div><b>${fmt(s.date)}</b><br><small>${s.time}</small></div><button class="btn small primary" style="margin-left:auto" ${remain(c)<=0?'disabled':''} onclick="clientBook('${s.id}','${c.id}')">Talep Et</button></div>`).join('')||'<div class="card">Şu an müsait saat yok.</div>'}`;
+function recoveredCount(mo) {
+  return sessionsIn(mo).filter(s => s.recovered).length;
 }
-function registerPremiumInterest(id){if(!st.premiumInterest)st.premiumInterest=[];if(!st.premiumInterest.includes(id))st.premiumInterest.push(id);save();toast('MOVA+ ilgin kaydedildi');render()}
-function openModal(name,data={}){ui.modal=name;ui.data=data;render()}function closeModal(){ui.modal=null;ui.data={};render()}
-function modal(){if(!ui.modal)return'';let body='';if(ui.modal==='slot')body=modalSlot();if(ui.modal==='session')body=modalSession();if(ui.modal==='client')body=modalClient();if(ui.modal==='book')body=modalBook();if(ui.modal==='sessionDetail')body=modalSessionDetail();if(ui.modal==='clientDetail')body=modalClientDetail();if(ui.modal==='alert')body=modalAlert();return `<div class="sheet-wrap" onclick="closeModal()"><div class="sheet" onclick="event.stopPropagation()"><div class="handle"></div>${body}</div></div>`}
-const timeOptions=()=>Array.from({length:33},(_,i)=>{const total=360+i*30;const h=String(Math.floor(total/60)).padStart(2,'0'),m=String(total%60).padStart(2,'0');return `<option>${h}:${m}</option>`}).join('');
-function modalSlot(){return `<h3>Müsait Saat Ekle</h3><div class="field"><label class="label">Tarih</label><input id="md" class="input" type="date" value="${ui.date}"></div><div class="field"><label class="label">Saat</label><select id="mt" class="input">${timeOptions()}</select></div><button class="btn primary" onclick="addSlot()">Ekle</button>`}
-function addSlot(){const d=document.getElementById('md').value,t=document.getElementById('mt').value;if(st.slots.some(s=>s.date===d&&s.time===t&&s.open))return toast('Bu saat zaten açık');st.slots.push({id:uid(),date:d,time:t,open:true});save();ui.date=d;closeModal();toast('Müsait saat eklendi')}
-function modalSession(){return `<h3>Yeni Ders</h3><div class="field"><label class="label">Tarih</label><input id="sd" class="input" type="date" value="${ui.date}"></div><div class="field"><label class="label">Saat</label><select id="st" class="input">${timeOptions()}</select></div><div class="field"><label class="label">Danışan</label><select id="sc" class="input">${st.clients.map(c=>`<option value="${c.id}">${c.name} • ${remain(c)} hak</option>`).join('')}</select></div><button class="btn primary" onclick="addSession()">Dersi Ekle</button>`}
-function addSession(){const d=document.getElementById('sd').value,t=document.getElementById('st').value,c=document.getElementById('sc').value;if(st.sessions.some(s=>s.date===d&&s.time===t&&s.status!=='cancelled'))return toast('Bu saat dolu');st.sessions.push({id:uid(),clientId:c,date:d,time:t,status:'booked',chargeable:false});const o=st.slots.find(s=>s.date===d&&s.time===t&&s.open);if(o)o.open=false;save();ui.date=d;closeModal();toast('Ders eklendi')}
-function modalClient(){return `<h3>Yeni Danışan</h3><div class="field"><label class="label">Ad Soyad</label><input id="cn" class="input"></div><div class="field"><label class="label">Telefon</label><input id="cp" class="input"></div><div class="field"><label class="label">Başlangıç hakkı</label><input id="cr" class="input" type="number" value="10"></div><div class="field"><label class="label">Dumbbell</label><select id="ct" class="input"><option value="silver">Silver</option><option value="rose" selected>Rose Gold</option><option value="gold">Gold</option></select></div><div class="field"><label class="label">Özel fiyat — opsiyonel</label><input id="cc" class="input" type="number"></div><button class="btn primary" onclick="addClient()">Danışanı Ekle</button>`}
-function addClient(){const n=document.getElementById('cn').value.trim();if(!n)return toast('Ad gerekli');st.clients.push({id:uid(),name:n,phone:document.getElementById('cp').value,rights:+document.getElementById('cr').value||0,used:0,tier:document.getElementById('ct').value,custom:+document.getElementById('cc').value||0,availability:[],note:''});save();closeModal();toast('Danışan eklendi')}
-function modalBook(){const o=st.slots.find(x=>x.id===ui.data.slotId);return `<h3>Saati Doldur</h3><div class="notice success">${fmt(o.date)} • ${o.time}</div><div class="field"><label class="label">Danışan</label><select id="bc" class="input">${st.clients.filter(c=>remain(c)>0).map(c=>`<option value="${c.id}">${c.name} • ${tierName(c.tier)}</option>`).join('')}</select></div><button class="btn primary" onclick="bookSlot('${o.id}')">Rezerve Et</button>`}
-function bookSlot(id){const o=st.slots.find(x=>x.id===id),c=document.getElementById('bc').value;if(st.sessions.some(s=>s.date===o.date&&s.time===o.time&&s.status!=='cancelled'))return toast('Saat dolu');st.sessions.push({id:uid(),clientId:c,date:o.date,time:o.time,status:'booked',chargeable:false});o.open=false;save();closeModal();toast('Saat dolduruldu')}
-function modalSessionDetail(){const s=st.sessions.find(x=>x.id===ui.data.id),c=client(s.clientId);return `<h3>Ders Detayı</h3><div class="card"><b>${fmt(s.date)} • ${s.time}</b><p class="muted" style="margin-top:5px">${c.name}</p><div style="margin-top:10px"><span class="chip ${tierClass(c.tier)}">${tierName(c.tier)} • ${money(price(c))}</span></div></div>${s.status!=='completed'?`<button class="btn green" onclick="completeSession('${s.id}')">Dersi Tamamla + 1 Dumbbell</button>`:`<div class="notice success">Tamamlandı ve aylık gelire eklendi.</div>`}<button class="btn red" style="margin-top:10px" onclick="cancelSession('${s.id}')">Dersi İptal Et</button>`}
-function completeSession(id){const s=st.sessions.find(x=>x.id===id),c=client(s.clientId);if(s.status==='completed')return;if(remain(c)<=0)return toast('Ders hakkı kalmadı');s.status='completed';s.chargeable=true;c.used++;save();closeModal();toast(`1 ${tierName(c.tier)} dumbbell eklendi`)}
-function cancelSession(id){const s=st.sessions.find(x=>x.id===id),c=client(s.clientId);if(s.status==='completed'&&s.chargeable)c.used=Math.max(0,c.used-1);s.status='cancelled';const existing=st.slots.find(o=>o.date===s.date&&o.time===s.time);if(existing)existing.open=true;else st.slots.push({id:uid(),date:s.date,time:s.time,open:true});save();closeModal();toast('Ders iptal edildi; saat müsait oldu')}
-function modalClientDetail(){const c=client(ui.data.id);return `<h3>${c.name}</h3><div class="grid2"><div class="stat"><div class="n">${remain(c)}</div><div class="l">Kalan hak</div></div><div class="stat"><div class="n">${c.used}</div><div class="l">Tamamlanan</div></div></div><div class="card" style="margin-top:12px"><div class="eyebrow">Sadece PT görür</div><div class="field" style="margin-top:10px"><label class="label">Dumbbell</label><select id="edt" class="input"><option value="silver" ${c.tier==='silver'?'selected':''}>Silver</option><option value="rose" ${c.tier==='rose'?'selected':''}>Rose Gold</option><option value="gold" ${c.tier==='gold'?'selected':''}>Gold</option></select></div><div class="field"><label class="label">Özel fiyat</label><input id="edp" class="input" type="number" value="${c.custom||''}" placeholder="Boşsa dumbbell değeri"></div><div class="field"><label class="label">PT notu</label><textarea id="edn" class="input" rows="3">${c.note||''}</textarea></div><button class="btn soft" onclick="saveClientDetail('${c.id}')">Kaydet</button></div><button class="btn primary" onclick="ui.modal=null;ui.data={};openModal('session');document.getElementById('sc').value='${c.id}'">Yeni Ders Ekle</button>`}
-function saveClientDetail(id){const c=client(id);c.tier=document.getElementById('edt').value;c.custom=+document.getElementById('edp').value||0;c.note=document.getElementById('edn').value;save();closeModal();toast('Danışan kaydedildi')}
-function modalAlert(){const o=st.slots.find(x=>x.id===ui.data.slotId);return `<h3>Boş Saat Bildirimi</h3><div class="notice">${fmt(o.date)} • ${o.time}</div><p class="muted" style="font-size:13px;margin-bottom:10px">Bildirim gönderilecek danışanları seç.</p>${st.clients.filter(c=>remain(c)>0).map(c=>`<label class="item"><input class="alertTarget" type="checkbox" value="${c.id}" checked><div class="grow"><h4>${c.name}</h4><p>${c.availability.join(', ')||'Uygunluk tercihi yok'}</p></div></label>`).join('')}<button class="btn primary" style="margin-top:12px" onclick="sendAlert('${o.id}')">Gönder</button>`}
-function sendAlert(id){const ids=[...document.querySelectorAll('.alertTarget:checked')].map(x=>x.value),o=st.slots.find(x=>x.id===id);if(!ids.length)return toast('En az bir danışan seç');st.alerts.push({id:uid(),slotId:id,targets:ids,text:`${fmt(o.date)} ${o.time} saati müsait.`,at:new Date().toISOString()});save();closeModal();toast(`${ids.length} danışana gönderildi`)}
-function clientBook(slotId,clientId){const o=st.slots.find(x=>x.id===slotId),c=client(clientId);if(remain(c)<=0)return toast('Ders hakkın kalmadı');if(!o.open)return toast('Saat doldu');st.sessions.push({id:uid(),clientId,date:o.date,time:o.time,status:'booked',chargeable:false});o.open=false;save();toast('Rezervasyon talebin onaylandı');render()}
-function toast(t){document.querySelectorAll('.toast').forEach(x=>x.remove());const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2300)}
+function cancelledCount(mo) {
+  return sessionsIn(mo, 'cancelled').length;
+}
+function noShowCount(mo) {
+  return sessionsIn(mo, 'no-show').length;
+}
+function fillRate(mo) {
+  const comp = sessionsIn(mo,'completed').length;
+  const can = cancelledCount(mo);
+  const ns = noShowCount(mo);
+  const denom = comp + can + ns;
+  return denom > 0 ? Math.round(comp / denom * 100) : 0;
+}
+function recoveryRate(mo) {
+  const c = cancelledCount(mo);
+  if (!c) return 0;
+  return Math.min(100, Math.round(recoveredCount(mo) / c * 100));
+}
+function weekDates(dateStr) {
+  const d = new Date(dateStr+'T12:00:00');
+  const day = d.getDay() || 7;
+  d.setDate(d.getDate() - day + 1);
+  return Array.from({length:7}, (_,i) => { const x=new Date(d); x.setDate(d.getDate()+i); return iso(x) });
+}
+function monthCells(mo) {
+  const first = new Date(mo+'-01T12:00:00');
+  const start = new Date(first);
+  const dow = first.getDay() || 7;
+  start.setDate(first.getDate() - dow + 1);
+  return Array.from({length:42}, (_,i) => { const d=new Date(start); d.setDate(start.getDate()+i); return iso(d) });
+}
+function moveMonth(mo, n) {
+  const d = new Date(mo+'-01T12:00:00');
+  d.setMonth(d.getMonth()+n);
+  return iso(d).slice(0,7);
+}
+function tierDumbbell(tier) {
+  return tier==='silver'?'🥈':tier==='rose'?'💗':'🥇';
+}
+
+// ═══════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════
+function render() {
+  document.getElementById('root').innerHTML =
+    ui.view === 'login'  ? renderLogin() :
+    ui.view === 'pt'     ? renderPT() :
+                           renderClient();
+}
+
+// ─── LOGIN ────────────────────────────────────────
+function renderLogin() {
+  return `<div class="login">
+    <div class="login-logo">
+      <div class="login-bm">M</div>
+      <h1>MOVA Coach</h1>
+      <p>PT'nin dijital asistanı</p>
+    </div>
+    <div class="tabs">
+      <button class="${ui.loginTab==='pt'?'active':''}" onclick="ui.loginTab='pt';render()">Personal Trainer</button>
+      <button class="${ui.loginTab==='client'?'active':''}" onclick="ui.loginTab='client';render()">Danışan</button>
+    </div>
+    ${ui.loginTab==='pt' ? `
+      <div class="field"><label class="label">PT PIN</label>
+        <input id="pin" class="input" type="password" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off">
+      </div>
+      <button class="btn or" onclick="loginPT()">Giriş Yap</button>
+      <p class="small" style="text-align:center;margin-top:14px">Demo PIN: <strong style="color:var(--ink)">1234</strong></p>
+    ` : `
+      <div class="field"><label class="label">Danışanını seç</label>
+        <select id="csel" class="input">
+          <option value="">Seç</option>
+          ${st.clients.map(c=>`<option value="${c.id}">${c.name}</option>`).join('')}
+        </select>
+      </div>
+      <button class="btn or" onclick="loginClient()">Devam Et</button>
+    `}
+  </div>`;
+}
+function loginPT() {
+  if (document.getElementById('pin').value === st.pt.pin) { ui.view='pt'; ui.ptTab='home'; render() }
+  else toast('PIN hatalı');
+}
+function loginClient() {
+  const id = document.getElementById('csel').value;
+  if (!id) return toast('Danışan seç');
+  ui.clientId = id; ui.view = 'client'; ui.clientTab = 'home'; render();
+}
+function logout() { ui.view='login'; ui.clientId=null; ui.modal=null; ui.showAna=false; render() }
+
+// ─── PT SHELL ─────────────────────────────────────
+function renderPT() {
+  const pendingAlerts = st.alerts.filter(a => {
+    const sl = st.slots.find(s => s.id === a.slotId);
+    return sl && sl.open;
+  }).length;
+  const openSlots = st.slots.filter(s => s.open && s.date >= today()).length;
+
+  const content = ui.showAna ? renderAnalysis() :
+    ui.ptTab==='home'     ? renderHome() :
+    ui.ptTab==='calendar' ? renderCalendar() :
+    ui.ptTab==='clients'  ? renderClients() :
+    ui.ptTab==='alerts'   ? renderAlerts() :
+                             renderMore();
+
+  return `<div class="app">
+    <div class="header">
+      <div class="brand"><div class="brandmark">M</div>MOVA Coach</div>
+      ${ui.showAna
+        ? `<button class="header-btn" onclick="ui.showAna=false;render()">‹ Geri</button>`
+        : `<button class="header-btn" onclick="logout()">Çıkış</button>`}
+    </div>
+    <main class="main">${content}</main>
+    ${ui.showAna ? '' : `
+    <nav class="nav">
+      ${[
+        ['home','⌂','Bugün'],
+        ['calendar','◫','Takvim'],
+        ['clients','◎','Danışanlar'],
+        ['alerts','◌','Bildirimler'],
+        ['more','…','Daha']
+      ].map(([tab,icon,lbl]) => `
+        <button class="${ui.ptTab===tab?'active':''}" onclick="ui.ptTab='${tab}';ui.showAna=false;render()">
+          <span class="nav-rel">
+            <i>${icon}</i>
+            ${tab==='alerts'&&openSlots>0 ? `<span class="nav-badge">${openSlots}</span>` : ''}
+          </span>
+          ${lbl}
+        </button>`).join('')}
+    </nav>`}
+    ${renderModal()}
+  </div>`;
+}
+
+// ─── HOME ─────────────────────────────────────────
+function renderHome() {
+  const t = today();
+  const todaySess = st.sessions.filter(s => s.date===t && s.status==='booked').sort((a,b) => a.time.localeCompare(b.time));
+  const next = todaySess[0];
+  const nc = next ? client(next.clientId) : null;
+  const openSlots = st.slots.filter(s => s.open && s.date >= t).length;
+  const lowRights = st.clients.filter(c => remain(c) <= 3);
+  const mo = t.slice(0,7);
+  const showInc = st.pt.showIncome;
+  const realInc = incomeIn(mo);
+  const planInc = incomeBooked(mo);
+  const compCount = sessionsIn(mo,'completed').length;
+  const bookedCount = sessionsIn(mo,'booked').length;
+
+  return `
+    <div class="eyebrow">Merhaba ${st.pt.name}</div>
+    <div class="h1" style="margin:3px 0 14px">Gününü birlikte yönetelim.</div>
+
+    ${next ? `
+    <div class="hero">
+      <div class="eyebrow" style="color:#fff;opacity:.7">Sıradaki ders</div>
+      <div class="big">${next.time} — ${nc.name}</div>
+      <div class="sub">${fmt(t)} &nbsp;·&nbsp; <span class="chip ${tclass(nc.tier)}">${tname(nc.tier)}</span></div>
+    </div>
+    ` : `<div class="card" style="color:var(--muted)">Bugün planlanmış ders yok.</div>`}
+
+    <div class="grid2">
+      <div class="stat"><div class="n">${todaySess.length}</div><div class="l">Bugünkü ders</div></div>
+      <div class="stat"><div class="n" style="color:var(--green)">${openSlots}</div><div class="l">Açık saat</div></div>
+    </div>
+
+    <div class="income-card">
+      <div class="row space">
+        <div>
+          <div class="eyebrow" style="color:#fff;opacity:.6">Bu ay gerçekleşen</div>
+          <div class="amount">${showInc ? money(realInc) : '••••••'}</div>
+          <div class="sub">${compCount} ders tamamlandı · ${bookedCount} planlandı</div>
+          ${showInc && planInc > 0 ? `<div class="sub" style="margin-top:3px">+ ${money(planInc)} planlanan</div>` : ''}
+        </div>
+        <button class="toggle" onclick="st.pt.showIncome=!st.pt.showIncome;save();render()">
+          ${showInc ? 'Gizle' : 'Göster'}
+        </button>
+      </div>
+      <div class="row" style="margin-top:12px;gap:6px;flex-wrap:wrap">
+        ${['silver','rose','gold'].map(tier => {
+          const cnt = sessionsIn(mo,'completed').filter(s=>client(s.clientId)?.tier===tier).length;
+          if (!cnt) return '';
+          return `<span class="chip ${tier}">${tname(tier)} × ${cnt}</span>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <div class="sec">Hızlı işlemler</div>
+    <div class="quick">
+      <button onclick="openModal('session')"><i>＋</i><b>Yeni Ders</b><span>Danışana ders ekle</span></button>
+      <button onclick="openModal('slot')"><i>◷</i><b>Boş Saat</b><span>Müsaitlik yayınla</span></button>
+      <button onclick="openModal('client')"><i>◎</i><b>Danışan Ekle</b><span>Hak ve değer tanımla</span></button>
+      <button onclick="ui.ptTab='alerts';render()"><i>◌</i><b>Bildirim</b><span>Boş saati duyur</span></button>
+    </div>
+
+    ${(openSlots > 0 || lowRights.length > 0) ? `
+    <div class="sec">Dikkat gerekiyor</div>
+    <div class="list">
+      ${openSlots > 0 ? `
+      <div class="item item-clickable" onclick="ui.ptTab='alerts';render()">
+        <div class="avatar">◷</div>
+        <div class="grow"><h4>${openSlots} açık müsait saat var</h4><p>Uygun danışanlara bildirim gönder</p></div>
+        <span style="color:var(--muted)">›</span>
+      </div>` : ''}
+      ${lowRights.map(c => `
+      <div class="item item-clickable" onclick="openModal('clientDetail',{id:'${c.id}'})">
+        <div class="avatar">${initials(c.name)}</div>
+        <div class="grow"><h4>${c.name} — ${remain(c)} hak kaldı</h4><p>Paket yenileme gerekebilir</p></div>
+        <span style="color:var(--muted)">›</span>
+      </div>`).join('')}
+    </div>` : ''}`;
+}
+
+// ─── CALENDAR ─────────────────────────────────────
+function renderCalendar() {
+  const days = weekDates(ui.date);
+  const daySess = st.sessions.filter(s => s.date===ui.date && s.status!=='cancelled').sort((a,b)=>a.time.localeCompare(b.time));
+  const daySlots = st.slots.filter(s => s.date===ui.date && s.open);
+  const items = [
+    ...daySess.map(s=>({type:'session',time:s.time,data:s})),
+    ...daySlots.map(s=>({type:'slot',time:s.time,data:s}))
+  ].sort((a,b)=>a.time.localeCompare(b.time));
+
+  return `
+    <div class="row space">
+      <div>
+        <div class="eyebrow">Takvim</div>
+        <div class="h2" style="margin-top:2px">${ui.calMode==='month'
+          ? new Date(ui.date.slice(0,7)+'-01T12:00:00').toLocaleDateString('tr-TR',{month:'long',year:'numeric'})
+          : fmt(ui.date)}</div>
+      </div>
+      <div class="cal-toggle">
+        <button class="${ui.calMode==='week'?'active':''}" onclick="ui.calMode='week';render()">Hafta</button>
+        <button class="${ui.calMode==='month'?'active':''}" onclick="ui.calMode='month';render()">Ay</button>
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px;gap:6px">
+      <button class="btn sm soft" onclick="calMove(-1)">‹</button>
+      <button class="btn sm ghost" onclick="ui.date=today();render()">Bugün</button>
+      <button class="btn sm soft" onclick="calMove(1)">›</button>
+    </div>
+
+    ${ui.calMode === 'month' ? renderMonthGrid() : `
+      <div class="week">
+        ${days.map(d => {
+          const hasEv = st.sessions.some(s=>s.date===d&&s.status!=='cancelled') || st.slots.some(s=>s.date===d&&s.open);
+          return `<button class="wday ${d===ui.date?'active':''} ${d===today()?'today':''} ${hasEv?'has-dot':''}" onclick="ui.date='${d}';render()">
+            <small>${new Date(d+'T12:00:00').toLocaleDateString('tr-TR',{weekday:'narrow'})}</small>
+            <b>${new Date(d+'T12:00:00').getDate()}</b>
+            <span class="wday-dot"></span>
+          </button>`;
+        }).join('')}
+      </div>
+
+      <div class="sec-row" style="margin-top:4px">
+        <div class="h3">${fmtShort(ui.date)}</div>
+        <button class="btn sm soft" onclick="openModal('slot',{date:'${ui.date}'})">+ Saat Ekle</button>
+      </div>
+
+      ${items.length === 0
+        ? `<div class="card" style="color:var(--muted);font-size:14px">Bu gün için kayıt yok.</div>`
+        : items.map(item => {
+          if (item.type === 'slot') {
+            return `<div class="slot available" onclick="openModal('book',{slotId:'${item.data.id}'})">
+              <div class="time">${item.time}</div>
+              <div class="grow"><div class="name">Açık Saat</div><div class="status-label">Rezervasyon bekliyor</div></div>
+              <button class="btn xs green" onclick="event.stopPropagation();openModal('book',{slotId:'${item.data.id}'})">Doldur</button>
+            </div>`;
+          }
+          const c = client(item.data.clientId);
+          const isdone = item.data.status === 'completed';
+          const isns = item.data.status === 'no-show';
+          return `<div class="slot ${isdone?'done':isns?'no-show':''}" onclick="openModal('sessionDetail',{id:'${item.data.id}'})">
+            <div class="time">${item.time}</div>
+            <div class="grow">
+              <div class="name">${c?.name||'—'}</div>
+              <div class="status-label">${sLabel(item.data.status)} ${item.data.recovered?' · 🔄 kurtarılan':''}</div>
+            </div>
+            <span class="chip ${tclass(c?.tier)}">${tname(c?.tier)}</span>
+          </div>`;
+        }).join('')}
+    `}`;
+}
+
+function renderMonthGrid() {
+  const mo = ui.date.slice(0,7);
+  const cells = monthCells(mo);
+  const days = ['P','S','Ç','P','C','C','P'];
+  return `
+    <div class="month-head">${days.map(d=>`<span>${d}</span>`).join('')}</div>
+    <div class="month-grid">
+      ${cells.map(d => {
+        const cnt = st.sessions.filter(s=>s.date===d&&s.status!=='cancelled').length;
+        const hasOpen = st.slots.some(s=>s.date===d&&s.open);
+        return `<button class="mcell ${d.slice(0,7)!==mo?'out':''} ${d===ui.date?'active':''}" onclick="ui.date='${d}';ui.calMode='week';render()">
+          <b>${new Date(d+'T12:00:00').getDate()}</b>
+          ${hasOpen?'<span class="open-dot"></span>':''}
+          <div class="mc">${cnt?cnt+' ders':''}</div>
+        </button>`;
+      }).join('')}
+    </div>
+    <button class="btn soft" style="margin-top:10px" onclick="openModal('session')">Bu Aya Ders Ekle</button>`;
+}
+
+function calMove(n) {
+  const d = new Date(ui.date+'T12:00:00');
+  if (ui.calMode==='month') d.setMonth(d.getMonth()+n);
+  else d.setDate(d.getDate()+7*n);
+  ui.date = iso(d); render();
+}
+
+// ─── CLIENTS ──────────────────────────────────────
+function renderClients() {
+  return `
+    <div class="row space" style="margin-bottom:12px">
+      <div><div class="eyebrow">Danışanlar</div><div class="h2" style="margin-top:2px">${st.clients.length} kişi</div></div>
+      <button class="btn sm soft" onclick="openModal('client')">+ Ekle</button>
+    </div>
+    <div class="list">
+      ${st.clients.map(c => {
+        const rem = remain(c);
+        const upcoming = st.sessions.filter(s=>s.clientId===c.id&&s.status==='booked'&&s.date>=today());
+        return `<div class="item item-clickable" onclick="openModal('clientDetail',{id:'${c.id}'})">
+          <div class="avatar">${initials(c.name)}</div>
+          <div class="grow">
+            <h4>${c.name}</h4>
+            <p>${c.avail.days.slice(0,2).join(', ')||'Uygunluk girilmedi'} · ${upcoming.length} ders yaklaşıyor</p>
+          </div>
+          <div class="item-right">
+            <b style="font-size:15px;${rem<=3?'color:var(--red)':''}">${rem} hak</b>
+            <div style="margin-top:3px"><span class="chip ${tclass(c.tier)}">${tname(c.tier)}</span></div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
+
+// ─── ALERTS (BİLDİRİMLER) ────────────────────────
+function renderAlerts() {
+  const opens = st.slots.filter(s => s.open && s.date >= today());
+  return `
+    <div class="eyebrow">Bildirimler</div>
+    <div class="h2" style="margin:3px 0 14px">Boş saati doğru kişiye ulaştır.</div>
+    ${opens.length === 0
+      ? `<div class="card" style="color:var(--muted)">Açık müsait saat bulunmuyor.</div>`
+      : opens.map(s => `<div class="card">
+          <div class="row space">
+            <div>
+              <div class="h3">${fmt(s.date)} · ${s.time}</div>
+              <p class="small" style="margin-top:3px">Uygun danışanlara bildirim gönder</p>
+            </div>
+            <button class="btn sm or" onclick="openModal('alert',{slotId:'${s.id}'})">Gönder</button>
+          </div>
+        </div>`).join('')}
+
+    <div class="sec">Geçmiş bildirimler</div>
+    <div class="list">
+      ${st.alerts.length === 0
+        ? `<div class="item" style="color:var(--muted)">Henüz bildirim gönderilmedi.</div>`
+        : [...st.alerts].reverse().map(a => `<div class="item">
+            <div class="avatar" style="background:#F1F2F3;color:var(--muted)">◌</div>
+            <div class="grow"><h4>${a.text}</h4><p>${a.targets.length} danışana gönderildi</p></div>
+          </div>`).join('')}
+    </div>`;
+}
+
+// ─── MORE ─────────────────────────────────────────
+function renderMore() {
+  return `
+    <div class="eyebrow">Ayarlar</div>
+    <div class="h2" style="margin:3px 0 14px">Dumbbell değerleri</div>
+    <div class="card">
+      <div class="field"><label class="label">🥈 Silver (TL / ders)</label>
+        <input id="ps" class="input" type="number" value="${st.pt.prices.silver}"></div>
+      <div class="field"><label class="label">💗 Rose Gold (TL / ders)</label>
+        <input id="pr" class="input" type="number" value="${st.pt.prices.rose}"></div>
+      <div class="field"><label class="label">🥇 Gold (TL / ders)</label>
+        <input id="pg" class="input" type="number" value="${st.pt.prices.gold}"></div>
+      <div class="notice ink" style="font-size:12px">Bu değerler ve tüm gelir bilgileri yalnızca sana görünür. Danışan ekranında fiyat gösterilmez.</div>
+      <button class="btn or" onclick="savePrices()">Kaydet</button>
+    </div>
+    <div class="card item-clickable" style="cursor:pointer" onclick="ui.showAna=true;render()">
+      <div class="row space"><div><div class="h3">Ay Sonu Analizi</div><p class="small" style="margin-top:3px">Gelir, dumbbell, doluluk, iptal ve kurtarılan dersler</p></div><b>›</b></div>
+    </div>
+    <div class="card">
+      <div class="h3">Gizlilik ve veri</div>
+      <p class="small" style="line-height:1.5;margin-top:8px">Gelir rakamlarını ana ekranda tek dokunuşla gizleyebilirsin. Gerçek sürümde CSV dışa aktarma, hesap silme ve canlı destek bulunacaktır.</p>
+    </div>`;
+}
+function savePrices() {
+  const a=+document.getElementById('ps').value, b=+document.getElementById('pr').value, c=+document.getElementById('pg').value;
+  if (!a||!b||!c) return toast('Üç değeri de gir');
+  st.pt.prices={silver:a,rose:b,gold:c}; save(); toast('Dumbbell değerleri kaydedildi'); render();
+}
+
+// ─── ANALYSIS ─────────────────────────────────────
+function renderAnalysis() {
+  const mo = ui.anaMonth;
+  const moLabel = new Date(mo+'-01T12:00:00').toLocaleDateString('tr-TR',{month:'long',year:'numeric'});
+  const comp = sessionsIn(mo,'completed').length;
+  const booked = sessionsIn(mo,'booked').length;
+  const cancelled = cancelledCount(mo);
+  const noshow = noShowCount(mo);
+  const rec = recoveredCount(mo);
+  const fill = fillRate(mo);
+  const recRate = recoveryRate(mo);
+  const realInc = incomeIn(mo);
+  const planInc = incomeBooked(mo);
+  const lowRights = st.clients.filter(c => remain(c) <= 3);
+  const noFuture = st.clients.filter(c => !st.sessions.some(s=>s.clientId===c.id&&s.status==='booked'&&s.date>=today()));
+
+  const dumbBreak = ['silver','rose','gold'].map(tier => {
+    const cnt = sessionsIn(mo,'completed').filter(s=>client(s.clientId)?.tier===tier).length;
+    const val = sessionsIn(mo,'completed').filter(s=>client(s.clientId)?.tier===tier).reduce((a,s)=>a+price(client(s.clientId)),0);
+    return {tier, cnt, val};
+  });
+
+  return `
+    <div class="row space" style="margin-bottom:14px">
+      <div class="cal-toggle">
+        <button onclick="ui.anaMonth=moveMonth(ui.anaMonth,-1);render()">‹</button>
+        <button class="active">${moLabel}</button>
+        <button onclick="ui.anaMonth=moveMonth(ui.anaMonth,1);render()">›</button>
+      </div>
+    </div>
+
+    <div class="eyebrow">Özel PT raporu</div>
+    <div class="h1" style="margin:3px 0 12px">Ay Sonu Analizi</div>
+
+    <div class="income-card">
+      <div class="eyebrow" style="color:#fff;opacity:.6">Gerçekleşen ders değeri</div>
+      <div class="amount">${st.pt.showIncome ? money(realInc) : '••••••'}</div>
+      <div class="sub">${comp} ders tamamlandı · planlanan +${money(planInc)}</div>
+    </div>
+
+    <div class="analysis-grid">
+      <div class="metric"><strong>${comp}</strong><span>Tamamlanan</span></div>
+      <div class="metric"><strong>${booked}</strong><span>Planlandı</span></div>
+      <div class="metric"><strong>${cancelled}</strong><span>İptal</span></div>
+      <div class="metric"><strong>${noshow}</strong><span>Gelmedi</span></div>
+      <div class="metric"><strong>${rec}</strong><span>Kurtarılan saat</span></div>
+      <div class="metric"><strong>%${fill}</strong><span>Doluluk oranı</span></div>
+    </div>
+
+    <div class="card">
+      <div class="row space"><b>Dumbbell dağılımı</b><span class="small">${comp} toplam</span></div>
+      ${dumbBreak.map(d => `
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)">
+        <span class="chip ${tclass(d.tier)}">${tname(d.tier)}</span>
+        <div style="flex:1"><div class="prog"><i style="width:${comp?d.cnt/comp*100:0}%"></i></div></div>
+        <b style="width:24px;text-align:right;font-size:14px">${d.cnt}</b>
+        ${st.pt.showIncome?`<span class="small" style="width:70px;text-align:right">${money(d.val)}</span>`:''}
+      </div>`).join('')}
+    </div>
+
+    <div class="card">
+      <b>Boş saat kurtarma</b>
+      <div class="row space" style="margin:10px 0 6px">
+        <span class="small">Kurtarma oranı</span>
+        <b style="color:var(--green)">%${recRate}</b>
+      </div>
+      <div class="prog"><i class="green-fill" style="width:${recRate}%"></i></div>
+      <p class="small" style="margin-top:8px">${cancelled} iptalden ${rec} ders başka danışanla dolduruldu.</p>
+    </div>
+
+    <div class="sec">Gelecek ay dikkat listesi</div>
+    <div class="list">
+      <div class="item item-clickable" onclick="ui.showAna=false;ui.ptTab='clients';render()">
+        <div class="avatar" style="background:var(--red-sf);color:var(--red)">!</div>
+        <div class="grow"><h4>${lowRights.length} danışanın hakkı azalıyor</h4><p>Paket yenileme için görüş</p></div>›
+      </div>
+      <div class="item item-clickable" onclick="ui.showAna=false;ui.ptTab='clients';render()">
+        <div class="avatar" style="background:#F1F2F3;color:var(--muted)">◷</div>
+        <div class="grow"><h4>${noFuture.length} danışanın ileri rezervasyonu yok</h4><p>Kişisel takip mesajı gönder</p></div>›
+      </div>
+    </div>
+    <div class="notice green" style="font-size:12px">Bu rapor yalnızca sana görünür. Gelir bilgileri danışan ekranında hiçbir şekilde gösterilmez.</div>`;
+}
+
+// ─── CLIENT APP ───────────────────────────────────
+function renderClient() {
+  const c = client(ui.clientId);
+  if (!c) { logout(); return ''; }
+  const unread = st.alerts.filter(a => a.targets.includes(c.id)).length;
+  const content =
+    ui.clientTab==='home'     ? renderClientHome(c) :
+    ui.clientTab==='sessions' ? renderClientSessions(c) :
+    ui.clientTab==='slots'    ? renderClientSlots(c) :
+    ui.clientTab==='avail'    ? renderClientAvail(c) :
+                                 renderClientPlus(c);
+  return `<div class="app">
+    <div class="header">
+      <div class="brand"><div class="brandmark">M</div>Merhaba, ${c.name.split(' ')[0]}</div>
+      <button class="header-btn" onclick="logout()">Çıkış</button>
+    </div>
+    <main class="main">${content}</main>
+    <nav class="nav">
+      ${[
+        ['home','⌂','Ana Sayfa',''],
+        ['sessions','◫','Derslerim',''],
+        ['slots','◷','Müsait',''],
+        ['avail','⊕','Uygunluk',''],
+        ['plus','★','MOVA+','']
+      ].map(([tab,icon,lbl]) => `
+        <button class="${ui.clientTab===tab?'active':''}" onclick="ui.clientTab='${tab}';render()">
+          <span class="nav-rel">
+            <i>${icon}</i>
+            ${tab==='slots'&&unread>0?`<span class="nav-badge">${unread}</span>`:''}
+          </span>
+          ${lbl}
+        </button>`).join('')}
+    </nav>
+    ${renderModal()}
+  </div>`;
+}
+
+function renderClientHome(c) {
+  const t = today();
+  const next = st.sessions
+    .filter(s=>s.clientId===c.id&&s.status==='booked'&&s.date>=t)
+    .sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time))[0];
+  const rem = remain(c);
+  const newAlerts = st.alerts.filter(a=>a.targets.includes(c.id));
+
+  return `
+    <div class="eyebrow">MOVA Danışan</div>
+    <div class="h1" style="margin:3px 0 14px">Antrenman düzenin hazır.</div>
+
+    ${newAlerts.length > 0 ? `
+    <div class="hero" style="margin-bottom:10px">
+      <div class="eyebrow" style="color:#fff;opacity:.7">PT'nden yeni bildirim</div>
+      <div class="big" style="font-size:18px;line-height:1.4">${newAlerts[newAlerts.length-1].text}</div>
+      <button class="btn sm" style="background:rgba(255,255,255,.2);color:#fff;border:1.5px solid rgba(255,255,255,.35);margin-top:10px" onclick="ui.clientTab='slots';render()">Müsait saatlere bak →</button>
+    </div>` : ''}
+
+    <div class="grid2">
+      <div class="stat">
+        <div class="n" style="${rem<=3?'color:var(--red)':''}">${rem}</div>
+        <div class="l">Kalan ders hakkı</div>
+      </div>
+      <div class="stat">
+        <div class="n">${c.used}</div>
+        <div class="l">Tamamlanan ders</div>
+      </div>
+    </div>
+
+    ${next ? `
+    <div class="hero" style="background:linear-gradient(135deg,#2D4A6B,#1A2F45)">
+      <div class="eyebrow" style="color:#fff;opacity:.7">Sonraki dersin</div>
+      <div class="big" style="font-size:22px">${next.time}</div>
+      <div class="sub">${fmt(next.date)}</div>
+    </div>
+    ` : `
+    <div class="card" style="text-align:center;padding:24px">
+      <div style="font-size:32px;margin-bottom:8px">📅</div>
+      <p class="small">Henüz rezervasyonun yok.</p>
+      ${rem>0?`<button class="btn sm or" style="margin-top:12px" onclick="ui.clientTab='slots';render()">Müsait saat bak</button>`:''}
+    </div>`}
+
+    ${rem<=3&&rem>0?`<div class="notice" style="margin-top:2px">Ders hakkın azalıyor. PT'nle paket yenileme konuşabilirsin.</div>`:''}
+    ${rem<=0?`<div class="notice red">Ders hakkın tükendi. Devam etmek için PT'nle iletişime geç.</div>`:''}`;
+}
+
+function renderClientSessions(c) {
+  const t = today();
+  const all = st.sessions.filter(s=>s.clientId===c.id&&s.status!=='cancelled').sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+  const upcoming = all.filter(s=>s.date>=t);
+  const past = all.filter(s=>s.date<t).reverse();
+  return `
+    <div class="h2" style="margin-bottom:14px">Derslerim</div>
+    ${upcoming.length>0?`<div class="eyebrow" style="margin-bottom:8px">Yaklaşan</div>
+    ${upcoming.map(s=>`<div class="slot ${s.status==='booked'?'':'done'}">
+      <div class="time">${s.time}</div>
+      <div class="grow"><div class="name">${fmt(s.date)}</div><div class="status-label">${sLabel(s.status)}</div></div>
+    </div>`).join('')}`:''}
+    ${past.length>0?`<div class="eyebrow" style="margin-top:14px;margin-bottom:8px">Tamamlanan</div>
+    ${past.map(s=>`<div class="slot done">
+      <div class="time">${s.time}</div>
+      <div class="grow"><div class="name">${fmt(s.date)}</div><div class="status-label">${sLabel(s.status)}</div></div>
+    </div>`).join('')}`:''}
+    ${all.length===0?`<div class="card" style="color:var(--muted)">Ders kaydın yok.</div>`:''}`;
+}
+
+function renderClientSlots(c) {
+  const rem = remain(c);
+  const opens = st.slots.filter(s=>s.open&&s.date>=today()).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+  return `
+    <div class="h2" style="margin-bottom:14px">Müsait Saatler</div>
+    ${rem<=0?`<div class="notice red">Ders hakkın kalmadı. PT'nle iletişime geç.</div>`:''}
+    ${opens.length===0
+      ? `<div class="card" style="color:var(--muted)">Şu an açık müsait saat yok. PT saat açtığında bildirim alacaksın.</div>`
+      : opens.map(s=>{
+          const booked = st.sessions.some(x=>x.clientId===c.id&&x.date===s.date&&x.time===s.time&&x.status==='booked');
+          return `<div class="slot available">
+            <div>
+              <div class="name">${fmt(s.date)}</div>
+              <div class="status-label">${s.time}</div>
+            </div>
+            ${booked
+              ? `<span class="chip green" style="margin-left:auto">Rezervesin</span>`
+              : rem>0
+              ? `<button class="btn sm or" style="margin-left:auto" onclick="clientBook('${s.id}','${c.id}')">Talep Et</button>`
+              : `<span class="chip gray" style="margin-left:auto">Hak yok</span>`}
+          </div>`;
+        }).join('')}`;
+}
+
+function renderClientAvail(c) {
+  const avail = c.avail || { days:[], slots:[], lastMinute:false };
+  const days = ['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'];
+  const slots = [{key:'sabah',label:'Sabah (06–12)'},{key:'öğlen',label:'Öğlen (12–15)'},{key:'akşam',label:'Akşam (15–22)'}];
+
+  return `
+    <div class="h2" style="margin-bottom:4px">Uygunluk Tercihleri</div>
+    <p class="small" style="margin-bottom:14px">PT, boş saat bildirimlerini tercihlerine göre sana iletir.</p>
+
+    <div class="card">
+      <div class="label" style="margin-bottom:10px">Hangi günler uygunsun?</div>
+      ${days.map(d=>{
+        const on = avail.days.includes(d);
+        return `<div class="avail-row" onclick="toggleAvailDay('${c.id}','${d}')">
+          <div class="avail-check ${on?'on':''}">${on?'✓':''}</div>
+          <div>${d}</div>
+        </div>`;
+      }).join('')}
+    </div>
+
+    <div class="card">
+      <div class="label" style="margin-bottom:10px">Hangi saatlerde uygunsun?</div>
+      ${slots.map(sl=>{
+        const on = avail.slots.includes(sl.key);
+        return `<div class="avail-row" onclick="toggleAvailSlot('${c.id}','${sl.key}')">
+          <div class="avail-check ${on?'on':''}">${on?'✓':''}</div>
+          <div>${sl.label}</div>
+        </div>`;
+      }).join('')}
+    </div>
+
+    <div class="card">
+      <div class="avail-row" onclick="toggleLastMinute('${c.id}')">
+        <div class="avail-check ${avail.lastMinute?'on':''}">${avail.lastMinute?'✓':''}</div>
+        <div>
+          <div style="font-size:14px;font-weight:700">Son dakika müsaitim</div>
+          <div class="small">Aynı gün açılan saatlerden de haber ver</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice green" style="font-size:12px">Tercihlerini kaydetmek için her seçimi tıkladığında otomatik güncelleniyor.</div>`;
+}
+
+function toggleAvailDay(clientId, day) {
+  const c = client(clientId);
+  if (!c.avail) c.avail = {days:[],slots:[],lastMinute:false};
+  const idx = c.avail.days.indexOf(day);
+  if (idx>=0) c.avail.days.splice(idx,1); else c.avail.days.push(day);
+  save(); render();
+}
+function toggleAvailSlot(clientId, slot) {
+  const c = client(clientId);
+  if (!c.avail) c.avail = {days:[],slots:[],lastMinute:false};
+  const idx = c.avail.slots.indexOf(slot);
+  if (idx>=0) c.avail.slots.splice(idx,1); else c.avail.slots.push(slot);
+  save(); render();
+}
+function toggleLastMinute(clientId) {
+  const c = client(clientId);
+  if (!c.avail) c.avail = {days:[],slots:[],lastMinute:false};
+  c.avail.lastMinute = !c.avail.lastMinute;
+  save(); render();
+}
+
+function renderClientPlus(c) {
+  const interested = (st.premiumInterest||[]).includes(c.id);
+  return `
+    <div class="plus-card">
+      <div class="eyebrow" style="color:#fff;opacity:.6">MOVA+</div>
+      <div class="h1" style="color:#fff;margin-top:6px">Gelişiminin tamamını gör.</div>
+      <div class="plus-price">₺59<span style="font-size:13px;opacity:.6"> / ay</span></div>
+      <div class="plus-list">
+        <div>✓ Ayrıntılı aylık ilerleme özeti</div>
+        <div>✓ Ölçüm geçmişi ve grafikler</div>
+        <div>✓ Devamlılık ve antrenman düzeni</div>
+        <div>✓ Öncesi / sonrası karşılaştırması</div>
+        <div>✓ Gelecekte akıllı mezura bağlantısı</div>
+      </div>
+      <button class="btn" style="background:${interested?'rgba(255,255,255,.15)':'white'};color:${interested?'#fff':'var(--ink)'}" onclick="registerInterest('${c.id}')">
+        ${interested ? '✓ İlgin kaydedildi' : 'İlgileniyorum'}
+      </button>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Önizleme</div>
+      <div class="locked" style="margin-top:10px">
+        <div class="grid2">
+          <div class="stat"><div class="n">87%</div><div class="l">Devamlılık</div></div>
+          <div class="stat"><div class="n">−2 cm</div><div class="l">Bel değişimi</div></div>
+        </div>
+        <div class="prog" style="margin-top:12px"><i style="width:72%"></i></div>
+        <p class="small" style="margin-top:8px">Bu ay düzenli bir ilerleme gösterdin.</p>
+      </div>
+    </div>
+    <div class="notice ink" style="font-size:12px">Temel ders, hak ve takvim bilgilerin her zaman ücretsiz. MOVA+ yalnızca ek analiz ve gelişim araçları sunar.</div>`;
+}
+
+function registerInterest(id) {
+  if (!st.premiumInterest) st.premiumInterest=[];
+  if (!st.premiumInterest.includes(id)) st.premiumInterest.push(id);
+  save(); toast('MOVA+ ilgin kaydedildi'); render();
+}
+
+function clientBook(slotId, clientId) {
+  const sl = st.slots.find(x=>x.id===slotId);
+  const c = client(clientId);
+  if (remain(c)<=0) return toast('Ders hakkın kalmadı');
+  if (!sl.open) return toast('Bu saat doldu');
+  if (st.sessions.some(s=>s.date===sl.date&&s.time===sl.time&&s.status!=='cancelled')) return toast('Saat dolu');
+  st.sessions.push({id:uid(),clientId,date:sl.date,time:sl.time,status:'booked',chargeable:false,recovered:false});
+  sl.open=false; save(); toast('Rezervasyon talebiniz alındı!'); render();
+}
+
+// ═══════════════════════════════════════════════════
+// MODALS
+// ═══════════════════════════════════════════════════
+function openModal(name, data={}) { ui.modal=name; ui.mdata=data; render() }
+function closeModal() { ui.modal=null; ui.mdata={}; render() }
+
+function renderModal() {
+  if (!ui.modal) return '';
+  const bodies = {
+    slot: modalSlot, session: modalSession, client: modalClient,
+    book: modalBook, sessionDetail: modalSessionDetail,
+    clientDetail: modalClientDetail, alert: modalAlert
+  };
+  const fn = bodies[ui.modal];
+  if (!fn) return '';
+  return `<div class="overlay" onclick="closeModal()">
+    <div class="sheet" onclick="event.stopPropagation()">
+      <div class="handle"></div>${fn()}
+    </div>
+  </div>`;
+}
+
+const timeOpts = () => Array.from({length:33},(_,i)=>{
+  const tot=360+i*30, h=String(Math.floor(tot/60)).padStart(2,'0'), m=String(tot%60).padStart(2,'0');
+  return `<option>${h}:${m}</option>`;
+}).join('');
+
+function modalSlot() {
+  const dt = ui.mdata.date || ui.date;
+  return `<h3>Müsait Saat Ekle</h3>
+    <div class="field"><label class="label">Tarih</label><input id="md" class="input" type="date" value="${dt}"></div>
+    <div class="field"><label class="label">Saat</label><select id="mt" class="input">${timeOpts()}</select></div>
+    <button class="btn or" onclick="addSlot()">Ekle</button>`;
+}
+function addSlot() {
+  const d=document.getElementById('md').value, t=document.getElementById('mt').value;
+  if (!d||!t) return toast('Tarih ve saat seç');
+  if (st.slots.some(s=>s.date===d&&s.time===t&&s.open)) return toast('Bu saat zaten açık');
+  st.slots.push({id:uid(),date:d,time:t,open:true}); save();
+  ui.date=d; closeModal(); toast('Müsait saat eklendi');
+}
+
+function modalSession() {
+  const eligible = st.clients.filter(c=>remain(c)>0);
+  return `<h3>Yeni Ders Ekle</h3>
+    <div class="field"><label class="label">Tarih</label><input id="sd" class="input" type="date" value="${ui.date}"></div>
+    <div class="field"><label class="label">Saat</label><select id="st_" class="input">${timeOpts()}</select></div>
+    <div class="field"><label class="label">Danışan</label>
+      <select id="sc" class="input">
+        <option value="">Danışan seç</option>
+        ${eligible.map(c=>`<option value="${c.id}">${c.name} · ${remain(c)} hak · ${tname(c.tier)}</option>`).join('')}
+      </select>
+    </div>
+    <button class="btn or" onclick="addSession()">Dersi Ekle</button>`;
+}
+function addSession() {
+  const d=document.getElementById('sd').value, t=document.getElementById('st_').value, cid=document.getElementById('sc').value;
+  if (!d||!t||!cid) return toast('Tüm alanları doldur');
+  if (st.sessions.some(s=>s.date===d&&s.time===t&&s.status!=='cancelled')) return toast('Bu saat dolu');
+  const sl=st.slots.find(s=>s.date===d&&s.time===t&&s.open);
+  const isRec = !!sl && st.sessions.some(s=>s.date===d&&s.time===t&&s.status==='cancelled');
+  st.sessions.push({id:uid(),clientId:cid,date:d,time:t,status:'booked',chargeable:false,recovered:isRec});
+  if (sl) sl.open=false; save();
+  ui.date=d; closeModal(); toast('Ders eklendi');
+}
+
+function modalClient() {
+  return `<h3>Yeni Danışan</h3>
+    <div class="field"><label class="label">Ad Soyad *</label><input id="cn" class="input" placeholder="Ayşe Yılmaz"></div>
+    <div class="field"><label class="label">Telefon</label><input id="cp" class="input" type="tel" placeholder="0532 000 00 00"></div>
+    <div class="field"><label class="label">Başlangıç ders hakkı</label><input id="cr" class="input" type="number" value="10" min="0"></div>
+    <div class="field"><label class="label">Dumbbell tipi</label>
+      <select id="ct" class="input">
+        <option value="silver">🥈 Silver</option>
+        <option value="rose" selected>💗 Rose Gold</option>
+        <option value="gold">🥇 Gold</option>
+      </select>
+    </div>
+    <div class="field"><label class="label">Özel fiyat — opsiyonel (TL)</label><input id="cc" class="input" type="number" placeholder="Dumbbell değeri kullanılır"></div>
+    <button class="btn or" onclick="addClient()">Danışanı Ekle</button>`;
+}
+function addClient() {
+  const n = document.getElementById('cn').value.trim();
+  if (!n) return toast('Ad gerekli');
+  st.clients.push({
+    id:uid(), name:n,
+    phone: document.getElementById('cp').value||'',
+    rights: +document.getElementById('cr').value||0,
+    used: 0,
+    tier: document.getElementById('ct').value,
+    custom: +document.getElementById('cc').value||0,
+    note: '',
+    avail: {days:[],slots:[],lastMinute:false}
+  });
+  save(); closeModal(); toast(`${n} eklendi`);
+}
+
+function modalBook() {
+  const sl = st.slots.find(x=>x.id===ui.mdata.slotId);
+  if (!sl) return '<h3>Hata</h3>';
+  const eligible = st.clients.filter(c=>remain(c)>0);
+  return `<h3>Saati Doldur</h3>
+    <div class="notice green">${fmt(sl.date)} · ${sl.time}</div>
+    <div class="field"><label class="label">Danışan</label>
+      <select id="bc" class="input">
+        <option value="">Danışan seç</option>
+        ${eligible.map(c=>`<option value="${c.id}">${c.name} · ${tname(c.tier)} · ${remain(c)} hak</option>`).join('')}
+      </select>
+    </div>
+    <button class="btn green" onclick="bookSlot('${sl.id}')">Rezerve Et — Ders Planlandı</button>`;
+}
+function bookSlot(id) {
+  const sl=st.slots.find(x=>x.id===id), cid=document.getElementById('bc').value;
+  if (!cid) return toast('Danışan seç');
+  if (!sl.open) return toast('Saat doldu');
+  const wasCancelled = st.sessions.some(s=>s.date===sl.date&&s.time===sl.time&&s.status==='cancelled');
+  st.sessions.push({id:uid(),clientId:cid,date:sl.date,time:sl.time,status:'booked',chargeable:false,recovered:wasCancelled});
+  sl.open=false; save(); closeModal();
+  toast(wasCancelled ? '🔄 İptal saati kurtarıldı!' : 'Saat dolduruldu');
+}
+
+function modalSessionDetail() {
+  const s = st.sessions.find(x=>x.id===ui.mdata.id);
+  if (!s) return '<h3>Bulunamadı</h3>';
+  const c = client(s.clientId);
+  const isBooked = s.status === 'booked';
+  return `<h3>Ders Detayı</h3>
+    <div class="card">
+      <b>${fmt(s.date)} · ${s.time}</b>
+      <p class="small" style="margin-top:4px">${c?.name} &nbsp;·&nbsp; <span class="chip ${tclass(c?.tier)}">${tname(c?.tier)}</span></p>
+      ${st.pt.showIncome ? `<p class="small" style="margin-top:4px">Ders değeri: <b>${money(price(c))}</b></p>` : ''}
+      ${s.recovered ? `<p class="small" style="margin-top:4px;color:var(--green)">🔄 Kurtarılan saat</p>` : ''}
+    </div>
+    ${isBooked ? `
+      <button class="btn green" style="margin-bottom:8px" onclick="completeSession('${s.id}',true,false)">✓ Dersi Tamamla · 1 Hak Düş</button>
+      <button class="btn" style="background:#FFF8ED;color:#9D5C00;margin-bottom:8px;width:100%;font-weight:900;border-radius:11px" onclick="noShowSession('${s.id}',true)">⚠ Gelmedi — Ücretli · Hak Düş</button>
+      <button class="btn ghost" style="margin-bottom:8px" onclick="noShowSession('${s.id}',false)">Gelmedi — Ücretsiz</button>
+      <button class="btn red" onclick="cancelSessionUI('${s.id}')">❌ Dersi İptal Et</button>
+    ` : s.status === 'completed' ? `
+      <div class="notice green">Tamamlandı · Aylık değere eklendi.</div>
+      <button class="btn ghost" onclick="uncompleteSession('${s.id}')">Tamamlamayı Geri Al</button>
+    ` : s.status === 'no-show' ? `
+      <div class="notice ${s.chargeable?'':'red'}">Gelmedi · ${s.chargeable?'Ücret alındı':'Ücret alınmadı'}.</div>
+    ` : `
+      <div class="notice red">İptal edildi.</div>
+    `}`;
+}
+function completeSession(id, charge, recovered) {
+  const s=st.sessions.find(x=>x.id===id), c=client(s.clientId);
+  if (remain(c)<=0) return toast('Ders hakkı kalmadı');
+  s.status='completed'; s.chargeable=charge; if(recovered) s.recovered=true;
+  c.used++; save(); closeModal(); toast(`✓ ${tname(c.tier)} dumbbell eklendi`);
+}
+function noShowSession(id, charge) {
+  const s=st.sessions.find(x=>x.id===id), c=client(s.clientId);
+  s.status='no-show'; s.chargeable=charge;
+  if (charge) c.used++;
+  save(); closeModal(); toast(charge?'Gelmedi · Ücret alındı':'Gelmedi · Ücret alınmadı');
+}
+function cancelSessionUI(id) {
+  const s=st.sessions.find(x=>x.id===id), c=client(s.clientId);
+  if (s.status==='completed'&&s.chargeable) c.used=Math.max(0,c.used-1);
+  s.status='cancelled';
+  const existing=st.slots.find(sl=>sl.date===s.date&&sl.time===s.time);
+  if (existing) existing.open=true;
+  else st.slots.push({id:uid(),date:s.date,time:s.time,open:true});
+  save(); closeModal(); toast('İptal edildi · Saat müsait oldu');
+}
+function uncompleteSession(id) {
+  const s=st.sessions.find(x=>x.id===id), c=client(s.clientId);
+  if (s.chargeable) c.used=Math.max(0,c.used-1);
+  s.status='booked'; s.chargeable=false; save(); closeModal(); toast('Ders tekrar planlandı olarak işaretlendi');
+}
+
+function modalClientDetail() {
+  const c = client(ui.mdata.id);
+  if (!c) return '';
+  const upcoming = st.sessions.filter(s=>s.clientId===c.id&&s.status==='booked'&&s.date>=today());
+  return `<h3>${c.name}</h3>
+    <div class="grid2" style="margin-bottom:14px">
+      <div class="stat"><div class="n">${remain(c)}</div><div class="l">Kalan hak</div></div>
+      <div class="stat"><div class="n">${c.used}</div><div class="l">Tamamlanan</div></div>
+    </div>
+    <div class="card">
+      <div class="eyebrow" style="margin-bottom:10px">Sadece PT görür</div>
+      <div class="field"><label class="label">Dumbbell tipi</label>
+        <select id="edt" class="input">
+          <option value="silver" ${c.tier==='silver'?'selected':''}>🥈 Silver</option>
+          <option value="rose" ${c.tier==='rose'?'selected':''}>💗 Rose Gold</option>
+          <option value="gold" ${c.tier==='gold'?'selected':''}>🥇 Gold</option>
+        </select>
+      </div>
+      <div class="field"><label class="label">Özel fiyat (TL) — opsiyonel</label>
+        <input id="edp" class="input" type="number" value="${c.custom||''}" placeholder="Dumbbell değeri kullanılır">
+      </div>
+      <div class="field"><label class="label">Ders hakkı ekle</label>
+        <div class="row"><input id="edr" class="input" type="number" placeholder="Eklenecek miktar" style="flex:1">
+        <button class="btn sm or" onclick="addRights('${c.id}')">Ekle</button></div>
+      </div>
+      <div class="field"><label class="label">PT notu (danışan göremez)</label>
+        <textarea id="edn" class="input" rows="2" style="resize:none">${c.note||''}</textarea>
+      </div>
+      <button class="btn soft" onclick="saveClientDetail('${c.id}')">Kaydet</button>
+    </div>
+    ${upcoming.length>0?`<div class="sec">Yaklaşan (${upcoming.length})</div>
+    ${upcoming.map(s=>`<div class="slot"><div class="time">${s.time}</div>
+      <div class="grow"><div class="name">${fmtShort(s.date)}</div></div>
+      <button class="btn xs red" onclick="cancelSessionUI('${s.id}')">İptal</button>
+    </div>`).join('')}`:''}
+    <button class="btn or" style="margin-top:8px" onclick="closeModal();openModal('session')">+ Yeni Ders Ekle</button>`;
+}
+function addRights(clientId) {
+  const n = +document.getElementById('edr').value;
+  if (!n||n<1) return toast('Geçerli miktar gir');
+  client(clientId).rights += n; save(); render(); toast(`${n} hak eklendi`);
+}
+function saveClientDetail(id) {
+  const c = client(id);
+  c.tier = document.getElementById('edt').value;
+  c.custom = +document.getElementById('edp').value || 0;
+  c.note = document.getElementById('edn').value;
+  save(); closeModal(); toast('Danışan kaydedildi');
+}
+
+function modalAlert() {
+  const sl = st.slots.find(x=>x.id===ui.mdata.slotId);
+  if (!sl) return '<h3>Hata</h3>';
+  const eligible = st.clients.filter(c => {
+    if (remain(c)<=0) return false;
+    const avail = c.avail || {days:[],slots:[],lastMinute:false};
+    return true; // all eligible shown; PT selects
+  });
+  return `<h3>Boş Saat Bildirimi</h3>
+    <div class="notice">${fmt(sl.date)} · ${sl.time}</div>
+    <p class="small" style="margin-bottom:10px">Bildirim gönderilecek danışanları seç. Tercihlerine uyan danışanlar işaretli.</p>
+    ${eligible.map(c=>{
+      const avail = c.avail || {days:[],slots:[],lastMinute:false};
+      const slDay = new Date(sl.date+'T12:00:00').toLocaleDateString('tr-TR',{weekday:'short'}).slice(0,3);
+      const matches = avail.days.includes(slDay) || avail.lastMinute;
+      return `<label class="item" style="cursor:pointer;gap:10px">
+        <input class="at" type="checkbox" value="${c.id}" ${matches?'checked':''}>
+        <div class="grow"><h4>${c.name}</h4><p>${remain(c)} hak · ${avail.days.join(', ')||'tercih girilmedi'}</p></div>
+        ${matches?`<span class="chip green">Uygun</span>`:''}
+      </label>`;
+    }).join('')}
+    <button class="btn or" style="margin-top:12px" onclick="sendAlert('${sl.id}')">Bildirimi Gönder</button>`;
+}
+function sendAlert(id) {
+  const ids=[...document.querySelectorAll('.at:checked')].map(x=>x.value);
+  const sl=st.slots.find(x=>x.id===id);
+  if (!ids.length) return toast('En az bir danışan seç');
+  st.alerts.push({id:uid(),slotId:id,targets:ids,text:`${fmt(sl.date)} – ${sl.time} saati müsait.`,at:new Date().toISOString()});
+  save(); closeModal(); toast(`${ids.length} danışana bildirim gönderildi`);
+}
+
+// ─── TOAST ────────────────────────────────────────
+function toast(msg) {
+  document.querySelectorAll('.toast').forEach(x=>x.remove());
+  const el=document.createElement('div'); el.className='toast'; el.textContent=msg;
+  document.body.appendChild(el); setTimeout(()=>el.remove(),2500);
+}
+
+// ═══════════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════════
 render();
 </script>
 </body>
