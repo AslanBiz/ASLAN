@@ -1,0 +1,404 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>COP31 Etkinlik Takibi</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: program board (12 days × Blue Zone / Green Zone, like the planning sheet), offer calendar by contact date, notes; details open in a side drawer */
+:root{
+  --bg:#F3F6F6; --surface:#FFFFFF; --sunk:#E9EFEF; --line:#D3DCDC;
+  --ink:#10242A; --muted:#5A6E73; --accent:#0B6E78;
+  --blue:#2457A6; --blue-bg:#E6EEF9; --blue-band:#1F3F73; --green:#2E7D4F; --green-bg:#E4F3E9;
+  --ok:#2E7D4F; --warn:#B26B00; --bad:#B23A3A; --neutral:#7A8B8F; --info:#2457A6; --int:#6B4FA0;
+  --closed:repeating-linear-gradient(135deg,transparent 0 6px,rgba(16,36,42,.05) 6px 12px);
+  --shadow:0 12px 40px rgba(16,36,42,.18);
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1719; --surface:#142124; --sunk:#1A2A2E; --line:#2A3D41; --ink:#E4EEEF; --muted:#94A9AD; --accent:#4FB7C2;
+  --blue:#8DB2F0; --blue-bg:#18263D; --blue-band:#8DB2F0; --green:#7CCB9A; --green-bg:#15291D;
+  --ok:#7CCB9A; --warn:#F0B44C; --bad:#F08080; --neutral:#8FA1A5; --info:#8DB2F0; --int:#BBA4E8;
+  --closed:repeating-linear-gradient(135deg,transparent 0 6px,rgba(228,238,239,.05) 6px 12px);
+  --shadow:0 12px 40px rgba(0,0,0,.5); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1719; --surface:#142124; --sunk:#1A2A2E; --line:#2A3D41; --ink:#E4EEEF; --muted:#94A9AD; --accent:#4FB7C2;
+  --blue:#8DB2F0; --blue-bg:#18263D; --blue-band:#8DB2F0; --green:#7CCB9A; --green-bg:#15291D;
+  --ok:#7CCB9A; --warn:#F0B44C; --bad:#F08080; --neutral:#8FA1A5; --info:#8DB2F0; --int:#BBA4E8;
+  --closed:repeating-linear-gradient(135deg,transparent 0 6px,rgba(228,238,239,.05) 6px 12px);
+  --shadow:0 12px 40px rgba(0,0,0,.5); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 64px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+h1{font-size:30px;font-weight:700;letter-spacing:-.01em}
+h2{font-size:18px;font-weight:700}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.head{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between}
+.head p{margin:4px 0 0;color:var(--muted);max-width:62ch}
+.stats{display:flex;gap:10px;flex-wrap:wrap}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 14px;min-width:112px}
+.stat b{display:block;font-family:var(--f-display);font-size:24px;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--muted)}
+.stat.hot b{color:var(--warn)} .stat.good b{color:var(--ok)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tab{background:none;border:0;border-bottom:2px solid transparent;padding:10px 14px;font:600 14px var(--f-body);color:var(--muted);cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink);border-color:var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted);align-items:center}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.dot{width:9px;height:9px;border-radius:50%;flex:none;background:var(--neutral)}
+/* Board */
+.board{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.bhead,.brow{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1fr)}
+.bhead{background:var(--sunk);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.bhead>div{padding:10px 14px}
+.bhead .bz{color:var(--blue)} .bhead .gz{color:var(--green)}
+.brow{border-top:1px solid var(--line)}
+.day{padding:12px 14px;display:flex;flex-direction:column;gap:2px;border-right:1px solid var(--line)}
+.day b{font-family:var(--f-display);font-size:20px;line-height:1.1}
+.day .wd{font-family:var(--f-mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.day .th{font-size:12px;color:var(--muted);line-height:1.3;margin-top:4px}
+.day.today b{color:var(--accent)}
+.cell{padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.cell+.cell{border-left:1px solid var(--line)}
+.cell.closed{background:var(--closed)}
+.cell .none{font-size:12.5px;color:var(--muted);padding:4px}
+.ev{display:block;width:100%;text-align:left;font:inherit;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 11px;cursor:pointer;background:var(--surface);position:relative}
+.ev.blue{background:var(--blue-bg);border-color:transparent}
+.ev.green{background:var(--green-bg);border-color:transparent}
+.ev:hover{border-color:var(--accent)}
+.ev:focus-visible,.tab:focus-visible,.chip:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.ev .t{font-weight:600;font-size:13.5px;line-height:1.3}
+.ev .v{font-size:11.5px;color:var(--muted);margin-top:2px}
+.ev .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:7px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500;white-space:nowrap}
+.meter{display:flex;gap:2px;align-items:center}
+.meter i{width:8px;height:8px;border-radius:2px;background:var(--line);display:block}
+.meter i.ok{background:var(--ok)} .meter i.bad{background:var(--bad)} .meter i.wip{background:var(--warn)} .meter i.int{background:var(--int)}
+.meter em{font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-left:5px}
+.ev.dim{opacity:.55}
+/* Offer calendar */
+.group{display:flex;flex-direction:column;gap:6px}
+.ghead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding-top:10px}
+.ghead .sub{color:var(--muted);font-size:13px}
+.ghead.late h2{color:var(--bad)}
+.prow{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 12px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.4fr) 170px;gap:12px;align-items:center}
+.prow .n{font-weight:600}
+.prow .r{font-family:var(--f-mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.prow .e{font-size:13px;color:var(--muted);min-width:0;cursor:pointer;background:none;border:0;text-align:left;font-family:inherit;padding:0}
+.prow .e:hover{color:var(--accent)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px;font:13px var(--f-body);cursor:pointer;color:var(--ink)}
+.chip .c{font-family:var(--f-mono)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+select,input,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 8px;width:100%;min-width:0}
+textarea{min-height:58px;resize:vertical}
+/* Notes */
+.general{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.card h3{font-size:16px}
+.card p,.card li{margin:0;font-size:13.5px}
+.card ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+/* Drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,20,24,.35);z-index:20}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--bg);box-shadow:var(--shadow);z-index:21;overflow-y:auto;
+  padding:calc(18px + env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) calc(32px + env(safe-area-inset-bottom,0px)) 18px;display:flex;flex-direction:column;gap:16px}
+.dtop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.close{background:var(--surface);border:1px solid var(--line);border-radius:8px;width:34px;height:34px;font-size:18px;cursor:pointer;color:var(--ink);flex:none}
+.zbadge{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;display:inline-block}
+.zb-blue{background:var(--blue-bg);color:var(--blue)} .zb-green{background:var(--green-bg);color:var(--green)}
+.sec{display:flex;flex-direction:column;gap:8px}
+.sec>label,.sec>.lbl{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.person{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px;display:grid;grid-template-columns:minmax(0,1fr) 108px;gap:6px}
+.person .full{grid-column:1/-1}
+.person .row3{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 34px;gap:6px}
+.del{background:none;border:1px solid var(--line);border-radius:6px;color:var(--muted);cursor:pointer}
+.add{align-self:flex-start;background:var(--surface);border:1px dashed var(--accent);color:var(--accent);border-radius:8px;padding:6px 12px;cursor:pointer;font:500 13px var(--f-body)}
+.check{display:flex;gap:8px;align-items:center;font-size:13.5px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 9px;cursor:pointer}
+.check input{width:auto}
+.check.done span{color:var(--muted);text-decoration:line-through}
+.note{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:10px 12px;font-size:13.5px}
+.note .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:4px}
+.facts{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+.facts b{color:var(--ink);font-weight:500}
+.empty{padding:28px;text-align:center;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:10px}
+.bwrap{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{background:var(--surface);border:0;padding:5px 12px;font:600 12.5px var(--f-mono);color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.copy{background:var(--surface);border:1px solid var(--accent);color:var(--accent);border-radius:8px;padding:5px 12px;font:500 13px var(--f-body);cursor:pointer}
+.bcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.bcard h3{font-size:18px}
+.bcard .bmeta{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);line-height:1.6}
+.bcard h4{margin:0 0 3px;font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.bcard p{margin:0;font-size:13.5px;max-width:65ch}
+.bcard ol,.bcard ul{margin:0;padding-left:20px;font-size:13.5px;display:flex;flex-direction:column;gap:3px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:30}
+.toast.on{opacity:1}
+.ro{font-size:12.5px;color:var(--warn)}
+@media (max-width:760px){
+  .bhead{display:none}
+  .brow{grid-template-columns:1fr}
+  .day{border-right:0;border-bottom:1px solid var(--line);flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:8px;background:var(--sunk)}
+  .day .th{margin:0}
+  .cell+.cell{border-left:0;border-top:1px dashed var(--line)}
+  .cell::before{content:attr(data-z);font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
+  .cell.cb::before{color:var(--blue)} .cell.cg::before{color:var(--green)}
+  .prow{grid-template-columns:1fr}
+  h1{font-size:24px}
+}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+
+<div class="wrap">
+  <header class="head">
+    <div>
+      <div class="eyebrow">SP Architects · COP31 Antalya · 9–20 Kasım 2026</div>
+      <h1>COP31 Etkinlik Takibi</h1>
+      <p>Her etkinlik için konuşmacı ve ortak adaylarına teklif götürüyoruz; kabul edenlerle devam ediyoruz. Bir etkinliğe tıkla: kişiler, durumları, hazırlık listesi ve notlar açılır.</p>
+    </div>
+    <div class="stats">
+      <div class="stat hot"><b id="s-dl">–</b><span>gün · kabul hedefi 30 Ekim</span></div>
+      <div class="stat good"><b id="s-acc">–</b><span>kişi kabul etti</span></div>
+      <div class="stat"><b id="s-pend">–</b><span>teklif bekliyor</span></div>
+      <div class="stat"><b id="s-cop">–</b><span>gün · COP31 açılışı</span></div>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tab-board" aria-selected="true">Program takvimi</button>
+    <button class="tab" role="tab" id="tab-offers" aria-selected="false">Teklif takvimi</button>
+    <button class="tab" role="tab" id="tab-notes" aria-selected="false">Yorumlar</button>
+  </nav>
+  <span class="ro" id="roNote" hidden>Bu görünümde düzenleme yetkin yok; sadece okuyabilirsin.</span>
+
+  <section id="v-board">
+    <div class="legend" id="legend"></div>
+    <div class="board" style="margin-top:12px">
+      <div class="bhead"><div>Gün · resmî tema</div><div class="bz">Blue Zone · Pavyon / Sıfır Atık Müzesi</div><div class="gz">Green Zone · SP standı</div></div>
+      <div id="board"></div>
+    </div>
+  </section>
+
+  <section id="v-offers" hidden>
+    <div class="chips" id="pFilter"></div>
+    <div id="offers" style="display:flex;flex-direction:column;gap:8px;margin-top:8px"></div>
+  </section>
+
+  <section id="v-notes" hidden>
+    <div class="general">
+      <div class="card"><h3>Teklif mantığı</h3>
+        <p>Her etkinlikte "Öneri" isimler önce, "Opsiyonel" isimler yedek. Biri reddederse durumunu "Reddetti" yap ve aynı etkinlikteki sıradaki isme geç. Bir etkinlikte gereken konuşmacılar kabul ettiğinde etkinliği "Konuşmacılar tamam" yap. Takvimdeki kareler kişilerin durumunu gösterir: yeşil kabul, sarı görüşülüyor, kırmızı ret, mor iç ekip.</p></div>
+      <div class="card"><h3>Teklif sırası</h3>
+        <ul>
+          <li><b>16 Ekim:</b> İç ekip (Sabri Bey, Emrah Ünal, Duygu Başoğlu), İnşa Eden Kadınlar ve Turner, Esra Aydınoğlu, Pelin Özgen, Zeynep Bala Tuhanioğlu</li>
+          <li><b>19 Ekim:</b> Bakanlık (Banu Aslan, açılış protokolü, 12 Kasım için bir isim, Blue Zone kartları) ve Sıfır Atık Vakfı</li>
+          <li><b>20 Ekim:</b> Hakkı Alp, belediye başkanı, Autodesk, Polisan, Şişecam</li>
+          <li><b>21 Ekim:</b> İPKB, MEB, UN-Habitat, UNFCCC saha ekibi, Düşler Akademisi</li>
+          <li><b>22–23 Ekim:</b> Opsiyoneller ve yedekler</li>
+        </ul></div>
+      <div class="card"><h3>Yoğun günler</h3>
+        <p>12 Kasım'da iki Blue Zone oturumu iki ayrı salonda; saatler çakışmamalı. 19 Kasım'da Blue Zone'da "Glue" oturumu, standda COPCast İmece ve İnşa Eden Kadınlar var; senin ve Duygu Hanım'ın saatleri birlikte planlanmalı.</p></div>
+      <div class="card"><h3>Boş gün</h3>
+        <p>13 Kasım (Finans ve Ticaret) iki alanda da boş. Öneri dosyasındaki "Bir Desen, Bin El" geometrik desen atölyesi (Dr. Serap Ekizler Sönmez) ya da İstanbul Finans Merkezi üzerine bir COPCast bu günü az çabayla doldurur.</p></div>
+      <div class="card"><h3>Ortak hazırlıklar</h3>
+        <ul>
+          <li>Dış konuşmacıların Blue Zone kartları Bakanlık kotası üzerinden istenmeli; 19 Ekim görüşmesinde ayrı başlık.</li>
+          <li>COPCast kayıt seti 8 gün kullanılacak; bir kez kurulsun, bir kişi sorumlu olsun.</li>
+          <li>Hediyelikler 6 oturum için tek seferde sipariş edilsin.</li>
+          <li>Her konuktan çekim/yayın onayı; 14 Kasım'da çocuklar için veli izni.</li>
+          <li>Her akşam o günün kısa kurgusu yapılırsa kapanış videosu 20 Kasım'da hazır olur.</li>
+        </ul></div>
+      <div class="card"><h3>Dosyada düzeltilecekler</h3>
+        <ul>
+          <li>Kapakta "13 etkinlik" yazıyor; sayfalarda 16 etkinlik var (6 Blue + 10 Green).</li>
+          <li>"COP31'ı Tasarlamak" → "COP31'i Tasarlamak".</li>
+          <li>9 Kasım COPCast'in başlığı 10 Kasım'la aynı, konuk adı da özet tablodan farklı.</li>
+          <li>"11 / 19" sayfa numarası iki kez geçiyor.</li>
+                  </ul></div>
+      <div class="card"><h3>Takvim notu</h3>
+        <p>28 Ekim yarım gün, 29 Ekim resmî tatil. Teklifleri 16–23 Ekim arasına koydum ki 30 Ekim'de kabuller toplanmış olsun ve programın duyurusu, hediyelik ve basın hazırlığı için bir hafta kalsın.</p></div>
+    </div>
+  </section>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-modal="true" role="dialog" aria-labelledby="dTitle"></aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const DAYS=[
+ ["2026-11-09","Gıda, Tarım ve Sağlık",false,false],["2026-11-10","Enerji ve Ulaşım",false,false],
+ ["2026-11-11","Sıfır Atık · Liderler Zirvesi 1",false,true],["2026-11-12","Dirençli Şehirler · Liderler Zirvesi 2",false,true],
+ ["2026-11-13","Finans ve Ticaret",false,false],["2026-11-14","Çocuklar, Gençlik ve Eğitim",false,false],
+ ["2026-11-15","Antalya'da Bir Nefes",true,true],["2026-11-16","Bilim, Sanayi ve Teknoloji",false,false],
+ ["2026-11-17","Okyanus, Deniz, Doğa",false,false],["2026-11-18","İnsani ve Sosyal Kalkınma",false,false],
+ ["2026-11-19","İmece: Uygulamanın Güçlendirilmesi",false,false],["2026-11-20","Nihai Müzakereler",false,false]];
+const ESTAT=[{k:"Teklif aşamasında",c:"var(--neutral)"},{k:"Konuşmacılar tamam",c:"var(--info)"},{k:"Hazır",c:"var(--ok)"},{k:"Gerçekleşti",c:"var(--accent)"},{k:"İptal",c:"var(--bad)"}];
+const PSTAT=[{k:"Teklif edilecek",cls:"",c:"var(--neutral)"},{k:"Teklif edildi",cls:"wip",c:"var(--info)"},{k:"Görüşülüyor",cls:"wip",c:"var(--warn)"},
+             {k:"Kabul etti",cls:"ok",c:"var(--ok)"},{k:"Reddetti",cls:"bad",c:"var(--bad)"},{k:"İç ekip",cls:"int",c:"var(--int)"}];
+const ROLES=["Ana","Öneri","Opsiyonel","Konuk","Ortak"];
+const EC=Object.fromEntries(ESTAT.map(s=>[s.k,s.c])), PC=Object.fromEntries(PSTAT.map(s=>[s.k,s]));
+let events=[], db=null, canWrite=true, view="board", openId=null, pf=null, lang="tr";
+try{const v=localStorage.getItem("cop31-v2"); if(v) view=v; const l=localStorage.getItem("cop31-lang"); if(l) lang=l;}catch(e){}
+const VEN={"Türkiye Pavyonu · 40 kişilik salon":"Türkiye Pavilion · 40-seat room","Sıfır Atık Müzesi · 100 kişilik salon":"Zero Waste Museum · 100-seat room","Green Zone standı":"SP Architects stand, Green Zone"};
+const FMT={"Oturum ve Event":"Session","COPCast":"COPCast","Atölye":"Workshop","Mini oturum + COPCast":"Mini-session + COPCast","Mini oturum":"Mini-session"};
+const L={tr:{h:"Sunum notu",sum:"Özet",why:"Neden önemli",flow:"Akış",ask:"Sizden ricamız",msg:"Ana mesajlar",dur:"Süre"},en:{h:"Briefing note",sum:"Summary",why:"Why it matters",flow:"Run of show",ask:"Our request",msg:"Key messages",dur:"Duration"}};
+function briefData(e){const b=e.brief&&e.brief[lang]; if(!b) return null; const en=lang==="en";
+  return {b,title:en?e.en:e.tr,date:en?pd(e.date).toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"}):f(e.date,{day:"numeric",month:"long",year:"numeric",weekday:"long"}),
+    venue:en?(VEN[e.venue]||e.venue):e.venue,format:en?(FMT[e.format]||e.format):e.format,zone:e.zone};}
+function briefHTML(e){const d=briefData(e); if(!d) return `<div class="empty">Bu etkinlik için sunum notu yok.</div>`; const t=L[lang],b=d.b;
+  return `<div class="bcard" id="bcard"><div><h3>${esc(d.title)}</h3><div class="bmeta">COP31 · ${esc(d.date)}<br>${esc(d.zone)} · ${esc(d.venue)}<br>${esc(d.format)} · ${t.dur}: ${esc(b.duration)}</div></div>
+    <div><h4>${t.sum}</h4><p>${esc(b.pitch)}</p></div><div><h4>${t.why}</h4><p>${esc(b.why)}</p></div>
+    <div><h4>${t.flow}</h4><ol>${b.flow.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>
+    <div><h4>${t.ask}</h4><p>${esc(b.ask)}</p></div>
+    <div><h4>${t.msg}</h4><ul>${b.messages.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>`;}
+function briefText(e){const d=briefData(e); if(!d) return ""; const t=L[lang],b=d.b;
+  return [d.title,`COP31 · ${d.date}`,`${d.zone} · ${d.venue}`,`${d.format} · ${t.dur}: ${b.duration}`,"",t.sum.toUpperCase(),b.pitch,"",t.why.toUpperCase(),b.why,"",t.flow.toUpperCase(),...b.flow.map((x,i)=>`${i+1}. ${x}`),"",t.ask.toUpperCase(),b.ask,"",t.msg.toUpperCase(),...b.messages.map(x=>`• ${x}`),"","SP Architects"].join("\n");}
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pd=s=>{if(!s)return null;const[y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d);};
+const today=()=>{const t=new Date();return new Date(t.getFullYear(),t.getMonth(),t.getDate());};
+const daysTo=s=>Math.round((pd(s)-today())/864e5);
+const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const f=(s,o)=>{const d=pd(s);return d?d.toLocaleDateString("tr-TR",o):"";};
+const ext=e=>(e.people||[]).filter(p=>p.status!=="İç ekip");
+
+function stats(){
+  const all=events.flatMap(e=>e.people||[]);
+  $("#s-dl").textContent=Math.max(0,daysTo("2026-10-30"));
+  $("#s-cop").textContent=Math.max(0,daysTo("2026-11-09"));
+  $("#s-acc").textContent=all.filter(p=>p.status==="Kabul etti").length;
+  $("#s-pend").textContent=all.filter(p=>["Teklif edilecek","Teklif edildi","Görüşülüyor"].includes(p.status)).length;
+}
+function meter(e){
+  const ps=e.people||[]; const acc=ps.filter(p=>p.status==="Kabul etti"||p.status==="İç ekip").length;
+  return `<span class="meter" title="${acc}/${ps.length} kişi kabul etti veya iç ekip">${ps.map(p=>`<i class="${(PC[p.status]||{}).cls||""}"></i>`).join("")}<em>${acc}/${ps.length}</em></span>`;
+}
+function evBtn(e){
+  const z=e.zone==="Blue Zone"?"blue":"green";
+  return `<button class="ev ${z}${e.status==="İptal"?" dim":""}" data-open="${e.id}">
+    <div class="t">${esc(e.tr)}</div><div class="v">${esc(e.format)} · ${esc(e.venue)}</div>
+    <div class="foot"><span class="pill"><span class="dot" style="background:${EC[e.status]||"var(--neutral)"}"></span>${esc(e.status)}</span>${meter(e)}</div></button>`;
+}
+function board(){
+  $("#legend").innerHTML=ESTAT.map(s=>`<span><span class="dot" style="background:${s.c}"></span>${s.k}</span>`).join("")+
+    `<span style="margin-left:auto">Kareler: kişi başına durum</span>`;
+  const t=iso(today());
+  $("#board").innerHTML=DAYS.map(([d,th,bClosed,gClosed])=>{
+    const evs=events.filter(e=>e.date===d);
+    const cell=(zone,closed,cls,label)=>{const list=evs.filter(e=>e.zone===zone);
+      return `<div class="cell ${cls}${closed&&!list.length?" closed":""}" data-z="${label}">${list.length?list.map(evBtn).join(""):`<div class="none">${closed?"Kapalı":"—"}</div>`}</div>`;};
+    return `<div class="brow"><div class="day${d===t?" today":""}"><b>${f(d,{day:"numeric",month:"short"})}</b><span class="wd">${f(d,{weekday:"long"})}</span><span class="th">${esc(th)}</span></div>
+      ${cell("Blue Zone",bClosed,"cb","Blue Zone")}${cell("Green Zone",gClosed,"cg","Green Zone")}</div>`;}).join("");
+}
+function offers(){
+  const all=events.flatMap(e=>(e.people||[]).map((p,i)=>({...p,i,e}))).filter(p=>p.status!=="İç ekip");
+  const counts={}; all.forEach(p=>counts[p.status]=(counts[p.status]||0)+1);
+  $("#pFilter").innerHTML=`<button class="chip" data-pf="" aria-pressed="${!pf}">Tümü <span class="c">${all.length}</span></button>`+
+    PSTAT.filter(s=>s.k!=="İç ekip").map(s=>`<button class="chip" data-pf="${s.k}" aria-pressed="${pf===s.k}"><span class="dot" style="background:${s.c}"></span>${s.k} <span class="c">${counts[s.k]||0}</span></button>`).join("");
+  const list=all.filter(p=>!pf||p.status===pf).sort((a,b)=>(a.date||"9").localeCompare(b.date||"9")||a.e.date.localeCompare(b.e.date));
+  if(!list.length){$("#offers").innerHTML=`<div class="empty">Bu filtrede kimse yok.</div>`;return;}
+  const g=new Map(); list.forEach(p=>{const k=p.date||""; if(!g.has(k)) g.set(k,[]); g.get(k).push(p);});
+  const dis=canWrite?"":"disabled"; let h="";
+  for(const [d,ps] of g){
+    const dt=d?daysTo(d):null; const open=ps.filter(p=>p.status==="Teklif edilecek").length;
+    const late=d&&dt<0&&open>0;
+    const rel=d?(dt===0?"bugün":dt===1?"yarın":dt<0?`${-dt} gün önce`:`${dt} gün sonra`):"";
+    h+=`<section class="group"><div class="ghead${late?" late":""}"><h2>${d?f(d,{day:"numeric",month:"long",weekday:"long"}):"Tarih verilmedi"}</h2><span class="sub">${rel}${late?` · ${open} teklif gecikti`:""} · ${ps.length} kişi</span></div>`+
+      ps.map(p=>`<div class="prow"><div><div class="n">${esc(p.name)}</div><div class="r">${esc(p.role)}</div></div>
+        <button class="e" data-open="${p.e.id}">${f(p.e.date,{day:"numeric",month:"short"})} · ${esc(p.e.tr)}</button>
+        <select aria-label="Durum: ${esc(p.name)}" data-ps="${p.e.id}" data-i="${p.i}" ${dis}>${PSTAT.map(s=>`<option ${s.k===p.status?"selected":""}>${s.k}</option>`).join("")}</select></div>`).join("")+`</section>`;
+  }
+  $("#offers").innerHTML=h;
+}
+function drawer(){
+  const e=events.find(x=>x.id===openId); const d=$("#drawer");
+  if(!e){d.hidden=true;$("#scrim").hidden=true;return;}
+  const dis=canWrite?"":"disabled", z=e.zone==="Blue Zone"?"blue":"green";
+  d.innerHTML=`<div class="dtop"><div><span class="zbadge zb-${z}">${esc(e.zone)} · ${esc(e.format)}</span>
+      <h2 id="dTitle" style="margin-top:6px;font-size:21px">${esc(e.tr)}</h2><div style="color:var(--muted);font-size:13px">${esc(e.en)}</div></div>
+      <button class="close" id="dClose" aria-label="Kapat">×</button></div>
+    <div class="facts"><div><b>${f(e.date,{day:"numeric",month:"long",weekday:"long"})}</b> · ${esc(e.theme)}</div><div>${esc(e.venue)}</div><div>${esc(e.summary)}</div><div>Hedef kitle: ${esc(e.audience)}</div></div>
+    <div class="two"><div class="sec"><label for="d-status">Etkinlik durumu</label><select id="d-status" data-ef="status" ${dis}>${ESTAT.map(s=>`<option ${s.k===e.status?"selected":""}>${s.k}</option>`).join("")}</select></div>
+      <div class="sec"><label for="d-owner">Takip eden</label><input id="d-owner" data-ef="owner" value="${esc(e.owner)}" ${dis}></div></div>
+    <div class="sec"><span class="lbl">Kişiler ve teklif durumu</span>
+      ${(e.people||[]).map((p,i)=>`<div class="person">
+        <input aria-label="İsim" data-pf2="name" data-i="${i}" value="${esc(p.name)}" ${dis}>
+        <select aria-label="Rol" data-pf2="role" data-i="${i}" ${dis}>${ROLES.map(r=>`<option ${r===p.role?"selected":""}>${r}</option>`).join("")}</select>
+        <div class="row3"><input type="date" aria-label="Teklif tarihi" data-pf2="date" data-i="${i}" value="${esc(p.date)}" ${dis}>
+          <select aria-label="Durum" data-pf2="status" data-i="${i}" ${dis}>${PSTAT.map(s=>`<option ${s.k===p.status?"selected":""}>${s.k}</option>`).join("")}</select>
+          <button class="del" data-del="${i}" aria-label="Kişiyi sil" ${dis}>×</button></div>
+        <input class="full" aria-label="Not" placeholder="Not: ne dendi, ne istendi…" data-pf2="note" data-i="${i}" value="${esc(p.note)}" ${dis}></div>`).join("")}
+      ${canWrite?`<button class="add" id="addP">+ Kişi ekle</button>`:""}</div>
+    <div class="sec"><div class="bwrap"><span class="lbl">${L[lang].h} · TR / EN</span>
+      <div style="display:flex;gap:8px"><div class="seg"><button data-lang="tr" aria-pressed="${lang==="tr"}">TR</button><button data-lang="en" aria-pressed="${lang==="en"}">EN</button></div><button class="copy" id="copyBrief">Metni kopyala</button></div></div>
+      <div id="briefBox">${briefHTML(e)}</div></div>
+    <div class="sec"><span class="lbl">Hazırlık</span>
+      ${(e.prep||[]).map((p,i)=>`<label class="check${p.done?" done":""}"><input type="checkbox" data-prep="${i}" ${p.done?"checked":""} ${dis}><span>${esc(p.item)}</span></label>`).join("")}</div>
+    <div class="sec"><label for="d-next">Sonraki adım</label><textarea id="d-next" data-ef="nextStep" ${dis}>${esc(e.nextStep)}</textarea></div>
+    <div class="sec"><label for="d-notes">Notlar</label><textarea id="d-notes" data-ef="notes" placeholder="Görüşmelerden notlar…" ${dis}>${esc(e.notes)}</textarea></div>
+    <div class="note"><span class="k">Claude'un yorumu</span>${esc(e.comment)}</div>`;
+  d.hidden=false; $("#scrim").hidden=false;
+}
+function render(){
+  stats();
+  ["board","offers","notes"].forEach(v=>{$("#v-"+v).hidden=v!==view;});
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.id==="tab-"+view));
+  if(!events.length){ const m=`<div class="empty">${db?"Henüz etkinlik yok.":"Etkinlikler yükleniyor…"}</div>`; $("#board").innerHTML=m; $("#offers").innerHTML=m; return; }
+  if(view==="board") board(); else if(view==="offers") offers();
+}
+let tt; function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),1700);}
+async function write(id,patch){
+  const e=events.find(x=>x.id===id); if(!e) return; Object.assign(e,patch);
+  if(!db){toast("Kaydedilemedi: veri bağlantısı yok");return;}
+  try{await db.doc("events/"+id).update({...patch,updatedAt:new Date().toISOString()}); toast("Kaydedildi");}
+  catch(err){ if(err&&err.code==="invalid_argument"){canWrite=false;$("#roNote").hidden=false;drawer();} toast(err&&err.code==="invalid_argument"?"Düzenleme yetkin yok":"Kaydedilemedi, tekrar dene"); }
+}
+const clone=a=>JSON.parse(JSON.stringify(a||[]));
+function openEv(id){openId=id;drawer();setTimeout(()=>$("#dClose")&&$("#dClose").focus(),0);}
+function closeEv(){openId=null;drawer();render();}
+
+document.addEventListener("click",ev=>{
+  const o=ev.target.closest("[data-open]"); if(o){openEv(o.dataset.open);return;}
+  const tab=ev.target.closest(".tab"); if(tab){view=tab.id.replace("tab-","");try{localStorage.setItem("cop31-v2",view);}catch(e){}render();return;}
+  const c=ev.target.closest("[data-pf]"); if(c){pf=c.dataset.pf||null;offers();return;}
+  if(ev.target.id==="dClose"||ev.target.id==="scrim"){closeEv();return;}
+  if(ev.target.id==="addP"){const e=events.find(x=>x.id===openId);const ps=clone(e.people);ps.push({name:"Yeni kişi",role:"Öneri",date:iso(today()),status:"Teklif edilecek",note:""});write(e.id,{people:ps}).then(drawer);return;}
+  const lb=ev.target.closest("[data-lang]"); if(lb){lang=lb.dataset.lang;try{localStorage.setItem("cop31-lang",lang);}catch(e){} const e=events.find(x=>x.id===openId); $("#briefBox").innerHTML=briefHTML(e); document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang)); return;}
+  if(ev.target.id==="copyBrief"){const e=events.find(x=>x.id===openId); const txt=briefText(e);
+    const sel=()=>{const r=document.createRange();r.selectNodeContents($("#bcard"));const s=getSelection();s.removeAllRanges();s.addRange(r);toast("Metin seçildi, kopyala ile al");};
+    try{navigator.clipboard.writeText(txt).then(()=>toast(lang==="en"?"İngilizce metin kopyalandı":"Türkçe metin kopyalandı"),sel);}catch(err){sel();} return;}
+  const del=ev.target.closest("[data-del]"); if(del){const e=events.find(x=>x.id===openId);const ps=clone(e.people);ps.splice(+del.dataset.del,1);write(e.id,{people:ps}).then(drawer);}
+});
+document.addEventListener("keydown",ev=>{if(ev.key==="Escape"&&openId) closeEv();});
+document.addEventListener("change",ev=>{
+  const el=ev.target, e=openId&&events.find(x=>x.id===openId);
+  if(el.dataset.ps){const ee=events.find(x=>x.id===el.dataset.ps);const ps=clone(ee.people);ps[+el.dataset.i].status=el.value;write(ee.id,{people:ps}).then(()=>{stats();offers();});return;}
+  if(!e) return;
+  if(el.dataset.ef){write(e.id,{[el.dataset.ef]:el.value}); return;}
+  if(el.dataset.pf2){const ps=clone(e.people);ps[+el.dataset.i][el.dataset.pf2]=el.value;write(e.id,{people:ps}).then(stats);return;}
+  if(el.dataset.prep!==undefined){const pr=clone(e.prep);pr[+el.dataset.prep].done=el.checked;el.closest(".check").classList.toggle("done",el.checked);write(e.id,{prep:pr});}
+});
+
+render();
+(async()=>{
+  try{
+    const user=await window.claude?.use?.("user");
+    if(user){const c=await user.can("data.write"); if(c===false){canWrite=false;$("#roNote").hidden=false;}}
+    db=await window.claude?.use?.("db");
+    if(!db){$("#board").innerHTML=`<div class="empty">Takip verisi bu görünümde açılamadı. Claude'da oturum açıkken sayfayı yeniden aç.</div>`;return;}
+    db.collection("events").onSnapshot(snap=>{
+      events=snap.docs.filter(d=>d.exists).map(d=>({id:d.id,...d.data()}));
+      const a=document.activeElement; const editing=openId&&a&&$("#drawer").contains(a)&&/INPUT|TEXTAREA|SELECT/.test(a.tagName);
+      render(); if(openId&&!editing) drawer();
+    },()=>{$("#board").innerHTML=`<div class="empty">Veri bağlantısı koptu. Sayfayı yenile.</div>`;});
+  }catch(e){$("#board").innerHTML=`<div class="empty">Takip verisi yüklenemedi. Sayfayı yenile.</div>`;}
+})();
+</script>
+
+</body></html>
