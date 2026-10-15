@@ -1,0 +1,1498 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>SP BD Control Center</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: fixed navy rail + working canvas; dense tables, right-hand record drawer, modal forms. Tokens kept from the earlier SP BD Control Center preview. */
+:root{
+  --blue:#1877F2; --blue-deep:#1564DB; --blue-soft:#EAF2FE; --blue-ink:#1564DB;
+  --navy:#0B1E39; --navy-2:#091A33; --rail-ink:#A9BBD6; --rail-dim:#51699B;
+  --ink:#1E2A3D; --slate:#5A6B82; --faint:#8A99AE; --line:#E3EAF4; --line-2:#EDF2F8;
+  --surface:#F4F7FC; --panel:#FFFFFF; --hover:#F7FAFE;
+  --green:#1A9E5F; --green-soft:#E6F6EE; --amber:#B97F0E; --amber-soft:#FDF4E1; --red:#D64545; --red-soft:#FCEBEB; --grey-soft:#EEF2F7;
+  --shadow:0 1px 2px rgba(15,38,71,.06),0 4px 14px rgba(15,38,71,.05);
+  --display:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --blue-soft:#14284A; --blue-ink:#7FB2FF; --ink:#E4EBF5; --slate:#9DB0CA; --faint:#6F829E; --line:#22324A; --line-2:#1A2840;
+  --surface:#0A1322; --panel:#101B2E; --hover:#14223A;
+  --green-soft:#0F2E22; --amber-soft:#33270C; --red-soft:#3A1616; --grey-soft:#1A2740; --amber:#E2A93A; --green:#3CC489; --red:#F06B6B;
+  --shadow:0 1px 2px rgba(0,0,0,.3); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --blue-soft:#14284A; --blue-ink:#7FB2FF; --ink:#E4EBF5; --slate:#9DB0CA; --faint:#6F829E; --line:#22324A; --line-2:#1A2840;
+  --surface:#0A1322; --panel:#101B2E; --hover:#14223A;
+  --green-soft:#0F2E22; --amber-soft:#33270C; --red-soft:#3A1616; --grey-soft:#1A2740; --amber:#E2A93A; --green:#3CC489; --red:#F06B6B;
+  --shadow:0 1px 2px rgba(0,0,0,.3); color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:var(--body);font-size:14px;color:var(--ink);background:var(--surface);line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--blue-ink)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100%}
+/* rail */
+.rail{background:linear-gradient(180deg,var(--navy),var(--navy-2));color:#fff;display:flex;flex-direction:column;position:sticky;top:env(safe-area-inset-top,0px);height:100vh;padding-left:env(safe-area-inset-left,0px)}
+.brand{display:flex;align-items:center;gap:11px;padding:18px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.mark{width:32px;height:32px;border-radius:9px;flex:none;background:linear-gradient(135deg,#1877F2,#3F92FF);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.02em}
+.brand b{font-family:var(--display);font-size:14px;font-weight:700;display:block;line-height:1.2}
+.brand small{font-family:var(--mono);font-size:9.5px;color:#7FB2FF;letter-spacing:.1em}
+.nav{flex:1;padding:10px;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.nav-group{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--rail-dim);padding:12px 12px 6px}
+.nav a{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:9px;color:var(--rail-ink);text-decoration:none;font-size:13.5px;font-weight:500}
+.nav a svg{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.nav a:hover{background:rgba(255,255,255,.06);color:#fff}
+.nav a.active{background:#1877F2;color:#fff;box-shadow:0 6px 16px rgba(24,119,242,.35)}
+.nav .cnt{margin-left:auto;font-family:var(--mono);font-size:10.5px;background:rgba(255,255,255,.12);color:#fff;border-radius:20px;padding:1px 7px}
+.nav .cnt.hot{background:#D64545}
+.me{display:flex;align-items:center;gap:10px;padding:14px 16px;border-top:1px solid rgba(255,255,255,.08);background:none;border-left:0;border-right:0;border-bottom:0;color:#fff;text-align:left;cursor:pointer;width:100%}
+.me:hover{background:rgba(255,255,255,.05)}
+.me .nm{font-size:13px;font-weight:600;display:block}
+.me .rl{font-size:11px;color:#7E94B5;display:block}
+/* main */
+.main{min-width:0;display:flex;flex-direction:column}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding-block:12px;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+.top h1{font-family:var(--display);font-size:19px;font-weight:700;margin:0;white-space:nowrap;text-wrap:balance}
+.search{position:relative;flex:1;max-width:460px;margin-left:auto}
+.search input{width:100%;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:8px 12px 8px 34px}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--faint);fill:none;stroke-width:2}
+.sres{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgba(15,38,71,.16);max-height:420px;overflow:auto;padding:6px;z-index:40}
+.sres .grp{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding:8px 10px 4px}
+.sres button{display:block;width:100%;text-align:left;background:none;border:0;padding:7px 10px;border-radius:8px;cursor:pointer}
+.sres button:hover{background:var(--hover)}
+.sres small{color:var(--slate)}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:7px 12px;font-weight:600;font-size:13px;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--blue);color:var(--blue-ink)}
+.btn.pri{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.pri:hover{background:var(--blue-deep);color:#fff}
+.btn.ghost{border-color:transparent;background:none}
+.btn.sm{padding:4px 9px;font-size:12px;border-radius:7px}
+.btn.danger{color:var(--red)}
+.btn.danger.armed{background:var(--red);border-color:var(--red);color:#fff}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.lang{font-family:var(--mono);font-size:11px}
+.menu{position:relative}
+.menu-pop{position:absolute;right:0;top:calc(100% + 6px);background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgba(15,38,71,.16);padding:6px;min-width:200px;z-index:41}
+.menu-pop button{display:block;width:100%;text-align:left;background:none;border:0;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13.5px}
+.menu-pop button:hover{background:var(--hover)}
+.content{padding-block:20px 60px;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:18px;min-width:0}
+.banner{border-radius:12px;padding:11px 14px;font-size:13px;background:var(--amber-soft);color:var(--ink);border:1px solid color-mix(in srgb,var(--amber) 35%,transparent)}
+/* cards */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);min-width:0}
+.card-h{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line-2);flex-wrap:wrap}
+.card-h h2{font-family:var(--display);font-size:14.5px;font-weight:700;margin:0}
+.card-h .sub{color:var(--slate);font-size:12.5px}
+.card-h .right{margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.card-b{padding:12px 16px}
+.grid2{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:18px;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:2px;cursor:pointer;text-align:left}
+.kpi:hover{border-color:var(--blue)}
+.kpi b{font-family:var(--display);font-size:28px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi span{font-size:12.5px;color:var(--slate)}
+.kpi.red b{color:var(--red)} .kpi.amber b{color:var(--amber)} .kpi.blue b{color:var(--blue-ink)}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+/* rows */
+.rows{display:flex;flex-direction:column}
+.row{display:flex;align-items:center;gap:12px;padding:10px 4px;border-bottom:1px solid var(--line-2);min-width:0}
+.row:last-child{border-bottom:0}
+.row .main-t{min-width:0;flex:1;cursor:pointer}
+.row .main-t b{font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .main-t small{display:block;color:var(--slate);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px}
+.empty{color:var(--slate);padding:18px 4px;font-size:13px}
+.empty b{color:var(--ink)}
+/* pills & chips */
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.p-red{background:var(--red-soft);color:var(--red)} .p-amber{background:var(--amber-soft);color:var(--amber)} .p-blue{background:var(--blue-soft);color:var(--blue-ink)} .p-green{background:var(--green-soft);color:var(--green)} .p-grey{background:var(--grey-soft);color:var(--slate)}
+.av{width:24px;height:24px;border-radius:7px;color:#fff;font-family:var(--display);font-weight:700;font-size:10.5px;display:inline-grid;place-items:center;flex:none}
+.av.lg{width:34px;height:34px;border-radius:9px;font-size:12.5px}
+.av.none{background:var(--grey-soft);color:var(--faint);border:1px dashed var(--line)}
+.tag{font-family:var(--mono);font-size:10.5px;color:var(--slate);background:var(--grey-soft);border-radius:5px;padding:1px 6px;white-space:nowrap}
+.prio{font-family:var(--mono);font-weight:600;font-size:11px;width:20px;height:20px;border-radius:6px;display:inline-grid;place-items:center;flex:none}
+.prio.A{background:var(--red-soft);color:var(--red)} .prio.B{background:var(--amber-soft);color:var(--amber)} .prio.C{background:var(--grey-soft);color:var(--slate)}
+/* filters */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line-2)}
+.filters input[type=search],.filters select{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:6px 10px;font-size:13px;max-width:100%}
+.filters input[type=search]{min-width:220px;flex:1}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--panel)}
+.seg button{border:0;background:none;padding:6px 11px;font-size:12.5px;font-weight:600;color:var(--slate);cursor:pointer}
+.seg button.on{background:var(--blue);color:#fff}
+.count{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-left:auto}
+/* tables */
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600;text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--panel);position:sticky;top:0}
+td{padding:9px 12px;border-bottom:1px solid var(--line-2);vertical-align:middle}
+tr.click{cursor:pointer}
+tr.click:hover td{background:var(--hover)}
+td .t1{font-weight:600}
+td .t2{color:var(--slate);font-size:12.5px}
+td.nowrap{white-space:nowrap}
+.clip{max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.more{display:flex;justify-content:center;padding:12px}
+/* drawer & modal */
+.scrim{position:fixed;inset:0;background:rgba(9,20,38,.42);z-index:60}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--panel);z-index:61;box-shadow:-12px 0 40px rgba(9,20,38,.25);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-right:env(safe-area-inset-right,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.dr-h{display:flex;gap:12px;align-items:flex-start;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dr-h h3{font-family:var(--display);font-size:18px;margin:0;text-wrap:balance}
+.dr-h p{margin:2px 0 0;color:var(--slate);font-size:13px}
+.dr-b{flex:1;overflow:auto;padding:16px 20px;display:flex;flex-direction:column;gap:18px}
+.modal{position:fixed;z-index:62;left:50%;top:50%;transform:translate(-50%,-50%);width:min(620px,calc(100% - 24px));max-height:calc(100% - 40px);overflow:auto;background:var(--panel);border-radius:16px;box-shadow:0 24px 60px rgba(9,20,38,.35)}
+.modal .m-h{padding:18px 20px 6px;display:flex;align-items:center;gap:10px}
+.modal .m-h h3{font-family:var(--display);font-size:17px;margin:0}
+.modal .m-b{padding:8px 20px 18px;display:flex;flex-direction:column;gap:12px}
+.modal .m-f{padding:12px 20px 18px;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;border-top:1px solid var(--line-2)}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px}
+.fgrid .full{grid-column:1/-1}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--slate);min-width:0}
+label.f input,label.f select,label.f textarea{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:7px 10px;font-size:13.5px;font-weight:400;color:var(--ink);width:100%}
+label.f textarea{min-height:70px;resize:vertical}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{border:1px solid var(--line);background:var(--panel);border-radius:20px;padding:3px 10px;font-size:12px;cursor:pointer}
+.chips button.on{background:var(--blue-soft);border-color:var(--blue);color:var(--blue-ink)}
+.kv{display:grid;grid-template-columns:120px minmax(0,1fr);gap:6px 12px;font-size:13px}
+.kv dt{color:var(--slate)} .kv dd{margin:0;word-break:break-word}
+.copy{border:0;background:none;color:var(--blue-ink);cursor:pointer;font-size:12px;padding:0 4px}
+.tl{display:flex;flex-direction:column;gap:0;border-left:2px solid var(--line);margin-left:6px}
+.tl-i{position:relative;padding:0 0 14px 16px}
+.tl-i::before{content:"";position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--panel);border:2px solid var(--blue)}
+.tl-i .h{font-size:12px;color:var(--slate);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.tl-i .s{font-weight:600;margin-top:2px}
+.tl-i .x{font-size:13px;color:var(--ink);white-space:pre-wrap}
+.sec-t{font-family:var(--display);font-weight:700;font-size:13.5px;display:flex;align-items:center;gap:8px}
+.sec-t .right{margin-left:auto;display:flex;gap:6px}
+.drop{border:1.5px dashed var(--line);border-radius:12px;padding:16px;text-align:center;color:var(--slate);font-size:13px;cursor:pointer;background:var(--hover)}
+.drop.over{border-color:var(--blue);background:var(--blue-soft);color:var(--blue-ink)}
+.drop b{color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;border-radius:10px;font-size:13px;z-index:80;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
+.toast.err{background:#9B2C2C}
+.stagecol{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:12px;overflow-x:auto;padding:12px 16px 16px}
+.stage{background:var(--surface);border:1px solid var(--line-2);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.stage h4{margin:0;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);display:flex;justify-content:space-between}
+.tcard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 10px;cursor:pointer;display:flex;flex-direction:column;gap:4px}
+.tcard:hover{border-color:var(--blue)}
+.tcard b{font-size:13px;font-weight:600;line-height:1.35}
+.tcard small{color:var(--slate);font-size:12px}
+.tabs{display:flex;gap:4px;padding:6px 10px 0;border-bottom:1px solid var(--line-2);overflow-x:auto}
+.tabs button{border:0;background:none;padding:9px 12px;font-weight:600;font-size:13px;color:var(--slate);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+.tabs button.on{color:var(--blue-ink);border-color:var(--blue)}
+.task{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid var(--line-2)}
+.task input[type=checkbox]{width:17px;height:17px;accent-color:var(--blue);flex:none}
+.task.done .tt{text-decoration:line-through;color:var(--faint)}
+.task .tt{flex:1;min-width:0}
+.task .tt small{display:block;color:var(--slate);font-size:12px}
+.qadd{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--line-2)}
+.qadd input[type=text]{flex:1;min-width:200px}
+.qadd input,.qadd select{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:7px 10px;font-size:13.5px}
+.progress{height:6px;border-radius:6px;background:var(--grey-soft);overflow:hidden}
+.progress i{display:block;height:100%;background:var(--blue);width:0}
+.help ol{margin:6px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.help p{margin:0 0 6px;max-width:72ch}
+.loading{color:var(--slate);padding:30px 4px}
+@media (max-width:1100px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.grid2,.grid3{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:860px){
+  .app{display:block}
+  .rail{position:sticky;height:auto;flex-direction:row;align-items:center;z-index:30;padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px))}
+  .brand{border:0;padding:10px 6px}.brand div{display:none}
+  .nav{flex-direction:row;overflow-x:auto;padding:8px 4px;flex:1}
+  .nav-group{display:none}
+  .nav a{padding:7px 10px;white-space:nowrap}
+  .nav a span.lbl{display:none}
+  .nav a.active span.lbl{display:inline}
+  .me{width:auto;border:0;padding:8px}.me .who{display:none}
+  .top{position:static;flex-wrap:wrap}
+  .search{order:3;max-width:none;flex-basis:100%}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fgrid{grid-template-columns:minmax(0,1fr)}
+  .filters input[type=search]{min-width:0;flex-basis:100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="app">
+  <aside class="rail">
+    <div class="brand"><span class="mark">SP</span><div><b>BD Control Center</b><small>SP ARCHITECTS</small></div></div>
+    <nav class="nav" id="nav"></nav>
+    <button class="me" id="meBtn" type="button"></button>
+  </aside>
+  <div class="main">
+    <header class="top">
+      <h1 id="pageTitle">Panel</h1>
+      <div class="search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="gsearch" type="search" autocomplete="off" placeholder="Kişi, firma, ihale ara…">
+        <div class="sres" id="gres" hidden></div>
+      </div>
+      <button class="btn ghost lang" id="langBtn" type="button">EN</button>
+      <div class="menu">
+        <button class="btn pri" id="newBtn" type="button">+ <span data-t="Yeni">Yeni</span></button>
+        <div class="menu-pop" id="newMenu" hidden></div>
+      </div>
+    </header>
+    <div class="content">
+      <div id="banner" hidden></div>
+      <div id="view"><div class="loading">Veriler yükleniyor…</div></div>
+    </div>
+  </div>
+</div>
+<div id="overlay"></div>
+<div id="toastHost"></div>
+
+<script>
+(() => {
+'use strict';
+/* ---------------- i18n ---------------- */
+const EN = {
+ 'Panel':'Dashboard','Kişiler':'Contacts','Aksiyon Günlüğü':'Activity Log','Görevler':'Tasks','İhale & Teklif':'Tenders & Bids','Rehber':'Directory','Ayarlar':'Settings',
+ 'Takip':'Follow-up','İş Akışı':'Workflow','Hafıza':'Memory','Yeni':'New','Aksiyon':'Activity','Görev':'Task','Kişi':'Contact','İhale / Fırsat':'Tender / Opportunity',
+ 'Kişi, firma, ihale ara…':'Search contacts, companies, tenders…','Veriler yükleniyor…':'Loading data…',
+ 'Geciken takip':'Overdue follow-ups','Bugün':'Today','Bu hafta aksiyon':'Activities this week','Platform kontrolü':'Platform checks due','Açık fırsat / ihale':'Open opportunities',
+ 'Benim':'Mine','Ekip':'Team','Herkes':'Everyone','Takip sırası':'Follow-up queue','Bugün yapılacaklar':'Today','Son aksiyonlar':'Recent activity','Ekip haftası':'Team this week',
+ 'Aksiyon gir':'Log activity','Kaydet':'Save','İptal':'Cancel','Kapat':'Close','Sil':'Delete','Emin misin? Sil':'Sure? Delete','Düzenle':'Edit',
+ 'gün gecikti':'d overdue','Yarın':'Tomorrow','Tarih yok':'No date','Sahipsiz':'Unassigned',
+ 'Tür':'Type','Yön':'Direction','Tarih':'Date','Kim':'By','Konu':'Subject','Özet':'Summary','Sonraki takip':'Next follow-up','Sıradaki adım':'Next step','Kime':'To',
+ 'Firma':'Company','Ünvan':'Title','E-posta':'Email','Telefon':'Phone','Ülke':'Country','Şehir':'City','Kaynak':'Source','Öncelik':'Priority','Durum':'Status','Sahip':'Owner','Notlar':'Notes','İlişki':'Relation','Sektör':'Sector','Web':'Website','Tanışan':'Met by',
+ 'Son aksiyon':'Last activity','Geçmiş':'History','Görev ekle':'Add task','Henüz aksiyon yok.':'No activity yet.',
+ 'Mail dosyası bırak (.eml)':'Drop an email file (.eml)','Takibe al':'Start tracking','Takipte':'Tracking',
+ 'Fırsat & İhale hattı':'Pipeline','Platform kontrolleri':'Platform checks','Vendor kayıtları':'Vendor registrations','Kontrol ettim':'Checked',
+ 'Ekip':'Team','İçe aktar':'Import','Dışa aktar':'Export','Nasıl kullanılır':'How to use','Kim olarak çalışıyorsun?':'Who are you?',
+ 'Tümü':'All','Takibi gelen':'Due','Takip tarihi yok':'No follow-up date','Arşiv':'Archive','İzle':'Watch','Aktif':'Active',
+ 'Son başvuru':'Deadline','Aşama':'Stage','Kurum / Müşteri':'Client','Sonraki kontrol':'Next check','Son kontrol':'Last check','Sonuç':'Result','Sıklık':'Frequency','Portal':'Portal','Son temas':'Last contact',
+ 'Gecikmiş':'Overdue','Bu hafta':'This week','Sonra':'Later','Tarihsiz':'No date','Tamamlanan':'Done','Görev yaz ve Enter’a bas':'Type a task and press Enter','Ekle':'Add',
+ 'Kayıt':'Records','Daha fazla göster':'Show more','kayıt':'records','Gelen':'Incoming','Giden':'Outgoing'
+};
+let LANG = 'tr';
+try { LANG = localStorage.getItem('spbd.lang') || 'tr'; } catch(e) {}
+const t = s => (LANG === 'en' && EN[s]) ? EN[s] : s;
+
+/* ---------------- helpers ---------------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad = n => String(n).padStart(2, '0');
+const iso = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const today = () => iso(new Date());
+const dnum = s => { const [y,m,d] = s.split('-').map(Number); return Date.UTC(y, m-1, d||1) / 864e5; };
+const addDays = (s, n) => { const [y,m,d] = s.split('-').map(Number); return iso(new Date(y, m-1, d+n)); };
+const diff = s => Math.round(dnum(s) - dnum(today()));
+const MON_TR = ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+const MON_EN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const fdate = s => { if (!s) return '—'; const [y,m,d] = s.split('-').map(Number); const M = (LANG==='en'?MON_EN:MON_TR)[m-1]; return `${d||''} ${M}${y !== new Date().getFullYear() ? ' ' + y : ''}`.trim(); };
+const uid10 = p => p + Array.from(crypto.getRandomValues(new Uint8Array(5)), b => b.toString(16).padStart(2,'0')).join('');
+const norm = s => String(s||'').toLocaleLowerCase('tr').normalize('NFD').replace(/[̀-ͯ]/g,'');
+const store = { get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e) { return d; } },
+                set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} } };
+function duePill(s, doneLabel) {
+  if (!s) return `<span class="pill p-grey">${t('Tarih yok')}</span>`;
+  const n = diff(s);
+  if (n < 0) return `<span class="pill p-red">${-n} ${t('gün gecikti')}</span>`;
+  if (n === 0) return `<span class="pill p-amber">${t('Bugün')}</span>`;
+  if (n === 1) return `<span class="pill p-blue">${t('Yarın')}</span>`;
+  if (n <= 7) return `<span class="pill p-blue">${fdate(s)}</span>`;
+  return `<span class="pill p-grey">${fdate(s)}</span>`;
+}
+const MCOL = ['#1877F2','#1A9E5F','#C2410C','#7C3AED','#0E7490','#BE185D','#4D7C0F','#B45309'];
+function member(k) { return (S.team.members || []).find(m => m.key === k); }
+function mname(k) { const m = member(k); return m ? m.name : (k || ''); }
+function initials(n) { return String(n||'?').split(/\s+/).filter(Boolean).slice(0,2).map(w => w[0]).join('').toLocaleUpperCase('tr'); }
+function av(k, lg) {
+  const m = member(k);
+  if (!k) return `<span class="av none${lg?' lg':''}" title="${t('Sahipsiz')}">–</span>`;
+  const i = (S.team.members||[]).findIndex(x => x.key === k);
+  const col = MCOL[(i < 0 ? 7 : i) % MCOL.length];
+  return `<span class="av${lg?' lg':''}" style="background:${col}" title="${esc(m ? m.name : k)}">${esc(initials(m ? m.name : k))}</span>`;
+}
+function toast(msg, err) {
+  const h = $('#toastHost'); h.innerHTML = `<div class="toast${err?' err':''}" role="status">${esc(msg)}</div>`;
+  clearTimeout(toast._t); toast._t = setTimeout(() => h.innerHTML = '', err ? 6000 : 2600);
+}
+function copyText(txt) {
+  try { navigator.clipboard.writeText(txt).then(() => toast(LANG==='en'?'Copied':'Kopyalandı'), () => toast(txt)); } catch(e) { toast(txt); }
+}
+
+/* ---------------- constants ---------------- */
+const ACT_TYPES = ['E-posta','Telefon','Toplantı','WhatsApp','LinkedIn','Teklif','Not'];
+const KINDS = ['Client','Partner','Developer','Investor','Consultant','Contractor','Government','Supplier','Architect','Media','Other'];
+const STATUSES = ['Aktif','İzle','Arşiv'];
+const STAGES = ['Lead','Tanıtım','Görüşme','Takipte','EOI / Ön yeterlilik','Teklif hazırlanıyor','Teklif verildi','Müzakere','Beklemede','Kazanıldı','Kaybedildi'];
+const CLOSED = ['Kazanıldı','Kaybedildi'];
+const T_KINDS = ['İhale','Teklif','Fırsat','Lead'];
+const V_STATUS = ['Tamamlandı','Devam Ediyor','Askıda','Beklemede','Sorunlu','Bilgi'];
+const P_RESULTS = ['Uygun ihale yok','İncelenecek ihale var','EOI gerekli','Ortak gerekli','Doküman istendi','İlgisiz'];
+const FREQS = [[7,'Haftalık'],[15,'15 günde bir'],[30,'Aylık'],[0,'Gerektikçe']];
+
+/* ---------------- state ---------------- */
+const S = {
+  db: null, user: null, uid: null, canWrite: true, ready: false, failed: false,
+  me: store.get('spbd.me', ''), scope: store.get('spbd.scope', 'me'),
+  contacts: new Map(), actions: [], tasks: [], tenders: new Map(), platforms: new Map(), vendors: new Map(),
+  team: { members: [], followUpDays: 7 }, dir: null, dirLoading: false, loaded: new Set(),
+  route: 'panel', ui: store.get('spbd.ui', {})
+};
+const saveUI = () => store.set('spbd.ui', S.ui);
+
+/* ---------------- db ---------------- */
+async function writeDoc(col, id, data, mode) {
+  if (!S.db) { toast(LANG==='en'?'Database unavailable in this view.':'Bu görünümde veritabanına bağlanılamadı.', true); throw new Error('nodb'); }
+  if (!S.canWrite) { toast(LANG==='en'?'You have view-only access.':'Bu sayfada yalnızca görüntüleme yetkin var. Ayten Hanım’dan Düzenleyici yetkisi iste.', true); throw new Error('ro'); }
+  const ref = S.db.collection(col).doc(id);
+  try {
+    if (mode === 'delete') await ref.delete();
+    else if (mode === 'update') await ref.update(data);
+    else await ref.set(data);
+  } catch (e) {
+    const code = e && e.code;
+    if (code === 'unavailable') { await new Promise(r => setTimeout(r, 600 + Math.random()*600)); return writeDoc(col, id, data, mode); }
+    if (code === 'invalid_argument' && S.canWriteUnknown) { S.canWrite = false; showBanner(); }
+    const msg = code === 'quota_exceeded' ? 'Veritabanı kapasitesi doldu; eski kayıtlar silinmeli.' : code === 'resource_exhausted' ? 'Çok hızlı işlem yapıldı; birkaç saniye sonra tekrar dene.' : 'Kaydedilemedi. Bağlantını ve yetkini kontrol et.';
+    toast(msg, true); throw e;
+  }
+}
+const put = (c, id, d) => writeDoc(c, id, d, 'set');
+const patch = (c, id, d) => writeDoc(c, id, d, 'update');
+const del = (c, id) => writeDoc(c, id, null, 'delete');
+const nowISO = () => new Date().toISOString();
+
+let rerenderT = null;
+function changed() { clearTimeout(rerenderT); rerenderT = setTimeout(() => { renderNav(); if (!S.modalOpen) updateView(); refreshDrawer(); }, 60); }
+
+function subscribe() {
+  const db = S.db;
+  const onErr = name => e => { console.warn(name, e && e.code); };
+  const asMap = snap => new Map(snap.docs.map(d => [d.id, { id: d.id, ...d.data() }]));
+  db.collection('contacts').limit(1000).onSnapshot(s => { S.contacts = asMap(s); S.loaded.add('contacts'); changed(); }, onErr('contacts'));
+  db.collection('actions').orderBy('date', 'desc').limit(1000).onSnapshot(s => { S.actions = s.docs.map(d => ({ id: d.id, ...d.data() })); S.loaded.add('actions'); changed(); }, onErr('actions'));
+  db.collection('tasks').limit(1000).onSnapshot(s => { S.tasks = s.docs.map(d => ({ id: d.id, ...d.data() })); S.loaded.add('tasks'); changed(); }, onErr('tasks'));
+  db.collection('tenders').limit(500).onSnapshot(s => { S.tenders = asMap(s); S.loaded.add('tenders'); changed(); }, onErr('tenders'));
+  db.collection('platforms').limit(500).onSnapshot(s => { S.platforms = asMap(s); changed(); }, onErr('platforms'));
+  db.collection('vendors').limit(500).onSnapshot(s => { S.vendors = asMap(s); changed(); }, onErr('vendors'));
+  db.doc('config/team').onSnapshot(s => { if (s.exists) S.team = { followUpDays: 7, ...s.data() }; S.loaded.add('team'); renderMe(); renderNav(); if (!S.modalOpen) renderView(); refreshDrawer(); if (!S.me && S.ready) askIdentity(); }, onErr('team'));
+}
+async function loadDirectory() {
+  if (S.dir || S.dirLoading || !S.db) return;
+  S.dirLoading = true;
+  try {
+    const snap = await S.db.collection('directory').get();
+    const out = [];
+    snap.docs.forEach(d => { const b = d.data(); const F = b.fields || []; (b.rows || []).forEach(r => { const o = {}; F.forEach((f, i) => o[f] = r[i]); out.push(o); }); });
+    out.forEach(o => o._s = norm([o.company, o.name, o.email, o.country, o.city, o.source, o.title, o.notes].join(' ')));
+    S.dir = out;
+  } catch (e) { S.dir = []; }
+  S.dirLoading = false; changed();
+}
+
+/* ---------------- derived ---------------- */
+function followUps() {
+  const out = [];
+  for (const c of S.contacts.values()) if (c.nextDate && c.status !== 'Arşiv') out.push({ kind: 'contact', id: c.id, title: c.name || c.company, sub: c.name ? c.company : '', step: c.nextStep || '', date: c.nextDate, owner: c.owner || '' });
+  for (const x of S.tenders.values()) if (x.nextDate && !CLOSED.includes(x.stage)) out.push({ kind: 'tender', id: x.id, title: x.title, sub: x.client || '', step: x.nextStep || '', date: x.nextDate, owner: x.owner || '' });
+  for (const v of S.vendors.values()) if (v.nextDate && v.status !== 'Tamamlandı') out.push({ kind: 'vendor', id: v.id, title: v.name, sub: 'Vendor · ' + (v.country || ''), step: v.nextStep || '', date: v.nextDate, owner: v.owner || '' });
+  return out.sort((a, b) => a.date < b.date ? -1 : 1);
+}
+const inScope = owner => S.scope === 'team' || !S.me || owner === S.me;
+function platNext(p) {
+  if (!p.freq) return '';
+  if (!p.lastCheck) return today();
+  return addDays(p.lastCheck, p.freq);
+}
+function openTasks() { return S.tasks.filter(x => !x.done); }
+function entityLabel(type, id) {
+  if (type === 'contact') { const c = S.contacts.get(id); return c ? [c.name || c.company, c.name ? c.company : ''] : ['(silinmiş kişi)', '']; }
+  if (type === 'tender') { const x = S.tenders.get(id); return x ? [x.title, x.client || ''] : ['(silinmiş kayıt)', '']; }
+  if (type === 'vendor') { const v = S.vendors.get(id); return v ? [v.name, 'Vendor'] : ['(silinmiş kayıt)', '']; }
+  if (type === 'platform') { const p = S.platforms.get(id); return p ? [p.name, 'Platform'] : ['', '']; }
+  return ['', ''];
+}
+
+/* ---------------- shell ---------------- */
+const ICONS = {
+  panel:'<path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/>',
+  kisiler:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c1.9.7 3.1 2.6 3.5 5.5"/>',
+  aksiyonlar:'<path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/>',
+  gorevler:'<path d="M9 11l3 3 8-8"/><path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h11"/>',
+  ihaleler:'<path d="M4 20h16"/><path d="M6 20V9l6-5 6 5v11"/><path d="M10 20v-5h4v5"/>',
+  rehber:'<path d="M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2z"/><path d="M5 18a2 2 0 0 1 2-2h12"/>',
+  ayarlar:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>'
+};
+const ROUTES = [
+  ['panel','Panel',null], ['kisiler','Kişiler','Takip'], ['aksiyonlar','Aksiyon Günlüğü','Takip'], ['gorevler','Görevler','İş Akışı'],
+  ['ihaleler','İhale & Teklif','İş Akışı'], ['rehber','Rehber','Hafıza'], ['ayarlar','Ayarlar','Hafıza']
+];
+function renderNav() {
+  const fu = followUps().filter(f => inScope(f.owner) && diff(f.date) <= 0).length;
+  const tk = openTasks().filter(x => x.owner === S.me && x.due && diff(x.due) <= 0).length;
+  let g = null, h = '';
+  for (const [k, label, grp] of ROUTES) {
+    if (grp !== g && grp) { h += `<div class="nav-group">${esc(t(grp))}</div>`; } g = grp;
+    let cnt = '';
+    if (k === 'kisiler' && fu) cnt = `<span class="cnt hot">${fu}</span>`;
+    if (k === 'gorevler' && tk) cnt = `<span class="cnt hot">${tk}</span>`;
+    h += `<a href="#${k}" class="${S.route === k ? 'active' : ''}" aria-current="${S.route === k ? 'page' : 'false'}"><svg viewBox="0 0 24 24">${ICONS[k]}</svg><span class="lbl">${esc(t(label))}</span>${cnt}</a>`;
+  }
+  $('#nav').innerHTML = h;
+}
+function renderMe() {
+  const m = member(S.me);
+  $('#meBtn').innerHTML = `${av(S.me, true)}<span class="who"><span class="nm">${esc(m ? m.name : (LANG==='en'?'Choose identity':'Kimliğini seç'))}</span><span class="rl">${esc(m ? (m.role || 'SP Architects') : 'SP Architects')}</span></span>`;
+}
+function showBanner() {
+  const b = $('#banner');
+  if (S.failed) { b.hidden = false; b.className = 'banner'; b.textContent = LANG==='en' ? 'Shared database is not reachable in this view. Open the page in claude.ai while signed in.' : 'Bu görünümde ortak veritabanına bağlanılamadı. Sayfayı claude.ai’de oturum açıkken aç.'; return; }
+  if (!S.canWrite) { b.hidden = false; b.className = 'banner'; b.textContent = LANG==='en' ? 'View-only: ask the owner for Editor access to log activity.' : 'Yalnızca görüntüleme yetkin var. Aksiyon girebilmek için sayfa sahibinden “Düzenleyici” yetkisi iste.'; return; }
+  b.hidden = true;
+}
+function applyLang() {
+  document.documentElement.lang = LANG;
+  $('#langBtn').textContent = LANG === 'en' ? 'TR' : 'EN';
+  $('#gsearch').placeholder = t('Kişi, firma, ihale ara…');
+  $$('[data-t]').forEach(el => el.textContent = t(el.dataset.t));
+}
+
+/* ---------------- router ---------------- */
+function route() {
+  const h = (location.hash || '#panel').slice(1);
+  S.route = ROUTES.some(r => r[0] === h) ? h : 'panel';
+  const r = ROUTES.find(x => x[0] === S.route);
+  $('#pageTitle').textContent = t(r[1]);
+  renderNav(); renderView();
+  if (S.route === 'rehber') loadDirectory();
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', route);
+
+const VIEWS = {};
+function renderView() {
+  const v = VIEWS[S.route];
+  if (!S.db && !S.failed) { $('#view').innerHTML = `<div class="loading">${t('Veriler yükleniyor…')}</div>`; return; }
+  $('#view').innerHTML = v.shell();
+  v.bind && v.bind();
+  v.update();
+}
+function updateView() { const v = VIEWS[S.route]; if (v && $('#view').firstElementChild && !$('#view .loading')) v.update(); else renderView(); }
+
+/* ================= PANEL ================= */
+VIEWS.panel = {
+  shell() {
+    return `
+    <div class="kpis" id="kpis"></div>
+    <div class="grid2">
+      <section class="card">
+        <div class="card-h"><h2>${t('Bugün yapılacaklar')}</h2><span class="sub" id="todaySub"></span>
+          <div class="right"><div class="seg" role="group"><button type="button" data-scope="me" class="${S.scope==='me'?'on':''}">${t('Benim')}</button><button type="button" data-scope="team" class="${S.scope==='team'?'on':''}">${t('Ekip')}</button></div></div></div>
+        <div class="card-b"><div class="rows" id="todayList"></div></div>
+      </section>
+      <section class="card">
+        <div class="card-h"><h2>${t('Son aksiyonlar')}</h2><div class="right"><a class="btn sm" href="#aksiyonlar">${LANG==='en'?'All':'Tümü'}</a></div></div>
+        <div class="card-b"><div class="tl" id="feed"></div></div>
+      </section>
+    </div>
+    <div class="grid2">
+      <section class="card">
+        <div class="card-h"><h2>${t('Takip sırası')}</h2><span class="sub">${LANG==='en'?'next 14 days':'önümüzdeki 14 gün'}</span></div>
+        <div class="card-b"><div class="rows" id="queue"></div></div>
+      </section>
+      <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+        <section class="card">
+          <div class="card-h"><h2>${t('Ekip haftası')}</h2><span class="sub">${LANG==='en'?'last 7 days':'son 7 gün'}</span></div>
+          <div class="tw"><table id="teamTbl"></table></div>
+        </section>
+        <section class="card">
+          <div class="card-h"><h2>${LANG==='en'?'Tenders & checks':'İhale & kontroller'}</h2><div class="right"><a class="btn sm" href="#ihaleler">${LANG==='en'?'Open':'Aç'}</a></div></div>
+          <div class="card-b"><div class="rows" id="tenderMini"></div></div>
+        </section>
+      </div>
+    </div>`;
+  },
+  bind() {
+    $$('[data-scope]').forEach(b => b.onclick = () => { S.scope = b.dataset.scope; store.set('spbd.scope', S.scope); renderView(); renderNav(); });
+  },
+  update() {
+    if (!S.loaded.has('contacts')) { $('#todayList').innerHTML = $('#queue').innerHTML = `<div class="empty">${t('Veriler yükleniyor…')}</div>`; return; }
+    const td = today();
+    const fus = followUps();
+    const overdue = fus.filter(f => inScope(f.owner) && f.date < td);
+    const dueToday = fus.filter(f => inScope(f.owner) && f.date === td);
+    const tasksDue = openTasks().filter(x => inScope(x.owner) && x.due && x.due <= td);
+    const weekActs = S.actions.filter(a => a.date && diff(a.date) >= -6 && diff(a.date) <= 0 && (S.scope === 'team' || a.by === S.me || !S.me));
+    const platsDue = [...S.platforms.values()].filter(p => { const n = platNext(p); return n && n <= td; });
+    const openT = [...S.tenders.values()].filter(x => !CLOSED.includes(x.stage));
+    $('#kpis').innerHTML = [
+      ['red', overdue.length, t('Geciken takip'), '#kisiler'],
+      ['amber', dueToday.length + tasksDue.length, t('Bugün') + (LANG==='en'?' (follow-ups + tasks)':' (takip + görev)'), '#gorevler'],
+      ['blue', weekActs.length, t('Bu hafta aksiyon'), '#aksiyonlar'],
+      ['', platsDue.length, t('Platform kontrolü'), '#ihaleler'],
+      ['', openT.length, t('Açık fırsat / ihale'), '#ihaleler']
+    ].map(([c, n, l, h]) => `<a class="kpi ${n ? c : ''}" href="${h}" style="text-decoration:none;color:inherit"><b>${n}</b><span>${esc(l)}</span></a>`).join('');
+    // today list: overdue/today follow-ups + tasks
+    const items = [
+      ...[...overdue, ...dueToday].map(f => ({ k: 'fu', f })),
+      ...tasksDue.map(x => ({ k: 'task', x }))
+    ];
+    $('#todaySub').textContent = items.length ? `${items.length} ${LANG==='en'?'items':'iş'}` : '';
+    $('#todayList').innerHTML = items.length ? items.slice(0, 14).map(it => {
+      if (it.k === 'fu') { const f = it.f; return `<div class="row">${av(f.owner)}<div class="main-t" data-open="${f.kind}:${f.id}"><b>${esc(f.step || (LANG==='en'?'Follow up':'Takip et'))} — ${esc(f.title)}</b><small>${esc(f.sub)}</small></div>${duePill(f.date)}<button class="btn sm" type="button" data-log="${f.kind}:${f.id}">${t('Aksiyon gir')}</button></div>`; }
+      const x = it.x; const [l1] = x.linkType ? entityLabel(x.linkType, x.linkId) : [''];
+      return `<div class="row">${av(x.owner)}<div class="main-t" data-task="${x.id}"><b>${esc(x.title)}</b><small>${esc(l1 || (LANG==='en'?'Task':'Görev'))}</small></div>${duePill(x.due)}<button class="btn sm" type="button" data-done="${x.id}">✓</button></div>`;
+    }).join('') : `<div class="empty"><b>${LANG==='en'?'Nothing due today.':'Bugün için bekleyen iş yok.'}</b> ${LANG==='en'?'Log an activity or add a task from the + New menu.':'Bir aksiyon gir ya da “+ Yeni” menüsünden görev ekle.'}</div>`;
+    // feed
+    const acts = S.actions.slice(0, 10);
+    $('#feed').innerHTML = acts.length ? acts.map(actItem).join('') : `<div class="empty" style="padding-left:16px">${t('Henüz aksiyon yok.')}</div>`;
+    // queue next 14 days, excluding those already in today list
+    const q = fus.filter(f => inScope(f.owner) && f.date > td && diff(f.date) <= 14);
+    const noDate = [...S.contacts.values()].filter(c => c.status === 'Aktif' && !c.nextDate && (S.scope === 'team' || c.owner === S.me)).length;
+    $('#queue').innerHTML = (q.length ? q.slice(0, 12).map(f => `<div class="row">${av(f.owner)}<div class="main-t" data-open="${f.kind}:${f.id}"><b>${esc(f.title)}</b><small>${esc(f.step || '')}${f.sub ? ' · ' + esc(f.sub) : ''}</small></div>${duePill(f.date)}</div>`).join('') : `<div class="empty">${LANG==='en'?'No follow-ups scheduled in the next 14 days.':'Önümüzdeki 14 günde planlı takip yok.'}</div>`)
+      + (noDate ? `<div class="row"><div class="main-t"><small>${noDate} ${LANG==='en'?'active contacts have no follow-up date.':'aktif kişinin takip tarihi yok.'}</small></div><a class="btn sm" href="#kisiler" data-filter-nodate>${LANG==='en'?'Plan':'Planla'}</a></div>` : '');
+    const nd = $('[data-filter-nodate]'); if (nd) nd.onclick = () => { S.ui.cFilter = 'nodate'; S.ui.cOwner = S.scope === 'team' ? '' : S.me; saveUI(); };
+    // team table
+    const mem = S.team.members || [];
+    $('#teamTbl').innerHTML = `<thead><tr><th>${t('Kim')}</th><th>${LANG==='en'?'Activities':'Aksiyon'}</th><th>${LANG==='en'?'Open tasks':'Açık görev'}</th><th>${LANG==='en'?'Overdue':'Geciken'}</th></tr></thead><tbody>` +
+      mem.map(m => {
+        const a = S.actions.filter(x => x.by === m.key && x.date && diff(x.date) >= -6 && diff(x.date) <= 0).length;
+        const ot = openTasks().filter(x => x.owner === m.key).length;
+        const od = openTasks().filter(x => x.owner === m.key && x.due && x.due < td).length + fus.filter(f => f.owner === m.key && f.date < td).length;
+        return `<tr><td><span style="display:inline-flex;gap:8px;align-items:center">${av(m.key)}${esc(m.name)}</span></td><td class="nowrap">${a}</td><td class="nowrap">${ot}</td><td class="nowrap">${od ? `<span class="pill p-red">${od}</span>` : '0'}</td></tr>`;
+      }).join('') + '</tbody>';
+    // tenders mini
+    const tm = openT.filter(x => x.deadline && diff(x.deadline) >= -3).sort((a, b) => a.deadline < b.deadline ? -1 : 1).slice(0, 4);
+    const tmA = openT.filter(x => x.priority === 'A' && !tm.includes(x)).slice(0, 4 - tm.length);
+    $('#tenderMini').innerHTML = [...tm, ...tmA].map(x => `<div class="row"><span class="prio ${esc(x.priority||'B')}">${esc(x.priority||'B')}</span><div class="main-t" data-open="tender:${x.id}"><b>${esc(x.title)}</b><small>${esc(x.stage||'')} · ${esc(x.country||'')}</small></div>${x.deadline ? duePill(x.deadline) : ''}</div>`).join('') +
+      `<div class="row"><div class="main-t"><b>${platsDue.length} ${LANG==='en'?'platforms due for a check':'platform kontrol bekliyor'}</b><small>${LANG==='en'?'Tender portals on a check cycle':'Kontrol döngüsündeki ihale portalları'}</small></div><a class="btn sm" href="#ihaleler" data-tab="plat">${LANG==='en'?'Check':'Kontrol et'}</a></div>`;
+    const tb = $('[data-tab="plat"]'); if (tb) tb.onclick = () => { S.ui.tTab = 'plat'; saveUI(); };
+  }
+};
+function actItem(a) {
+  const [l1, l2] = entityLabel(a.linkType, a.linkId);
+  const title = a.linkTitle || l1; const org = a.linkOrg || l2;
+  return `<div class="tl-i"><div class="h">${av(a.by)}<span>${esc(fdate(a.date))}</span><span class="tag">${esc(a.type || '')}${a.dir === 'Gelen' ? ' ← ' + t('Gelen') : ''}</span>${a.followUp ? `<span>→ ${esc(fdate(a.followUp))}</span>` : ''}</div>
+    <div class="s"><a href="#" data-open="${esc(a.linkType)}:${esc(a.linkId)}" style="color:inherit;text-decoration:none">${esc(title)}</a>${org ? ` <span style="color:var(--slate);font-weight:400">· ${esc(org)}</span>` : ''}</div>
+    ${a.subject ? `<div class="x"><b style="font-weight:600">${esc(a.subject)}</b></div>` : ''}${a.summary ? `<div class="x">${esc(a.summary)}</div>` : ''}</div>`;
+}
+
+/* ================= KİŞİLER ================= */
+VIEWS.kisiler = {
+  shell() {
+    const srcs = [...new Set([...S.contacts.values()].map(c => (c.source || '').split(' · ')[0]).filter(Boolean))].sort();
+    const ctr = [...new Set([...S.contacts.values()].map(c => c.country).filter(Boolean))].sort();
+    const u = S.ui;
+    return `<section class="card">
+      <div class="filters">
+        <input type="search" id="cQ" placeholder="${LANG==='en'?'Name, company, email…':'Ad, firma, e-posta…'}" value="${esc(u.cQ||'')}">
+        <div class="seg" id="cF">${[['','Tümü'],['due','Takibi gelen'],['nodate','Takip tarihi yok']].map(([k,l]) => `<button type="button" data-v="${k}" class="${(u.cFilter||'')===k?'on':''}">${t(l)}</button>`).join('')}</div>
+        <select id="cOwner"><option value="">${t('Sahip')}: ${t('Herkes')}</option>${(S.team.members||[]).map(m => `<option value="${esc(m.key)}" ${u.cOwner===m.key?'selected':''}>${esc(m.name)}</option>`).join('')}<option value="_none" ${u.cOwner==='_none'?'selected':''}>${t('Sahipsiz')}</option></select>
+        <select id="cSrc"><option value="">${t('Kaynak')}: ${t('Tümü')}</option>${srcs.map(s => `<option ${u.cSrc===s?'selected':''}>${esc(s)}</option>`).join('')}</select>
+        <select id="cCtr"><option value="">${t('Ülke')}: ${t('Tümü')}</option>${ctr.map(s => `<option ${u.cCtr===s?'selected':''}>${esc(s)}</option>`).join('')}</select>
+        <select id="cSt"><option value="">${t('Durum')}: ${t('Tümü')}</option>${STATUSES.map(s => `<option ${u.cSt===s?'selected':''}>${esc(s)}</option>`).join('')}</select>
+        <span class="count" id="cCount"></span><button class="btn sm pri" type="button" data-new="contact">+ ${t('Kişi')}</button>
+      </div>
+      <div class="tw"><table><thead><tr><th></th><th>${t('Kişi')} / ${t('Firma')}</th><th>${t('Ülke')}</th><th>${t('Kaynak')}</th><th>${t('Sahip')}</th><th>${t('Son aksiyon')}</th><th>${t('Sıradaki adım')}</th></tr></thead><tbody id="cBody"></tbody></table></div>
+      <div class="more" id="cMore"></div>
+    </section>`;
+  },
+  bind() {
+    const u = S.ui;
+    $('#cQ').oninput = e => { u.cQ = e.target.value; u.cLim = 100; saveUI(); this.update(); };
+    $$('#cF button').forEach(b => b.onclick = () => { u.cFilter = b.dataset.v; saveUI(); $$('#cF button').forEach(x => x.classList.toggle('on', x === b)); this.update(); });
+    [['cOwner','cOwner'],['cSrc','cSrc'],['cCtr','cCtr'],['cSt','cSt']].forEach(([id, k]) => $('#' + id).onchange = e => { u[k] = e.target.value; saveUI(); this.update(); });
+  },
+  update() {
+    const u = S.ui; const q = norm(u.cQ || ''); const td = today();
+    if ($('#cSrc').options.length <= 1 && S.contacts.size) {
+      const srcs = [...new Set([...S.contacts.values()].map(c => (c.source || '').split(' · ')[0]).filter(Boolean))].sort();
+      const ctr = [...new Set([...S.contacts.values()].map(c => c.country).filter(Boolean))].sort();
+      $('#cSrc').insertAdjacentHTML('beforeend', srcs.map(s => `<option ${u.cSrc===s?'selected':''}>${esc(s)}</option>`).join(''));
+      $('#cCtr').insertAdjacentHTML('beforeend', ctr.map(s => `<option ${u.cCtr===s?'selected':''}>${esc(s)}</option>`).join(''));
+    }
+    let list = [...S.contacts.values()];
+    if (q) list = list.filter(c => norm([c.name, c.company, c.email, c.email2, c.country, c.city, c.title, c.notes].join(' ')).includes(q));
+    if (u.cFilter === 'due') list = list.filter(c => c.nextDate && c.nextDate <= addDays(td, 2));
+    if (u.cFilter === 'nodate') list = list.filter(c => !c.nextDate && c.status !== 'Arşiv');
+    if (u.cOwner === '_none') list = list.filter(c => !c.owner); else if (u.cOwner) list = list.filter(c => c.owner === u.cOwner);
+    if (u.cSrc) list = list.filter(c => (c.source || '').includes(u.cSrc));
+    if (u.cCtr) list = list.filter(c => c.country === u.cCtr);
+    if (u.cSt) list = list.filter(c => (c.status || 'Aktif') === u.cSt);
+    const pr = { A: 0, B: 1, C: 2 };
+    list.sort((a, b) => {
+      const ad = a.nextDate || '9999', bd = b.nextDate || '9999';
+      if (ad !== bd) return ad < bd ? -1 : 1;
+      const ap = pr[a.priority] ?? 3, bp = pr[b.priority] ?? 3; if (ap !== bp) return ap - bp;
+      return (b.lastActionDate || '') > (a.lastActionDate || '') ? 1 : -1;
+    });
+    const lim = u.cLim || 100;
+    $('#cCount').textContent = `${list.length} ${t('kayıt')}`;
+    $('#cBody').innerHTML = list.slice(0, lim).map(c => `<tr class="click" data-open="contact:${esc(c.id)}">
+      <td>${c.priority ? `<span class="prio ${esc(c.priority)}">${esc(c.priority)}</span>` : ''}</td>
+      <td><div class="t1">${esc(c.name || '—')}</div><div class="t2 clip">${esc(c.company || '')}${c.title ? ' · ' + esc(c.title) : ''}</div></td>
+      <td class="nowrap">${esc(c.country || '')}</td>
+      <td><span class="tag">${esc((c.source || '').split(' · ')[0])}</span></td>
+      <td>${av(c.owner)}</td>
+      <td class="nowrap">${c.lastActionDate ? `${esc(fdate(c.lastActionDate))} <span class="t2">${esc(c.lastActionType || '')}</span>` : '<span class="t2">—</span>'}</td>
+      <td><div class="clip">${esc(c.nextStep || '')}</div>${c.nextDate ? duePill(c.nextDate) : ''}</td></tr>`).join('') || `<tr><td colspan="7"><div class="empty">${S.loaded.has('contacts') ? (LANG==='en'?'No contacts match these filters.':'Bu filtrelere uyan kişi yok.') : t('Veriler yükleniyor…')}</div></td></tr>`;
+    $('#cMore').innerHTML = list.length > lim ? `<button class="btn" type="button" id="cMoreB">${t('Daha fazla göster')} (${list.length - lim})</button>` : '';
+    const mb = $('#cMoreB'); if (mb) mb.onclick = () => { u.cLim = lim + 200; this.update(); };
+  }
+};
+
+/* ================= AKSİYON GÜNLÜĞÜ ================= */
+VIEWS.aksiyonlar = {
+  shell() {
+    const u = S.ui;
+    return `<section class="card">
+      <div class="card-h"><h2>${LANG==='en'?'Who was contacted, when, and what is next':'Kime, ne zaman, ne yapıldı — sırada ne var'}</h2><div class="right"><button class="btn pri sm" type="button" data-new="action">+ ${t('Aksiyon')}</button></div></div>
+      <div class="card-b"><div class="drop" id="emlDrop" tabindex="0" role="button"><b>${t('Mail dosyası bırak (.eml)')}</b><br>${LANG==='en'?'Drag a sent email here (or click to choose). The recipient, date and subject are read and matched to the contact.':'Gönderilen maili buraya sürükle ya da tıklayıp seç. Alıcı, tarih ve konu okunur, kişiyle eşleştirilir.'}<input type="file" id="emlFile" accept=".eml,message/rfc822" multiple hidden></div></div>
+      <div class="filters">
+        <input type="search" id="aQ" placeholder="${LANG==='en'?'Search subject, contact, company…':'Konu, kişi, firma ara…'}" value="${esc(u.aQ||'')}">
+        <select id="aBy"><option value="">${t('Kim')}: ${t('Herkes')}</option>${(S.team.members||[]).map(m => `<option value="${esc(m.key)}" ${u.aBy===m.key?'selected':''}>${esc(m.name)}</option>`).join('')}</select>
+        <select id="aType"><option value="">${t('Tür')}: ${t('Tümü')}</option>${ACT_TYPES.concat(['İhale kontrolü']).map(s => `<option ${u.aType===s?'selected':''}>${esc(s)}</option>`).join('')}</select>
+        <div class="seg" id="aRange">${[['7','7 gün'],['30','30 gün'],['','Tümü']].map(([k,l]) => `<button type="button" data-v="${k}" class="${(u.aRange??'30')===k?'on':''}">${esc(LANG==='en'?l.replace('gün','days').replace('Tümü','All'):l)}</button>`).join('')}</div>
+        <span class="count" id="aCount"></span>
+      </div>
+      <div class="tw"><table><thead><tr><th>${t('Tarih')}</th><th>${t('Tür')}</th><th>${t('Kime')}</th><th>${t('Konu')} / ${t('Özet')}</th><th>${t('Kim')}</th><th>${t('Sonraki takip')}</th><th></th></tr></thead><tbody id="aBody"></tbody></table></div>
+    </section>`;
+  },
+  bind() {
+    const u = S.ui;
+    $('#aQ').oninput = e => { u.aQ = e.target.value; saveUI(); this.update(); };
+    $('#aBy').onchange = e => { u.aBy = e.target.value; saveUI(); this.update(); };
+    $('#aType').onchange = e => { u.aType = e.target.value; saveUI(); this.update(); };
+    $$('#aRange button').forEach(b => b.onclick = () => { u.aRange = b.dataset.v; saveUI(); $$('#aRange button').forEach(x => x.classList.toggle('on', x === b)); this.update(); });
+    bindDrop($('#emlDrop'), $('#emlFile'));
+  },
+  update() {
+    const u = S.ui; const q = norm(u.aQ || ''); const rng = u.aRange ?? '30';
+    let list = S.actions;
+    if (rng) list = list.filter(a => a.date && diff(a.date) >= -Number(rng));
+    if (u.aBy) list = list.filter(a => a.by === u.aBy);
+    if (u.aType) list = list.filter(a => a.type === u.aType);
+    if (q) list = list.filter(a => { const [l1, l2] = entityLabel(a.linkType, a.linkId); return norm([a.subject, a.summary, a.linkTitle, a.linkOrg, l1, l2].join(' ')).includes(q); });
+    $('#aCount').textContent = `${list.length} ${t('kayıt')}`;
+    $('#aBody').innerHTML = list.slice(0, 400).map(a => {
+      const [l1, l2] = entityLabel(a.linkType, a.linkId);
+      const fuOpen = a.followUp && !a.closed;
+      return `<tr><td class="nowrap">${esc(fdate(a.date))}</td><td class="nowrap"><span class="tag">${esc(a.type||'')}</span>${a.dir==='Gelen'?` <span class="pill p-green">${t('Gelen')}</span>`:''}</td>
+      <td><a href="#" data-open="${esc(a.linkType)}:${esc(a.linkId)}" class="t1" style="color:inherit">${esc(a.linkTitle || l1)}</a><div class="t2 clip">${esc(a.linkOrg || l2)}</div></td>
+      <td><div class="t1 clip">${esc(a.subject || '')}</div><div class="t2 clip" style="max-width:360px">${esc(a.summary || '')}</div></td>
+      <td>${av(a.by)}</td><td class="nowrap">${a.followUp ? duePill(a.followUp) : '<span class="t2">—</span>'}</td>
+      <td class="nowrap"><button class="btn sm ghost" type="button" data-edit-act="${esc(a.id)}">${t('Düzenle')}</button></td></tr>`;
+    }).join('') || `<tr><td colspan="7"><div class="empty">${t('Henüz aksiyon yok.')}</div></td></tr>`;
+  }
+};
+
+/* ================= GÖREVLER ================= */
+VIEWS.gorevler = {
+  shell() {
+    const u = S.ui; const own = u.tOwner ?? (S.me || '');
+    return `<section class="card">
+      <div class="qadd">
+        <input type="text" id="qT" placeholder="${t('Görev yaz ve Enter’a bas')}" aria-label="${t('Görev')}">
+        <select id="qO" aria-label="${t('Sahip')}">${(S.team.members||[]).map(m => `<option value="${esc(m.key)}" ${m.key===(S.me||'')?'selected':''}>${esc(m.name)}</option>`).join('')}</select>
+        <input type="date" id="qD" value="${today()}" aria-label="${t('Tarih')}">
+        <button class="btn pri" type="button" id="qAdd">${t('Ekle')}</button>
+      </div>
+      <div class="filters">
+        <div class="seg" id="tOwn"><button type="button" data-v="${esc(S.me||'')}" class="${own===(S.me||'')?'on':''}">${t('Benim')}</button><button type="button" data-v="" class="${own===''?'on':''}">${t('Herkes')}</button>${(S.team.members||[]).filter(m=>m.key!==S.me).map(m => `<button type="button" data-v="${esc(m.key)}" class="${own===m.key?'on':''}">${esc(m.name.split(' ')[0])}</button>`).join('')}</div>
+        <label style="display:flex;gap:6px;align-items:center;font-size:13px;color:var(--slate)"><input type="checkbox" id="tDone" ${u.tDone?'checked':''}> ${t('Tamamlanan')}</label>
+        <span class="count" id="tCount"></span>
+      </div>
+      <div class="card-b" id="tBody"></div>
+    </section>`;
+  },
+  bind() {
+    const u = S.ui;
+    const add = async () => {
+      const title = $('#qT').value.trim(); if (!title) { $('#qT').focus(); return; }
+      const id = uid10('k');
+      await put('tasks', id, { title, owner: $('#qO').value, due: $('#qD').value || '', priority: 'Normal', done: false, createdBy: S.me || '', createdAt: nowISO() });
+      $('#qT').value = ''; $('#qT').focus(); toast(LANG==='en'?'Task added':'Görev eklendi');
+    };
+    $('#qAdd').onclick = add; $('#qT').onkeydown = e => { if (e.key === 'Enter') add(); };
+    $$('#tOwn button').forEach(b => b.onclick = () => { u.tOwner = b.dataset.v; saveUI(); $$('#tOwn button').forEach(x => x.classList.toggle('on', x === b)); this.update(); });
+    $('#tDone').onchange = e => { u.tDone = e.target.checked; saveUI(); this.update(); };
+  },
+  update() {
+    const u = S.ui; const own = u.tOwner ?? (S.me || ''); const td = today();
+    let list = S.tasks.filter(x => !own || x.owner === own);
+    const open = list.filter(x => !x.done);
+    const groups = [
+      ['Gecikmiş', open.filter(x => x.due && x.due < td)],
+      ['Bugün', open.filter(x => x.due === td)],
+      ['Yarın', open.filter(x => x.due === addDays(td, 1))],
+      ['Bu hafta', open.filter(x => x.due && x.due > addDays(td, 1) && x.due <= addDays(td, 7))],
+      ['Sonra', open.filter(x => x.due && x.due > addDays(td, 7))],
+      ['Tarihsiz', open.filter(x => !x.due)]
+    ];
+    if (u.tDone) groups.push(['Tamamlanan', list.filter(x => x.done).sort((a, b) => (b.doneAt || '') > (a.doneAt || '') ? 1 : -1).slice(0, 50)]);
+    $('#tCount').textContent = `${open.length} ${LANG==='en'?'open':'açık'}`;
+    const row = x => { const [l1] = x.linkType ? entityLabel(x.linkType, x.linkId) : ['']; return `<div class="task${x.done?' done':''}"><input type="checkbox" ${x.done?'checked':''} data-toggle="${esc(x.id)}" aria-label="${esc(x.title)}"><div class="tt"><span class="t1">${esc(x.title)}</span>${x.priority==='Yüksek'?' <span class="pill p-red">!</span>':''}<small>${l1 ? `<a href="#" data-open="${esc(x.linkType)}:${esc(x.linkId)}">${esc(l1)}</a>` : ''}${x.notes ? (l1?' · ':'') + esc(x.notes) : ''}</small></div>${av(x.owner)}${x.due ? duePill(x.due) : ''}<button class="btn sm ghost" type="button" data-task="${esc(x.id)}">${t('Düzenle')}</button></div>`; };
+    const sorted = arr => arr.sort((a, b) => (a.due || '9') < (b.due || '9') ? -1 : 1);
+    const html = groups.filter(g => g[1].length).map(([g, arr]) => `<div class="eyebrow" style="margin:14px 0 2px;${g==='Gecikmiş'?'color:var(--red)':''}">${esc(t(g))} · ${arr.length}</div>${sorted(arr).map(row).join('')}`).join('');
+    $('#tBody').innerHTML = html || `<div class="empty"><b>${LANG==='en'?'No open tasks.':'Açık görev yok.'}</b> ${LANG==='en'?'Type a task above and press Enter.':'Yukarıya bir görev yazıp Enter’a bas. Kişi veya ihale kartından da görev eklenebilir.'}</div>`;
+  }
+};
+
+/* ================= İHALELER ================= */
+VIEWS.ihaleler = {
+  shell() {
+    const tab = S.ui.tTab || 'pipe';
+    return `<section class="card">
+      <div class="tabs" id="tTabs">${[['pipe','Fırsat & İhale hattı'],['plat','Platform kontrolleri'],['vend','Vendor kayıtları']].map(([k,l]) => `<button type="button" data-v="${k}" class="${tab===k?'on':''}">${t(l)}</button>`).join('')}
+        <span style="margin-left:auto;padding:4px 6px" id="tAct"></span></div>
+      <div id="tPane"></div>
+    </section>`;
+  },
+  bind() { $$('#tTabs button').forEach(b => b.onclick = () => { S.ui.tTab = b.dataset.v; saveUI(); $$('#tTabs button').forEach(x => x.classList.toggle('on', x === b)); this.update(); }); },
+  update() {
+    const tab = S.ui.tTab || 'pipe'; const td = today();
+    if (tab === 'pipe') {
+      $('#tAct').innerHTML = `<button class="btn pri sm" type="button" data-new="tender">+ ${t('İhale / Fırsat')}</button>`;
+      const all = [...S.tenders.values()];
+      const showClosed = S.ui.tClosed;
+      const stages = STAGES.filter(s => showClosed || !CLOSED.includes(s));
+      $('#tPane').innerHTML = `<div class="filters"><label style="display:flex;gap:6px;align-items:center;font-size:13px;color:var(--slate)"><input type="checkbox" id="tClosed" ${showClosed?'checked':''}> ${LANG==='en'?'Show won / lost':'Kazanılan / kaybedilenleri göster'}</label><span class="count">${all.length} ${t('kayıt')}</span></div>
+      <div class="stagecol">${stages.map(s => { const arr = all.filter(x => (x.stage || 'Lead') === s).sort((a,b) => (a.priority||'B') < (b.priority||'B') ? -1 : 1); if (!arr.length && !['Lead','Teklif verildi','Teklif hazırlanıyor'].includes(s)) return ''; return `<div class="stage"><h4><span>${esc(s)}</span><span>${arr.length}</span></h4>${arr.map(x => `<div class="tcard" data-open="tender:${esc(x.id)}"><div style="display:flex;gap:6px;align-items:center"><span class="prio ${esc(x.priority||'B')}">${esc(x.priority||'B')}</span><span class="tag">${esc(x.kind||'')}</span>${av(x.owner)}</div><b>${esc(x.title)}</b><small>${esc([x.client, x.country].filter(Boolean).join(' · '))}</small>${x.deadline ? `<div>${t('Son başvuru')}: ${duePill(x.deadline)}</div>` : ''}${x.nextDate ? `<div>${esc(x.nextStep||'')} ${duePill(x.nextDate)}</div>` : ''}</div>`).join('')}</div>`; }).join('')}</div>`;
+      $('#tClosed').onchange = e => { S.ui.tClosed = e.target.checked; saveUI(); this.update(); };
+    } else if (tab === 'plat') {
+      $('#tAct').innerHTML = `<button class="btn pri sm" type="button" data-new="platform">+ Platform</button>`;
+      const list = [...S.platforms.values()].map(p => ({ p, n: platNext(p) })).sort((a, b) => (a.n || '9999') < (b.n || '9999') ? -1 : (a.n === b.n ? (a.p.name < b.p.name ? -1 : 1) : 1));
+      $('#tPane').innerHTML = `<div class="tw"><table><thead><tr><th>Platform</th><th>${LANG==='en'?'Region':'Bölge'}</th><th>${t('Sıklık')}</th><th>${t('Sahip')}</th><th>${t('Son kontrol')}</th><th>${t('Sonuç')}</th><th>${t('Sonraki kontrol')}</th><th></th></tr></thead><tbody>${list.map(({ p, n }) => `<tr><td><a href="#" data-open="platform:${esc(p.id)}" class="t1" style="color:inherit">${esc(p.name)}</a><div class="t2">${esc(p.category||'')}</div></td><td class="nowrap">${esc(p.region||'')}</td><td class="nowrap">${esc((FREQS.find(f => f[0] === p.freq)||[0,'Gerektikçe'])[1])}</td><td>${av(p.owner)}</td><td class="nowrap">${p.lastCheck ? esc(fdate(p.lastCheck)) : `<span class="pill p-grey">${LANG==='en'?'Never':'Hiç'}</span>`}</td><td><div class="clip">${esc(p.lastResult||'')}</div></td><td class="nowrap">${n ? duePill(n) : '—'}</td><td class="nowrap">${p.url ? `<a class="btn sm" href="${esc(p.url)}" target="_blank" rel="noopener">${LANG==='en'?'Open':'Aç'} ↗</a> ` : ''}<button class="btn sm pri" type="button" data-check="${esc(p.id)}">${t('Kontrol ettim')}</button></td></tr>`).join('')}</tbody></table></div>`;
+    } else {
+      $('#tAct').innerHTML = `<button class="btn pri sm" type="button" data-new="vendor">+ Vendor</button>`;
+      const list = [...S.vendors.values()].sort((a, b) => (a.nextDate || a.lastDate || '9') < (b.nextDate || b.lastDate || '9') ? -1 : 1);
+      $('#tPane').innerHTML = `<div class="tw"><table><thead><tr><th>${LANG==='en'?'Organisation':'Kurum'}</th><th>${t('Ülke')}</th><th>${t('Durum')}</th><th>${t('Son temas')}</th><th>${t('Sahip')}</th><th>${t('Sıradaki adım')}</th><th></th></tr></thead><tbody>${list.map(v => { const stale = ['Askıda','Devam Ediyor','Beklemede','Sorunlu'].includes(v.status) && (!v.lastDate || diff(v.lastDate) < -30) && !v.nextDate; const sc = { 'Tamamlandı':'p-green','Devam Ediyor':'p-blue','Askıda':'p-amber','Sorunlu':'p-red' }[v.status] || 'p-grey';
+        return `<tr class="click" data-open="vendor:${esc(v.id)}"><td><div class="t1">${esc(v.name)}</div><div class="t2 clip">${esc(v.email||v.portal||'')}</div></td><td class="nowrap">${esc(v.country||'')}</td><td><span class="pill ${sc}">${esc(v.status||'—')}</span></td><td class="nowrap">${v.lastDate ? esc(fdate(v.lastDate)) : '—'}<div class="t2">${esc(mname(v.lastBy) || '')}</div></td><td>${av(v.owner)}</td><td>${v.nextDate ? `<div class="clip">${esc(v.nextStep||'')}</div>${duePill(v.nextDate)}` : (stale ? `<span class="pill p-amber">${LANG==='en'?'Needs follow-up':'Takip gerekli'}</span>` : '')}</td><td><button class="btn sm" type="button" data-log="vendor:${esc(v.id)}">${t('Aksiyon gir')}</button></td></tr>`; }).join('')}</tbody></table></div>`;
+    }
+  }
+};
+
+/* ================= REHBER ================= */
+VIEWS.rehber = {
+  shell() {
+    const u = S.ui;
+    return `<section class="card">
+      <div class="card-h"><h2>${LANG==='en'?'Address book':'Kişi rehberi'}</h2><span class="sub">${LANG==='en'?'Archive from MASTER CRM, Oman 2025 and Cityscape 2024. Start tracking anyone with one click.':'MASTER CRM, Oman 2025 ve Cityscape 2024 arşivi. Biriyle yeniden temas kurulacaksa “Takibe al”.'}</span></div>
+      <div class="filters">
+        <input type="search" id="dQ" placeholder="${LANG==='en'?'Search name, company, country, notes…':'Ad, firma, ülke, not ara…'}" value="${esc(u.dQ||'')}">
+        <select id="dCtr"></select><select id="dSrc"></select>
+        <span class="count" id="dCount"></span>
+      </div>
+      <div class="tw"><table><thead><tr><th></th><th>${t('Kişi')} / ${t('Firma')}</th><th>${t('Ülke')}</th><th>${t('Kaynak')}</th><th>${t('E-posta')} / ${t('Telefon')}</th><th>${t('Notlar')}</th><th></th></tr></thead><tbody id="dBody"></tbody></table></div>
+      <div class="more" id="dMore"></div>
+    </section>`;
+  },
+  bind() {
+    const u = S.ui;
+    $('#dQ').oninput = e => { u.dQ = e.target.value; u.dLim = 100; saveUI(); this.update(); };
+    $('#dCtr').onchange = e => { u.dCtr = e.target.value; saveUI(); this.update(); };
+    $('#dSrc').onchange = e => { u.dSrc = e.target.value; saveUI(); this.update(); };
+  },
+  update() {
+    const u = S.ui;
+    if (!S.dir) { $('#dBody').innerHTML = `<tr><td colspan="7"><div class="empty">${LANG==='en'?'Loading directory…':'Rehber yükleniyor…'}</div></td></tr>`; loadDirectory(); return; }
+    const sel = (id, key, label, vals) => { const el = $('#' + id); if (el.options.length) return; el.innerHTML = `<option value="">${label}: ${t('Tümü')}</option>` + vals.map(v => `<option ${u[key]===v?'selected':''}>${esc(v)}</option>`).join(''); };
+    const cnt = k => { const m = new Map(); S.dir.forEach(o => { const v = o[k]; if (v) m.set(v, (m.get(v)||0)+1); }); return [...m.entries()].sort((a,b) => b[1]-a[1]).map(x => x[0]); };
+    sel('dCtr', 'dCtr', t('Ülke'), cnt('country').slice(0, 80));
+    sel('dSrc', 'dSrc', t('Kaynak'), cnt('source').slice(0, 60));
+    const q = norm(u.dQ || '').split(/\s+/).filter(Boolean);
+    let list = S.dir;
+    if (q.length) list = list.filter(o => q.every(w => o._s.includes(w)));
+    if (u.dCtr) list = list.filter(o => o.country === u.dCtr);
+    if (u.dSrc) list = list.filter(o => o.source === u.dSrc);
+    const lim = u.dLim || 100;
+    $('#dCount').textContent = `${list.length} / ${S.dir.length}`;
+    $('#dBody').innerHTML = list.slice(0, lim).map(o => { const tracked = S.contacts.has(o.id); return `<tr>
+      <td>${o.priority ? `<span class="prio ${esc(o.priority)}">${esc(o.priority)}</span>` : ''}</td>
+      <td><div class="t1">${esc(o.name || '—')}</div><div class="t2 clip">${esc(o.company || '')}${o.title ? ' · ' + esc(o.title) : ''}</div></td>
+      <td class="nowrap">${esc(o.country || '')}<div class="t2">${esc(o.city || '')}</div></td>
+      <td><span class="tag">${esc(o.source || '')}</span>${o.firstDate ? `<div class="t2">${esc(fdate(o.firstDate))}</div>` : ''}</td>
+      <td><div class="clip">${esc(o.email || '')}</div><div class="t2 clip">${esc(o.phone || '')}</div></td>
+      <td><div class="t2 clip" style="max-width:300px" title="${esc(o.notes||'')}">${esc(o.notes || '')}</div></td>
+      <td class="nowrap">${tracked ? `<button class="btn sm" type="button" data-open="contact:${esc(o.id)}">${t('Takipte')} →</button>` : `<button class="btn sm pri" type="button" data-promote="${esc(o.id)}">${t('Takibe al')}</button>`}</td></tr>`; }).join('') || `<tr><td colspan="7"><div class="empty">${LANG==='en'?'No match.':'Eşleşme yok.'}</div></td></tr>`;
+    $('#dMore').innerHTML = list.length > lim ? `<button class="btn" type="button" id="dMoreB">${t('Daha fazla göster')} (${list.length - lim})</button>` : '';
+    const mb = $('#dMoreB'); if (mb) mb.onclick = () => { u.dLim = lim + 200; this.update(); };
+  }
+};
+async function promote(id) {
+  const o = (S.dir || []).find(x => x.id === id); if (!o) return;
+  const c = {}; ['company','name','title','email','email2','phone','country','city','region','kind','field','source','priority','firstDate','metBy','website','notes'].forEach(k => { if (o[k]) c[k] = o[k]; });
+  Object.assign(c, { status: 'Aktif', owner: S.me || '', createdAt: nowISO(), updatedAt: nowISO(), promotedFrom: 'Rehber' });
+  await put('contacts', id, c);
+  toast(LANG==='en'?'Now tracking':'Takibe alındı'); openDrawer('contact', id);
+}
+
+/* ================= AYARLAR ================= */
+VIEWS.ayarlar = {
+  shell() {
+    return `<div class="grid2">
+      <section class="card"><div class="card-h"><h2>${t('Ekip')}</h2><span class="sub">${LANG==='en'?'Who appears as owner and author':'Sahip ve “kim yaptı” listesi'}</span><div class="right"><button class="btn sm" type="button" id="addMem">+ ${LANG==='en'?'Member':'Kişi ekle'}</button></div></div>
+        <div class="card-b" id="teamEdit"></div>
+        <div class="card-b" style="border-top:1px solid var(--line-2)"><label class="f" style="max-width:280px">${LANG==='en'?'Default follow-up after an activity (days)':'Aksiyondan sonra varsayılan takip süresi (gün)'}<input type="number" min="1" max="60" id="fuDays" value="${esc(S.team.followUpDays||7)}"></label></div>
+      </section>
+      <section class="card help"><div class="card-h"><h2>${t('Nasıl kullanılır')}</h2></div><div class="card-b">${LANG==='en' ? `
+        <p>One shared page for the BD team. Everything you enter is saved for everyone immediately.</p>
+        <ol><li><b>Every contact gets a next step and a date.</b> After a mail, call or meeting, use “Log activity”; the next follow-up date is set automatically.</li>
+        <li><b>Dashboard → Today</b> lists what is due: overdue follow-ups and your tasks.</li>
+        <li><b>Sent an email?</b> Drop the .eml file in the Activity Log; recipient and date are read for you.</li>
+        <li><b>After a fair</b> import the business-card Excel under Import below with a source tag such as “Cityscape 2026”.</li>
+        <li><b>Tender portals</b> each have a check cycle; press “Checked” after looking.</li></ol>` : `
+        <p>BD ekibinin ortak sayfası. Girilen her şey anında herkes için kaydedilir; Excel’e geri dönmeye gerek yok.</p>
+        <ol><li><b>Her kişinin bir sıradaki adımı ve tarihi olsun.</b> Mail, telefon ya da toplantıdan sonra “Aksiyon gir” — sonraki takip tarihi otomatik önerilir.</li>
+        <li><b>Panel → Bugün yapılacaklar</b> geciken takipleri ve görevlerini tek listede gösterir. Her sabah buradan başla.</li>
+        <li><b>Mail attın mı?</b> .eml dosyasını Aksiyon Günlüğü’ne sürükle; alıcı, tarih ve konu otomatik okunur. (Outlook: maili masaüstüne sürükle; Gmail: ⋮ → “Mesajı indir”.)</li>
+        <li><b>Fuardan sonra</b> kartvizit Excel’ini aşağıdaki “İçe aktar” ile yükle, kaynak etiketi ver (ör. “Cityscape 2026”).</li>
+        <li><b>İhale portalları</b> kontrol döngüsünde; baktıktan sonra “Kontrol ettim” de, sonuç yaz.</li>
+        <li><b>Şifreler buraya girilmez.</b> Portal kullanıcı adları referans olarak durur.</li></ol>`}</div></section>
+    </div>
+    <div class="grid2">
+      <section class="card"><div class="card-h"><h2>${t('İçe aktar')}</h2><span class="sub">${LANG==='en'?'Business-card / contact Excel (.xlsx, .csv)':'Kartvizit / kişi listesi Excel (.xlsx, .csv)'}</span></div>
+        <div class="card-b" style="display:flex;flex-direction:column;gap:10px">
+          <label class="f">${t('Kaynak')} (${LANG==='en'?'tag for this list':'bu listenin etiketi'})<input id="impSrc" placeholder="Cityscape 2026"></label>
+          <div class="drop" id="impDrop" tabindex="0" role="button"><b>${LANG==='en'?'Choose or drop the Excel file':'Excel dosyasını seç ya da sürükle'}</b><br>${LANG==='en'?'Columns like COMPANY NAME, CONTACT NAME, E-MAIL, PHONE, COUNTRY are recognised.':'COMPANY NAME, CONTACT NAME, E-MAIL, PHONE, COUNTRY gibi sütunlar tanınır (Türkçe başlıklar da).'}<input type="file" id="impFile" accept=".xlsx,.xls,.csv" hidden></div>
+          <div id="impOut"></div>
+        </div></section>
+      <section class="card"><div class="card-h"><h2>${t('Dışa aktar')}</h2><span class="sub">${LANG==='en'?'Full backup as Excel':'Tüm veriyi Excel olarak yedekle'}</span></div>
+        <div class="card-b" style="display:flex;flex-direction:column;gap:10px"><p style="margin:0;color:var(--slate);max-width:60ch">${LANG==='en'?'Contacts, activities, tasks, tenders, platforms and vendors — one sheet each.':'Kişiler, aksiyonlar, görevler, ihaleler, platformlar ve vendorlar ayrı sayfalarda tek dosya.'}</p><div><button class="btn pri" type="button" id="expBtn">${LANG==='en'?'Download backup (.xlsx)':'Yedeği indir (.xlsx)'}</button></div></div></section>
+    </div>`;
+  },
+  bind() {
+    $('#addMem').onclick = () => openMemberModal();
+    $('#fuDays').onchange = async e => { const n = Math.max(1, Math.min(60, Number(e.target.value) || 7)); await saveTeam({ ...S.team, followUpDays: n }); toast(LANG==='en'?'Saved':'Kaydedildi'); };
+    bindFile($('#impDrop'), $('#impFile'), f => importExcel(f));
+    $('#expBtn').onclick = exportAll;
+  },
+  update() {
+    $('#teamEdit').innerHTML = (S.team.members || []).map(m => `<div class="row">${av(m.key, true)}<div class="main-t" data-mem="${esc(m.key)}"><b>${esc(m.name)}${m.key === S.me ? ` <span class="pill p-blue">${LANG==='en'?'you':'sen'}</span>` : ''}</b><small>${esc([m.role, m.email].filter(Boolean).join(' · '))}</small></div><button class="btn sm ghost" type="button" data-mem="${esc(m.key)}">${t('Düzenle')}</button></div>`).join('') || `<div class="empty">${LANG==='en'?'No team members yet.':'Henüz ekip üyesi yok.'}</div>`;
+  }
+};
+async function saveTeam(team) { await put('config', 'team', { members: team.members || [], followUpDays: team.followUpDays || 7, updatedAt: nowISO() }); }
+
+/* ---------------- overlay: drawer & modal ---------------- */
+let DR = null; // {type,id}
+function closeOverlay() { $('#overlay').innerHTML = ''; DR = null; S.modalOpen = false; document.body.style.overflow = ''; changed(); }
+function openDrawer(type, id) {
+  DR = { type, id }; S.modalOpen = false;
+  $('#overlay').innerHTML = `<div class="scrim" data-close></div><aside class="drawer" role="dialog" aria-modal="true" id="drawer"></aside>`;
+  document.body.style.overflow = 'hidden';
+  refreshDrawer(true);
+}
+function refreshDrawer(force) {
+  if (!DR || S.modalOpen) return; const el = $('#drawer'); if (!el) return;
+  if (!force && el.contains(document.activeElement) && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+  const sc = $('.dr-b', el)?.scrollTop || 0;
+  el.innerHTML = DRAWERS[DR.type](DR.id);
+  const b = $('.dr-b', el); if (b) b.scrollTop = sc;
+}
+function timeline(type, id) {
+  const acts = S.actions.filter(a => a.linkType === type && a.linkId === id);
+  const tasks = S.tasks.filter(x => x.linkType === type && x.linkId === id && !x.done);
+  return `<div class="sec-t">${t('Geçmiş')}<div class="right"><button class="btn sm pri" type="button" data-log="${type}:${esc(id)}">${t('Aksiyon gir')}</button><button class="btn sm" type="button" data-newtask="${type}:${esc(id)}">${t('Görev ekle')}</button></div></div>
+    ${tasks.length ? `<div>${tasks.map(x => `<div class="task"><input type="checkbox" data-toggle="${esc(x.id)}" aria-label="${esc(x.title)}"><div class="tt"><span class="t1">${esc(x.title)}</span></div>${av(x.owner)}${x.due ? duePill(x.due) : ''}</div>`).join('')}</div>` : ''}
+    ${acts.length ? `<div class="tl">${acts.map(a => `<div class="tl-i"><div class="h">${av(a.by)}<span>${esc(fdate(a.date))}</span><span class="tag">${esc(a.type||'')}${a.dir==='Gelen'?' ← '+t('Gelen'):''}</span>${a.followUp ? `<span>→ ${esc(fdate(a.followUp))}</span>` : ''}<button class="copy" type="button" data-edit-act="${esc(a.id)}">${t('Düzenle')}</button></div>${a.subject ? `<div class="s">${esc(a.subject)}</div>` : ''}${a.summary ? `<div class="x">${esc(a.summary)}</div>` : ''}</div>`).join('')}</div>` : `<div class="empty">${t('Henüz aksiyon yok.')}</div>`}`;
+}
+const kvRow = (k, v, copy) => v ? `<dt>${esc(t(k))}</dt><dd>${esc(v)}${copy ? ` <button class="copy" type="button" data-copy="${esc(v)}">${LANG==='en'?'copy':'kopyala'}</button>` : ''}</dd>` : '';
+const DRAWERS = {
+  contact(id) {
+    const c = S.contacts.get(id);
+    if (!c) return `<div class="dr-h"><h3>${LANG==='en'?'Record not found':'Kayıt bulunamadı'}</h3><button class="btn ghost" type="button" data-close style="margin-left:auto">✕</button></div>`;
+    return `<div class="dr-h">${av(c.owner, true)}<div style="min-width:0;flex:1"><h3>${esc(c.name || c.company)}</h3><p>${esc([c.title, c.company].filter(Boolean).join(' · '))}</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">${c.priority?`<span class="prio ${esc(c.priority)}">${esc(c.priority)}</span>`:''}<span class="pill ${c.status==='Arşiv'?'p-grey':'p-blue'}">${esc(t(c.status||'Aktif'))}</span>${c.source?`<span class="tag">${esc(c.source)}</span>`:''}${(c.tags||[]).map(x => `<span class="tag">${esc(x)}</span>`).join('')}</div></div>
+      <button class="btn ghost" type="button" data-close aria-label="${t('Kapat')}">✕</button></div>
+      <div class="dr-b">
+        <div class="card" style="box-shadow:none"><div class="card-b" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <div style="flex:1;min-width:180px"><div class="eyebrow">${t('Sıradaki adım')}</div><div class="t1">${esc(c.nextStep || (LANG==='en'?'Not set':'Belirlenmedi'))}</div><div class="t2">${t('Sahip')}: ${esc(mname(c.owner) || t('Sahipsiz'))}</div></div>
+          ${c.nextDate ? duePill(c.nextDate) : `<span class="pill p-grey">${t('Takip tarihi yok')}</span>`}
+          <button class="btn sm" type="button" data-edit="contact:${esc(id)}">${t('Düzenle')}</button></div></div>
+        <dl class="kv">${kvRow('E-posta', c.email, true)}${kvRow('E-posta', c.email2, true)}${kvRow('Telefon', c.phone, true)}${kvRow('Ülke', [c.city, c.country].filter(Boolean).join(', '))}${kvRow('İlişki', c.kind)}${kvRow('Sektör', c.field)}${kvRow('Web', c.website)}${kvRow('Tanışan', c.metBy)}${c.firstDate ? kvRow(LANG==='en'?'First contact':'İlk temas', fdate(c.firstDate)) : ''}${kvRow('Notlar', c.notes)}</dl>
+        ${timeline('contact', id)}
+      </div>`;
+  },
+  tender(id) {
+    const x = S.tenders.get(id);
+    if (!x) return `<div class="dr-h"><h3>—</h3><button class="btn ghost" type="button" data-close style="margin-left:auto">✕</button></div>`;
+    return `<div class="dr-h">${av(x.owner, true)}<div style="min-width:0;flex:1"><h3>${esc(x.title)}</h3><p>${esc([x.client, x.country].filter(Boolean).join(' · '))}</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><span class="prio ${esc(x.priority||'B')}">${esc(x.priority||'B')}</span><span class="pill p-blue">${esc(x.stage||'')}</span><span class="tag">${esc(x.kind||'')}</span></div></div>
+      <button class="btn ghost" type="button" data-close aria-label="${t('Kapat')}">✕</button></div>
+      <div class="dr-b">
+        <div class="card" style="box-shadow:none"><div class="card-b" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <div style="flex:1;min-width:180px"><div class="eyebrow">${t('Sıradaki adım')}</div><div class="t1">${esc(x.nextStep || (LANG==='en'?'Not set':'Belirlenmedi'))}</div><div class="t2">${t('Sahip')}: ${esc(mname(x.owner) || t('Sahipsiz'))}</div></div>
+          ${x.nextDate ? duePill(x.nextDate) : ''}<button class="btn sm" type="button" data-edit="tender:${esc(id)}">${t('Düzenle')}</button></div></div>
+        <dl class="kv">${x.deadline ? kvRow('Son başvuru', fdate(x.deadline)) : ''}${x.published ? kvRow(LANG==='en'?'Published':'Yayın', fdate(x.published)) : ''}${kvRow(LANG==='en'?'Value':'Değer', x.value)}${kvRow(LANG==='en'?'Status note':'Durum notu', x.statusNote)}${kvRow('Notlar', x.notes)}${x.link ? `<dt>Link</dt><dd><a href="${esc(x.link)}" target="_blank" rel="noopener">${esc(x.link)}</a></dd>` : ''}</dl>
+        ${timeline('tender', id)}
+      </div>`;
+  },
+  vendor(id) {
+    const v = S.vendors.get(id);
+    if (!v) return `<div class="dr-h"><h3>—</h3><button class="btn ghost" type="button" data-close style="margin-left:auto">✕</button></div>`;
+    return `<div class="dr-h">${av(v.owner, true)}<div style="min-width:0;flex:1"><h3>${esc(v.name)}</h3><p>Vendor · ${esc(v.country||'')}</p><div style="margin-top:8px"><span class="pill p-blue">${esc(v.status||'')}</span></div></div><button class="btn ghost" type="button" data-close aria-label="${t('Kapat')}">✕</button></div>
+      <div class="dr-b">
+        <div class="card" style="box-shadow:none"><div class="card-b" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><div style="flex:1;min-width:180px"><div class="eyebrow">${t('Sıradaki adım')}</div><div class="t1">${esc(v.nextStep || (LANG==='en'?'Not set':'Belirlenmedi'))}</div></div>${v.nextDate ? duePill(v.nextDate) : ''}<button class="btn sm" type="button" data-edit="vendor:${esc(id)}">${t('Düzenle')}</button></div></div>
+        <dl class="kv">${kvRow('E-posta', v.email, true)}${kvRow(LANG==='en'?'Person':'Kişi', v.person)}${v.portal ? `<dt>Portal</dt><dd><a href="${esc(v.portal)}" target="_blank" rel="noopener">${esc(v.portal)}</a></dd>` : ''}${v.lastDate ? kvRow('Son temas', fdate(v.lastDate) + (v.lastBy ? ' · ' + mname(v.lastBy) : '')) : ''}${kvRow('Notlar', v.notes)}</dl>
+        ${timeline('vendor', id)}
+      </div>`;
+  },
+  platform(id) {
+    const p = S.platforms.get(id);
+    if (!p) return `<div class="dr-h"><h3>—</h3><button class="btn ghost" type="button" data-close style="margin-left:auto">✕</button></div>`;
+    const n = platNext(p);
+    return `<div class="dr-h"><div style="min-width:0;flex:1"><h3>${esc(p.name)}</h3><p>${esc([p.category, p.region].filter(Boolean).join(' · '))}</p></div><button class="btn ghost" type="button" data-close aria-label="${t('Kapat')}">✕</button></div>
+      <div class="dr-b">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">${p.url ? `<a class="btn" href="${esc(p.url)}" target="_blank" rel="noopener">${LANG==='en'?'Open portal':'Portalı aç'} ↗</a>` : ''}<button class="btn pri" type="button" data-check="${esc(id)}">${t('Kontrol ettim')}</button><button class="btn" type="button" data-edit="platform:${esc(id)}">${t('Düzenle')}</button></div>
+        <dl class="kv">${kvRow('Sıklık', (FREQS.find(f => f[0] === p.freq)||[0,'Gerektikçe'])[1])}${kvRow('Sahip', mname(p.owner))}${kvRow('Son kontrol', p.lastCheck ? fdate(p.lastCheck) + (p.lastBy ? ' · ' + mname(p.lastBy) : '') : (LANG==='en'?'Never':'Hiç kontrol edilmedi'))}${kvRow('Sonuç', p.lastResult)}${n ? kvRow('Sonraki kontrol', fdate(n)) : ''}${kvRow(LANG==='en'?'Login (reference)':'Kullanıcı adı (referans)', p.login, true)}${kvRow(LANG==='en'?'Registered email':'Kayıt e-postası', p.regEmail)}${kvRow('Notlar', p.notes)}</dl>
+        <div class="sec-t">${LANG==='en'?'Check history':'Kontrol geçmişi'}</div>
+        ${(p.history||[]).length ? `<div class="tl">${(p.history||[]).slice().reverse().map(h => `<div class="tl-i"><div class="h">${av(h.by)}<span>${esc(fdate(h.date))}</span></div><div class="s">${esc(h.result||'')}</div>${h.note?`<div class="x">${esc(h.note)}</div>`:''}</div>`).join('')}</div>` : `<div class="empty">${LANG==='en'?'Not checked yet.':'Henüz kontrol kaydı yok.'}</div>`}
+      </div>`;
+  }
+};
+
+function openModal(html, onMount) {
+  S.modalOpen = true;
+  const keepDrawer = DR ? $('#overlay').innerHTML : '';
+  $('#overlay').insertAdjacentHTML('beforeend', `<div class="scrim" data-mclose style="z-index:62"></div><div class="modal" role="dialog" aria-modal="true" id="modal" style="z-index:63">${html}</div>`);
+  document.body.style.overflow = 'hidden';
+  onMount && onMount($('#modal'));
+  const f = $('#modal input:not([type=hidden]),#modal select,#modal textarea'); f && f.focus();
+}
+function closeModal() {
+  $('#modal')?.remove(); $$('[data-mclose]').forEach(x => x.remove()); S.modalOpen = false;
+  if (!DR) { $('#overlay').innerHTML = ''; document.body.style.overflow = ''; }
+  changed();
+}
+const opt = (arr, cur, blank) => (blank != null ? `<option value="">${esc(blank)}</option>` : '') + arr.map(v => Array.isArray(v) ? `<option value="${esc(v[0])}" ${String(cur)===String(v[0])?'selected':''}>${esc(v[1])}</option>` : `<option ${cur===v?'selected':''}>${esc(v)}</option>`).join('');
+const memOpts = (cur, blank) => opt((S.team.members||[]).map(m => [m.key, m.name]), cur, blank);
+const fv = (m, id) => { const el = $('#' + id, m); return el ? el.value.trim() : ''; };
+
+/* ---- action modal ---- */
+function linkOptions() {
+  const o = [];
+  for (const c of S.contacts.values()) o.push([`${c.name || c.company}${c.name && c.company ? ' — ' + c.company : ''}`, 'contact', c.id]);
+  for (const x of S.tenders.values()) o.push([`${x.title} (${LANG==='en'?'tender':'ihale'})`, 'tender', x.id]);
+  for (const v of S.vendors.values()) o.push([`${v.name} (vendor)`, 'vendor', v.id]);
+  return o;
+}
+function openActionModal(pre = {}) {
+  const a = pre.id ? S.actions.find(x => x.id === pre.id) || {} : {};
+  const linkType = pre.linkType || a.linkType || '', linkId = pre.linkId || a.linkId || '';
+  const [l1, l2] = linkType ? entityLabel(linkType, linkId) : ['', ''];
+  const fd = S.team.followUpDays || 7;
+  const date = a.date || pre.date || today();
+  const ent = linkType === 'contact' ? S.contacts.get(linkId) : linkType === 'tender' ? S.tenders.get(linkId) : linkType === 'vendor' ? S.vendors.get(linkId) : null;
+  const links = linkType ? null : linkOptions();
+  openModal(`<div class="m-h"><h3>${a.id ? t('Düzenle') : t('Aksiyon gir')}</h3><button class="btn ghost" type="button" data-mclose style="margin-left:auto">✕</button></div>
+    <div class="m-b">
+      ${linkType ? `<div><div class="eyebrow">${t('Kime')}</div><div class="t1">${esc(pre.linkTitle || l1)}</div><div class="t2">${esc(pre.linkOrg || l2)}</div></div>` :
+        `<label class="f">${t('Kime')} *<input id="fLink" list="fLinkL" placeholder="${LANG==='en'?'Start typing a contact, company or tender':'Kişi, firma ya da ihale yazmaya başla'}"><datalist id="fLinkL">${links.map(l => `<option value="${esc(l[0])}"></option>`).join('')}</datalist></label>`}
+      <div class="chips" id="fType">${ACT_TYPES.map(x => `<button type="button" data-v="${esc(x)}" class="${(a.type||pre.type||'E-posta')===x?'on':''}">${esc(x)}</button>`).join('')}</div>
+      <div class="fgrid">
+        <label class="f">${t('Tarih')}<input type="date" id="fDate" value="${esc(date)}"></label>
+        <label class="f">${t('Kim')}<select id="fBy">${memOpts(a.by || pre.by || S.me)}</select></label>
+        <label class="f">${t('Yön')}<select id="fDir">${opt([['Giden', t('Giden')], ['Gelen', t('Gelen')]], a.dir || pre.dir || 'Giden')}</select></label>
+        <label class="f">${t('Konu')}<input id="fSubj" value="${esc(a.subject || pre.subject || '')}"></label>
+        <label class="f full">${t('Özet')}<textarea id="fSum" placeholder="${LANG==='en'?'What was said or sent, what was agreed':'Ne gönderildi / konuşuldu, ne kararlaştırıldı'}">${esc(a.summary || pre.summary || '')}</textarea></label>
+        <label class="f">${t('Sonraki takip')}<input type="date" id="fFu" value="${esc(a.id ? (a.followUp || '') : addDays(date, fd))}"></label>
+        <div class="f" style="justify-content:flex-end"><div class="chips" id="fFuQ">${[[3,'+3'],[7,'+7'],[14,'+14'],[30,'+30'],[0,LANG==='en'?'none':'yok']].map(([n,l]) => `<button type="button" data-v="${n}">${l}</button>`).join('')}</div></div>
+        <label class="f full">${t('Sıradaki adım')}<input id="fNext" value="${esc(a.id ? (a.nextStep || '') : (pre.nextStep || ''))}" placeholder="${LANG==='en'?'e.g. Ask for a meeting date':'ör. Toplantı tarihi iste, portfolyo gönder'}"></label>
+      </div>
+    </div>
+    <div class="m-f">${a.id ? `<button class="btn danger" type="button" id="fDel">${t('Sil')}</button><span style="flex:1"></span>` : ''}<button class="btn" type="button" data-mclose>${t('İptal')}</button><button class="btn pri" type="button" id="fSave">${t('Kaydet')}</button></div>`,
+  m => {
+    let type = a.type || pre.type || 'E-posta';
+    $$('#fType button', m).forEach(b => b.onclick = () => { type = b.dataset.v; $$('#fType button', m).forEach(x => x.classList.toggle('on', x === b)); });
+    $$('#fFuQ button', m).forEach(b => b.onclick = () => { const n = Number(b.dataset.v); $('#fFu', m).value = n ? addDays(fv(m, 'fDate') || today(), n) : ''; });
+    if ($('#fDel', m)) armDelete($('#fDel', m), async () => { await del('actions', a.id); closeModal(); toast(LANG==='en'?'Deleted':'Silindi'); });
+    $('#fSave', m).onclick = async () => {
+      let lt = linkType, li = linkId;
+      if (!lt) { const v = fv(m, 'fLink'); const hit = links.find(l => l[0] === v); if (!hit) { toast(LANG==='en'?'Pick a record from the list.':'Listeden bir kayıt seç.', true); $('#fLink', m).focus(); return; } lt = hit[1]; li = hit[2]; }
+      const [t1, t2] = entityLabel(lt, li);
+      const d = fv(m, 'fDate') || today(), fu = fv(m, 'fFu'), by = fv(m, 'fBy'), nextStep = fv(m, 'fNext');
+      const doc = { linkType: lt, linkId: li, linkTitle: t1, linkOrg: t2, type, dir: fv(m, 'fDir'), date: d, by, subject: fv(m, 'fSubj'), summary: fv(m, 'fSum'), followUp: fu, nextStep, updatedAt: nowISO() };
+      const id = a.id || uid10('a');
+      if (!a.id) { doc.createdAt = nowISO(); doc.uid = S.uid || ''; }
+      $('#fSave', m).disabled = true;
+      try {
+        await put('actions', id, a.id ? { ...stripId(a), ...doc } : doc);
+        await applyActionToEntity(lt, li, doc);
+        closeModal(); toast(LANG==='en'?'Activity saved':'Aksiyon kaydedildi');
+      } catch (e) { $('#fSave', m).disabled = false; }
+    };
+  });
+}
+const stripId = o => { const c = { ...o }; delete c.id; return c; };
+async function applyActionToEntity(lt, li, doc) {
+  // only move the entity forward if this is its latest activity
+  const latest = S.actions.filter(x => x.linkType === lt && x.linkId === li && x.date > doc.date).length === 0;
+  if (!latest) return;
+  const up = { nextDate: doc.followUp || '', nextStep: doc.nextStep || '', updatedAt: nowISO() };
+  if (lt === 'contact') { const c = S.contacts.get(li); if (!c) return; Object.assign(up, { lastActionDate: doc.date, lastActionType: doc.type, lastActionBy: doc.by }); if (!c.owner) up.owner = doc.by; if (c.status === 'Arşiv') up.status = 'Aktif'; await patch('contacts', li, up); }
+  else if (lt === 'tender') { const x = S.tenders.get(li); if (!x) return; if (!x.owner) up.owner = doc.by; await patch('tenders', li, up); }
+  else if (lt === 'vendor') { const v = S.vendors.get(li); if (!v) return; Object.assign(up, { lastDate: doc.date, lastBy: doc.by }); if (!v.owner) up.owner = doc.by; await patch('vendors', li, up); }
+}
+function armDelete(btn, fn) {
+  btn.onclick = async () => {
+    if (!btn.classList.contains('armed')) { btn.classList.add('armed'); btn.textContent = t('Emin misin? Sil'); setTimeout(() => { btn.classList.remove('armed'); btn.textContent = t('Sil'); }, 4000); return; }
+    btn.disabled = true; try { await fn(); } catch (e) { btn.disabled = false; }
+  };
+}
+
+/* ---- task modal ---- */
+function openTaskModal(pre = {}) {
+  const x = pre.id ? S.tasks.find(k => k.id === pre.id) || {} : {};
+  const lt = x.linkType || pre.linkType || '', li = x.linkId || pre.linkId || '';
+  const [l1] = lt ? entityLabel(lt, li) : [''];
+  openModal(`<div class="m-h"><h3>${x.id ? t('Düzenle') : t('Görev ekle')}</h3><button class="btn ghost" type="button" data-mclose style="margin-left:auto">✕</button></div>
+    <div class="m-b">${l1 ? `<div><div class="eyebrow">${LANG==='en'?'Linked to':'Bağlı kayıt'}</div><div class="t1">${esc(l1)}</div></div>` : ''}
+      <div class="fgrid">
+        <label class="f full">${t('Görev')} *<input id="kT" value="${esc(x.title || '')}"></label>
+        <label class="f">${t('Sahip')}<select id="kO">${memOpts(x.owner || S.me)}</select></label>
+        <label class="f">${t('Tarih')}<input type="date" id="kD" value="${esc(x.id ? (x.due || '') : today())}"></label>
+        <label class="f">${t('Öncelik')}<select id="kP">${opt(['Normal','Yüksek'], x.priority || 'Normal')}</select></label>
+        <label class="f full">${t('Notlar')}<textarea id="kN">${esc(x.notes || '')}</textarea></label>
+      </div></div>
+    <div class="m-f">${x.id ? `<button class="btn danger" type="button" id="kDel">${t('Sil')}</button><span style="flex:1"></span>` : ''}<button class="btn" type="button" data-mclose>${t('İptal')}</button><button class="btn pri" type="button" id="kSave">${t('Kaydet')}</button></div>`,
+  m => {
+    if ($('#kDel', m)) armDelete($('#kDel', m), async () => { await del('tasks', x.id); closeModal(); });
+    $('#kSave', m).onclick = async () => {
+      const title = fv(m, 'kT'); if (!title) { $('#kT', m).focus(); return; }
+      const doc = { ...(x.id ? stripId(x) : { done: false, createdBy: S.me || '', createdAt: nowISO() }), title, owner: fv(m, 'kO'), due: fv(m, 'kD'), priority: fv(m, 'kP'), notes: fv(m, 'kN'), linkType: lt, linkId: li, updatedAt: nowISO() };
+      await put('tasks', x.id || uid10('k'), doc); closeModal(); toast(LANG==='en'?'Task saved':'Görev kaydedildi');
+    };
+  });
+}
+async function toggleTask(id) {
+  const x = S.tasks.find(k => k.id === id); if (!x) return;
+  await patch('tasks', id, { done: !x.done, doneAt: !x.done ? nowISO() : '', doneBy: !x.done ? (S.me || '') : '' });
+}
+
+/* ---- contact modal ---- */
+function openContactModal(id, pre = {}) {
+  const c = id ? S.contacts.get(id) || {} : pre;
+  const F = (k, label, type = 'text', full) => `<label class="f${full?' full':''}">${t(label)}<input type="${type}" id="c_${k}" value="${esc(c[k] || '')}"></label>`;
+  openModal(`<div class="m-h"><h3>${id ? t('Düzenle') : (LANG==='en'?'New contact':'Yeni kişi')}</h3><button class="btn ghost" type="button" data-mclose style="margin-left:auto">✕</button></div>
+    <div class="m-b"><div class="fgrid">
+      ${F('name','Kişi')}${F('company','Firma')}${F('title','Ünvan')}${F('email','E-posta','email')}${F('phone','Telefon')}${F('email2',LANG==='en'?'Other emails':'Diğer e-postalar')}
+      ${F('country','Ülke')}${F('city','Şehir')}
+      <label class="f">${t('İlişki')}<select id="c_kind">${opt(KINDS, c.kind || '', '—')}</select></label>${F('field','Sektör')}
+      ${F('source','Kaynak')}${F('metBy','Tanışan')}
+      <label class="f">${t('Öncelik')}<select id="c_priority">${opt(['A','B','C'], c.priority || '', '—')}</select></label>
+      <label class="f">${t('Durum')}<select id="c_status">${opt(STATUSES, c.status || 'Aktif')}</select></label>
+      <label class="f">${t('Sahip')}<select id="c_owner">${memOpts(c.owner || (id ? '' : S.me), t('Sahipsiz'))}</select></label>
+      <label class="f">${t('Sonraki takip')}<input type="date" id="c_nextDate" value="${esc(c.nextDate || '')}"></label>
+      ${F('nextStep','Sıradaki adım','text',true)}${F('website','Web','text',true)}
+      <label class="f full">${t('Notlar')}<textarea id="c_notes">${esc(c.notes || '')}</textarea></label>
+    </div></div>
+    <div class="m-f">${id ? `<button class="btn danger" type="button" id="cDel">${t('Sil')}</button><span style="flex:1"></span>` : ''}<button class="btn" type="button" data-mclose>${t('İptal')}</button><button class="btn pri" type="button" id="cSave">${t('Kaydet')}</button></div>`,
+  m => {
+    if ($('#cDel', m)) armDelete($('#cDel', m), async () => { await del('contacts', id); closeModal(); closeOverlay(); toast(LANG==='en'?'Deleted':'Silindi'); });
+    $('#cSave', m).onclick = async () => {
+      const keys = ['name','company','title','email','phone','email2','country','city','kind','field','source','metBy','priority','status','owner','nextDate','nextStep','website','notes'];
+      const d = {}; keys.forEach(k => d[k] = fv(m, 'c_' + k)); d.email = d.email.toLowerCase();
+      if (!d.name && !d.company) { toast(LANG==='en'?'Name or company is required.':'Ad ya da firma gerekli.', true); return; }
+      d.updatedAt = nowISO();
+      if (!id) {
+        const dup = [...S.contacts.values()].find(x => (d.email && (x.email === d.email)) || (d.name && norm(x.name) === norm(d.name) && norm(x.company) === norm(d.company)));
+        if (dup) { toast(LANG==='en'?'This contact already exists — opening it.':'Bu kişi zaten kayıtlı — açılıyor.', true); closeModal(); openDrawer('contact', dup.id); return; }
+        const nid = uid10('c'); d.createdAt = nowISO(); d.createdBy = S.me || '';
+        await put('contacts', nid, d); closeModal(); openDrawer('contact', nid); return pre._after && pre._after(nid);
+      }
+      await patch('contacts', id, d); closeModal(); toast(LANG==='en'?'Saved':'Kaydedildi');
+    };
+  });
+}
+
+/* ---- tender / vendor / platform modals ---- */
+function openTenderModal(id) {
+  const x = id ? S.tenders.get(id) || {} : { stage: 'Lead', kind: 'Fırsat', priority: 'B', owner: S.me };
+  const F = (k, label, type = 'text', full) => `<label class="f${full?' full':''}">${esc(label)}<input type="${type}" id="t_${k}" value="${esc(x[k] || '')}"></label>`;
+  openModal(`<div class="m-h"><h3>${id ? t('Düzenle') : t('İhale / Fırsat')}</h3><button class="btn ghost" type="button" data-mclose style="margin-left:auto">✕</button></div>
+    <div class="m-b"><div class="fgrid">
+      ${F('title', LANG==='en'?'Title *':'Başlık *', 'text', true)}${F('client', t('Kurum / Müşteri'))}${F('country', t('Ülke'))}
+      <label class="f">${LANG==='en'?'Kind':'Tür'}<select id="t_kind">${opt(T_KINDS, x.kind)}</select></label>
+      <label class="f">${t('Aşama')}<select id="t_stage">${opt(STAGES, x.stage)}</select></label>
+      <label class="f">${t('Öncelik')}<select id="t_priority">${opt(['A','B','C'], x.priority || 'B')}</select></label>
+      <label class="f">${t('Sahip')}<select id="t_owner">${memOpts(x.owner, t('Sahipsiz'))}</select></label>
+      ${F('published', LANG==='en'?'Published':'Yayın tarihi', 'date')}${F('deadline', t('Son başvuru'), 'date')}
+      ${F('value', LANG==='en'?'Value (est.)':'Tahmini değer')}${F('link', 'Link', 'url')}
+      ${F('nextStep', t('Sıradaki adım'))}${F('nextDate', t('Sonraki takip'), 'date')}
+      ${F('statusNote', LANG==='en'?'Status note':'Durum notu', 'text', true)}
+      <label class="f full">${t('Notlar')}<textarea id="t_notes">${esc(x.notes || '')}</textarea></label>
+    </div></div>
+    <div class="m-f">${id ? `<button class="btn danger" type="button" id="tDel">${t('Sil')}</button><span style="flex:1"></span>` : ''}<button class="btn" type="button" data-mclose>${t('İptal')}</button><button class="btn pri" type="button" id="tSave">${t('Kaydet')}</button></div>`,
+  m => {
+    if ($('#tDel', m)) armDelete($('#tDel', m), async () => { await del('tenders', id); closeModal(); closeOverlay(); });
+    $('#tSave', m).onclick = async () => {
+      const keys = ['title','client','country','kind','stage','priority','owner','published','deadline','value','link','nextStep','nextDate','statusNote','notes'];
+      const d = {}; keys.forEach(k => d[k] = fv(m, 't_' + k));
+      if (!d.title) { $('#t_title', m).focus(); return; }
+      d.updatedAt = nowISO();
+      if (id) await patch('tenders', id, d); else { d.createdAt = nowISO(); const nid = uid10('t'); await put('tenders', nid, d); closeModal(); openDrawer('tender', nid); return; }
+      closeModal(); toast(LANG==='en'?'Saved':'Kaydedildi');
+    };
+  });
+}
+function openVendorModal(id) {
+  const v = id ? S.vendors.get(id) || {} : { status: 'Beklemede', owner: S.me };
+  const F = (k, label, type = 'text', full) => `<label class="f${full?' full':''}">${esc(label)}<input type="${type}" id="v_${k}" value="${esc(v[k] || '')}"></label>`;
+  openModal(`<div class="m-h"><h3>${id ? t('Düzenle') : 'Vendor'}</h3><button class="btn ghost" type="button" data-mclose style="margin-left:auto">✕</button></div>
+    <div class="m-b"><div class="fgrid">
+      ${F('name', LANG==='en'?'Organisation *':'Kurum *', 'text', true)}${F('country', t('Ülke'))}
+      <label class="f">${t('Durum')}<select id="v_status">${opt(V_STATUS, v.status)}</select></label>
+      ${F('portal', 'Portal URL', 'url', true)}${F('email', t('E-posta'))}${F('person', LANG==='en'?'Person':'Kişi')}
+      <label class="f">${t('Sahip')}<select id="v_owner">${memOpts(v.owner, t('Sahipsiz'))}</select></label>
+      ${F('lastDate', t('Son temas'), 'date')}
+      ${F('nextStep', t('Sıradaki adım'))}${F('nextDate', t('Sonraki takip'), 'date')}
+      <label class="f full">${t('Notlar')}<textarea id="v_notes">${esc(v.notes || '')}</textarea></label>
+    </div></div>
+    <div class="m-f">${id ? `<button class="btn danger" type="button" id="vDel">${t('Sil')}</button><span style="flex:1"></span>` : ''}<button class="btn" type="button" data-mclose>${t('İptal')}</button><button class="btn pri" type="button" id="vSave">${t('Kaydet')}</button></div>`,
+  m => {
+    if ($('#vDel', m)) armDelete($('#vDel', m), async () => { await del('vendors', id); closeModal(); closeOverlay(); });
+    $('#vSave', m).onclick = async () => {
+      const keys = ['name','country','status','portal','email','person','owner','lastDate','nextStep','nextDate','notes'];
+      const d = {}; keys.forEach(k => d[k] = fv(m, 'v_' + k)); if (!d.name) { $('#v_name', m).focus(); return; }
+      d.updatedAt = nowISO();
+      if (id) await patch('vendors', id, d); else { d.createdAt = nowISO(); await put('vendors', uid10('v'), d); }
+      closeModal(); toast(LANG==='en'?'Saved':'Kaydedildi');
+    };
+  });
+}
+function openPlatformModal(id) {
+  const p = id ? S.platforms.get(id) || {} : { freq: 30, priority: 'Orta', owner: S.me };
+  const F = (k, label, type = 'text', full) => `<label class="f${full?' full':''}">${esc(label)}<input type="${type}" id="p_${k}" value="${esc(p[k] || '')}"></label>`;
+  openModal(`<div class="m-h"><h3>${id ? t('Düzenle') : 'Platform'}</h3><button class="btn ghost" type="button" data-mclose style="margin-left:auto">✕</button></div>
+    <div class="m-b"><div class="fgrid">
+      ${F('name', LANG==='en'?'Platform *':'Platform adı *', 'text', true)}${F('url', 'URL', 'url', true)}
+      ${F('region', LANG==='en'?'Region':'Bölge')}${F('category', LANG==='en'?'Category':'Kategori')}
+      <label class="f">${t('Sıklık')}<select id="p_freq">${opt(FREQS, p.freq ?? 30)}</select></label>
+      <label class="f">${t('Sahip')}<select id="p_owner">${memOpts(p.owner, t('Sahipsiz'))}</select></label>
+      ${F('login', LANG==='en'?'Login (reference only)':'Kullanıcı adı (yalnız referans)')}${F('regEmail', LANG==='en'?'Registered email':'Kayıt e-postası')}
+      <p class="full" style="margin:0;font-size:12px;color:var(--slate)">${LANG==='en'?'Passwords are never stored here.':'Şifreler buraya yazılmaz; ortak sayfada herkes görür.'}</p>
+      <label class="f full">${t('Notlar')}<textarea id="p_notes">${esc(p.notes || '')}</textarea></label>
+    </div></div>
+    <div class="m-f">${id ? `<button class="btn danger" type="button" id="pDel">${t('Sil')}</button><span style="flex:1"></span>` : ''}<button class="btn" type="button" data-mclose>${t('İptal')}</button><button class="btn pri" type="button" id="pSave">${t('Kaydet')}</button></div>`,
+  m => {
+    if ($('#pDel', m)) armDelete($('#pDel', m), async () => { await del('platforms', id); closeModal(); closeOverlay(); });
+    $('#pSave', m).onclick = async () => {
+      const keys = ['name','url','region','category','owner','login','regEmail','notes'];
+      const d = {}; keys.forEach(k => d[k] = fv(m, 'p_' + k)); d.freq = Number(fv(m, 'p_freq')); if (!d.name) { $('#p_name', m).focus(); return; }
+      d.updatedAt = nowISO();
+      if (id) await patch('platforms', id, d); else { d.createdAt = nowISO(); d.lastCheck = ''; await put('platforms', uid10('p'), d); }
+      closeModal(); toast(LANG==='en'?'Saved':'Kaydedildi');
+    };
+  });
+}
+function openCheckModal(id) {
+  const p = S.platforms.get(id); if (!p) return;
+  openModal(`<div class="m-h"><h3>${esc(p.name)} — ${t('Kontrol ettim')}</h3><button class="btn ghost" type="button" data-mclose style="margin-left:auto">✕</button></div>
+    <div class="m-b"><div class="chips" id="rC">${P_RESULTS.map((r, i) => `<button type="button" data-v="${esc(r)}" class="${i===0?'on':''}">${esc(r)}</button>`).join('')}</div>
+      <div class="fgrid"><label class="f">${t('Tarih')}<input type="date" id="rD" value="${today()}"></label><label class="f">${t('Kim')}<select id="rB">${memOpts(S.me)}</select></label>
+      <label class="f full">${LANG==='en'?'Note (tender name, reference, link)':'Not (ihale adı, referans no, link)'}<textarea id="rN"></textarea></label></div>
+      <label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" id="rT"> ${LANG==='en'?'Add to the pipeline as a tender':'İhale hattına yeni kayıt olarak ekle'}</label></div>
+    <div class="m-f"><button class="btn" type="button" data-mclose>${t('İptal')}</button><button class="btn pri" type="button" id="rSave">${t('Kaydet')}</button></div>`,
+  m => {
+    let res = P_RESULTS[0];
+    $$('#rC button', m).forEach(b => b.onclick = () => { res = b.dataset.v; $$('#rC button', m).forEach(x => x.classList.toggle('on', x === b)); $('#rT', m).checked = !['Uygun ihale yok','İlgisiz'].includes(res); });
+    $('#rSave', m).onclick = async () => {
+      const date = fv(m, 'rD') || today(), by = fv(m, 'rB'), note = fv(m, 'rN');
+      const hist = (p.history || []).concat([{ date, by, result: res, note }]).slice(-15);
+      await patch('platforms', id, { lastCheck: date, lastBy: by, lastResult: res + (note ? ' — ' + note : ''), history: hist, updatedAt: nowISO() });
+      if ($('#rT', m).checked) {
+        const nid = uid10('t');
+        await put('tenders', nid, { title: note ? note.split('\n')[0].slice(0, 120) : `${p.name} – ${res}`, client: '', country: p.region || '', kind: 'İhale', stage: 'Takipte', priority: 'B', owner: by, statusNote: `${p.name}: ${res}`, notes: note, link: p.url || '', nextStep: LANG==='en'?'Review documents':'Dokümanları incele', nextDate: addDays(date, 2), createdAt: nowISO(), updatedAt: nowISO() });
+        closeModal(); openDrawer('tender', nid); return;
+      }
+      closeModal(); toast(LANG==='en'?'Check logged':'Kontrol kaydedildi');
+    };
+  });
+}
+function openMemberModal(key) {
+  const mm = key ? member(key) || {} : {};
+  openModal(`<div class="m-h"><h3>${key ? t('Düzenle') : (LANG==='en'?'Add member':'Ekibe kişi ekle')}</h3><button class="btn ghost" type="button" data-mclose style="margin-left:auto">✕</button></div>
+    <div class="m-b"><div class="fgrid"><label class="f full">${LANG==='en'?'Full name *':'Ad soyad *'}<input id="mN" value="${esc(mm.name||'')}"></label><label class="f">${t('E-posta')}<input id="mE" type="email" value="${esc(mm.email||'')}"></label><label class="f">${LANG==='en'?'Role':'Görev'}<input id="mR" value="${esc(mm.role||'')}"></label></div>
+    <p style="margin:0;font-size:12px;color:var(--slate)">${LANG==='en'?'The email is used to recognise the sender of dropped .eml files.':'E-posta, sürüklenen .eml dosyalarında gönderenin kim olduğunu tanımak için kullanılır.'}</p></div>
+    <div class="m-f">${key ? `<button class="btn danger" type="button" id="mDel">${LANG==='en'?'Remove':'Ekipten çıkar'}</button><span style="flex:1"></span>` : ''}<button class="btn" type="button" data-mclose>${t('İptal')}</button><button class="btn pri" type="button" id="mSave">${t('Kaydet')}</button></div>`,
+  m => {
+    if ($('#mDel', m)) armDelete($('#mDel', m), async () => { await saveTeam({ ...S.team, members: S.team.members.filter(x => x.key !== key) }); closeModal(); });
+    $('#mSave', m).onclick = async () => {
+      const name = fv(m, 'mN'); if (!name) { $('#mN', m).focus(); return; }
+      const d = { key: key || norm(name.split(' ')[0]).replace(/[^a-z0-9]/g, '') + (S.team.members.some(x => x.key === norm(name.split(' ')[0])) ? Math.floor(Math.random()*90+10) : ''), name, email: fv(m, 'mE').toLowerCase(), role: fv(m, 'mR') };
+      const members = key ? S.team.members.map(x => x.key === key ? d : x) : [...(S.team.members || []), d];
+      await saveTeam({ ...S.team, members }); closeModal(); toast(LANG==='en'?'Saved':'Kaydedildi');
+    };
+  });
+}
+function askIdentity() {
+  if (S.modalOpen || !(S.team.members || []).length) return;
+  openModal(`<div class="m-h"><h3>${t('Kim olarak çalışıyorsun?')}</h3></div>
+    <div class="m-b"><p style="margin:0;color:var(--slate)">${LANG==='en'?'Your activities and tasks are recorded under this name. You can change it anytime from the bottom-left.':'Gireceğin aksiyon ve görevler bu isimle kaydedilir. Sol alttan istediğin zaman değiştirebilirsin.'}</p>
+    <div class="rows">${S.team.members.map(m => `<button type="button" class="row" data-iam="${esc(m.key)}" style="border:0;background:none;text-align:left;cursor:pointer;width:100%">${av(m.key, true)}<span class="main-t"><b>${esc(m.name)}</b><small>${esc(m.role || m.email || '')}</small></span></button>`).join('')}</div>
+    <button class="btn" type="button" id="iamNew">${LANG==='en'?'I am not on the list':'Listede yokum — kendimi ekle'}</button></div>`,
+  m => {
+    $$('[data-iam]', m).forEach(b => b.onclick = async () => { await setMe(b.dataset.iam); closeModal(); });
+    $('#iamNew', m).onclick = () => { closeModal(); openMemberModal(); };
+  });
+}
+async function setMe(k) {
+  S.me = k; store.set('spbd.me', k);
+  if (S.db && S.uid) { try { await S.db.doc(`data/users/${S.uid}/profile`).set({ member: k, updatedAt: nowISO() }); } catch (e) {} }
+  renderMe(); renderView(); renderNav();
+}
+
+/* ---------------- .eml import ---------------- */
+function bindFile(zone, input, handler, multi) {
+  zone.onclick = () => input.click();
+  zone.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); } };
+  input.onchange = () => { const fs = [...input.files]; input.value = ''; if (fs.length) multi ? handler(fs) : handler(fs[0]); };
+  zone.ondragover = e => { e.preventDefault(); zone.classList.add('over'); };
+  zone.ondragleave = () => zone.classList.remove('over');
+  zone.ondrop = e => { e.preventDefault(); zone.classList.remove('over'); const fs = [...e.dataTransfer.files]; if (fs.length) multi ? handler(fs) : handler(fs[0]); };
+}
+function bindDrop(zone, input) { bindFile(zone, input, fs => emlQueue(fs), true); }
+function decodeWords(s) {
+  return String(s || '').replace(/(=\?[^?]+\?[BbQq]\?[^?]*\?=)\s+(?==\?)/g, '$1').replace(/=\?([^?]+)\?([BbQq])\?([^?]*)\?=/g, (_, cs, enc, txt) => {
+    try {
+      let bytes;
+      if (enc.toUpperCase() === 'B') { const bin = atob(txt); bytes = Uint8Array.from(bin, ch => ch.charCodeAt(0)); }
+      else { const q = txt.replace(/_/g, ' '); const arr = []; for (let i = 0; i < q.length; i++) { if (q[i] === '=' && /[0-9A-Fa-f]{2}/.test(q.substr(i+1, 2))) { arr.push(parseInt(q.substr(i+1, 2), 16)); i += 2; } else arr.push(q.charCodeAt(i)); } bytes = new Uint8Array(arr); }
+      return new TextDecoder(cs.toLowerCase()).decode(bytes);
+    } catch (e) { return txt; }
+  });
+}
+function parseAddrs(v) {
+  const out = []; if (!v) return out;
+  const parts = String(v).match(/("[^"]*"|[^,])+/g) || [];
+  for (const p of parts) {
+    const m = p.match(/<([^>]+)>/); const addr = (m ? m[1] : p).trim().replace(/^mailto:/i, '').toLowerCase();
+    if (!/@/.test(addr)) continue;
+    let name = m ? p.slice(0, p.indexOf('<')).trim().replace(/^"|"$/g, '') : '';
+    out.push({ addr, name: decodeWords(name) });
+  }
+  return out;
+}
+async function parseEml(file) {
+  const buf = await file.arrayBuffer();
+  const txt = new TextDecoder('latin1').decode(buf.slice(0, 200000));
+  const end = txt.search(/\r?\n\r?\n/); const head = (end > 0 ? txt.slice(0, end) : txt).replace(/\r?\n[ \t]+/g, ' ');
+  const H = {}; head.split(/\r?\n/).forEach(l => { const i = l.indexOf(':'); if (i > 0) { const k = l.slice(0, i).trim().toLowerCase(); if (!(k in H)) H[k] = l.slice(i + 1).trim(); } });
+  const d = H.date ? new Date(H.date) : null;
+  return { from: parseAddrs(H.from)[0] || null, to: parseAddrs(H.to), cc: parseAddrs(H.cc), subject: decodeWords(H.subject || ''), date: d && !isNaN(d) ? iso(d) : today() };
+}
+async function emlQueue(files) {
+  const list = files.filter(f => /\.eml$/i.test(f.name) || f.type === 'message/rfc822');
+  if (!list.length) { toast(LANG==='en'?'Please choose .eml files.':'Lütfen .eml dosyası seç. (Outlook .msg ise “Farklı kaydet → .eml” ya da masaüstüne sürükle.)', true); return; }
+  for (let i = 0; i < list.length; i++) { const ok = await emlOne(await parseEml(list[i]), i + 1, list.length); if (ok === 'stop') break; }
+}
+function emlOne(mail, n, total) {
+  return new Promise(resolve => {
+    const teamEmails = new Map((S.team.members || []).filter(m => m.email).map(m => [m.email.toLowerCase(), m.key]));
+    const isTeam = a => teamEmails.has(a) || /@spdo\.com\.tr$/.test(a) || /@aslanbusiness\.com$/.test(a);
+    const fromTeam = mail.from && isTeam(mail.from.addr);
+    const by = fromTeam ? (teamEmails.get(mail.from.addr) || S.me) : S.me;
+    const dir = fromTeam || !mail.from ? 'Giden' : 'Gelen';
+    const ext = dir === 'Giden' ? mail.to.concat(mail.cc).filter(a => !isTeam(a.addr)) : [mail.from];
+    const toAddrs = new Set(mail.to.map(a => a.addr));
+    const byEmail = new Map(); for (const c of S.contacts.values()) { [c.email, ...String(c.email2 || '').split(/[,;\s]+/)].filter(Boolean).forEach(e => byEmail.set(e.toLowerCase(), c)); }
+    const rows = []; const seenC = new Set();
+    ext.forEach(a => { const c = byEmail.get(a.addr); if (c) { if (seenC.has(c.id)) return; seenC.add(c.id); rows.push({ a, c, on: dir === 'Gelen' || toAddrs.has(a.addr) }); } else rows.push({ a, c: null, on: dir === 'Gelen' || toAddrs.has(a.addr) }); });
+    const dup = c => S.actions.some(x => x.linkId === c.id && x.date === mail.date && (x.subject || '') === mail.subject);
+    const fd = S.team.followUpDays || 7;
+    openModal(`<div class="m-h"><h3>${LANG==='en'?'Log email':'Maili kaydet'}${total > 1 ? ` <span class="tag">${n}/${total}</span>` : ''}</h3><button class="btn ghost" type="button" id="eStop" style="margin-left:auto">✕</button></div>
+      <div class="m-b">
+        <dl class="kv">${kvRow('Konu', mail.subject)}${kvRow('Tarih', fdate(mail.date))}<dt>${t('Kim')}</dt><dd>${esc(mail.from ? (mail.from.name || mail.from.addr) : '')} ${dir === 'Gelen' ? `<span class="pill p-green">${t('Gelen')}</span>` : ''}</dd></dl>
+        <div class="eyebrow">${dir === 'Gelen' ? (LANG==='en'?'From':'Gönderen') : (LANG==='en'?'Recipients outside the team':'Ekip dışı alıcılar')}</div>
+        <div class="rows">${rows.map((r, i) => `<label class="row" style="cursor:pointer"><input type="checkbox" data-ri="${i}" ${r.on ? 'checked' : ''}><span class="main-t"><b>${esc(r.c ? (r.c.name || r.c.company) : (r.a.name || r.a.addr))}</b><small>${esc(r.a.addr)}${r.c ? ' · ' + esc(r.c.company || '') : ''}</small></span>${r.c ? (dup(r.c) ? `<span class="pill p-amber">${LANG==='en'?'already logged':'zaten kayıtlı'}</span>` : `<span class="pill p-green">${LANG==='en'?'matched':'eşleşti'}</span>`) : `<span class="pill p-blue">${LANG==='en'?'new contact':'yeni kişi'}</span>`}</label>`).join('') || `<div class="empty">${LANG==='en'?'No external recipients found.':'Ekip dışı alıcı bulunamadı.'}</div>`}</div>
+        <div class="fgrid">
+          <label class="f">${t('Kim')}<select id="eBy">${memOpts(by)}</select></label>
+          <label class="f">${t('Sonraki takip')}<input type="date" id="eFu" value="${esc(addDays(mail.date, fd))}"></label>
+          <label class="f full">${t('Sıradaki adım')}<input id="eNext" value="${esc(dir === 'Gelen' ? (LANG==='en'?'Reply':'Yanıtla') : (LANG==='en'?'Check for a reply':'Dönüşü kontrol et'))}"></label>
+          <label class="f full">${t('Özet')}<textarea id="eSum" placeholder="${LANG==='en'?'Optional':'İsteğe bağlı'}"></textarea></label>
+        </div>
+      </div>
+      <div class="m-f">${total > 1 ? `<button class="btn" type="button" id="eSkip">${LANG==='en'?'Skip':'Atla'}</button>` : ''}<button class="btn" type="button" id="eCancel">${t('İptal')}</button><button class="btn pri" type="button" id="eSave">${t('Kaydet')}</button></div>`,
+    m => {
+      const done = v => { closeModal(); resolve(v); };
+      $('#eStop', m).onclick = () => done('stop'); $('#eCancel', m).onclick = () => done('stop');
+      if ($('#eSkip', m)) $('#eSkip', m).onclick = () => done('skip');
+      $('#eSave', m).onclick = async () => {
+        const sel = rows.filter((r, i) => $(`[data-ri="${i}"]`, m).checked);
+        if (!sel.length) { toast(LANG==='en'?'Select at least one recipient.':'En az bir alıcı seç.', true); return; }
+        $('#eSave', m).disabled = true;
+        try {
+          for (const r of sel) {
+            let c = r.c;
+            if (!c) {
+              const nid = uid10('c'); const dom = r.a.addr.split('@')[1] || '';
+              const nc = { name: r.a.name || '', company: /gmail|hotmail|outlook|yahoo|icloud/.test(dom) ? '' : dom, email: r.a.addr, status: 'Aktif', owner: fv(m, 'eBy'), source: LANG==='en'?'Email':'E-posta', createdAt: nowISO(), updatedAt: nowISO(), createdBy: S.me || '' };
+              await put('contacts', nid, nc); c = { id: nid, ...nc }; S.contacts.set(nid, c);
+            }
+            if (dup(c)) continue;
+            const doc = { linkType: 'contact', linkId: c.id, linkTitle: c.name || c.company, linkOrg: c.name ? (c.company || '') : '', type: 'E-posta', dir, date: mail.date, by: fv(m, 'eBy'), subject: mail.subject, summary: fv(m, 'eSum'), followUp: fv(m, 'eFu'), nextStep: fv(m, 'eNext'), source: 'eml', createdAt: nowISO(), updatedAt: nowISO(), uid: S.uid || '' };
+            await put('actions', uid10('a'), doc);
+            await applyActionToEntity('contact', c.id, doc);
+          }
+          toast(LANG==='en'?'Email logged':'Mail kaydedildi'); done('ok');
+        } catch (e) { $('#eSave', m).disabled = false; }
+      };
+    });
+  });
+}
+
+/* ---------------- Excel import / export ---------------- */
+let XLSXP = null;
+function loadXLSX() {
+  if (window.XLSX) return Promise.resolve(window.XLSX);
+  if (XLSXP) return XLSXP;
+  XLSXP = new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'; s.onload = () => res(window.XLSX); s.onerror = () => { XLSXP = null; rej(new Error('xlsx')); }; document.head.appendChild(s); });
+  return XLSXP;
+}
+const SYN = {
+  company: ['COMPANY NAME','COMPANY','ŞİRKET','SIRKET','FİRMA','FIRMA','ŞİRKET ADI','KURUM'],
+  name: ['CONTACT NAME','NAME OF CONTACT','NAME','İSİM','ISIM','AD SOYAD','ADI SOYADI','KİŞİ'],
+  title: ['JOB TITLE','TITLE','POZİSYON','POZISYON','UNVAN','ÜNVAN','GÖREV'],
+  email: ['E-MAIL','EMAIL','E-POSTA','EPOSTA','MAIL'],
+  phone: ['PHONE','TELEFON','TEL','MOBILE','GSM'],
+  combo: ['TELEFON / EMAIL','TELEFON/EMAIL','PHONE / EMAIL'],
+  country: ['COUNTRY','ÜLKE','ULKE'], city: ['CITY','ŞEHİR','SEHIR'], region: ['REGION','BÖLGE'], website: ['WEBSITE','WEB','WEB SİTESİ'],
+  kind: ['KIND OF RELATIONS','RELATION','İLİŞKİ'], field: ['OCCUPATION FIELD','OCCUPATION','KATEGORİ','KATEGORI','SECTOR','SEKTÖR'],
+  notes: ['NOTES','NOT','NOTLAR','NOTE'], metBy: ['FIRST CONTACTED BY','GÖRÜŞEN KİŞİ','GÖRÜŞEN','MET BY'], priority: ['PRIORITY','ÖNCELİK']
+};
+async function importExcel(file) {
+  const out = $('#impOut'); const src = $('#impSrc').value.trim();
+  if (!src) { toast(LANG==='en'?'Enter a source tag first (e.g. Cityscape 2026).':'Önce kaynak etiketi yaz (ör. Cityscape 2026).', true); $('#impSrc').focus(); return; }
+  out.innerHTML = `<div class="loading">${LANG==='en'?'Reading…':'Okunuyor…'}</div>`;
+  let X; try { X = await loadXLSX(); } catch (e) { out.innerHTML = `<div class="empty">${LANG==='en'?'The Excel reader could not load. Check your connection.':'Excel okuyucu yüklenemedi; bağlantını kontrol et.'}</div>`; return; }
+  const wb = X.read(await file.arrayBuffer(), { type: 'array', cellDates: true });
+  const recs = [];
+  for (const sn of wb.SheetNames) {
+    const rows = X.utils.sheet_to_json(wb.Sheets[sn], { header: 1, raw: false, defval: '' });
+    let hi = -1, map = null;
+    for (let i = 0; i < Math.min(8, rows.length); i++) {
+      const up = rows[i].map(v => String(v).trim().toLocaleUpperCase('tr'));
+      const mm = {}; let hits = 0;
+      for (const [k, syn] of Object.entries(SYN)) { const j = up.findIndex(v => syn.includes(v)); if (j >= 0) { mm[k] = j; hits++; } }
+      if (hits >= 3 && (mm.company != null || mm.name != null)) { hi = i; map = mm; break; }
+    }
+    if (hi < 0) continue;
+    for (const r of rows.slice(hi + 1)) {
+      const g = k => map[k] != null ? String(r[map[k]] ?? '').trim() : '';
+      const c = { company: g('company'), name: g('name'), title: g('title'), email: g('email'), phone: g('phone'), country: g('country'), city: g('city'), region: g('region'), website: g('website'), kind: g('kind'), field: g('field'), notes: g('notes'), metBy: g('metBy') };
+      const pr = g('priority'); c.priority = { '***': 'A', '**': 'B', '*': 'C', A: 'A', B: 'B', C: 'C' }[pr] || '';
+      if (map.combo != null) { const v = String(r[map.combo] || ''); const em = v.match(/[\w.+-]+@[\w-]+(\.[\w-]+)+/); if (em && !c.email) c.email = em[0]; if (!c.phone) c.phone = v.replace(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g, '').replace(/[\/;,]+/g, ' ').trim(); }
+      const ems = (c.email.match(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g) || []).map(x => x.toLowerCase()); c.email = ems[0] || ''; if (ems.length > 1) c.email2 = ems.slice(1).join(', ');
+      if (!c.company && !c.name) continue;
+      if (/^company name$/i.test(c.company)) continue;
+      Object.keys(c).forEach(k => { if (!c[k]) delete c[k]; });
+      recs.push(c);
+    }
+  }
+  if (!recs.length) { out.innerHTML = `<div class="empty">${LANG==='en'?'No recognisable header row (COMPANY NAME / CONTACT NAME / E-MAIL…) was found.':'Tanınan bir başlık satırı bulunamadı (COMPANY NAME / CONTACT NAME / E-MAIL…).'}</div>`; return; }
+  const exists = c => [...S.contacts.values()].find(x => (c.email && (x.email === c.email || String(x.email2||'').includes(c.email))) || (c.name && norm(x.name) === norm(c.name) && norm(x.company) === norm(c.company)));
+  const fresh = recs.filter(c => !exists(c));
+  out.innerHTML = `<div class="card" style="box-shadow:none"><div class="card-b" style="display:flex;flex-direction:column;gap:10px">
+    <div><b>${recs.length}</b> ${LANG==='en'?'rows read':'satır okundu'} · <b>${fresh.length}</b> ${LANG==='en'?'new':'yeni'} · ${recs.length - fresh.length} ${LANG==='en'?'already in contacts (skipped)':'zaten kayıtlı (atlanacak)'}</div>
+    <div class="tw" style="max-height:220px"><table><tbody>${fresh.slice(0, 8).map(c => `<tr><td class="t1">${esc(c.name||'')}</td><td class="t2">${esc(c.company||'')}</td><td class="t2">${esc(c.email||'')}</td><td class="t2">${esc(c.country||'')}</td></tr>`).join('')}</tbody></table></div>
+    <label class="f" style="max-width:260px">${t('Sahip')}<select id="impOwner">${memOpts(S.me, t('Sahipsiz'))}</select></label>
+    <div class="progress"><i id="impBar"></i></div>
+    <div><button class="btn pri" type="button" id="impGo" ${fresh.length ? '' : 'disabled'}>${fresh.length} ${LANG==='en'?'contacts — import':'kişiyi içe aktar'}</button></div></div></div>`;
+  $('#impGo').onclick = async () => {
+    const owner = $('#impOwner').value; $('#impGo').disabled = true; let i = 0, fail = 0;
+    const queue = fresh.slice();
+    const worker = async () => { while (queue.length) { const c = queue.shift(); try { await put('contacts', uid10('c'), { ...c, source: src, status: 'Aktif', owner, createdAt: nowISO(), updatedAt: nowISO(), createdBy: S.me || '' }); } catch (e) { fail++; } i++; const bar = $('#impBar'); if (bar) bar.style.width = (100 * i / fresh.length) + '%'; } };
+    await Promise.all([worker(), worker(), worker()]);
+    toast(fail ? `${fresh.length - fail} ${LANG==='en'?'imported,':'aktarıldı,'} ${fail} ${LANG==='en'?'failed':'başarısız'}` : `${fresh.length} ${LANG==='en'?'contacts imported':'kişi aktarıldı'}`, !!fail);
+    out.innerHTML = '';
+    S.ui.cSrc = src; saveUI(); location.hash = '#kisiler';
+  };
+}
+async function exportAll() {
+  const dl = S.downloads;
+  if (!dl) { toast(LANG==='en'?'Downloads are not available in this view.':'Bu görünümde dosya indirme kullanılamıyor.', true); return; }
+  let X; try { X = await loadXLSX(); } catch (e) { toast(LANG==='en'?'Excel writer could not load.':'Excel yazıcı yüklenemedi.', true); return; }
+  const mn = k => mname(k);
+  const wb = X.utils.book_new();
+  const add = (name, rows) => X.utils.book_append_sheet(wb, X.utils.json_to_sheet(rows.length ? rows : [{}]), name);
+  add('Kişiler', [...S.contacts.values()].map(c => ({ Kişi: c.name, Firma: c.company, Ünvan: c.title, 'E-posta': c.email, 'Diğer e-posta': c.email2, Telefon: c.phone, Ülke: c.country, Şehir: c.city, İlişki: c.kind, Sektör: c.field, Kaynak: c.source, Öncelik: c.priority, Durum: c.status, Sahip: mn(c.owner), 'Son aksiyon': c.lastActionDate, 'Son aksiyon türü': c.lastActionType, 'Sıradaki adım': c.nextStep, 'Takip tarihi': c.nextDate, Notlar: c.notes })));
+  add('Aksiyonlar', S.actions.map(a => ({ Tarih: a.date, Tür: a.type, Yön: a.dir, Kime: a.linkTitle || entityLabel(a.linkType, a.linkId)[0], Firma: a.linkOrg, Konu: a.subject, Özet: a.summary, Kim: mn(a.by), 'Sonraki takip': a.followUp, 'Sıradaki adım': a.nextStep })));
+  add('Görevler', S.tasks.map(x => ({ Görev: x.title, Sahip: mn(x.owner), Tarih: x.due, Öncelik: x.priority, Durum: x.done ? 'Tamamlandı' : 'Açık', 'Bağlı kayıt': x.linkType ? entityLabel(x.linkType, x.linkId)[0] : '', Notlar: x.notes })));
+  add('İhale & Teklif', [...S.tenders.values()].map(x => ({ Başlık: x.title, Tür: x.kind, Aşama: x.stage, Kurum: x.client, Ülke: x.country, Öncelik: x.priority, Sahip: mn(x.owner), 'Son başvuru': x.deadline, 'Sıradaki adım': x.nextStep, 'Takip tarihi': x.nextDate, 'Durum notu': x.statusNote, Link: x.link, Notlar: x.notes })));
+  add('Platformlar', [...S.platforms.values()].map(p => ({ Platform: p.name, Bölge: p.region, Kategori: p.category, URL: p.url, Sıklık: p.freq, Sahip: mn(p.owner), 'Son kontrol': p.lastCheck, Sonuç: p.lastResult, 'Sonraki kontrol': platNext(p), 'Kullanıcı adı (ref)': p.login, Notlar: p.notes })));
+  add('Vendor', [...S.vendors.values()].map(v => ({ Kurum: v.name, Ülke: v.country, Durum: v.status, Portal: v.portal, 'E-posta': v.email, Kişi: v.person, 'Son temas': v.lastDate, 'Son temas eden': mn(v.lastBy), Sahip: mn(v.owner), 'Sıradaki adım': v.nextStep, 'Takip tarihi': v.nextDate, Notlar: v.notes })));
+  const arr = X.write(wb, { bookType: 'xlsx', type: 'array' });
+  try { await dl.save({ filename: `SP_BD_Yedek_${today()}.xlsx`, data: new Blob([arr]) }); toast(LANG==='en'?'Backup ready':'Yedek indirildi'); }
+  catch (e) { if (e && e.code !== 'declined') toast(LANG==='en'?'Download failed.':'İndirme başarısız.', true); }
+}
+
+/* ---------------- global search ---------------- */
+function gsearch(q) {
+  const box = $('#gres'); const n = norm(q.trim());
+  if (n.length < 2) { box.hidden = true; return; }
+  const words = n.split(/\s+/);
+  const hit = s => words.every(w => s.includes(w));
+  const cs = [...S.contacts.values()].filter(c => hit(norm([c.name, c.company, c.email, c.country].join(' ')))).slice(0, 6);
+  const ts = [...S.tenders.values()].filter(x => hit(norm([x.title, x.client, x.country].join(' ')))).slice(0, 4);
+  const vs = [...S.vendors.values()].filter(v => hit(norm([v.name, v.country].join(' ')))).slice(0, 3);
+  const ds = S.dir ? S.dir.filter(o => !S.contacts.has(o.id) && words.every(w => o._s.includes(w))).slice(0, 5) : [];
+  if (!S.dir) loadDirectory();
+  const sec = (title, arr, f) => arr.length ? `<div class="grp">${esc(title)}</div>` + arr.map(f).join('') : '';
+  box.innerHTML = sec(t('Kişiler'), cs, c => `<button type="button" data-open="contact:${esc(c.id)}">${esc(c.name || c.company)} <small>${esc(c.company || '')} · ${esc(c.country || '')}</small></button>`) +
+    sec(t('İhale & Teklif'), ts, x => `<button type="button" data-open="tender:${esc(x.id)}">${esc(x.title)} <small>${esc(x.stage || '')}</small></button>`) +
+    sec('Vendor', vs, v => `<button type="button" data-open="vendor:${esc(v.id)}">${esc(v.name)} <small>${esc(v.status || '')}</small></button>`) +
+    sec(t('Rehber') + (LANG==='en'?' (not tracked)':' (takipte değil)'), ds, o => `<button type="button" data-promote="${esc(o.id)}">${esc(o.name || o.company)} <small>${esc(o.company || '')} · ${esc(o.source || '')} — ${t('Takibe al')}</small></button>`) ||
+    `<div class="empty" style="padding:10px">${LANG==='en'?'No results':'Sonuç yok'}</div>`;
+  box.hidden = false;
+}
+
+/* ---------------- global events ---------------- */
+document.addEventListener('click', async e => {
+  const el = e.target.closest('[data-open],[data-log],[data-new],[data-close],[data-mclose],[data-edit],[data-newtask],[data-task],[data-toggle],[data-done],[data-check],[data-promote],[data-copy],[data-edit-act],[data-mem]');
+  if (!$('#gres').hidden && !e.target.closest('.search')) $('#gres').hidden = true;
+  if (!$('#newMenu').hidden && !e.target.closest('.menu')) $('#newMenu').hidden = true;
+  if (!el) return;
+  const d = el.dataset;
+  if ('mclose' in d) { e.preventDefault(); closeModal(); return; }
+  if ('close' in d) { e.preventDefault(); closeOverlay(); return; }
+  if (d.open) { e.preventDefault(); $('#gres').hidden = true; const [ty, id] = d.open.split(':'); if (ty && id && DRAWERS[ty]) openDrawer(ty, id); return; }
+  if (d.log) { e.preventDefault(); const [ty, id] = d.log.split(':'); openActionModal({ linkType: ty, linkId: id }); return; }
+  if (d.newtask) { const [ty, id] = d.newtask.split(':'); openTaskModal({ linkType: ty, linkId: id }); return; }
+  if (d.task) { openTaskModal({ id: d.task }); return; }
+  if (d.toggle) { e.preventDefault(); try { await toggleTask(d.toggle); } catch (err) {} return; }
+  if (d.done) { try { await toggleTask(d.done); toast(LANG==='en'?'Done':'Tamamlandı'); } catch (err) {} return; }
+  if (d.check) { openCheckModal(d.check); return; }
+  if (d.promote) { $('#gres').hidden = true; try { await promote(d.promote); } catch (err) {} return; }
+  if (d.copy) { copyText(d.copy); return; }
+  if (d.editAct) { e.preventDefault(); openActionModal({ id: d.editAct }); return; }
+  if (d.mem) { openMemberModal(d.mem); return; }
+  if (d.edit) { const [ty, id] = d.edit.split(':'); ({ contact: openContactModal, tender: openTenderModal, vendor: openVendorModal, platform: openPlatformModal })[ty](id); return; }
+  if (d.new) { $('#newMenu').hidden = true; ({ action: () => openActionModal(), task: () => openTaskModal(), contact: () => openContactModal(), tender: () => openTenderModal(), vendor: () => openVendorModal(), platform: () => openPlatformModal() })[d.new](); return; }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (S.modalOpen) closeModal(); else if (DR) closeOverlay(); else $('#gres').hidden = true; } });
+$('#gsearch').addEventListener('input', e => gsearch(e.target.value));
+$('#gsearch').addEventListener('focus', e => { if (e.target.value) gsearch(e.target.value); });
+$('#newBtn').onclick = e => { e.stopPropagation(); const m = $('#newMenu'); m.innerHTML = [['action','Aksiyon'],['task','Görev'],['contact','Kişi'],['tender','İhale / Fırsat']].map(([k, l]) => `<button type="button" data-new="${k}">${esc(t(l))}</button>`).join(''); m.hidden = !m.hidden; };
+$('#langBtn').onclick = () => { LANG = LANG === 'en' ? 'tr' : 'en'; try { localStorage.setItem('spbd.lang', LANG); } catch (e) {} applyLang(); renderMe(); route(); showBanner(); };
+$('#meBtn').onclick = () => askIdentity();
+
+/* ---------------- boot ---------------- */
+async function boot() {
+  applyLang(); renderNav(); renderMe();
+  const C = window.claude;
+  if (!C || !C.use) { S.failed = true; showBanner(); renderEmptyOffline(); return; }
+  const [db, user, dl] = await Promise.all([C.use('db'), C.use('user'), C.use('downloads')]);
+  S.downloads = dl;
+  if (!db) { S.failed = true; showBanner(); renderEmptyOffline(); return; }
+  S.db = db; S.user = user;
+  if (user) {
+    try { S.uid = await user.id(); } catch (e) {}
+    try { const w = await user.can('data.write'); if (w === false) S.canWrite = false; if (w == null) S.canWriteUnknown = true; } catch (e) {}
+  }
+  if (S.uid) { try { const p = await db.doc(`data/users/${S.uid}/profile`).get(); if (p.exists && p.data().member) { S.me = p.data().member; store.set('spbd.me', S.me); } } catch (e) {} }
+  S.ready = true; showBanner();
+  subscribe(); route();
+}
+function renderEmptyOffline() {
+  $('#view').innerHTML = `<section class="card"><div class="card-b"><div class="empty"><b>${LANG==='en'?'This page keeps the BD team’s shared records.':'Bu sayfa BD ekibinin ortak kayıtlarını tutar.'}</b> ${LANG==='en'?'Open it in claude.ai while signed in to see contacts, activities, tasks and tenders.':'Kişileri, aksiyonları, görevleri ve ihaleleri görmek için claude.ai’de oturum açıkken aç.'}</div></div></section>`;
+}
+boot();
+})();
+</script>
+
+</body></html>
